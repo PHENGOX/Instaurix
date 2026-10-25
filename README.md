@@ -1,5 +1,7 @@
 # Switch2Emu 0.86
 
+Je développe cet émulateur avec l’aide d’une intelligence artificielle pour l’écriture du code, les tests et l’analyse technique.
+
 Émulateur expérimental en C++20 visant à terme l'exécution de jeux Nintendo Switch 2 sur PC. Le développement actuel porte sur les fondations ARM64 et les services système HLE. **Aucun jeu commercial ni aucune compatibilité native Switch 2 ne sont actuellement validés.**
 
 Prototype de machine ARM64 en C++20 : CPU entier/FP/SIMD partiel, runtime HLE de référence et formats ELF/NRO statiques bornés. Il ne lance pas de jeux Switch 2.
