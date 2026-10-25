@@ -1,0 +1,3826 @@
+{
+  "assembler": "Clang 18.1.6 via Zig 0.13.0",
+  "oracle": "Unicorn 2.1.4",
+  "seed": "0xF0642026",
+  "variants": 477,
+  "cases": 61056,
+  "sha256": "476708ca11dd757a49d454f81994a4ac79b8aa7dce5998283d7d6a23938f6c3b",
+  "instructions": [
+    {
+      "asm": "sqadd v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v0.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v1.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v2.8b, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v0.8b, v1.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v1.8b, v1.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v0.8b, v1.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v1.8b, v1.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v0.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v1.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v2.16b, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v0.16b, v1.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v1.16b, v1.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v0.16b, v1.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v1.16b, v1.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v0.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v1.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v2.4h, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v0.4h, v1.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v1.4h, v1.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v0.4h, v1.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v1.4h, v1.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v0.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v1.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v2.8h, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v0.8h, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v1.8h, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v0.8h, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v1.8h, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v0.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v1.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v2.2s, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v0.2s, v1.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v1.2s, v1.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v0.2s, v1.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v1.2s, v1.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v0.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v1.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v2.4s, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v0.4s, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v1.4s, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v0.4s, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v1.4s, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sshl v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v0.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v1.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl v2.2d, v1.2d, v2.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v0.2d, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs v1.2d, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v0.2d, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg v1.2d, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd b0, b1, b2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd b0, b1, b2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub b0, b1, b2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub b0, b1, b2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl b0, b1, b2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl b0, b1, b2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl b0, b1, b2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl b0, b1, b2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs b0, b1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg b0, b1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd h0, h1, h2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd h0, h1, h2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub h0, h1, h2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub h0, h1, h2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl h0, h1, h2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl h0, h1, h2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl h0, h1, h2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl h0, h1, h2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs h0, h1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg h0, h1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd s0, s1, s2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd s0, s1, s2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub s0, s1, s2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub s0, s1, s2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl s0, s1, s2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl s0, s1, s2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl s0, s1, s2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl s0, s1, s2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs s0, s1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg s0, s1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqadd d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqadd d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqsub d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "uqsub d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sshl d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "ushl d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "srshl d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "urshl d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqshl d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqshl d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqrshl d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "uqrshl d0, d1, d2",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "shift",
+      "samples": 128
+    },
+    {
+      "asm": "sqabs d0, d1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "sqneg d0, d1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "saturate",
+      "samples": 128
+    },
+    {
+      "asm": "smull v0.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull v1.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull v2.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull2 v0.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull2 v1.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull2 v2.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull v0.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull v1.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull v2.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull2 v0.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull2 v1.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull2 v2.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal v0.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal v1.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal v2.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal2 v0.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal2 v1.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal2 v2.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal v0.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal v1.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal v2.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal2 v0.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal2 v1.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal2 v2.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl v0.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl v1.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl v2.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl2 v0.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl2 v1.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl2 v2.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl v0.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl v1.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl v2.8h, v1.8b, v2.8b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl2 v0.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl2 v1.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl2 v2.8h, v1.16b, v2.16b",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 8,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull v0.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull v1.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull v2.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull2 v0.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull2 v1.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull2 v2.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull v0.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull v1.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull v2.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull2 v0.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull2 v1.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull2 v2.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal v0.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal v1.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal v2.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal2 v0.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal2 v1.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal2 v2.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal v0.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal v1.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal v2.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal2 v0.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal2 v1.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal2 v2.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl v0.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl v1.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl v2.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl2 v0.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl2 v1.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl2 v2.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl v0.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl v1.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl v2.4s, v1.4h, v2.4h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl2 v0.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl2 v1.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl2 v2.4s, v1.8h, v2.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull v0.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull v1.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull v2.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull2 v0.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull2 v1.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smull2 v2.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull v0.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull v1.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull v2.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull2 v0.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull2 v1.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umull2 v2.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal v0.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal v1.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal v2.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal2 v0.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal2 v1.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlal2 v2.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal v0.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal v1.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal v2.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal2 v0.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal2 v1.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlal2 v2.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl v0.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl v1.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl v2.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl2 v0.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl2 v1.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "smlsl2 v2.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl v0.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl v1.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl v2.2d, v1.2s, v2.2s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl2 v0.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl2 v1.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "umlsl2 v2.2d, v1.4s, v2.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "widen",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn v0.8b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn v1.8b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn2 v0.16b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn2 v1.16b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn v0.8b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn v1.8b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn2 v0.16b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn2 v1.16b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun v0.8b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun v1.8b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun2 v0.16b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun2 v1.16b, v1.8h",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn b0, h1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn b0, h1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun b0, h1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 16,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn v0.4h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn v1.4h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn2 v0.8h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn2 v1.8h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn v0.4h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn v1.4h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn2 v0.8h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn2 v1.8h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun v0.4h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun v1.4h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun2 v0.8h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun2 v1.8h, v1.4s",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn h0, s1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn h0, s1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun h0, s1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 32,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn v0.2s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn v1.2s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn2 v0.4s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn2 v1.4s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn v0.2s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn v1.2s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn2 v0.4s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn2 v1.4s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun v0.2s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun v1.2s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun2 v0.4s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun2 v1.4s, v1.2d",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtn s0, d1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "uqxtn s0, d1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    },
+    {
+      "asm": "sqxtun s0, d1",
+      "kind": "simd-extra",
+      "wide": false,
+      "element_bits": 64,
+      "category": "narrow",
+      "samples": 128
+    }
+  ]
+}

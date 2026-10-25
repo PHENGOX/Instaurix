@@ -1,0 +1,15 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "newlib_source_url": "https://sourceware.org/pub/newlib/newlib-4.6.0.20260123.tar.gz",
+  "newlib_source_sha256": "6FF27E3BF022666F43F7802255BE680EEFF722AC181B1725D21E2E8318604EE3",
+  "newlib_patch_url": "https://raw.githubusercontent.com/devkitPro/buildscripts/refs/tags/devkitA64_r29.2/patches/newlib-4.6.0.20260123-4.patch",
+  "newlib_patch_sha256": "6D5ABA4356553C727765C98E7553D3784F31D361C856E220EF27CC26353FB88F",
+  "compiler": "Zig 0.13.0 / Clang 18.1.6, aarch64-none-elf, -O1 -ffreestanding -fgnuc-version=4.2.1",
+  "configuration": "Minimal source subset; __SWITCH__, _HAVE_INITFINI_ARRAY=1; no installed devkitA64 toolchain or configured full libc",
+  "nro_sha256": "978C0F56ED1237219688C5D68A83CD6C8C400D8419F62FF63BF3943147D18434",
+  "instructions": 1660,
+  "main_result": 77,
+  "loader_result": 0,
+  "report_flags": 15,
+  "scope": "Original libnx crt0, init, env, newlibSetup, virtmem, heap, thread, argv and exit; original newlib constructor iteration and reent data; custom no-service app hooks and exit bridge"
+}

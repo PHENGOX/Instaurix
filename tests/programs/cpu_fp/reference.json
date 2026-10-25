@@ -1,0 +1,7465 @@
+{
+  "assembler": "Clang 18.1.6 via Zig 0.13.0",
+  "oracle": "Unicorn 2.1.4",
+  "seed": "0xF0642026",
+  "variants": 1491,
+  "cases": 96400,
+  "sha256": "6a57a418f3f5867eb8601fb12530d7bb84723ad7052e12bd97aa4540af233f27",
+  "instructions": [
+    {
+      "asm": "fadd s0, s1, s2",
+      "kind": "arithmetic",
+      "wide": false
+    },
+    {
+      "asm": "fadd s1, s1, s2",
+      "kind": "arithmetic",
+      "wide": false
+    },
+    {
+      "asm": "fsub s0, s1, s2",
+      "kind": "arithmetic",
+      "wide": false
+    },
+    {
+      "asm": "fsub s1, s1, s2",
+      "kind": "arithmetic",
+      "wide": false
+    },
+    {
+      "asm": "fmul s0, s1, s2",
+      "kind": "arithmetic",
+      "wide": false
+    },
+    {
+      "asm": "fmul s1, s1, s2",
+      "kind": "arithmetic",
+      "wide": false
+    },
+    {
+      "asm": "fdiv s0, s1, s2",
+      "kind": "arithmetic",
+      "wide": false
+    },
+    {
+      "asm": "fdiv s1, s1, s2",
+      "kind": "arithmetic",
+      "wide": false
+    },
+    {
+      "asm": "fsqrt s0, s1",
+      "kind": "sqrt",
+      "wide": false
+    },
+    {
+      "asm": "fmov s0, s1",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fabs s0, s1",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fneg s0, s1",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fmov s0, #1.0",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov s0, #-2.0",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov s0, #0.125",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov s0, #31.0",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fcmp s1, s2",
+      "kind": "compare",
+      "wide": false
+    },
+    {
+      "asm": "fcmp s1, #0.0",
+      "kind": "compare",
+      "wide": false
+    },
+    {
+      "asm": "fcmpe s1, s2",
+      "kind": "compare",
+      "wide": false
+    },
+    {
+      "asm": "fcmpe s1, #0.0",
+      "kind": "compare",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, eq",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, ne",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, gt",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, le",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, mi",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, pl",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, vs",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, vc",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, al",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fcsel s0, s1, s2, nv",
+      "kind": "scalarbits",
+      "wide": false
+    },
+    {
+      "asm": "fadd d0, d1, d2",
+      "kind": "arithmetic",
+      "wide": true
+    },
+    {
+      "asm": "fadd d1, d1, d2",
+      "kind": "arithmetic",
+      "wide": true
+    },
+    {
+      "asm": "fsub d0, d1, d2",
+      "kind": "arithmetic",
+      "wide": true
+    },
+    {
+      "asm": "fsub d1, d1, d2",
+      "kind": "arithmetic",
+      "wide": true
+    },
+    {
+      "asm": "fmul d0, d1, d2",
+      "kind": "arithmetic",
+      "wide": true
+    },
+    {
+      "asm": "fmul d1, d1, d2",
+      "kind": "arithmetic",
+      "wide": true
+    },
+    {
+      "asm": "fdiv d0, d1, d2",
+      "kind": "arithmetic",
+      "wide": true
+    },
+    {
+      "asm": "fdiv d1, d1, d2",
+      "kind": "arithmetic",
+      "wide": true
+    },
+    {
+      "asm": "fsqrt d0, d1",
+      "kind": "sqrt",
+      "wide": true
+    },
+    {
+      "asm": "fmov d0, d1",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fabs d0, d1",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fneg d0, d1",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fmov d0, #1.0",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov d0, #-2.0",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov d0, #0.125",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov d0, #31.0",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fcmp d1, d2",
+      "kind": "compare",
+      "wide": true
+    },
+    {
+      "asm": "fcmp d1, #0.0",
+      "kind": "compare",
+      "wide": true
+    },
+    {
+      "asm": "fcmpe d1, d2",
+      "kind": "compare",
+      "wide": true
+    },
+    {
+      "asm": "fcmpe d1, #0.0",
+      "kind": "compare",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, eq",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, ne",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, gt",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, le",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, mi",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, pl",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, vs",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, vc",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, al",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fcsel d0, d1, d2, nv",
+      "kind": "scalarbits",
+      "wide": true
+    },
+    {
+      "asm": "fmov w0, s1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov s0, w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov x0, d1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov d0, x1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov wzr, s1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov s31, wzr",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov xzr, d1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "fmov d31, xzr",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "mrs x0, fpcr",
+      "kind": "system",
+      "wide": false
+    },
+    {
+      "asm": "mrs x0, fpsr",
+      "kind": "system",
+      "wide": false
+    },
+    {
+      "asm": "msr fpcr, x0",
+      "kind": "system",
+      "wide": false
+    },
+    {
+      "asm": "msr fpsr, x0",
+      "kind": "system",
+      "wide": false
+    },
+    {
+      "asm": "msr fpcr, xzr",
+      "kind": "system",
+      "wide": false
+    },
+    {
+      "asm": "msr fpsr, xzr",
+      "kind": "system",
+      "wide": false
+    },
+    {
+      "asm": "add v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v1.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v1.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v1.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v1.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v0.4h, v1.4h, v2.4h",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v1.4h, v1.4h, v2.4h",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v0.4h, v1.4h, v2.4h",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v1.4h, v1.4h, v2.4h",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v0.8h, v1.8h, v2.8h",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v1.8h, v1.8h, v2.8h",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v0.8h, v1.8h, v2.8h",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v1.8h, v1.8h, v2.8h",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v0.2s, v1.2s, v2.2s",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v1.2s, v1.2s, v2.2s",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v0.2s, v1.2s, v2.2s",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v1.2s, v1.2s, v2.2s",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v0.4s, v1.4s, v2.4s",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v1.4s, v1.4s, v2.4s",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v0.4s, v1.4s, v2.4s",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v1.4s, v1.4s, v2.4s",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v0.2d, v1.2d, v2.2d",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "add v1.2d, v1.2d, v2.2d",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v0.2d, v1.2d, v2.2d",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "sub v1.2d, v1.2d, v2.2d",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "and v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "bic v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "orr v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "orn v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "eor v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "bsl v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "bit v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "bif v0.8b, v1.8b, v2.8b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "and v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "bic v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "orr v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "orn v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "eor v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "bsl v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "bit v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "bif v0.16b, v1.16b, v2.16b",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.8b, w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.16b, w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.4h, w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.8h, w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.2s, w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.4s, w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.2d, x1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "umov w0, v1.b[15]",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.b[15], w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "umov w0, v1.h[7]",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.h[7], w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "umov w0, v1.s[3]",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.s[3], w1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "umov x0, v1.d[1]",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.d[1], x1",
+      "kind": "bits",
+      "wide": false
+    },
+    {
+      "asm": "ldr b0, [x1, #2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr b0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr b0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr b0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr b0, [x1, w2, sxtw #0]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr b0, [sp, #1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldur b0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str b0, [x1, #2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str b0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str b0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str b0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str b0, [x1, w2, sxtw #0]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str b0, [sp, #1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stur b0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr h0, [x1, #4]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr h0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr h0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr h0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr h0, [x1, w2, sxtw #1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr h0, [sp, #2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldur h0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str h0, [x1, #4]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str h0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str h0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str h0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str h0, [x1, w2, sxtw #1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str h0, [sp, #2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stur h0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr s0, [x1, #8]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr s0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr s0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr s0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr s0, [x1, w2, sxtw #2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr s0, [sp, #4]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldur s0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str s0, [x1, #8]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str s0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str s0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str s0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str s0, [x1, w2, sxtw #2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str s0, [sp, #4]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stur s0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr d0, [x1, #16]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr d0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr d0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr d0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr d0, [x1, w2, sxtw #3]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr d0, [sp, #8]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldur d0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str d0, [x1, #16]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str d0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str d0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str d0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str d0, [x1, w2, sxtw #3]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str d0, [sp, #8]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stur d0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr q0, [x1, #32]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr q0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr q0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr q0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr q0, [x1, w2, sxtw #4]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr q0, [sp, #16]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldur q0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str q0, [x1, #32]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str q0, [x1, #-16]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str q0, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str q0, [x1, x2]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str q0, [x1, w2, sxtw #4]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "str q0, [sp, #16]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stur q0, [x1, #-7]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldp s0, s2, [x1, #8]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldp s0, s2, [x1, #-32]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldp s0, s2, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stp s0, s2, [x1, #8]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stp s0, s2, [x1, #-32]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stp s0, s2, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr s0, .+8",
+      "kind": "literal",
+      "wide": false
+    },
+    {
+      "asm": "ldp d0, d2, [x1, #16]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldp d0, d2, [x1, #-32]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldp d0, d2, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stp d0, d2, [x1, #16]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stp d0, d2, [x1, #-32]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stp d0, d2, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr d0, .+8",
+      "kind": "literal",
+      "wide": false
+    },
+    {
+      "asm": "ldp q0, q2, [x1, #32]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldp q0, q2, [x1, #-32]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldp q0, q2, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stp q0, q2, [x1, #32]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stp q0, q2, [x1, #-32]!",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "stp q0, q2, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ldr q0, .+8",
+      "kind": "literal",
+      "wide": false
+    },
+    {
+      "asm": "ldr q1, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "scvtf s0, w1",
+      "kind": "itof",
+      "wide": false
+    },
+    {
+      "asm": "ucvtf s0, w1",
+      "kind": "itof",
+      "wide": false
+    },
+    {
+      "asm": "fcvtns w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtnu w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtas w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtau w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtps w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtpu w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtms w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtmu w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzs w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzu w0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "scvtf s0, x1",
+      "kind": "itof",
+      "wide": false
+    },
+    {
+      "asm": "ucvtf s0, x1",
+      "kind": "itof",
+      "wide": false
+    },
+    {
+      "asm": "fcvtns x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtnu x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtas x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtau x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtps x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtpu x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtms x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtmu x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzs x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzu x0, s1",
+      "kind": "ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fmadd s0, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fmadd s1, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fmadd s3, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fmsub s0, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fmsub s1, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fmsub s3, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fnmadd s0, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fnmadd s1, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fnmadd s3, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fnmsub s0, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fnmsub s1, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "fnmsub s3, s1, s2, s3",
+      "kind": "fused",
+      "wide": false
+    },
+    {
+      "asm": "scvtf d0, w1",
+      "kind": "itof",
+      "wide": true
+    },
+    {
+      "asm": "ucvtf d0, w1",
+      "kind": "itof",
+      "wide": true
+    },
+    {
+      "asm": "fcvtns w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtnu w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtas w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtau w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtps w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtpu w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtms w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtmu w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtzs w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtzu w0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "scvtf d0, x1",
+      "kind": "itof",
+      "wide": true
+    },
+    {
+      "asm": "ucvtf d0, x1",
+      "kind": "itof",
+      "wide": true
+    },
+    {
+      "asm": "fcvtns x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtnu x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtas x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtau x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtps x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtpu x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtms x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtmu x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtzs x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtzu x0, d1",
+      "kind": "ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fmadd d0, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fmadd d1, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fmadd d3, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fmsub d0, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fmsub d1, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fmsub d3, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fnmadd d0, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fnmadd d1, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fnmadd d3, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fnmsub d0, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fnmsub d1, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fnmsub d3, d1, d2, d3",
+      "kind": "fused",
+      "wide": true
+    },
+    {
+      "asm": "fcvt d0, s1",
+      "kind": "precision",
+      "wide": false
+    },
+    {
+      "asm": "fcvt s0, d1",
+      "kind": "precision",
+      "wide": true
+    },
+    {
+      "asm": "ucvtf d31, xzr",
+      "kind": "itof",
+      "wide": true
+    },
+    {
+      "asm": "fcvtzs xzr, d31",
+      "kind": "ftoi-zr",
+      "wide": true
+    },
+    {
+      "asm": "cmeq v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v0.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v1.8b, v1.8b, v2.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.8b, v1.8b, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.8b, v1.8b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.8b, v1.8b, #7",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.8b, v1.8b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.8b, v1.8b, #8",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.8b, v1.8b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.8b, v1.8b, #8",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v0.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v1.16b, v1.16b, v2.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.16b, v1.16b, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.16b, v1.16b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.16b, v1.16b, #7",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.16b, v1.16b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.16b, v1.16b, #8",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.16b, v1.16b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.16b, v1.16b, #8",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v0.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v1.4h, v1.4h, v2.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.4h, v1.4h, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.4h, v1.4h, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.4h, v1.4h, #15",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.4h, v1.4h, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.4h, v1.4h, #16",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.4h, v1.4h, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.4h, v1.4h, #16",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v0.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v1.8h, v1.8h, v2.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.8h, v1.8h, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.8h, v1.8h, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.8h, v1.8h, #15",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.8h, v1.8h, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.8h, v1.8h, #16",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.8h, v1.8h, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.8h, v1.8h, #16",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v0.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v1.2s, v1.2s, v2.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.2s, v1.2s, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.2s, v1.2s, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.2s, v1.2s, #31",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.2s, v1.2s, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.2s, v1.2s, #32",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.2s, v1.2s, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.2s, v1.2s, #32",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mul v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mla v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "mls v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smax v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smin v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umax v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umin v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v0.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v1.4s, v1.4s, v2.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.4s, v1.4s, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.4s, v1.4s, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.4s, v1.4s, #31",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.4s, v1.4s, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.4s, v1.4s, #32",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.4s, v1.4s, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.4s, v1.4s, #32",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmeq v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmgt v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmge v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhi v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmhs v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cmtst v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addp v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip1 v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "zip2 v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp1 v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uzp2 v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn1 v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v0.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "trn2 v1.2d, v1.2d, v2.2d",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.2d, v1.2d, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.2d, v1.2d, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "shl v0.2d, v1.2d, #63",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.2d, v1.2d, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sshr v0.2d, v1.2d, #64",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.2d, v1.2d, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ushr v0.2d, v1.2d, #64",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addv b0, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smaxv b0, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sminv b0, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umaxv b0, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uminv b0, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addv b0, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smaxv b0, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sminv b0, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umaxv b0, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uminv b0, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addv h0, v1.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smaxv h0, v1.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sminv h0, v1.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umaxv h0, v1.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uminv h0, v1.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addv h0, v1.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smaxv h0, v1.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sminv h0, v1.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umaxv h0, v1.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uminv h0, v1.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "addv s0, v1.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smaxv s0, v1.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "sminv s0, v1.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "umaxv s0, v1.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "uminv s0, v1.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev16 v0.8b, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev16 v0.16b, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev32 v0.8b, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev32 v0.16b, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev32 v0.4h, v1.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev32 v0.8h, v1.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev64 v0.8b, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev64 v0.16b, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev64 v0.4h, v1.4h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev64 v0.8h, v1.8h",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev64 v0.2s, v1.2s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "rev64 v0.4s, v1.4s",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cnt v0.8b, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "not v0.8b, v1.8b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v0.8b, v1.8b, v2.8b, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v1.8b, v1.8b, v2.8b, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v0.8b, v1.8b, v2.8b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v1.8b, v1.8b, v2.8b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v0.8b, v1.8b, v2.8b, #7",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v1.8b, v1.8b, v2.8b, #7",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "cnt v0.16b, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "not v0.16b, v1.16b",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v0.16b, v1.16b, v2.16b, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v1.16b, v1.16b, v2.16b, #0",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v0.16b, v1.16b, v2.16b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v1.16b, v1.16b, v2.16b, #1",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v0.16b, v1.16b, v2.16b, #7",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v1.16b, v1.16b, v2.16b, #7",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v0.16b, v1.16b, v2.16b, #15",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ext v1.16b, v1.16b, v2.16b, #15",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "fadd v0.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fadd v1.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fadd v2.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsub v0.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsub v1.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsub v2.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmul v0.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmul v1.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmul v2.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fdiv v0.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fdiv v1.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fdiv v2.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmla v0.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmla v1.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmla v2.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmls v0.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmls v1.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmls v2.2s, v1.2s, v2.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsqrt v0.2s, v1.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsqrt v1.2s, v1.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fabs v0.2s, v1.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fabs v1.2s, v1.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fneg v0.2s, v1.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fneg v1.2s, v1.2s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fadd v0.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fadd v1.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fadd v2.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsub v0.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsub v1.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsub v2.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmul v0.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmul v1.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmul v2.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fdiv v0.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fdiv v1.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fdiv v2.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmla v0.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmla v1.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmla v2.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmls v0.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmls v1.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fmls v2.4s, v1.4s, v2.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsqrt v0.4s, v1.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fsqrt v1.4s, v1.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fabs v0.4s, v1.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fabs v1.4s, v1.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fneg v0.4s, v1.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fneg v1.4s, v1.4s",
+      "kind": "vector-fp",
+      "wide": false
+    },
+    {
+      "asm": "fadd v0.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fadd v1.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fadd v2.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fsub v0.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fsub v1.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fsub v2.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fmul v0.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fmul v1.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fmul v2.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fdiv v0.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fdiv v1.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fdiv v2.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fmla v0.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fmla v1.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fmla v2.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fmls v0.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fmls v1.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fmls v2.2d, v1.2d, v2.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fsqrt v0.2d, v1.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fsqrt v1.2d, v1.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fabs v0.2d, v1.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fabs v1.2d, v1.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fneg v0.2d, v1.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "fneg v1.2d, v1.2d",
+      "kind": "vector-fp",
+      "wide": true
+    },
+    {
+      "asm": "scvtf v0.2s, v1.2s",
+      "kind": "ext-itof",
+      "wide": false
+    },
+    {
+      "asm": "scvtf v1.2s, v1.2s",
+      "kind": "ext-itof",
+      "wide": false
+    },
+    {
+      "asm": "ucvtf v0.2s, v1.2s",
+      "kind": "ext-itof",
+      "wide": false
+    },
+    {
+      "asm": "ucvtf v1.2s, v1.2s",
+      "kind": "ext-itof",
+      "wide": false
+    },
+    {
+      "asm": "fcvtns v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtns v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtnu v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtnu v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtas v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtas v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtau v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtau v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtps v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtps v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtpu v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtpu v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtms v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtms v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtmu v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtmu v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzs v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzs v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzu v0.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzu v1.2s, v1.2s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "frintn v0.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintn v1.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinta v0.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinta v1.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintp v0.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintp v1.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintm v0.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintm v1.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintz v0.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintz v1.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinti v0.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinti v1.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintx v0.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintx v1.2s, v1.2s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "fmax v0.2s, v1.2s, v2.2s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmax v1.2s, v1.2s, v2.2s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmin v0.2s, v1.2s, v2.2s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmin v1.2s, v1.2s, v2.2s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnm v0.2s, v1.2s, v2.2s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnm v1.2s, v1.2s, v2.2s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fminnm v0.2s, v1.2s, v2.2s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fminnm v1.2s, v1.2s, v2.2s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "faddp v0.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "faddp v1.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxp v0.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxp v1.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminp v0.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminp v1.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnmp v0.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnmp v1.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminnmp v0.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminnmp v1.2s, v1.2s, v2.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "scvtf v0.4s, v1.4s",
+      "kind": "ext-itof",
+      "wide": false
+    },
+    {
+      "asm": "scvtf v1.4s, v1.4s",
+      "kind": "ext-itof",
+      "wide": false
+    },
+    {
+      "asm": "ucvtf v0.4s, v1.4s",
+      "kind": "ext-itof",
+      "wide": false
+    },
+    {
+      "asm": "ucvtf v1.4s, v1.4s",
+      "kind": "ext-itof",
+      "wide": false
+    },
+    {
+      "asm": "fcvtns v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtns v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtnu v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtnu v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtas v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtas v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtau v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtau v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtps v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtps v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtpu v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtpu v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtms v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtms v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtmu v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtmu v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzs v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzs v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzu v0.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "fcvtzu v1.4s, v1.4s",
+      "kind": "ext-ftoi",
+      "wide": false
+    },
+    {
+      "asm": "frintn v0.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintn v1.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinta v0.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinta v1.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintp v0.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintp v1.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintm v0.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintm v1.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintz v0.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintz v1.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinti v0.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinti v1.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintx v0.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintx v1.4s, v1.4s",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "fmax v0.4s, v1.4s, v2.4s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmax v1.4s, v1.4s, v2.4s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmin v0.4s, v1.4s, v2.4s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmin v1.4s, v1.4s, v2.4s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnm v0.4s, v1.4s, v2.4s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnm v1.4s, v1.4s, v2.4s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fminnm v0.4s, v1.4s, v2.4s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fminnm v1.4s, v1.4s, v2.4s",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "faddp v0.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "faddp v1.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxp v0.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxp v1.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminp v0.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminp v1.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnmp v0.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnmp v1.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminnmp v0.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminnmp v1.4s, v1.4s, v2.4s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "scvtf v0.2d, v1.2d",
+      "kind": "ext-itof",
+      "wide": true
+    },
+    {
+      "asm": "scvtf v1.2d, v1.2d",
+      "kind": "ext-itof",
+      "wide": true
+    },
+    {
+      "asm": "ucvtf v0.2d, v1.2d",
+      "kind": "ext-itof",
+      "wide": true
+    },
+    {
+      "asm": "ucvtf v1.2d, v1.2d",
+      "kind": "ext-itof",
+      "wide": true
+    },
+    {
+      "asm": "fcvtns v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtns v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtnu v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtnu v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtas v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtas v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtau v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtau v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtps v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtps v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtpu v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtpu v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtms v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtms v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtmu v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtmu v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtzs v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtzs v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtzu v0.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "fcvtzu v1.2d, v1.2d",
+      "kind": "ext-ftoi",
+      "wide": true
+    },
+    {
+      "asm": "frintn v0.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintn v1.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frinta v0.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frinta v1.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintp v0.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintp v1.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintm v0.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintm v1.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintz v0.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintz v1.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frinti v0.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frinti v1.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintx v0.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintx v1.2d, v1.2d",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "fmax v0.2d, v1.2d, v2.2d",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmax v1.2d, v1.2d, v2.2d",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmin v0.2d, v1.2d, v2.2d",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmin v1.2d, v1.2d, v2.2d",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmaxnm v0.2d, v1.2d, v2.2d",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmaxnm v1.2d, v1.2d, v2.2d",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fminnm v0.2d, v1.2d, v2.2d",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fminnm v1.2d, v1.2d, v2.2d",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "faddp v0.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "faddp v1.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fmaxp v0.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fmaxp v1.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fminp v0.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fminp v1.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fmaxnmp v0.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fmaxnmp v1.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fminnmp v0.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fminnmp v1.2d, v1.2d, v2.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "faddp s0, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "faddp s1, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxp s0, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxp s1, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminp s0, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminp s1, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnmp s0, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnmp s1, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminnmp s0, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fminnmp s1, v1.2s",
+      "kind": "ext-pair",
+      "wide": false
+    },
+    {
+      "asm": "fmax s0, s1, s2",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmax s1, s1, s2",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmin s0, s1, s2",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmin s1, s1, s2",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnm s0, s1, s2",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnm s1, s1, s2",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fminnm s0, s1, s2",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "fminnm s1, s1, s2",
+      "kind": "ext-minmax",
+      "wide": false
+    },
+    {
+      "asm": "frintn s0, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintn s1, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinta s0, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinta s1, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintp s0, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintp s1, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintm s0, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintm s1, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintz s0, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintz s1, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinti s0, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frinti s1, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintx s0, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "frintx s1, s1",
+      "kind": "ext-round",
+      "wide": false
+    },
+    {
+      "asm": "faddp d0, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "faddp d1, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fmaxp d0, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fmaxp d1, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fminp d0, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fminp d1, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fmaxnmp d0, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fmaxnmp d1, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fminnmp d0, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fminnmp d1, v1.2d",
+      "kind": "ext-pair",
+      "wide": true
+    },
+    {
+      "asm": "fmax d0, d1, d2",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmax d1, d1, d2",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmin d0, d1, d2",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmin d1, d1, d2",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmaxnm d0, d1, d2",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fmaxnm d1, d1, d2",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fminnm d0, d1, d2",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "fminnm d1, d1, d2",
+      "kind": "ext-minmax",
+      "wide": true
+    },
+    {
+      "asm": "frintn d0, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintn d1, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frinta d0, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frinta d1, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintp d0, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintp d1, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintm d0, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintm d1, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintz d0, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintz d1, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frinti d0, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frinti d1, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintx d0, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "frintx d1, d1",
+      "kind": "ext-round",
+      "wide": true
+    },
+    {
+      "asm": "fmaxv s0, v1.4s",
+      "kind": "ext-reduce",
+      "wide": false
+    },
+    {
+      "asm": "fmaxv s1, v1.4s",
+      "kind": "ext-reduce",
+      "wide": false
+    },
+    {
+      "asm": "fminv s0, v1.4s",
+      "kind": "ext-reduce",
+      "wide": false
+    },
+    {
+      "asm": "fminv s1, v1.4s",
+      "kind": "ext-reduce",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnmv s0, v1.4s",
+      "kind": "ext-reduce",
+      "wide": false
+    },
+    {
+      "asm": "fmaxnmv s1, v1.4s",
+      "kind": "ext-reduce",
+      "wide": false
+    },
+    {
+      "asm": "fminnmv s0, v1.4s",
+      "kind": "ext-reduce",
+      "wide": false
+    },
+    {
+      "asm": "fminnmv s1, v1.4s",
+      "kind": "ext-reduce",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b }, [x1], #8",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b }, [x1], #8",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b, v1.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b, v1.8b }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b, v1.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b, v1.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b, v1.8b }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b, v1.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b, v1.8b, v2.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b, v1.8b, v2.8b }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b, v1.8b, v2.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b, v1.8b, v2.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b, v1.8b, v2.8b }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b, v1.8b, v2.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.8b, v1.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.8b, v1.8b }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.8b, v1.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.8b, v1.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.8b, v1.8b }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.8b, v1.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.8b, v1.8b, v2.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.8b, v1.8b, v2.8b }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.8b, v1.8b, v2.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.8b, v1.8b, v2.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.8b, v1.8b, v2.8b }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.8b, v1.8b, v2.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.8b, v1.8b, v2.8b, v3.8b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b, v1.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b, v1.16b }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b, v1.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b, v1.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b, v1.16b }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b, v1.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b, v1.16b, v2.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b, v1.16b, v2.16b }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b, v1.16b, v2.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b, v1.16b, v2.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b, v1.16b, v2.16b }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b, v1.16b, v2.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.16b, v1.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.16b, v1.16b }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.16b, v1.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.16b, v1.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.16b, v1.16b }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.16b, v1.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.16b, v1.16b, v2.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.16b, v1.16b, v2.16b }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.16b, v1.16b, v2.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.16b, v1.16b, v2.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.16b, v1.16b, v2.16b }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.16b, v1.16b, v2.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.16b, v1.16b, v2.16b, v3.16b }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h }, [x1], #8",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h }, [x1], #8",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h, v1.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h, v1.4h }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h, v1.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h, v1.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h, v1.4h }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h, v1.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h, v1.4h, v2.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h, v1.4h, v2.4h }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h, v1.4h, v2.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h, v1.4h, v2.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h, v1.4h, v2.4h }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h, v1.4h, v2.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.4h, v1.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.4h, v1.4h }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.4h, v1.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.4h, v1.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.4h, v1.4h }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.4h, v1.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.4h, v1.4h, v2.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.4h, v1.4h, v2.4h }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.4h, v1.4h, v2.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.4h, v1.4h, v2.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.4h, v1.4h, v2.4h }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.4h, v1.4h, v2.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.4h, v1.4h, v2.4h, v3.4h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h, v1.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h, v1.8h }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h, v1.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h, v1.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h, v1.8h }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h, v1.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h, v1.8h, v2.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h, v1.8h, v2.8h }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h, v1.8h, v2.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h, v1.8h, v2.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h, v1.8h, v2.8h }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h, v1.8h, v2.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.8h, v1.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.8h, v1.8h }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.8h, v1.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.8h, v1.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.8h, v1.8h }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.8h, v1.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.8h, v1.8h, v2.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.8h, v1.8h, v2.8h }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.8h, v1.8h, v2.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.8h, v1.8h, v2.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.8h, v1.8h, v2.8h }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.8h, v1.8h, v2.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.8h, v1.8h, v2.8h, v3.8h }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s }, [x1], #8",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s }, [x1], #8",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s, v1.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s, v1.2s }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s, v1.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s, v1.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s, v1.2s }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s, v1.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s, v1.2s, v2.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s, v1.2s, v2.2s }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s, v1.2s, v2.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s, v1.2s, v2.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s, v1.2s, v2.2s }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s, v1.2s, v2.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.2s, v1.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.2s, v1.2s }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.2s, v1.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.2s, v1.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.2s, v1.2s }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.2s, v1.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.2s, v1.2s, v2.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.2s, v1.2s, v2.2s }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.2s, v1.2s, v2.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.2s, v1.2s, v2.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.2s, v1.2s, v2.2s }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.2s, v1.2s, v2.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.2s, v1.2s, v2.2s, v3.2s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s, v1.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s, v1.4s }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s, v1.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s, v1.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s, v1.4s }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s, v1.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s, v1.4s, v2.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s, v1.4s, v2.4s }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s, v1.4s, v2.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s, v1.4s, v2.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s, v1.4s, v2.4s }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s, v1.4s, v2.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.4s, v1.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.4s, v1.4s }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.4s, v1.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.4s, v1.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.4s, v1.4s }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.4s, v1.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.4s, v1.4s, v2.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.4s, v1.4s, v2.4s }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.4s, v1.4s, v2.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.4s, v1.4s, v2.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.4s, v1.4s, v2.4s }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.4s, v1.4s, v2.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.4s, v1.4s, v2.4s, v3.4s }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d }, [x1], #8",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d }, [x1], #8",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d, v1.1d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d, v1.1d }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d, v1.1d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d, v1.1d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d, v1.1d }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d, v1.1d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d, v1.1d, v2.1d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d, v1.1d, v2.1d }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d, v1.1d, v2.1d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d, v1.1d, v2.1d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d, v1.1d, v2.1d }, [x1], #24",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d, v1.1d, v2.1d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d, v1.1d, v2.1d, v3.1d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d, v1.1d, v2.1d, v3.1d }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.1d, v1.1d, v2.1d, v3.1d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d, v1.1d, v2.1d, v3.1d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d, v1.1d, v2.1d, v3.1d }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.1d, v1.1d, v2.1d, v3.1d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d }, [x1], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d, v1.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d, v1.2d }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d, v1.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d, v1.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d, v1.2d }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d, v1.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d, v1.2d, v2.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d, v1.2d, v2.2d }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d, v1.2d, v2.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d, v1.2d, v2.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d, v1.2d, v2.2d }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d, v1.2d, v2.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.2d, v1.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.2d, v1.2d }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v0.2d, v1.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.2d, v1.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.2d, v1.2d }, [x1], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v0.2d, v1.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.2d, v1.2d, v2.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.2d, v1.2d, v2.2d }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v0.2d, v1.2d, v2.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.2d, v1.2d, v2.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.2d, v1.2d, v2.2d }, [x1], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v0.2d, v1.2d, v2.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1]",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v0.2d, v1.2d, v2.2d, v3.2d }, [x1], x2",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v31.16b }, [sp], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v31.16b }, [sp], #16",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v31.16b, v0.16b }, [sp], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v31.16b, v0.16b }, [sp], #32",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v31.16b, v0.16b, v1.16b }, [sp], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v31.16b, v0.16b, v1.16b }, [sp], #48",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld1 { v31.16b, v0.16b, v1.16b, v2.16b }, [sp], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st1 { v31.16b, v0.16b, v1.16b, v2.16b }, [sp], #64",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld2 { v31.8h, v0.8h }, [x1], x1",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st2 { v31.8h, v0.8h }, [x1], x1",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld3 { v31.8h, v0.8h, v1.8h }, [x1], x1",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st3 { v31.8h, v0.8h, v1.8h }, [x1], x1",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "ld4 { v31.8h, v0.8h, v1.8h, v2.8h }, [x1], x1",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "st4 { v31.8h, v0.8h, v1.8h, v2.8h }, [x1], x1",
+      "kind": "memory",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.8b, { v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.8b, { v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v1.8b, { v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.8b, { v31.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.8b, { v31.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v31.8b, { v31.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.8b, { v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.8b, { v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v1.8b, { v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.8b, { v31.16b, v0.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.8b, { v31.16b, v0.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v31.8b, { v31.16b, v0.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.8b, { v1.16b, v2.16b, v3.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.8b, { v1.16b, v2.16b, v3.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v1.8b, { v1.16b, v2.16b, v3.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.8b, { v31.16b, v0.16b, v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.8b, { v31.16b, v0.16b, v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v31.8b, { v31.16b, v0.16b, v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.8b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.8b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v1.8b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.8b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.8b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v31.8b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.8b, { v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.8b, { v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v1.8b, { v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.8b, { v31.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.8b, { v31.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v31.8b, { v31.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.8b, { v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.8b, { v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v1.8b, { v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.8b, { v31.16b, v0.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.8b, { v31.16b, v0.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v31.8b, { v31.16b, v0.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.8b, { v1.16b, v2.16b, v3.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.8b, { v1.16b, v2.16b, v3.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v1.8b, { v1.16b, v2.16b, v3.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.8b, { v31.16b, v0.16b, v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.8b, { v31.16b, v0.16b, v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v31.8b, { v31.16b, v0.16b, v1.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.8b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.8b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v1.8b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.8b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.8b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v31.8b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.8b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.16b, { v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.16b, { v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v1.16b, { v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.16b, { v31.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.16b, { v31.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v31.16b, { v31.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.16b, { v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.16b, { v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v1.16b, { v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.16b, { v31.16b, v0.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.16b, { v31.16b, v0.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v31.16b, { v31.16b, v0.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.16b, { v1.16b, v2.16b, v3.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.16b, { v1.16b, v2.16b, v3.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v1.16b, { v1.16b, v2.16b, v3.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.16b, { v31.16b, v0.16b, v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.16b, { v31.16b, v0.16b, v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v31.16b, { v31.16b, v0.16b, v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.16b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.16b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v1.16b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v0.16b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v2.16b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbl v31.16b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.16b, { v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.16b, { v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v1.16b, { v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.16b, { v31.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.16b, { v31.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v31.16b, { v31.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.16b, { v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.16b, { v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v1.16b, { v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.16b, { v31.16b, v0.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.16b, { v31.16b, v0.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v31.16b, { v31.16b, v0.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.16b, { v1.16b, v2.16b, v3.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.16b, { v1.16b, v2.16b, v3.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v1.16b, { v1.16b, v2.16b, v3.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.16b, { v31.16b, v0.16b, v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.16b, { v31.16b, v0.16b, v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v31.16b, { v31.16b, v0.16b, v1.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.16b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.16b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v1.16b, { v1.16b, v2.16b, v3.16b, v4.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v0.16b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v2.16b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "tbx v31.16b, { v31.16b, v0.16b, v1.16b, v2.16b }, v2.16b",
+      "kind": "simd-table",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.8b, v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.8b, v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.8b, v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.8b, v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.16b, v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.16b, v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.16b, v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.16b, v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.4h, v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.4h, v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.4h, v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.4h, v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.8h, v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.8h, v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.8h, v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.8h, v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.2s, v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.2s, v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.2s, v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.2s, v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.4s, v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.4s, v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.4s, v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.4s, v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.2d, v1.d[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.2d, v1.d[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v0.2d, v1.d[1]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "dup v1.2d, v1.d[1]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.b[0], v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.b[0], v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.b[15], v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.b[15], v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.b[0], v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.b[0], v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.b[15], v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.b[15], v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.h[0], v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.h[0], v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.h[7], v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.h[7], v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.h[0], v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.h[0], v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.h[7], v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.h[7], v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.s[0], v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.s[0], v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.s[3], v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.s[3], v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.s[0], v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.s[0], v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.s[3], v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.s[3], v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.d[0], v1.d[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.d[0], v1.d[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.d[1], v1.d[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.d[1], v1.d[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.d[0], v1.d[1]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.d[0], v1.d[1]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v0.d[1], v1.d[1]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "ins v1.d[1], v1.d[1]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov w0, v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov wzr, v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov w0, v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov wzr, v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov w0, v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov wzr, v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov w0, v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov wzr, v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov x0, v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov xzr, v1.b[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov x0, v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov xzr, v1.b[15]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov x0, v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov xzr, v1.h[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov x0, v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov xzr, v1.h[7]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov x0, v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov xzr, v1.s[0]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov x0, v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    },
+    {
+      "asm": "smov xzr, v1.s[3]",
+      "kind": "simd-integer",
+      "wide": false
+    }
+  ]
+}

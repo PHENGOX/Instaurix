@@ -1,0 +1,10 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "crt0_source_sha256": "8BD363084B79672C3E44A5C98DF10B6B5232BA7160C15F7942359A0E8D59987E",
+  "dynamic_source": "../libnx_dynamic/dynamic.upstream.c",
+  "compiler": "Zig 0.13.0, bundled Clang, aarch64-none-elf",
+  "nro_sha256": "3AF78512386437A230B3CB4CDE5FB4DF8A044223AE816A6BF8CA52B0E7B7FDD6",
+  "expected_instructions": 12432,
+  "expected_boundary_marker": 49153,
+  "scope": "Unmodified libnx crt0 and dynamic.c; __libnx_init is an explicit harness stop, never a successful initialization"
+}

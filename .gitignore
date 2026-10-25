@@ -1,0 +1,36 @@
+/build/
+/out/
+*.user
+*.suo
+/tools/zig-*/
+/tools/*.zip
+/tools/zig-package.json
+/tools/python-deps/
+/tools/reference-sources/
+
+# Caches locaux et fichiers personnels
+.vs/
+.idea/
+__pycache__/
+*.pyc
+.zig-cache/
+zig-out/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+prod.keys
+title.keys
+
+# Dumps console et contenus de jeux (les petits ELF/NRO de tests restent inclus)
+*.xci
+*.nsp
+*.nca
+*.nsz
+*.xcz
+/firmware/
+/dumps/
+/roms/
+/keys/
+/saves/

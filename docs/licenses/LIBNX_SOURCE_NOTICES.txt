@@ -1,0 +1,2283 @@
+libnx b156b4774fb2df7b93402169509266da7547fc4c
+Notices from reference sources and headers (including headers not necessarily linked).
+The ISC licence is reproduced in tests/programs/libnx_*/LICENSE.libnx.md.
+Copyright 2017-2018 libnx Authors
+
+Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+===== external/bsd/include/net/bpf.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1990, 1991, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from the Stanford/CMU enet packet filter,
+ * (net/enet.c) distributed as part of 4.3BSD, and code contributed
+ * to Berkeley by Steven McCanne and Van Jacobson both of Lawrence
+ * Berkeley Laboratory.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *      @(#)bpf.h	8.1 (Berkeley) 6/10/93
+ *	@(#)bpf.h	1.34 (LBL)     6/16/96
+ *
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/net/dlt.h =====
+/*-
+ * Copyright (c) 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from the Stanford/CMU enet packet filter,
+ * (net/enet.c) distributed as part of 4.3BSD, and code contributed
+ * to Berkeley by Steven McCanne and Van Jacobson both of Lawrence
+ * Berkeley Laboratory.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *      @(#)bpf.h       7.1 (Berkeley) 5/7/91
+ *
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/net/if.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1989, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)if.h	8.1 (Berkeley) 6/10/93
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/net/if_arp.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1986, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)if_arp.h	8.1 (Berkeley) 6/10/93
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/net/if_dl.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1990, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)if_dl.h	8.1 (Berkeley) 6/10/93
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/net/if_media.h =====
+/*-
+ * SPDX-License-Identifier: BSD-4-Clause
+ *
+ * Copyright (c) 1997
+ *	Jonathan Stone and Jason R. Thorpe.  All rights reserved.
+ *
+ * This software is derived from information provided by Matt Thomas.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *	This product includes software developed by Jonathan Stone
+ *	and Jason R. Thorpe for the NetBSD Project.
+ * 4. The names of the authors may not be used to endorse or promote products
+ *    derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+ * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
+===== external/bsd/include/net/route.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1980, 1986, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)route.h	8.4 (Berkeley) 1/9/95
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/netdb.h =====
+/*-
+ * SPDX-License-Identifier: (BSD-3-Clause AND ISC)
+ *
+ * Copyright (c) 1980, 1983, 1988, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * -
+ * Portions Copyright (c) 1993 by Digital Equipment Corporation.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies, and that
+ * the name of Digital Equipment Corporation not be used in advertising or
+ * publicity pertaining to distribution of the document or software without
+ * specific, written prior permission.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND DIGITAL EQUIPMENT CORP. DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS.   IN NO EVENT SHALL DIGITAL EQUIPMENT
+ * CORPORATION BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
+ * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
+ * SOFTWARE.
+ * -
+ * --Copyright--
+ */
+
+===== external/bsd/include/netinet/in.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1990, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)in.h	8.3 (Berkeley) 1/3/94
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/netinet/tcp.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)tcp.h	8.1 (Berkeley) 6/10/93
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/netinet/udp.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1993
+ *	The Regents of the University of California.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)udp.h	8.1 (Berkeley) 6/10/93
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/poll.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1997 Peter Wemm <peter@freebsd.org>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. The name of the author may not be used to endorse or promote products
+ *    derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/sys/_iovec.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1993, 1994
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)uio.h	8.5 (Berkeley) 2/22/94
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/sys/_sockaddr_storage.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1985, 1986, 1988, 1993, 1994
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)socket.h	8.4 (Berkeley) 2/21/94
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/sys/filio.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1990, 1993, 1994
+ *	The Regents of the University of California.  All rights reserved.
+ * (c) UNIX System Laboratories, Inc.
+ * All or some portions of this file are derived from material licensed
+ * to the University of California by American Telephone and Telegraph
+ * Co. or Unix System Laboratories, Inc. and are reproduced herein with
+ * the permission of UNIX System Laboratories, Inc.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)filio.h	8.1 (Berkeley) 3/28/94
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/sys/ioccom.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1990, 1993, 1994
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)ioccom.h	8.2 (Berkeley) 3/28/94
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/sys/ioctl.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1990, 1993, 1994
+ *	The Regents of the University of California.  All rights reserved.
+ * (c) UNIX System Laboratories, Inc.
+ * All or some portions of this file are derived from material licensed
+ * to the University of California by American Telephone and Telegraph
+ * Co. or Unix System Laboratories, Inc. and are reproduced herein with
+ * the permission of UNIX System Laboratories, Inc.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)ioctl.h	8.6 (Berkeley) 3/28/94
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/sys/socket.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1985, 1986, 1988, 1993, 1994
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)socket.h	8.4 (Berkeley) 2/21/94
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/sys/sockio.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1982, 1986, 1990, 1993, 1994
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)sockio.h	8.1 (Berkeley) 3/28/94
+ * $FreeBSD$
+ */
+
+===== external/bsd/include/sys/sysctl.h =====
+/*-
+ * SPDX-License-Identifier: BSD-3-Clause
+ *
+ * Copyright (c) 1989, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from software contributed to Berkeley by
+ * Mike Karels at Berkeley Software Design, Inc.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *	@(#)sysctl.h	8.1 (Berkeley) 6/2/93
+ * $FreeBSD$
+ */
+
+===== include/switch/applets/album_la.h =====
+/**
+ * @file album_la.h
+ * @brief Wrapper for using the Album LibraryApplet.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/error.h =====
+/**
+ * @file error.h
+ * @brief Wrapper for using the error LibraryApplet.
+ * @author StuntHacks, yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/friends_la.h =====
+/**
+ * @file friends_la.h
+ * @brief Wrapper for using the MyPage (friends) LibraryApplet.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/hid_la.h =====
+/**
+ * @file hid_la.h
+ * @brief Wrapper for using the controller LibraryApplet.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/libapplet.h =====
+/**
+ * @file libapplet.h
+ * @brief LibraryApplet wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/mii_la.h =====
+/**
+ * @file mii_la.h
+ * @brief Wrapper for using the MiiEdit LibraryApplet.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/nfp_la.h =====
+/**
+ * @file nfp_la.h
+ * @brief Wrapper for using the cabinet (amiibo) LibraryApplet.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/nifm_la.h =====
+/**
+ * @file nifm_la.h
+ * @brief Wrapper for using the nifm LibraryApplet (the launched applet varies).
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/pctlauth.h =====
+/**
+ * @file pctlauth.h
+ * @brief Wrapper for using the Parental Controls authentication LibraryApplet. This applet is used by qlaunch.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/psel.h =====
+/**
+ * @file psel.h
+ * @brief Wrapper for using the playerSelect (user selection) LibraryApplet.
+ * @author XorTroll, yellows8
+ * @copyright libnx Authors
+ */
+///< [6.0.0+] LicenseRequirementsForNetworkService
+
+///< [7.0.0+] LicenseRequirementsForNetworkServiceWithUserContextImpl
+
+
+===== include/switch/applets/swkbd.h =====
+/**
+ * @file swkbd.h
+ * @brief Wrapper for using the swkbd (software keyboard) LibraryApplet.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/applets/web.h =====
+/**
+ * @file web.h
+ * @brief Wrapper for using the web LibraryApplets. See also: https://switchbrew.org/wiki/Internet_Browser
+ * @author p-sam, yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/arm/cache.h =====
+/**
+ * @file cache.h
+ * @brief AArch64 cache operations.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/arm/counter.h =====
+/**
+ * @file counter.h
+ * @brief AArch64 system counter-timer.
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/arm/thread_context.h =====
+/**
+ * @file thread_context.h
+ * @brief AArch64 register dump format and related definitions.
+ * @author TuxSH
+ * @copyright libnx Authors
+ */
+
+===== include/switch/arm/tls.h =====
+/**
+ * @file tls.h
+ * @brief AArch64 thread local storage.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/audio/audio.h =====
+/**
+ * @file audio.h
+ * @brief Global audio service.
+ * @author hexkyz
+ * @copyright libnx Authors
+ */
+
+===== include/switch/audio/driver.h =====
+/**
+ * @file driver.h
+ * @brief Audio driver (audren wrapper).
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/crypto/aes.h =====
+/**
+ * @file aes.h
+ * @brief Hardware accelerated AES-ECB implementation.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/crypto/aes_cbc.h =====
+/**
+ * @file aes_cbc.h
+ * @brief Hardware accelerated AES-CBC implementation.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/crypto/aes_ctr.h =====
+/**
+ * @file aes_ctr.h
+ * @brief Hardware accelerated AES-CTR implementation.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/crypto/aes_xts.h =====
+/**
+ * @file aes_xts.h
+ * @brief Hardware accelerated AES-XTS implementation.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/crypto/cmac.h =====
+/**
+ * @file cmac.h
+ * @brief Hardware accelerated AES-CMAC implementation.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/crypto/crc.h =====
+/**
+ * @file crc.h
+ * @brief Hardware accelerated CRC32 implementation.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/crypto/hmac.h =====
+/**
+ * @file hmac.h
+ * @brief Hardware accelerated HMAC-SHA(1, 256) implementation.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/crypto/sha1.h =====
+/**
+ * @file sha1.h
+ * @brief Hardware accelerated SHA1 implementation.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/crypto/sha256.h =====
+/**
+ * @file sha256.h
+ * @brief Hardware accelerated SHA256 implementation.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/display/framebuffer.h =====
+/**
+ * @file framebuffer.h
+ * @brief Framebuffer wrapper object, providing support for software rendered graphics.
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/display/native_window.h =====
+/**
+ * @file native_window.h
+ * @brief Native window (NWindow) wrapper object, used for presenting images to the display (or other sinks).
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/display/types.h =====
+/**
+ * @file display/types.h
+ * @brief Definitions for Android-related types and enumerations.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/barrier.h =====
+/**
+ * @file barrier.h
+ * @brief Multi-threading Barrier
+ * @author tatehaga
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/condvar.h =====
+/**
+ * @file condvar.h
+ * @brief Condition variable synchronization primitive.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/detect.h =====
+/**
+ * @file detect.h
+ * @brief Kernel capability detection
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/event.h =====
+/**
+ * @file event.h
+ * @brief Kernel-mode event synchronization primitive.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/jit.h =====
+/**
+ * @file jit.h
+ * @brief Just-in-time compilation support.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+///< JIT supported using svcSetProcessMemoryPermission
+
+/**
+ * @brief Transition a JIT buffer to have writable permission.
+ * @param j JIT buffer.
+ * @return Result code.
+ */
+/**
+ * @brief Transition a JIT buffer to have executable permission.
+ * @param j JIT buffer.
+ * @return Result code.
+ */
+
+===== include/switch/kernel/levent.h =====
+/**
+ * @file levent.h
+ * @brief Light event synchronization primitive [4.0.0+]
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/mutex.h =====
+/**
+ * @file mutex.h
+ * @brief Mutex synchronization primitive.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/random.h =====
+/**
+ * @file random.h
+ * @brief OS-seeded pseudo-random number generation support (ChaCha algorithm).
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/rwlock.h =====
+/**
+ * @file rwlock.h
+ * @brief Read/write lock synchronization primitive.
+ * @author plutoo, SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/semaphore.h =====
+/**
+ * @file semaphore.h
+ * @brief Thread synchronization based on Mutex.
+ * @author SciresM & Kevoot
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/shmem.h =====
+/**
+ * @file shmem.h
+ * @brief Shared memory object handling
+ * @author plutoo
+ * @copyright libnx Authors
+ * @remark Shared memory differs from transfer memory in the fact that the kernel (as opposed to the user process) allocates and owns its backing memory.
+ */
+///< Permissions.
+
+/**
+ * @brief Creates a shared memory object.
+ * @param s Shared memory information structure which will be filled in.
+ * @param size Size of the shared memory object to create.
+ * @param local_perm Permissions with which the shared memory object will be mapped in the local process.
+ * @param remote_perm Permissions with which the shared memory object will be mapped in the remote process (can be Perm_DontCare).
+ * @return Result code.
+ * @warning This is a privileged operation; in normal circumstances applications cannot use this function.
+ */
+/**
+ * @brief Loads a shared memory object coming from a remote process.
+ * @param s Shared memory information structure which will be filled in.
+ * @param handle Handle of the shared memory object.
+ * @param size Size of the shared memory object that is being loaded.
+ * @param perm Permissions with which the shared memory object will be mapped in the local process.
+ */
+
+===== include/switch/kernel/svc.h =====
+/**
+ * @file svc.h
+ * @brief Wrappers for kernel syscalls.
+ * @copyright libnx Authors
+ */
+///< Transition from MemType_CodeStatic performed by \ref svcSetProcessMemoryPermission.
+
+///< Transition from \ref MemType_ModuleCodeStatic performed by \ref svcSetProcessMemoryPermission.
+
+///< Permission change allowed.
+
+///< Process permission change allowed.
+
+///< Is permission locked.
+
+/// Memory permission bitmasks.
+
+///< No permissions.
+
+///< Read permission.
+
+///< Write permission.
+
+///< Execute permission.
+
+///< Read/write permissions.
+
+///< Read/execute permissions.
+
+///< Memory permissions (see \ref Permission).
+
+/**
+ * @brief Set the memory permissions of a (page-aligned) range of memory.
+ * @param[in] addr Start address of the range.
+ * @param[in] size Size of the range, in bytes.
+ * @param[in] perm Permissions (see \ref Permission).
+ * @return Result code.
+ * @remark Perm_X is not allowed. Setting write-only is not allowed either (Perm_W).
+ *         This can be used to move back and forth between Perm_None, Perm_R and Perm_Rw.
+ * @note Syscall number 0x02.
+ */
+/**
+ * @brief Sets the memory permissions for the specified memory with the supplied process handle.
+ * @param[in] proc Process handle.
+ * @param[in] addr Address of the memory.
+ * @param[in] size Size of the memory.
+ * @param[in] perm Permissions (see \ref Permission).
+ * @return Result code.
+ * @remark This returns an error (0xD801) when \p perm is >0x5, hence -WX and RWX are not allowed.
+ * @note Syscall number 0x73.
+ * @warning This is a privileged syscall. Use \ref envIsSyscallHinted to check if it is available.
+ */
+/**
+ * @brief Maps the src address from the supplied process handle into the current process.
+ * @param[in] dst Address to which map the memory in the current process.
+ * @param[in] proc Process handle.
+ * @param[in] src Source mapping address.
+ * @param[in] size Size of the memory.
+ * @return Result code.
+ * @remark This allows mapping code and rodata with RW- permission.
+ * @note Syscall number 0x74.
+ * @warning This is a privileged syscall. Use \ref envIsSyscallHinted to check if it is available.
+ */
+/**
+ * @brief Undoes the effects of \ref svcMapProcessMemory.
+ * @param[in] dst Destination mapping address
+ * @param[in] proc Process handle.
+ * @param[in] src Address of the memory in the process.
+ * @param[in] size Size of the memory.
+ * @return Result code.
+ * @remark This allows mapping code and rodata with RW- permission.
+ * @note Syscall number 0x75.
+ * @warning This is a privileged syscall. Use \ref envIsSyscallHinted to check if it is available.
+ */
+
+===== include/switch/kernel/thread.h =====
+/**
+ * @file thread.h
+ * @brief Multi-threading support
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/tmem.h =====
+/**
+ * @file tmem.h
+ * @brief Transfer memory handling
+ * @author plutoo
+ * @copyright libnx Authors
+ * @remark Transfer memory differs from shared memory in the fact that the user process (as opposed to the kernel) allocates and owns its backing memory.
+ */
+///< Permissions of the transfer memory object.
+
+/**
+ * @brief Creates a transfer memory object.
+ * @param t Transfer memory information structure that will be filled in.
+ * @param size Size of the transfer memory object to create.
+ * @param perm Permissions with which to protect the transfer memory in the local process.
+ * @return Result code.
+ */
+/**
+ * @brief Creates a transfer memory object from existing memory.
+ * @param t Transfer memory information structure that will be filled in.
+ * @param buf Pointer to a page-aligned buffer.
+ * @param size Size of the transfer memory object to create.
+ * @param perm Permissions with which to protect the transfer memory in the local process.
+ * @return Result code.
+ */
+/**
+ * @brief Loads a transfer memory object coming from a remote process.
+ * @param t Transfer memory information structure which will be filled in.
+ * @param handle Handle of the transfer memory object.
+ * @param size Size of the transfer memory object that is being loaded.
+ * @param perm Permissions which the transfer memory is expected to have in the process that owns the memory.
+ * @warning This is a privileged operation; in normal circumstances applications shouldn't use this function.
+ */
+/**
+ * @brief Waits until source backing memory permissions match perm.
+ * @param t Transfer memory information structure.
+ * @param perm Permissions which the source backing memory is expected to have before return.
+ * @return Result code.
+ */
+
+===== include/switch/kernel/uevent.h =====
+/**
+ * @file uevent.h
+ * @brief User-mode event synchronization primitive.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/utimer.h =====
+/**
+ * @file utimer.h
+ * @brief User-mode timer synchronization primitive.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/virtmem.h =====
+/**
+ * @file virtmem.h
+ * @brief Virtual memory mapping utilities
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/kernel/wait.h =====
+/**
+ * @file wait.h
+ * @brief User mode synchronization primitive waiting operations.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/nacp.h =====
+/**
+ * @file nacp.h
+ * @brief Control.nacp structure / related code for nacp.
+ * @copyright libnx Authors
+ */
+///< SupportingLimitedApplicationLicenses
+
+///< RequiredNetworkServiceLicenseOnLaunchFlag
+
+///< PlayReportPermission
+
+
+===== include/switch/nro.h =====
+/**
+ * @file nro.h
+ * @brief NRO headers.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/result.h =====
+/**
+ * @file result.h
+ * @brief Switch result code tools.
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/btdev.h =====
+/**
+ * @file btdev.h
+ * @brief Wrapper around the bt/btmu services for using bluetooth BLE.
+ * @note Only available on [5.0.0+].
+ * @note See also: https://switchbrew.org/wiki/BTM_services
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/devices/console.h =====
+/**
+ * @file console.h
+ * @brief Framebuffer text console.
+ * @author yellows8
+ * @author WinterMute
+ * @copyright libnx Authors
+ *
+ * Provides stdio integration for printing to the Switch screen as well as debug print
+ * functionality provided by stderr.
+ *
+ * General usage is to initialize the console by:
+ * @code
+ * consoleInit(NULL)
+ * @endcode
+ * optionally customizing the console usage by passing a pointer to a custom PrintConsole struct.
+ */
+
+===== include/switch/runtime/devices/fs_dev.h =====
+/**
+ * @file fs_dev.h
+ * @brief FS driver, using devoptab.
+ * @author yellows8
+ * @author mtheall
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/devices/romfs_dev.h =====
+/**
+ * @file romfs_dev.h
+ * @brief RomFS driver.
+ * @author yellows8
+ * @author mtheall
+ * @author fincs
+ * @copyright libnx Authors
+ */
+/**
+ * @brief Mounts RomFS of a running program.
+ * @note Permission needs to be set in the NPDM.
+ * @param program_id ProgramId to mount.
+ * @param name Device mount name.
+ */
+
+===== include/switch/runtime/devices/usb_comms.h =====
+/**
+ * @file usb_comms.h
+ * @brief USB comms.
+ * @author yellows8
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/diag.h =====
+/**
+ * @file diag.h
+ * @brief Debugging and diagnostics utilities
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/env.h =====
+/**
+ * @file env.h
+ * @brief Homebrew environment definitions and utilities.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/hosversion.h =====
+/**
+ * @file hosversion.h
+ * @brief Horizon OS (HOS) version detection utilities.
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/nxlink.h =====
+/**
+ * @file nxlink.h
+ * @brief Netloader (nxlink) utilities
+ * @author WinterMute
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/pad.h =====
+/**
+ * @file pad.h
+ * @brief Simple wrapper for the HID Npad API.
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/ringcon.h =====
+/**
+ * @file ringcon.h
+ * @brief Wrapper for using the Ring-Con attached to a Joy-Con, with hidbus. See also: https://switchbrew.org/wiki/Ring-Con
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/runtime/util/utf.h =====
+/**
+ * @file utf.h
+ * @brief UTF conversion functions.
+ * @author mtheall
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/acc.h =====
+/**
+ * @file acc.h
+ * @brief Account (acc:*) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/apm.h =====
+/**
+ * @file apm.h
+ * @brief Performance management (apm) service IPC wrapper. This is used internally by applet with __nx_applet_PerformanceConfiguration, however if you prefer non-init/exit can be used manually. See also: https://switchbrew.org/wiki/PTM_services#apm:am
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/applet.h =====
+/**
+ * @file applet.h
+ * @brief Applet (applet) service IPC wrapper.
+ * @note For wrappers which launch LibraryApplets etc, see switch/applets/.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+/// Permission values for \ref appletSetScreenShotPermission.
+
+/**
+ * @brief Controls whether screenshot-capture is allowed.
+ * @param permission \ref AppletScreenShotPermission
+ */
+/**
+ * @brief Initializes the ApplicationCopyrightFrameBuffer, with dimensions 1280x720 + the tmem for it. This is used as an overlay for screenshots.
+ * @note Only available with AppletType_*Application on [5.0.0+].
+ * @note Cleanup for this is handled automatically during app exit in \ref appletExit.
+ */
+/**
+ * @brief Sets the RGBA8 image for use with \ref appletInitializeApplicationCopyrightFrameBuffer. Overrides the current image, if this was already used previously.
+ * @note Only available with AppletType_*Application on [5.0.0+].
+ * @note The specified coordinates and width/height must be within the bounds of the framebuffer setup by \ref appletInitializeApplicationCopyrightFrameBuffer.
+ * @param[in] buffer Input image buffer.
+ * @param[in] size Input image buffer size.
+ * @param[in] x X coordinate. Must not be negative.
+ * @param[in] y Y coordinate. Must not be negative.
+ * @param[in] width Image width. Must be >=1.
+ * @param[in] height Image height. Must be >=1.
+ * @param[in] mode \ref AppletWindowOriginMode
+ */
+/**
+ * @brief Sets the visibility for the image set by \ref appletSetApplicationCopyrightImage, in screenshots.
+ * @note Only available with AppletType_*Application on [5.0.0+].
+ * @param[in] visible Whether the image is visible. The default is true.
+ */
+/**
+ * @brief Sets ScreenShotPermissionGlobally.
+ * @note Only available with AppletType_OverlayApplet on [3.0.0+].
+ * @param[in] flag Flag
+ */
+
+===== include/switch/services/async.h =====
+/**
+ * @file async.h
+ * @brief NS/NIM IAsync* IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/aud.h =====
+/**
+ * @file aud.h
+ * @brief Only available on [11.0.0+].
+ * @note Only one session may be open at once.
+ * @author TotalJustice
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/audctl.h =====
+/**
+ * @file audctl.h
+ * @brief Audio Control IPC wrapper.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/auddev.h =====
+/**
+ * @file auddev.h
+ * @brief IAudioDevice IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/audin.h =====
+/**
+ * @file audin.h
+ * @brief Audio input service.
+ * @author hexkyz
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/audout.h =====
+/**
+ * @file audout.h
+ * @brief Audio output service.
+ * @author hexkyz, TotalJustice
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/audrec.h =====
+/**
+ * @file audrec.h
+ * @brief Audio Recorder IPC wrapper.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/audren.h =====
+/**
+ * @file audren.h
+ * @brief Audio renderer service.
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/avm.h =====
+/**
+ * @file avm.h
+ * @brief AVM services IPC wrapper. Only available on [6.0.0+].
+ * @author Behemoth
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/bpc.h =====
+/**
+ * @file bpc.h
+ * @brief Board power control (bpc) service IPC wrapper.
+ * @author XorTroll, SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/bsd.h =====
+/**
+ * @file bsd.h
+ * @brief BSD sockets (bsd:u/s) service IPC wrapper. Please use the standard <sys/socket.h> interface instead.
+ * @author plutoo
+ * @author TuxSH
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/bt.h =====
+/**
+ * @file bt.h
+ * @brief Bluetooth user (bt) service IPC wrapper.
+ * @note See also btdev.
+ * @author yellows8, ndeadly
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/btdrv.h =====
+/**
+ * @file btdrv.h
+ * @brief Bluetooth driver (btdrv) service IPC wrapper.
+ * @author yellows8, ndeadly
+ * @copyright libnx Authors
+ */
+/**
+ * @brief AddGattCharacteristic
+ * @note Only available on [5.0.0+].
+ * @note Broken behaviour due to internal bugs.
+ * @param[in] server_if Server interface ID
+ * @param[in] serv_uuid Service UUID \ref BtdrvGattAttributeUuid
+ * @param[in] char_uuid Characteristic UUID \ref BtdrvGattAttributeUuid
+ * @param[in] permissions \ref BtdrvGattAttributePermission
+ * @param[in] property \ref BtdrvGattCharacteristicProperty
+ */
+/**
+ * @brief AddGattDescriptor
+ * @note Only available on [5.0.0+].
+ * @note Broken behaviour due to internal bugs.
+ * @param[in] server_if Server interface ID
+ * @param[in] serv_uuid Service UUID \ref BtdrvGattAttributeUuid
+ * @param[in] desc_uuid Descriptor UUID \ref BtdrvGattAttributeUuid
+ * @param[in] permissions \ref BtdrvGattAttributePermission
+ */
+
+===== include/switch/services/btdrv_ids.h =====
+/**
+ * @file btdrv_ids.h
+ * @brief Bluetooth SIG assigned number definitions (see https://www.bluetooth.com/specifications/assigned-numbers/).
+ * @author ndeadly
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/btdrv_types.h =====
+/**
+ * @file btdrv_types.h
+ * @brief Bluetooth driver (btdrv) service types (see btdrv.h for the rest).
+ * @author yellows8, ndeadly
+ * @copyright libnx Authors
+ */
+/// GattAttributePermission
+
+
+===== include/switch/services/btm_types.h =====
+/**
+ * @file btm_types.h
+ * @brief btm service types.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/caps.h =====
+/**
+ * @file caps.h
+ * @brief Common caps (caps:*) service IPC header.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/capsa.h =====
+/**
+ * @file capsa.h
+ * @brief Album Accessor (caps:a) service IPC wrapper.
+ * @author Behemoth
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/capsc.h =====
+/**
+ * @file capsc.h
+ * @brief Album Control (caps:c) service IPC wrapper.
+ * @author Behemoth
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/capsdc.h =====
+/**
+ * @file capsdc.h
+ * @brief Jpeg Decoder (caps:dc) service IPC wrapper. Only available on [4.0.0+].
+ * @note Only holds one session that is occupied by capsrv.
+ * @author Behemoth
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/capssc.h =====
+/**
+ * @file capssc.h
+ * @brief Screenshot control (caps:sc) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/capssu.h =====
+/**
+ * @file capssu.h
+ * @brief Application screenshot saving (caps:su) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/capsu.h =====
+/**
+ * @file capsu.h
+ * @brief Application Album (caps:u) service IPC wrapper.
+ * This is only usable with AlbumFiles associated with the current host Application.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/clkrst.h =====
+/**
+ * @file clkrst.h
+ * @brief Clkrst service IPC wrapper.
+ * @author p-sam
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/csrng.h =====
+/**
+ * @file csrng.h
+ * @brief Cryptographically-Secure Random Number Generation (csrng) service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ectx.h =====
+/**
+ * @file ectx.h
+ * @brief [11.0.0+] Error Context services IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/fan.h =====
+/**
+ * @file fan.h
+ * @brief Fan service IPC wrapper.
+ * @author Behemoth
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/fatal.h =====
+/**
+ * @file fatal.h
+ * @brief Fatal error (fatal:u) service IPC wrapper.
+ * @author plutoo
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/friends.h =====
+/**
+ * @file friend.h
+ * @brief Friends (friend:*) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+///< Presence permission
+
+///< Play log permission
+
+
+===== include/switch/services/fs.h =====
+/**
+ * @file fs.h
+ * @brief Filesystem (fsp-srv) service IPC wrapper.
+ * Normally applications should just use standard stdio not FS-serv directly. However this can be used if obtaining a FsFileSystem, FsFile, or FsStorage, for mounting with fs_dev/romfs_dev, etc.
+ * @author plutoo
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/fsldr.h =====
+/**
+ * @file fsldr.h
+ * @brief FilesystemProxy-ForLoader (fsp-ldr) service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/fspr.h =====
+/**
+ * @file fspr.h
+ * @brief FilesystemProxy-ProgramRegistry (fsp-pr) service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/gpio.h =====
+/**
+ * @file gpio.h
+ * @brief GPIO service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/grc.h =====
+/**
+ * @file grc.h
+ * @brief GRC Game Recording (grc:*) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/hid.h =====
+/**
+ * @file hid.h
+ * @brief Human input device (hid) service IPC wrapper.
+ * @note Applet services must be initialized.
+ * @author shinyquagsire23
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/htcs.h =====
+/**
+ * @file htcs.h
+ * @brief HTC sockets (htcs) service IPC wrapper. Please use <<TODO>> instead.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/hwopus.h =====
+/**
+ * @file hwopus.h
+ * @brief Hardware Opus audio service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/i2c.h =====
+/**
+ * @file i2c.h
+ * @brief I2C service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/idlesys.h =====
+/**
+ * @file idlesys.h
+ * @author MasaGratoR
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ins.h =====
+/**
+ * @file ins.h
+ * @brief INS services IPC wrapper.
+ * @author averne
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/irs.h =====
+/**
+ * @file irs.h
+ * @brief HID IR sensor (irs) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/lbl.h =====
+/**
+ * @file lbl.h
+ * @brief LBL service IPC wrapper.
+ * @author SciresM, exelix
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ldn.h =====
+/**
+ * @file ldn.h
+ * @brief LDN (local network communications) IPC wrapper. See also: https://switchbrew.org/wiki/LDN_services
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ldr.h =====
+/**
+ * @file ldr.h
+ * @brief Loader (ldr*) service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/lp2p.h =====
+/**
+ * @file lp2p.h
+ * @brief lp2p service IPC wrapper, for local-WLAN communications with accessories. See also: https://switchbrew.org/wiki/LDN_services
+ * @note Only available on [9.1.0+].
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/lr.h =====
+/**
+ * @file lr.h
+ * @brief Location Resolver (lr) service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/mii.h =====
+/**
+ * @file mii.h
+ * @brief Mii services (mii:*) IPC wrapper.
+ * @author XorTroll
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/miiimg.h =====
+/**
+ * @file miiimg.h
+ * @brief Mii image (miiimg) service IPC wrapper.
+ * @author XorTroll
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/mm.h =====
+/**
+ * @file mmu.h
+ * @brief Multimedia (mm) IPC wrapper.
+ * @author averne
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ncm.h =====
+/**
+ * @file ncm.h
+ * @brief Content Manager (ncm) service IPC wrapper.
+ * @author Adubbz & zhuowei
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ncm_types.h =====
+/**
+ * @file ncm_types.h
+ * @brief Content Manager (ncm) service types (see ncm.h for the rest).
+ * @author Adubbz, zhuowei, and yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/news.h =====
+/**
+ * @file news.h
+ * @brief News service IPC wrapper.
+ * @author Behemoth
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/nfc.h =====
+/**
+ * @file nfc.h
+ * @brief Nintendo Figurine (amiibo) Platform (nfp:user) service IPC wrapper.
+ * @author averne
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/nifm.h =====
+/**
+ * @file nifm.h
+ * @brief Network interface service IPC wrapper.
+ * @author shadowninja108, shibboleet, exelix, yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/nim.h =====
+/**
+ * @file nim.h
+ * @brief Network Install Manager (nim) service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/notif.h =====
+/**
+ * @file notif.h
+ * @brief Alarm notification (notif:*) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ns.h =====
+/**
+ * @file ns.h
+ * @brief NS services IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/nv.h =====
+/**
+ * @file nv.h
+ * @brief NVIDIA low level driver (nvdrv*) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/omm.h =====
+/**
+ * @file omm.h
+ * @author MasaGratoR
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ovln.h =====
+/**
+ * @file ovln.h
+ * @brief Overlay notification (ovln:*) service IPC wrapper.
+ * @author ndeadly
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/pctl.h =====
+/**
+ * @file pctl.h
+ * @brief Parental Controls service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+/// Reset the confirmation done by \ref pctlConfirmStereoVisionPermission. Only available with [5.0.0+].
+
+
+===== include/switch/services/pcv.h =====
+/**
+ * @file pcv.h
+ * @brief PCV service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/pdm.h =====
+/**
+ * @file pdm.h
+ * @brief PDM (pdm:*) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/pgl.h =====
+/**
+ * @file pgl.h
+ * @brief PGL service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/pl.h =====
+/**
+ * @file pl.h
+ * @brief pl:u service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/pm.h =====
+/**
+ * @file pm.h
+ * @brief Process management (pm*) service IPC wrapper.
+ * @author plutoo
+ * @author yellows8
+ * @author mdbell
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/psc.h =====
+/**
+ * @file psc.h
+ * @brief PSC service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/psm.h =====
+/**
+ * @file psm.h
+ * @brief PSM service IPC wrapper.
+ * @author XorTroll, endrift, and yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ro.h =====
+/**
+ * @file ro.h
+ * @brief Relocatable Objects (ro) service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/set.h =====
+/**
+ * @file set.h
+ * @brief Settings services IPC wrapper.
+ * @author plutoo
+ * @author yellows8
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+/// FriendPresenceOverlayPermission
+
+/// ErrorReportSharePermission
+
+///< \ref SetSysFriendPresenceOverlayPermission
+
+/**
+ * @brief GetErrorReportSharePermission
+ * @note Only available on [4.0.0+].
+ * @param[out] out \ref SetSysErrorReportSharePermission
+ */
+/**
+ * @brief SetErrorReportSharePermission
+ * @note Only available on [4.0.0+].
+ * @param[in] permission \ref SetSysErrorReportSharePermission
+ */
+
+===== include/switch/services/sfdnsres.h =====
+/**
+ * @file sfdnsres.h
+ * @brief Domain name resolution service IPC wrapper. Please use the standard <netdb.h> interface instead.
+ * @author TuxSH
+ * @author fincs
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/sm.h =====
+/**
+ * @file sm.h
+ * @brief Service manager (sm) IPC wrapper.
+ * @author plutoo
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/smm.h =====
+/**
+ * @file smm.h
+ * @brief ServiceManager-IManager (sm:m) service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/spl.h =====
+/**
+ * @file spl.h
+ * @brief Security Processor Liaison (spl*) service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/spsm.h =====
+/**
+ * @file spsm.h
+ * @brief SPSM service IPC wrapper.
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ssl.h =====
+/**
+ * @file fs.h
+ * @brief SSL service IPC wrapper, for using client-mode TLS. See also: https://switchbrew.org/wiki/SSL_services
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/tc.h =====
+/**
+ * @file tc.h
+ * @brief Temperature control (tc) service IPC wrapper.
+ * @author Behemoth
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/time.h =====
+/**
+ * @file time.h
+ * @brief Time services IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/ts.h =====
+/**
+ * @file ts.h
+ * @brief Temperature measurement (ts) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/uart.h =====
+/**
+ * @file uart.h
+ * @brief UART service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/usb.h =====
+/**
+ * @file usb.h
+ * @brief Common USB (usb:*) service IPC header.
+ * @author SciresM, yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/usbds.h =====
+/**
+ * @file usbds.h
+ * @brief USB (usb:ds) service IPC wrapper.
+ * @brief Switch-as-device<>host USB comms, see also here: https://switchbrew.org/wiki/USB_services
+ * @author SciresM, yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/usbhs.h =====
+/**
+ * @file usbhs.h
+ * @brief USB (usb:hs) devices service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/vi.h =====
+/**
+ * @file vi.h
+ * @brief Display (vi:*) service IPC wrapper.
+ * @author yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/services/wlaninf.h =====
+/**
+ * @file wlaninf.h
+ * @brief WLAN InfraManager service IPC wrapper.
+ * @author natinusala, yellows8
+ * @copyright libnx Authors
+ */
+
+===== include/switch/sf/cmif.h =====
+/**
+ * @file cmif.h
+ * @brief Common Message Interface Framework protocol
+ * @author fincs
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/sf/hipc.h =====
+/**
+ * @file hipc.h
+ * @brief Horizon Inter-Process Communication protocol
+ * @author fincs
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/sf/service.h =====
+/**
+ * @file service.h
+ * @brief Service wrapper object
+ * @author fincs
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/sf/tipc.h =====
+/**
+ * @file tipc.h
+ * @brief Tiny IPC protocol
+ * @author fincs
+ * @author SciresM
+ * @copyright libnx Authors
+ */
+
+===== include/switch/types.h =====
+/**
+ * @file switch/types.h
+ * @brief Various system types.
+ * @copyright libnx Authors
+ */
+
+===== include/switch.h =====
+/**
+ * @file switch.h
+ * @brief Central Switch header. Includes all others.
+ * @copyright libnx Authors
+ */
+
+===== source/kernel/event.c =====
+// Copyright 2018 plutoo
+
+
+===== source/kernel/mutex.c =====
+// Copyright 2017 plutoo, 2020 SciresM
+
+
+===== source/kernel/thread.c =====
+// Copyright 2017 plutoo
+
+
+===== source/kernel/tmem.c =====
+// Copyright 2017 plutoo
+
+
+===== source/kernel/wait.c =====
+// Copyright 2018 plutoo
+
+
+===== source/kernel/wait.h =====
+// Copyright 2018 plutoo
+
+
+===== source/runtime/dynamic.c =====
+// Lock the relro segment's permissions
+
+
+===== source/runtime/env.c =====
+// Copyright 2018 plutoo
+

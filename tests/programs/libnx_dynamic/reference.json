@@ -1,0 +1,10 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "switch_examples_revision": "669786898205b7beb25ff1731e72982e6d0397d3",
+  "archive_url": "https://codeload.github.com/switchbrew/libnx/zip/b156b4774fb2df7b93402169509266da7547fc4c",
+  "archive_sha256": "459F39C54C187A48BDAC78F2A4A202BFB7AA7707E76BC1C50C030FB1817C5503",
+  "dynamic_source_sha256": "4D058C2F8BA9EF867D554519FA7378D4F1A39A7C22AE5DF212362A1B25D081CE",
+  "compiler": "Zig 0.13.0, bundled Clang, aarch64-none-elf, -O1 -ffreestanding",
+  "program_sha256": "DDF8DAB68D3D4E889FDED4BC938A0FF02C20500225160320BE4BEB82132B1FCC",
+  "scope": "Unchanged libnx dynamic.c in a project-owned ELF harness; not full libnx startup or hello-world"
+}

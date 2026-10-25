@@ -1,0 +1,3102 @@
+[
+  {
+    "asm": "add w0, w1, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, w1, #3, lsl #12",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "add wzr, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, w1, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, w1, #3, lsl #12",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds wzr, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, w1, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, w1, #3, lsl #12",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub wzr, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, w1, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, w1, #3, lsl #12",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs wzr, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adc w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adcs w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbc w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbcs w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "and w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "and w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "and w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "and w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "and w0, w1, w2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic w0, w1, w2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr w0, w1, w2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn w0, w1, w2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor w0, w1, w2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon w0, w1, w2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands w0, w1, w2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics w0, w1, w2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics w0, w1, w2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics w0, w1, w2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics w0, w1, w2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics w0, w1, w2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "udiv w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sdiv w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "lslv w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "lsrv w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "asrv w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "rorv w0, w1, w2",
+    "kind": "integer"
+  },
+  {
+    "asm": "madd w0, w1, w2, w3",
+    "kind": "integer"
+  },
+  {
+    "asm": "msub w0, w1, w2, w3",
+    "kind": "integer"
+  },
+  {
+    "asm": "rbit w0, w1",
+    "kind": "integer"
+  },
+  {
+    "asm": "rev16 w0, w1",
+    "kind": "integer"
+  },
+  {
+    "asm": "rev w0, w1",
+    "kind": "integer"
+  },
+  {
+    "asm": "clz w0, w1",
+    "kind": "integer"
+  },
+  {
+    "asm": "cls w0, w1",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm w0, w1, #0, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm w0, w1, #8, #15",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm w0, w1, #20, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm w0, w1, #1, #30",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm w0, w1, #31, #31",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm w0, w1, #0, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm w0, w1, #8, #15",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm w0, w1, #20, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm w0, w1, #1, #30",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm w0, w1, #31, #31",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm w0, w1, #0, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm w0, w1, #8, #15",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm w0, w1, #20, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm w0, w1, #1, #30",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm w0, w1, #31, #31",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr w0, w1, w2, #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr w0, w1, w2, #1",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr w0, w1, w2, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr w0, w1, w2, #31",
+    "kind": "integer"
+  },
+  {
+    "asm": "csel w0, w1, w2, eq",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, eq",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, eq",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, eq",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, ne",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, ne",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, ne",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, ne",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, hs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, hs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, hs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, hs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, lo",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, lo",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, lo",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, lo",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, mi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, mi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, mi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, mi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, pl",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, pl",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, pl",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, pl",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, vs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, vs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, vs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, vs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, vc",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, vc",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, vc",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, vc",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, hi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, hi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, hi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, hi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, ls",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, ls",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, ls",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, ls",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, ge",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, ge",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, ge",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, ge",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, lt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, lt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, lt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, lt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, gt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, gt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, gt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, gt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, le",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, le",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, le",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, le",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, al",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, al",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, al",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, al",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel w0, w1, w2, nv",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc w0, w1, w2, nv",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv w0, w1, w2, nv",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg w0, w1, w2, nv",
+    "kind": "condition"
+  },
+  {
+    "asm": "and w0, w1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "and w0, w1, #0x80000001",
+    "kind": "integer"
+  },
+  {
+    "asm": "and w0, w1, #0x55555555",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr w0, w1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr w0, w1, #0x80000001",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr w0, w1, #0x55555555",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor w0, w1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor w0, w1, #0x80000001",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor w0, w1, #0x55555555",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands w0, w1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands w0, w1, #0x80000001",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands w0, w1, #0x55555555",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, wsp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, wsp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, wsp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, wsp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "add wsp, w1, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "add wsp, wsp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub wsp, w1, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub wsp, wsp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr wsp, w1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, wsp, w2, uxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, wsp, w2, uxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, wsp, w2, uxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, wsp, w2, uxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, wsp, w2, uxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, wsp, w2, uxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, wsp, w2, uxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, wsp, w2, uxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, wsp, w2, uxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, wsp, w2, uxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, wsp, w2, uxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, wsp, w2, uxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, wsp, w2, sxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, wsp, w2, sxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, wsp, w2, sxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, wsp, w2, sxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, wsp, w2, sxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, wsp, w2, sxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, wsp, w2, sxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, wsp, w2, sxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add w0, wsp, w2, sxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds w0, wsp, w2, sxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub w0, wsp, w2, sxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs w0, wsp, w2, sxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, x1, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, x1, #3, lsl #12",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "add xzr, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, x1, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, x1, #3, lsl #12",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds xzr, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, x1, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, x1, #3, lsl #12",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub xzr, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, x1, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, x1, #3, lsl #12",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs xzr, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adc x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adcs x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbc x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbcs x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "and x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "and x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "and x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "and x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "and x0, x1, x2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "bic x0, x1, x2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr x0, x1, x2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "orn x0, x1, x2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor x0, x1, x2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "eon x0, x1, x2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands x0, x1, x2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics x0, x1, x2, lsl #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics x0, x1, x2, lsl #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics x0, x1, x2, lsr #13",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics x0, x1, x2, asr #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "bics x0, x1, x2, ror #5",
+    "kind": "integer"
+  },
+  {
+    "asm": "udiv x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sdiv x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "lslv x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "lsrv x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "asrv x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "rorv x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "madd x0, x1, x2, x3",
+    "kind": "integer"
+  },
+  {
+    "asm": "msub x0, x1, x2, x3",
+    "kind": "integer"
+  },
+  {
+    "asm": "rbit x0, x1",
+    "kind": "integer"
+  },
+  {
+    "asm": "rev16 x0, x1",
+    "kind": "integer"
+  },
+  {
+    "asm": "rev x0, x1",
+    "kind": "integer"
+  },
+  {
+    "asm": "clz x0, x1",
+    "kind": "integer"
+  },
+  {
+    "asm": "cls x0, x1",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm x0, x1, #0, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm x0, x1, #8, #15",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm x0, x1, #20, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm x0, x1, #1, #30",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm x0, x1, #31, #31",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm x0, x1, #0, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm x0, x1, #8, #15",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm x0, x1, #20, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm x0, x1, #1, #30",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm x0, x1, #31, #31",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm x0, x1, #0, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm x0, x1, #8, #15",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm x0, x1, #20, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm x0, x1, #1, #30",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm x0, x1, #31, #31",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr x0, x1, x2, #0",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr x0, x1, x2, #1",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr x0, x1, x2, #17",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr x0, x1, x2, #31",
+    "kind": "integer"
+  },
+  {
+    "asm": "csel x0, x1, x2, eq",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, eq",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, eq",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, eq",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, ne",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, ne",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, ne",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, ne",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, hs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, hs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, hs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, hs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, lo",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, lo",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, lo",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, lo",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, mi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, mi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, mi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, mi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, pl",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, pl",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, pl",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, pl",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, vs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, vs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, vs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, vs",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, vc",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, vc",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, vc",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, vc",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, hi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, hi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, hi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, hi",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, ls",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, ls",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, ls",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, ls",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, ge",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, ge",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, ge",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, ge",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, lt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, lt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, lt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, lt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, gt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, gt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, gt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, gt",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, le",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, le",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, le",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, le",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, al",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, al",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, al",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, al",
+    "kind": "condition"
+  },
+  {
+    "asm": "csel x0, x1, x2, nv",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinc x0, x1, x2, nv",
+    "kind": "condition"
+  },
+  {
+    "asm": "csinv x0, x1, x2, nv",
+    "kind": "condition"
+  },
+  {
+    "asm": "csneg x0, x1, x2, nv",
+    "kind": "condition"
+  },
+  {
+    "asm": "and x0, x1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "and x0, x1, #0x8000000000000001",
+    "kind": "integer"
+  },
+  {
+    "asm": "and x0, x1, #0x5555555555555555",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr x0, x1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr x0, x1, #0x8000000000000001",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr x0, x1, #0x5555555555555555",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor x0, x1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor x0, x1, #0x8000000000000001",
+    "kind": "integer"
+  },
+  {
+    "asm": "eor x0, x1, #0x5555555555555555",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands x0, x1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands x0, x1, #0x8000000000000001",
+    "kind": "integer"
+  },
+  {
+    "asm": "ands x0, x1, #0x5555555555555555",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, sp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, sp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, sp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, sp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "add sp, x1, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "add sp, sp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub sp, x1, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub sp, sp, #16",
+    "kind": "integer"
+  },
+  {
+    "asm": "orr sp, x1, #0xff",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, sp, w2, uxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, sp, w2, uxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, sp, w2, uxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, sp, w2, uxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, sp, w2, uxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, sp, w2, uxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, sp, w2, uxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, sp, w2, uxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, sp, w2, uxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, sp, w2, uxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, sp, w2, uxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, sp, w2, uxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, sp, w2, sxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, sp, w2, sxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, sp, w2, sxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, sp, w2, sxtb #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, sp, w2, sxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, sp, w2, sxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, sp, w2, sxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, sp, w2, sxth #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "add x0, sp, w2, sxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "adds x0, sp, w2, sxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "sub x0, sp, w2, sxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "subs x0, sp, w2, sxtw #2",
+    "kind": "integer"
+  },
+  {
+    "asm": "smaddl x0, w1, w2, x3",
+    "kind": "integer"
+  },
+  {
+    "asm": "smsubl x0, w1, w2, x3",
+    "kind": "integer"
+  },
+  {
+    "asm": "umaddl x0, w1, w2, x3",
+    "kind": "integer"
+  },
+  {
+    "asm": "umsubl x0, w1, w2, x3",
+    "kind": "integer"
+  },
+  {
+    "asm": "smulh x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "umulh x0, x1, x2",
+    "kind": "integer"
+  },
+  {
+    "asm": "rev32 x0, x1",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm x0, x1, #32, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm x0, x1, #63, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm x0, x1, #60, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "sbfm x0, x1, #0, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm x0, x1, #32, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm x0, x1, #63, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm x0, x1, #60, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "ubfm x0, x1, #0, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm x0, x1, #32, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm x0, x1, #63, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm x0, x1, #60, #7",
+    "kind": "integer"
+  },
+  {
+    "asm": "bfm x0, x1, #0, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr x0, x1, x2, #32",
+    "kind": "integer"
+  },
+  {
+    "asm": "extr x0, x1, x2, #63",
+    "kind": "integer"
+  },
+  {
+    "asm": "b.eq .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.eq .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.ne .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.ne .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.hs .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.hs .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.lo .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.lo .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.mi .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.mi .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.pl .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.pl .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.vs .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.vs .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.vc .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.vc .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.hi .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.hi .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.ls .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.ls .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.ge .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.ge .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.lt .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.lt .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.gt .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.gt .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.le .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.le .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.al .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.al .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.nv .+16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b.nv .-16",
+    "kind": "condition"
+  },
+  {
+    "asm": "b .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "b .-16",
+    "kind": "integer"
+  },
+  {
+    "asm": "bl .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "bl .-16",
+    "kind": "integer"
+  },
+  {
+    "asm": "cbz w1, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "cbz w1, .-16",
+    "kind": "integer"
+  },
+  {
+    "asm": "cbz x1, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "cbz x1, .-16",
+    "kind": "integer"
+  },
+  {
+    "asm": "cbnz w1, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "cbnz w1, .-16",
+    "kind": "integer"
+  },
+  {
+    "asm": "cbnz x1, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "cbnz x1, .-16",
+    "kind": "integer"
+  },
+  {
+    "asm": "tbz x1, #0, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "tbz x1, #31, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "tbz x1, #32, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "tbz x1, #63, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "tbnz x1, #0, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "tbnz x1, #31, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "tbnz x1, #32, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "tbnz x1, #63, .+16",
+    "kind": "integer"
+  },
+  {
+    "asm": "adr x0, .+64",
+    "kind": "integer"
+  },
+  {
+    "asm": "adr x0, .-64",
+    "kind": "integer"
+  },
+  {
+    "asm": ".inst 0xb0000000",
+    "kind": "integer"
+  },
+  {
+    "asm": "br x1",
+    "kind": "indirect"
+  },
+  {
+    "asm": "blr x1",
+    "kind": "indirect"
+  },
+  {
+    "asm": "ret",
+    "kind": "indirect"
+  },
+  {
+    "asm": "str x0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "str x0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "str x0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "str x0, [sp, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "str x0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "str x0, [x1, w2, uxtw #3]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "str x0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "str x0, [x1, w2, sxtw #3]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "str x0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "str x0, [x1, x2, lsl #3]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "str x0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "str x0, [x1, x2, sxtx #3]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "ldr x0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldr x0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldr x0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldr x0, [sp, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldr x0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "ldr x0, [x1, w2, uxtw #3]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "ldr x0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldr x0, [x1, w2, sxtw #3]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldr x0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "ldr x0, [x1, x2, lsl #3]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "ldr x0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "ldr x0, [x1, x2, sxtx #3]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "stur x0, [x1, #-7]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldur x0, [x1, #-7]",
+    "kind": "memory"
+  },
+  {
+    "asm": "str w0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "str w0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "str w0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "str w0, [sp, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "str w0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "str w0, [x1, w2, uxtw #2]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "str w0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "str w0, [x1, w2, sxtw #2]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "str w0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "str w0, [x1, x2, lsl #2]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "str w0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "str w0, [x1, x2, sxtx #2]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "ldr w0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldr w0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldr w0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldr w0, [sp, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldr w0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "ldr w0, [x1, w2, uxtw #2]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "ldr w0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldr w0, [x1, w2, sxtw #2]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldr w0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "ldr w0, [x1, x2, lsl #2]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "ldr w0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "ldr w0, [x1, x2, sxtx #2]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "stur w0, [x1, #-7]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldur w0, [x1, #-7]",
+    "kind": "memory"
+  },
+  {
+    "asm": "strb w0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "strb w0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "strb w0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "strb w0, [sp, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "strb w0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "strb w0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "strb w0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "strb w0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "strb w0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "strb w0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "strb w0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "strb w0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "ldrb w0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrb w0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrb w0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrb w0, [sp, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrb w0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "ldrb w0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "ldrb w0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldrb w0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldrb w0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "ldrb w0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "ldrb w0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "ldrb w0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "sturb w0, [x1, #-7]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldurb w0, [x1, #-7]",
+    "kind": "memory"
+  },
+  {
+    "asm": "strh w0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "strh w0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "strh w0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "strh w0, [sp, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "strh w0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "strh w0, [x1, w2, uxtw #1]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "strh w0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "strh w0, [x1, w2, sxtw #1]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "strh w0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "strh w0, [x1, x2, lsl #1]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "strh w0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "strh w0, [x1, x2, sxtx #1]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "ldrh w0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrh w0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrh w0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrh w0, [sp, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrh w0, [x1, w2, uxtw #0]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "ldrh w0, [x1, w2, uxtw #1]",
+    "kind": "memory-uxtw"
+  },
+  {
+    "asm": "ldrh w0, [x1, w2, sxtw #0]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldrh w0, [x1, w2, sxtw #1]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldrh w0, [x1, x2, lsl #0]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "ldrh w0, [x1, x2, lsl #1]",
+    "kind": "memory-lsl"
+  },
+  {
+    "asm": "ldrh w0, [x1, x2, sxtx #0]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "ldrh w0, [x1, x2, sxtx #1]",
+    "kind": "memory-sxtx"
+  },
+  {
+    "asm": "sturh w0, [x1, #-7]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldurh w0, [x1, #-7]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsb w0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsb w0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsb w0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsb w0, [x1, w2, sxtw]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldrsb x0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsb x0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsb x0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsb x0, [x1, w2, sxtw]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldrsh w0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsh w0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsh w0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsh w0, [x1, w2, sxtw]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldrsh x0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsh x0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsh x0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsh x0, [x1, w2, sxtw]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldrsw x0, [x1, #8]",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsw x0, [x1, #-8]!",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsw x0, [x1], #8",
+    "kind": "memory"
+  },
+  {
+    "asm": "ldrsw x0, [x1, w2, sxtw]",
+    "kind": "memory-sxtw"
+  },
+  {
+    "asm": "ldr w0, .",
+    "kind": "integer"
+  },
+  {
+    "asm": "ldr x0, .",
+    "kind": "integer"
+  },
+  {
+    "asm": "ldrsw x0, .",
+    "kind": "integer"
+  },
+  {
+    "asm": "ccmp w1, w2, #0, eq",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #0, eq",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #7, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #7, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #14, hs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #14, hs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #5, lo",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #5, lo",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #12, mi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #12, mi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #3, pl",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #3, pl",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #10, vs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #10, vs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #1, vc",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #1, vc",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #8, hi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #8, hi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #15, ls",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #15, ls",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #6, ge",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #6, ge",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #13, lt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #13, lt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #4, gt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #4, gt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #11, le",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #11, le",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #2, al",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #2, al",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, w2, #9, nv",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp w1, #31, #9, nv",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp wzr, #0, #15, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #0, eq",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #0, eq",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #7, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #7, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #14, hs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #14, hs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #5, lo",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #5, lo",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #12, mi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #12, mi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #3, pl",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #3, pl",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #10, vs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #10, vs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #1, vc",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #1, vc",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #8, hi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #8, hi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #15, ls",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #15, ls",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #6, ge",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #6, ge",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #13, lt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #13, lt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #4, gt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #4, gt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #11, le",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #11, le",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #2, al",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #2, al",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, w2, #9, nv",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn w1, #31, #9, nv",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn wzr, #0, #15, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #0, eq",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #0, eq",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #7, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #7, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #14, hs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #14, hs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #5, lo",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #5, lo",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #12, mi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #12, mi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #3, pl",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #3, pl",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #10, vs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #10, vs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #1, vc",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #1, vc",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #8, hi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #8, hi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #15, ls",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #15, ls",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #6, ge",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #6, ge",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #13, lt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #13, lt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #4, gt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #4, gt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #11, le",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #11, le",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #2, al",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #2, al",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, x2, #9, nv",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp x1, #31, #9, nv",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmp xzr, #0, #15, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #0, eq",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #0, eq",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #7, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #7, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #14, hs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #14, hs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #5, lo",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #5, lo",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #12, mi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #12, mi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #3, pl",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #3, pl",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #10, vs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #10, vs",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #1, vc",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #1, vc",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #8, hi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #8, hi",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #15, ls",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #15, ls",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #6, ge",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #6, ge",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #13, lt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #13, lt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #4, gt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #4, gt",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #11, le",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #11, le",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #2, al",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #2, al",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, x2, #9, nv",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn x1, #31, #9, nv",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": "ccmn xzr, #0, #15, ne",
+    "kind": "conditional-compare"
+  },
+  {
+    "asm": ".inst 0x91800020",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x0b028020",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x0bc20020",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x53008020",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x13c00020",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x5ac00c20",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x52c00020",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x9b600c20",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x7a420030",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x7a420420",
+    "kind": "invalid"
+  },
+  {
+    "asm": ".inst 0x5a420020",
+    "kind": "invalid"
+  }
+]

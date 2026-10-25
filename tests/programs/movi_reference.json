@@ -1,0 +1,7 @@
+{
+  "engine": "Unicorn 2.1.4",
+  "generator": "tools/generate_movi_reference.py",
+  "sha256": "21125330DB4119472455B86A7C015B5B1E404E8144FE0969A238F0033C918571",
+  "cases": 1024,
+  "scope": "MOVI byte-mask immediate, scalar D and vector 2D; all 256 masks with destinations 0 and 31"
+}

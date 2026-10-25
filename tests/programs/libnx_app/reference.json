@@ -1,0 +1,23 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "initialization_provenance": "../libnx_init/reference.json",
+  "compiler": "Zig 0.13.0 / Clang 18.1.6, aarch64-none-elf, -O1 -ffreestanding",
+  "original_default_app_hooks": true,
+  "service_sources_sha256": {
+    "../kernel/wait.c": "8DB8C060761B52977678C4C1389AC862C7B9FD4178D870F21D30C6FAED2B704F",
+    "apm.c": "9F3E3FEF7B8FCFA81366EC3E90FCB4CE12BE35CBFB4C217F29EDB30FBC55C6FA",
+    "applet.c": "703010AFDC785FF5F241FA5B70BD1D5BCEFFE8D93C47D7E7E81BBE80254055E3",
+    "set.c": "48A525415DAABF62EB189DEAA2C86FC1673FD0D437CFE054B5C373E38697DA9D"
+  },
+  "nro_sha256": "10F4CF1CB2CD69FCB75C8935CB39A9F84210114236688BB50F3495AF2409553F",
+  "instructions": 7428,
+  "diagnostic": 16217,
+  "diagnostic_name": "MAKERESULT(Module_Libnx, LibnxError_InitFail_AM)",
+  "native_service_order": ["set:sys", "apm", "appletOE"],
+  "ipc_exchanges": 35,
+  "domain_root_id": 1,
+  "domain_output_objects": [2,3,4,5,6,7,8,9,10],
+  "unsupported_operation": "IWindowController::AcquireForegroundRights (command 10)",
+  "main_reached": false,
+  "scope": "Original default __appInit, applet/APM clients and original wait.c; process resource identity, copied message event and focus notifications are live. Foreground acquisition remains unsupported."
+}

@@ -1,2 +1,12 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Préserver les octets, y compris les sources tierces vérifiées par SHA-256.
+* -text
+
+# Identifier les programmes et vecteurs de référence comme binaires.
+*.bin binary
+*.elf binary
+*.nro binary
+
+# Les trois références dépassent la limite de fichier GitHub (100 MiB).
+tests/programs/cpu_fp/reference.bin filter=lfs diff=lfs merge=lfs -text
+tests/programs/cpu_simd_arithmetic/reference.bin filter=lfs diff=lfs merge=lfs -text
+tests/programs/cpu_subnormal/reference.bin filter=lfs diff=lfs merge=lfs -text

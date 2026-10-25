@@ -1,0 +1,12 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "sm_source_sha256": "4AF4927CC3352F8A4663C9119BCE16B0F2A0D024C257E2C8E9A186D0DCCAE9CB",
+  "initialization_provenance": "../libnx_init/reference.json",
+  "compiler": "Zig 0.13.0 / Clang 18.1.6, aarch64-none-elf, -O1 -ffreestanding",
+  "nro_sha256": "C4056A3821AF141E31523BF629B6F0AA75A3ED83C5A74131117A6687B9E3121D",
+  "instructions": 3117,
+  "ipc_exchanges": 8,
+  "main_result": 77,
+  "loader_result": 0,
+  "scope": "Original libnx initialization and sm.c; custom app hooks call real SM initialization/exit, clone and unavailable native set:sys lookup. No emu:* service is used."
+}

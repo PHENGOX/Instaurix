@@ -1,0 +1,7 @@
+{
+  "generator": "Clang 18.1.6 (Zig 0.13.0) + Unicorn 2.1.4",
+  "seed": "0xA6402026",
+  "variants": 775,
+  "cases": 41304,
+  "reference_sha256": "246dd419cd0a22458d18291996d03f23ea013949cfe7f5634155de3fb253d010"
+}

@@ -1,0 +1,10 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "upstream_component": "../libnx_dynamic/dynamic.upstream.c",
+  "license": "LICENSE.libnx.md",
+  "compiler": "Zig 0.13.0 bundled Clang, aarch64-none-elf, -O1 -ffreestanding",
+  "nro_sha256": "9B511BF539D4B2AE80B52ACAED7A47A8D6CD69D8B7264CE2F3E2AFB6288A2336",
+  "expected_instructions": 32968,
+  "expected_return_code": 42,
+  "scope": "Project-owned NRO startup and main; unchanged upstream libnx __nx_dynamic; no full libnx initialization"
+}
