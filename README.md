@@ -1,4 +1,4 @@
-# Switch2Emu 0.86
+# Switch2Emu
 
 Je développe cet émulateur avec l’aide d’une intelligence artificielle pour l’écriture du code, les tests et l’analyse technique.
 
