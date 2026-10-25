@@ -1,4 +1,4 @@
-# Switch2Emu 0.86
+# Switch2Emu
 
 I am developing this emulator with the help of artificial intelligence for coding, testing, and technical analysis.
 
