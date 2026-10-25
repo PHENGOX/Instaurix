@@ -1,5 +1,21 @@
 # Switch2Emu
 
+Hey everyone,
+
+First of all, I'm sorry for the misunderstanding surrounding my project. I'm still new to all of this, and I honestly didn't expect it to get this much attention.
+
+Switch2Emu is an experimental project that I'm working on for fun and to learn more about emulation and low-level programming. I'm not a professional developer, and I'm still learning as I go, with the help of AI tools.
+
+I want to make it clear that this is **not a working emulator yet**, and I'm not claiming that it can run any commercial games. It's a work in progress, and there's still a huge amount of work to do.
+
+The project is **open source**, so anyone is free to explore the code, learn from it, or reuse anything they find useful, in accordance with the project's license. If any part of my work can help someone else's project, feel free to use it!
+
+I never intended to mislead anyone or create unrealistic expectations. I was simply sharing what I've been working on, and I genuinely didn't expect it to reach this many people.
+
+I'm sorry again for the confusion and for any inconvenience I've caused. Thank you to everyone who took the time to check out the project, share feedback, or offer constructive criticism.
+
+I'm just a beginner trying to learn, experiment, and build something interesting. ❤️
+
 Je développe cet émulateur avec l’aide d’une intelligence artificielle pour l’écriture du code, les tests et l’analyse technique.
 
 Émulateur expérimental en C++20 visant à terme l'exécution de jeux Nintendo Switch 2 sur PC. Le développement actuel porte sur les fondations ARM64 et les services système HLE. **Aucun jeu commercial ni aucune compatibilité native Switch 2 ne sont actuellement validés.**
