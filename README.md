@@ -16,19 +16,20 @@ I'm sorry again for the confusion and for any inconvenience I've caused. Thank y
 
 I'm just a beginner trying to learn, experiment, and build something interesting. ❤️
 
-Je développe cet émulateur avec l’aide d’une intelligence artificielle pour l’écriture du code, les tests et l’analyse technique.
 
-Émulateur expérimental en C++20 visant à terme l'exécution de jeux Nintendo Switch 2 sur PC. Le développement actuel porte sur les fondations ARM64 et les services système HLE. **Aucun jeu commercial ni aucune compatibilité native Switch 2 ne sont actuellement validés.**
+I am developing this emulator with the help of artificial intelligence for coding, testing, and technical analysis.
 
-Prototype de machine ARM64 en C++20 : CPU entier/FP/SIMD partiel, runtime HLE de référence et formats ELF/NRO statiques bornés. Il ne lance pas de jeux Switch 2.
+An experimental C++20 emulator aiming to eventually run Nintendo Switch 2 games on PC. Current development focuses on the ARM64 foundations and HLE system services. **No commercial games or native Switch 2 compatibility have been validated yet.**
 
-Dernière étape : [identité, messages et focus](docs/LIBNX_APPLET_STATE.md). Le client libnx obtient une identité de processus stable et utilise un véritable événement de messages et sa routine d'attente originale. Il s'arrête désormais sur AcquireForegroundRights, avant main. Le profil exige `--hle-reference --homebrew-entry`. Prochaine priorité : acquisition du premier plan et dépendances observées du démarrage. La démo interactive reste accessible par `.\tools\run_interactive.ps1`.
+A C++20 ARM64 machine prototype featuring partial integer/FP/SIMD CPU support, a reference HLE runtime, and bounded support for static ELF/NRO formats. It does not run Switch 2 games.
 
-## Compiler et tester (PowerShell)
+Latest milestone: [identity, messages, and focus](docs/LIBNX_APPLET_STATE.md). The libnx client obtains a stable process identity and uses an actual message event and its original wait routine. It now stops at AcquireForegroundRights, before main. This profile requires `--hle-reference --homebrew-entry`. Next priority: foreground-rights acquisition and the startup dependencies observed during execution. The interactive demo remains available through `.\tools\run_interactive.ps1`.
 
-Le dépôt contient les petits programmes et données de référence nécessaires aux tests. Les outils téléchargés, caches et dossiers de compilation sont exclus. Zig, Python et Unicorn servent à reconstruire certaines références ; ils ne sont pas requis pour compiler le cœur C++ et lancer les tests fournis. Les validations libnx concernent l'écosystème historique Switch et ne prouvent pas une compatibilité Switch 2. Dernière validation : **60 suites CTest réussies en Debug et Release**.
+## Build and test (PowerShell)
 
-**Git LFS est nécessaire pour récupérer trois grandes références CPU.** Après clonage, exécuter `git lfs install` puis `git lfs pull` avant les tests. Le téléchargement ZIP de GitHub peut fournir des pointeurs LFS plutôt que les données. Les programmes de test ELF/NRO restent inclus normalement.
+The repository includes the small programs and reference data needed for testing. Downloaded tools, caches, and build directories are excluded. Zig, Python, and Unicorn are used to rebuild some references; they are not required to compile the C++ core and run the supplied tests. The libnx validations concern the original Switch ecosystem and do not demonstrate Switch 2 compatibility. Latest validation: **60 CTest suites passing in Debug and Release**.
+
+**Git LFS is required to retrieve three large CPU reference files.** After cloning, run `git lfs install` and then `git lfs pull` before testing. GitHub ZIP downloads may contain LFS pointers instead of the actual data. ELF/NRO test programs remain included normally.
 
 ```powershell
 cmake -S . -B build
@@ -36,136 +37,139 @@ cmake --build build --config Debug
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-CMake 3.20 minimum et un compilateur C++20 sont necessaires. Sous Windows, les outils C++ de Visual Studio conviennent.
+CMake 3.20 or later and a C++20 compiler are required. On Windows, the Visual Studio C++ build tools are suitable.
 
-## Licence et contributions
+## License and contributions
 
-Le code propre à Switch2Emu est distribué sous **GNU GPL version 3 uniquement** (`GPL-3.0-only`) ; voir [LICENSE](LICENSE). Les composants et références tiers conservent leurs licences : [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Switch2Emu's own code is distributed under **GNU GPL version 3 only** (`GPL-3.0-only`); see [LICENSE](LICENSE). Third-party components and references retain their original licenses: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-Les contributions sont les bienvenues : fournir un cas reproductible, préciser les limites et respecter les licences d'origine. Une contribution au code propre au projet est proposée sous GPL-3.0-only. Ne joindre aucun jeu, firmware, clé console ou fichier confidentiel aux contributions.
+Contributions are welcome: provide a reproducible case, describe limitations, and respect the original licenses. Contributions to the project's own code are submitted under GPL-3.0-only. Do not attach games, firmware, console keys, or confidential files to contributions.
 
-Projet indépendant, sans affiliation avec Nintendo. Pour préparer le dépôt GitHub : [guide de publication](docs/GITHUB_PUBLICATION.md).
+An independent project with no affiliation with Nintendo. To prepare the GitHub repository, see the [publication guide](docs/GITHUB_PUBLICATION.md).
 
-## Executer le programme fourni
+## Run the supplied program
 
 ```powershell
 .\build\Debug\Switch2Emu.exe .\program.bin 4
 ```
 
-Resultat attendu : 4 instructions, X0=5, X1=7 et X2=12. Le programme contient MOVZ, MOVZ, ADD et RET. RET revient a X30, initialement nul ; le budget de 4 instructions arrete donc l'execution avant de recommencer.
+Expected result: 4 instructions, X0=5, X1=7, and X2=12. The program contains MOVZ, MOVZ, ADD, and RET. RET returns to X30, initially zero; the four-instruction budget therefore stops execution before it starts over.
 
-Le premier argument est un fichier binaire ARM64 brut, charge a l'adresse 0. Sa taille doit etre non nulle, multiple de 4 et inferieure ou egale a 16 Mio. Le second argument est un budget strict d'instructions (100000 par defaut). Un budget atteint est un arret volontaire, pas la preuve que le programme s'est termine. Une erreur de fichier, d'instruction ou de bus renvoie un code de sortie non nul.
+The first argument is a raw ARM64 binary file loaded at address 0. Its size must be nonzero, a multiple of 4, and no greater than 16 MiB. The second argument is a strict instruction budget (100000 by default). Reaching the budget is an intentional stop, not proof that the program has finished. A file, instruction, or bus error produces a nonzero exit code.
 
-## Organisation
+## Project structure
 
-- `src/cpu.*` : interpretation ARM64 pas a pas ; tous les acces passent par Bus.
-- `src/memory.*` : RAM, pages de 4 Kio allouees a la demande.
-- `src/bus.*` : RAM et peripheriques MMIO ; un acces traversant une region est refuse.
-- `src/machine.*` : assemblage des composants, chargement et boucle d'execution.
-- `src/main.cpp` : interface en ligne de commande.
-- `tests/legacy_tests.cpp` : verifications historiques, avec echec du processus si une ligne FAIL apparait.
-- `tests/core_tests.cpp` : regressions, 5334 masques logiques et integration CPU/bus/minuteur/IRQ.
+- `src/cpu.*`: step-by-step ARM64 interpretation; all accesses go through Bus.
+- `src/memory.*`: RAM with 4 KiB pages allocated on demand.
+- `src/bus.*`: RAM and MMIO devices; accesses crossing a region boundary are rejected.
+- `src/machine.*`: component assembly, loading, and execution loop.
+- `src/main.cpp`: command-line interface.
+- `tests/legacy_tests.cpp`: historical checks, with process failure if a FAIL line appears.
+- `tests/core_tests.cpp`: regression tests, 5,334 logical masks, and CPU/bus/timer/IRQ integration.
 
-## Machine de developpement
+## Development machine
 
-Ces adresses sont propres au prototype et ne representent pas la carte materielle de la Switch 2.
+These addresses belong to the prototype and do not represent the Switch 2 hardware memory map.
 
-| Adresse | Fonction |
+| Address | Function |
 | --- | --- |
-| 0x00000000 a 0x00FFFFFF | RAM de 16 Mio ; programme a 0, pile initiale a 0x01000000 |
-| 0x10000000 | Peripherique de test : ID +0, CONTROL +4, STATUS +8, DATA +12 (32 bits) |
-| 0x10001000 | IRQ : PENDING +0 (ecriture de bits pour acquitter), ENABLE +4, ACTIVE +8 (32 bits) |
-| 0x10002000 | Minuteur : COUNTER +0, PERIOD +8 (64 bits), CONTROL +16 (32 bits, bit 0 active) |
+| 0x00000000 to 0x00FFFFFF | 16 MiB RAM; program at 0, initial stack at 0x01000000 |
+| 0x10000000 | Test device: ID +0, CONTROL +4, STATUS +8, DATA +12 (32-bit) |
+| 0x10001000 | IRQ: PENDING +0 (write bits to acknowledge), ENABLE +4, ACTIVE +8 (32-bit) |
+| 0x10002000 | Timer: COUNTER +0, PERIOD +8 (64-bit), CONTROL +16 (32-bit, bit 0 enables it) |
 
-Une instruction reussie fait avancer le minuteur d'un tick. Le minuteur declenche l'IRQ 4. Une IRQ active et autorisee provoque un retour de la boucle au programme hote, qui peut l'acquitter et reprendre l'execution. L'entree dans une exception ARM64, les vecteurs, niveaux de privilege et ERET restent a implementer. Le minuteur ne modelise pas le temps reel ni les cycles d'un processeur physique.
+Each successfully executed instruction advances the timer by one tick. The timer triggers IRQ 4. An active, enabled IRQ causes the execution loop to return to the host program, which can acknowledge it and resume execution. ARM64 exception entry, vectors, privilege levels, and ERET remain unimplemented. The timer does not model real time or physical processor cycles.
 
-## Limites et prochaines etapes
+## Limitations and next steps
 
-Le CPU reste partiel : permissions de pages et premier sous-ensemble FP/SIMD disponibles, mais pas de traduction MMU, exceptions architecturales ou execution multicoeur. Pas de GPU, audio, manettes, services systeme de jeux ou formats de jeux. Les tests actuels valident les cas couverts, pas toute la conformite ARM64.
+The CPU remains partial: page permissions and an initial FP/SIMD subset are available, but MMU translation, architectural exceptions, and multicore execution are not. There is no GPU, audio, controller support, game system services, or game-format support. Current tests validate the covered cases, not complete ARM64 compliance.
 
-Direction retenue : emulateur applicatif hybride, avec services systeme en HLE. Premier jalon realise : un programme C compile avec pile, resultat verifiable et fin explicite. Chargement ELF ARM64 statique et permissions memoire R/W/X desormais disponibles pour les programmes de test. Les exceptions materielles completes ne sont plus le prochain chantier par defaut. `Machine::load` remplace la RAM et reinitialise CPU et peripheriques apres un chargement reussi ; un echec conserve la session precedente.
+Chosen direction: a hybrid application emulator with HLE system services. First milestone completed: a compiled C program with a stack, a verifiable result, and explicit termination. Static ARM64 ELF loading and R/W/X memory permissions are now available for test programs. Full hardware exceptions are no longer the default next task. `Machine::load` replaces RAM and resets the CPU and devices after a successful load; a failed load preserves the previous session.
 
-## Strategie Switch 2
+## Switch 2 strategy
 
-- [Architecture, jalons et prochain chantier](docs/STRATEGY.md)
-- [Inventaire des connaissances et sources publiques](docs/SWITCH2_RESEARCH.md)
+- [Architecture, milestones, and next task](docs/STRATEGY.md)
+- [Knowledge inventory and public sources](docs/SWITCH2_RESEARCH.md)
 
-Ces documents distinguent le prototype ARM64 des interfaces natives Switch 2 restant a valider. Objectif a terme : jeux jouables sur Windows ; aucune compatibilite avec un jeu n'est encore revendiquee.
+These documents distinguish the ARM64 prototype from native Switch 2 interfaces that remain to be validated. The long-term goal is playable games on Windows; no game compatibility is currently claimed.
 
-## Premier programme C et instructions de pile
+## First C program and stack instructions
 
-Les paires de registres entiers LDP/STP sont implementees en W/X, avec offset signe, pre-index et post-index. Les variantes SIMD et les paires MMIO restent non prises en charge.
+Integer register pairs LDP/STP are implemented for W/X registers, with signed offsets, pre-indexing, and post-indexing. SIMD variants and MMIO pairs remain unsupported.
 
 ```powershell
 .\build\Debug\Switch2Emu.exe .\tests\programs\stack_sum\program.bin 500 --test-protocol
 ```
 
-Cette demonstration compilee calcule 55 en memoire et se termine normalement via un protocole de test local. Le test d'integration verifie aussi la restauration de la pile. Ce protocole ne represente pas une ABI Switch 2 et reste desactive par defaut.
+This compiled demonstration calculates 55 in memory and terminates normally through a local test protocol. The integration test also verifies stack restoration. This protocol does not represent a Switch 2 ABI and remains disabled by default.
 
-- [Sources, reproduction et limites du programme](tests/programs/stack_sum/README.md)
-- [Plan technique du GPU](docs/GPU_PLAN.md)
+- [Program sources, reproduction, and limitations](tests/programs/stack_sum/README.md)
+- [GPU technical plan](docs/GPU_PLAN.md)
 
-
-## Programmes ELF ARM64 et protections memoire
+## ARM64 ELF programs and memory protection
 
 ```powershell
 .\build\Debug\Switch2Emu.exe .\tests\programs\elf_sum\program.elf 500 --test-protocol
 ```
 
-Le programme ELF de reference calcule **55** en **94 instructions**, avec code R/X, constantes R, donnees R/W et pile non executable. Les **11 tests CTest passent**, y compris 102 variantes ELF invalides refusees. Les anciens binaires bruts restent disponibles et conservent leur memoire R/W/X historique.
+The reference ELF program calculates **55** in **94 instructions**, with R/X code, R constants, R/W data, and a non-executable stack. **All 11 CTest tests pass**, including the rejection of 102 invalid ELF variants. Earlier raw binaries remain available and retain their original R/W/X memory behavior.
 
-- [Chargeur ELF, droits memoire et restrictions](docs/ELF_LOADER.md)
-- [Sources et reproduction du programme ELF](tests/programs/elf_sum/README.md)
+- [ELF loader, memory permissions, and restrictions](docs/ELF_LOADER.md)
+- [ELF program sources and reproduction](tests/programs/elf_sum/README.md)
 
-## Premier profil HLE de reference
+## First reference HLE profile
 
 ```powershell
 .\build\Debug\Switch2Emu.exe .\tests\programs\hle_memory\program.elf 500 --hle-reference
 ```
 
-Ce profil ajoute un processus et un thread principal, les registres locaux du thread, puis SetHeapSize, QueryMemory et ExitProcess selon les conventions publiques de reference. La demonstration C produit **55 en 121 instructions** ; les **15 tests CTest passent**.
+This profile adds a process and a main thread, thread-local registers, followed by SetHeapSize, QueryMemory, and ExitProcess according to public reference conventions. The C demonstration produces **55 in 121 instructions**; **all 15 CTest tests pass**.
 
-Le mode est explicite, reserve aux ELF et distinct du protocole de test precedent. Sa disposition memoire est locale et sa compatibilite native Switch 2 reste a valider.
+This mode is explicit, restricted to ELF files, and separate from the previous test protocol. Its memory layout is local, and native Switch 2 compatibility remains to be validated.
 
-- [Services, contexte, limites et sources](docs/HLE_RUNTIME.md)
-- [Programme HLE et reproduction](tests/programs/hle_memory/README.md)
+- [Services, context, limitations, and sources](docs/HLE_RUNTIME.md)
+- [HLE program and reproduction](tests/programs/hle_memory/README.md)
 
-## Audit et consolidation du CPU entier
+## Integer CPU audit and consolidation
 
-Le CPU traite maintenant les calculs entiers usuels W/X : arithmetique avec flags et retenue, multiplication/division, decalages et rotations, champs de bits et selections conditionnelles. Le decodage des acces memoire scalaires et des conditions a ete revu.
+The CPU now handles common W/X integer calculations: arithmetic with flags and carry, multiplication/division, shifts and rotations, bitfields, and conditional selections. Scalar memory-access decoding and condition handling have been reviewed.
 
-Validation du corpus entier actuel : **41 304 comparaisons independantes** sur **775 variantes**, incluant maintenant CCMP/CCMN. Un programme C 32/64 bits donne les memes resultats sur l'emulateur et en execution native, en 303 instructions invitees. La suite complete compte desormais 24 tests CTest avec les paliers suivants.
+Validation of the current integer corpus: **41,304 independent comparisons** across **775 variants**, now including CCMP/CCMN. A 32/64-bit C program produces the same results in the emulator and in native execution, using 303 guest instructions. The complete suite now contains 24 CTest tests with the milestones below.
 
-- [Audit, couverture et limites du CPU](docs/CPU_AUDIT.md)
-- [Programme de calcul et reproduction des references](tests/programs/cpu_integer/README.md)
+- [CPU audit, coverage, and limitations](docs/CPU_AUDIT.md)
+- [Calculation program and reference reproduction](tests/programs/cpu_integer/README.md)
 
-Le CPU n'est pas termine : FP/SIMD est encore partiel et plusieurs autres familles restent a developper. L'ajout de services HLE et d'IPC est differe pour donner la priorite a ces fondations.
+The CPU is not complete: FP/SIMD remains partial, and several other instruction families still need to be developed. HLE service and IPC additions are deferred to prioritize these foundations.
 
-## Palier atomiques et exclusives
+## Atomics and exclusive accesses milestone
 
-LDXR/STXR, leurs variantes acquire/release, les paires exclusives, LDAR/STLR et les principales operations LSE (dont CAS et SWP) sont disponibles. Le suivi des reservations detecte les ecritures dans le meme granule RAM, y compris depuis l'hote ou un autre CPU execute sequentiellement. CLREX et les barrieres usuelles sont traites. Le modele reste sequentiel et ne fournit pas encore l'execution parallele multicoeur.
+LDXR/STXR, their acquire/release variants, exclusive pairs, LDAR/STLR, and the main LSE operations (including CAS and SWP) are available. Reservation tracking detects writes within the same RAM granule, including writes from the host or another CPU executed sequentially. CLREX and common barriers are handled. The model remains sequential and does not yet provide parallel multicore execution.
 
-Validation de ce palier : **19 suites CTest**, avec une nouvelle suite utilisant **206 instructions assemblees independamment**. Voir [couverture, tests et limites](docs/CPU_ATOMICS.md).
+Validation of this milestone: **19 CTest suites**, including a new suite using **206 independently assembled instructions**. See [coverage, tests, and limitations](docs/CPU_ATOMICS.md).
 
-## Premier palier FP/SIMD
+## First FP/SIMD milestone
 
-Les 32 registres vectoriels, FPCR et FPSR sont sauvegardes dans le contexte du thread. Le CPU execute un premier ensemble de calculs flottants S/D, comparaisons, copies, acces memoire B/H/S/D/Q et operations vectorielles entieres. Les calculs sous-normaux et FZ sont maintenant pris en charge par un moteur logiciel ; les exceptions piegees et certains modes FPCR restent refuses.
+All 32 vector registers, FPCR, and FPSR are saved in the thread context. The CPU executes an initial set of S/D floating-point calculations, comparisons, copies, B/H/S/D/Q memory accesses, and integer vector operations. Subnormal calculations and FZ are now supported by a software engine; trapped exceptions and some FPCR modes remain rejected.
 
-Validation : **24 suites CTest reussies**, avec **96 400 cas FP/SIMD generaux** et **64 896 cas sous-normaux/FZ supplementaires**. Le meme calcul C float/double produit les memes bits sur l'hote et l'emulateur ; l'executable de test enchaine aussi des operations SIMD, conversions entier/flottant et S/D, et multiplication-addition fusionnee. Il termine en **343 instructions**.
+Validation: **24 CTest suites passing**, with **96,400 general FP/SIMD cases** and **64,896 additional subnormal/FZ cases**. The same C float/double calculation produces identical bits on the host and emulator; the test executable also combines SIMD operations, integer/floating-point and S/D conversions, and fused multiply-add. It finishes in **343 instructions**.
 
-Les conversions couvrent les entiers signes/non signes W/X et les cinq arrondis des conversions vers entier, avec saturation et flags d'erreur. FMADD/FMSUB/FNMADD/FNMSUB S/D utilisent un seul arrondi. Les modes FPCR non couverts restent explicites ; les sous-normaux et FZ sont disponibles.
+Conversions cover signed/unsigned W/X integers and all five rounding modes for conversions to integers, with saturation and error flags. FMADD/FMSUB/FNMADD/FNMSUB S/D use a single rounding step. Unsupported FPCR modes remain explicit; subnormals and FZ are available.
 
-Le SIMD entier inclut maintenant multiplications/accumulations, comparaisons signees et non signees, extrema, reductions, entrelacements et extractions, inversion d'ordre des elements, comptage de bits et decalages immediats. Une chaine de ces operations et de CCMP/CCMN est verifiee sur 112 octets par une reference scalaire separee.
+Integer SIMD now includes multiplication/accumulation, signed and unsigned comparisons, minimum/maximum operations, reductions, interleaving and extraction, element-order reversal, population counts, and immediate shifts. A chain of these operations and CCMP/CCMN is checked over 112 bytes against a separate scalar reference.
 
-Les vecteurs flottants 2S/4S/2D disposent de FADD/FSUB/FMUL/FDIV/FSQRT, FMLA/FMLS fusionnes et FABS/FNEG. Ils partagent le traitement scalaire des arrondis et NaN. Une erreur sur un element annule toute l'instruction. Une seconde chaine de 112 octets est comparee bit pour bit aux calculs natifs. Le moteur logiciel gere aussi les sous-normaux arithmetiques et FZ.
+Floating-point vectors 2S/4S/2D support FADD/FSUB/FMUL/FDIV/FSQRT, fused FMLA/FMLS, and FABS/FNEG. They share scalar rounding and NaN handling. An error in one element cancels the entire instruction. A second 112-byte chain is compared bit for bit against native calculations. The software engine also handles arithmetic subnormals and FZ.
 
-Trois extensions ajoutent les reductions flottantes par paires et extrema sur 4S, les conversions vectorielles entier/flottant et les instructions FRINT et minimum/maximum scalaires/vectorielles. Une chaine de 128 octets verifie leur integration. Les variantes NM, les zeros signes et la difference de flags entre FRINTI et FRINTX sont controles.
+Three extensions add pairwise floating-point reductions and minimum/maximum operations on 4S, vector integer/floating-point conversions, FRINT instructions, and scalar/vector minimum/maximum operations. A 128-byte chain checks their integration. NM variants, signed zeros, and the flag difference between FRINTI and FRINTX are checked.
 
-Les transferts multiple structures LD1/ST1 a LD4/ST4, les tables TBL/TBX et les copies DUP/INS d'elements et SMOV sont disponibles. Une chaine de 144 octets verifie desentrelacement, calcul, consultation de table et reentrelacement. Les acces incomplets sont refuses avant tout effet et les ecritures invalident les reservations exclusives.
+Multiple-structure transfers LD1/ST1 through LD4/ST4, TBL/TBX table lookups, DUP/INS element copies, and SMOV are available. A 144-byte chain checks deinterleaving, calculation, table lookup, and reinterleaving. Incomplete accesses are rejected before any effects, and writes invalidate exclusive reservations.
 
-- [Couverture, limites et suite CPU](docs/CPU_FP_SIMD.md)
-- [Programme et reproduction](tests/programs/cpu_fp/README.md)
+- [Coverage, limitations, and CPU suite](docs/CPU_FP_SIMD.md)
+- [Program and reproduction](tests/programs/cpu_fp/README.md)
 
-Le [moteur flottant logiciel](docs/CPU_SOFTFLOAT.md) calcule sur les bits avec des entiers exacts : il gere les sous-normaux, la petitesse avant arrondi, FZ et les flags UFC/IXC/IDC sans dependre des flottants du PC.
+The [software floating-point engine](docs/CPU_SOFTFLOAT.md) calculates directly on bit representations using exact integer arithmetic: it handles subnormals, tininess before rounding, FZ, and UFC/IXC/IDC flags without relying on the PC's floating-point arithmetic.
 
-Le [palier SIMD arithmetique](docs/CPU_SIMD_ARITHMETIC.md) ajoute saturation/QC, retrecissements, decalages variables et multiplications elargies : **61 056 comparaisons independantes supplementaires**. La prochaine priorite est une suite de programmes C/C++ compiles plus varies, avant plusieurs threads.
+The [SIMD arithmetic milestone](docs/CPU_SIMD_ARITHMETIC.md) adds saturation/QC, narrowing, variable shifts, and widening multiplication: **61,056 additional independent comparisons**. The next priority is a wider range of compiled C/C++ programs before moving on to multiple threads.
+
+## Contributors
+
+Thanks to [@dougchansan](https://github.com/dougchansan) for the Linux atomic-test compilation fix and the Windows/Linux CI workflow, adapted from [PR #1](https://github.com/dougchansan/switch2emu/pull/1).
