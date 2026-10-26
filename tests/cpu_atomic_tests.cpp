@@ -1,6 +1,7 @@
 #include "cpu.hpp"
 #include "memory.hpp"
 #include "test_device.hpp"
+#include <array>
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -146,7 +147,7 @@ int main(int argc, char** argv)
         "retry loop recovers from contention");
     TestDevice device; check(bus.mapDevice(0x4000,device.size(),device,"atomic-test"), "map MMIO fixture");
     for (size_t index : {12U,14U,20U,22U,30U,31U,152U,161U})
-    for (uint64_t address : {0x2001ULL,0x5000ULL,0x4000ULL,UINT64_MAX})
+    for (uint64_t address : std::array<uint64_t,4>{0x2001,0x5000,0x4000,UINT64_MAX})
     {
         setup(); cpu.writeRegister(2,address); cpu.writeRegister(0,77); cpu.writeRegister(4,88);
         const auto before = cpu.captureContext();
