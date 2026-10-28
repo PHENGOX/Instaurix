@@ -1,4 +1,4 @@
-# Instaurix 0.86
+# Instaurix
 
 Previously named Switch2Emu. The current executable is `Instaurix.exe` on Windows.
 
