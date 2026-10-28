@@ -7,14 +7,29 @@
 
 uint64_t Memory::reservationVersion(uint64_t address) const
 {
-    return isValidAddress(address) ? writeVersions[static_cast<size_t>(address / 16)] : 0;
+    if(!isValidAddress(address))return 0;
+    const auto& page=writeVersions[static_cast<size_t>(address/PAGE_SIZE)];
+    return page.granules?(*page.granules)[static_cast<size_t>((address%PAGE_SIZE)/16)]:page.baseline;
+}
+
+void Memory::prepareWriteVersions(uint64_t address,size_t length)
+{
+    const auto last=static_cast<size_t>((address+length-1)/PAGE_SIZE);
+    for(size_t i=static_cast<size_t>(address/PAGE_SIZE);i<=last;++i){
+        auto& page=writeVersions[i];
+        if(!page.granules){
+            auto granules=std::make_unique<GranuleVersions>();
+            granules->fill(page.baseline);
+            page.granules=std::move(granules);
+        }
+    }
 }
 
 void Memory::markWritten(uint64_t address, size_t length)
 {
     const uint64_t version = ++writeSerial;
     for (size_t i = static_cast<size_t>(address / 16); i <= (address + length - 1) / 16; ++i)
-        writeVersions[i] = version;
+        (*writeVersions[i/(PAGE_SIZE/16)].granules)[i%(PAGE_SIZE/16)] = version;
 }
 
 uint8_t Memory::permissionsAt(uint64_t address) const
@@ -31,6 +46,17 @@ bool Memory::discardPages(uint64_t address, size_t length)
     return true;
 }
 
+bool Memory::mapReadOnlySharedPages(uint64_t address,std::span<const std::shared_ptr<uint8_t[]>> backing)
+{
+    if(backing.empty() || backing.size()>memorySize/PAGE_SIZE || address%PAGE_SIZE ||
+       !isValidRange(address,backing.size()*PAGE_SIZE)) return false;
+    for(const auto& page:backing) if(!page) return false;
+    const auto first=size_t(address/PAGE_SIZE);
+    for(size_t i=0;i<backing.size();++i) if(permissions[first+i]!=None || pages[first+i]) return false;
+    for(size_t i=0;i<backing.size();++i) pages[first+i]=backing[i];
+    return setPermissions(address,backing.size()*PAGE_SIZE,Read);
+}
+
 bool Memory::writeBytes(uint64_t address, const uint8_t* bytes, size_t length)
 {
     const WriteRange range{address,bytes,length};
@@ -41,7 +67,7 @@ bool Memory::writeRanges(std::span<const WriteRange> ranges)
 {
     for (const auto& range : ranges)
     {
-        if (!range.bytes) { lastError = "Buffer de copie memoire absent"; return false; }
+        if (!range.bytes) { lastError = "Missing memory copy buffer"; return false; }
         if (!validateAccess(range.address,range.size,Write)) return false;
     }
     try
@@ -51,9 +77,10 @@ bool Memory::writeRanges(std::span<const WriteRange> ranges)
         {
             const uint64_t last = (range.address + range.size - 1) / PAGE_SIZE;
             for (uint64_t i = range.address / PAGE_SIZE; i <= last; ++i) getOrCreatePage(i);
+            prepareWriteVersions(range.address,range.size);
         }
     }
-    catch (const std::bad_alloc&) { lastError = "Allocation pour copie memoire impossible"; return false; }
+    catch (const std::bad_alloc&) { lastError = "Memory copy allocation failed"; return false; }
     for (const auto& range : ranges)
     {
         for (size_t i = 0; i < range.size; ++i)
@@ -67,7 +94,8 @@ void Memory::reset(uint8_t permission)
 {
     for (auto& page : pages) page.reset();
     std::fill(permissions.begin(), permissions.end(), permission & All);
-    std::fill(writeVersions.begin(), writeVersions.end(), ++writeSerial);
+    const auto version=++writeSerial;
+    for(auto& page:writeVersions){page.baseline=version;page.granules.reset();}
     lastError = nullptr;
 }
 
@@ -76,13 +104,15 @@ bool Memory::setPermissions(uint64_t address, size_t length, uint8_t permission)
     if ((permission & ~All) != 0 || length == 0 || !isValidRange(address, length) ||
         address % PAGE_SIZE != 0 || (length % PAGE_SIZE != 0 && address + length != memorySize))
     {
-        lastError = "Plage de permissions invalide ou non alignee";
+        lastError = "Invalid or unaligned permission range";
         return false;
     }
     const size_t first = static_cast<size_t>(address / PAGE_SIZE);
     const size_t last = static_cast<size_t>((address + length - 1) / PAGE_SIZE);
     std::fill(permissions.begin() + first, permissions.begin() + last + 1, permission);
-    markWritten(address, length);
+    // Full-page permission changes invalidate every granule without allocating tracking rows.
+    const auto version=++writeSerial;
+    for(size_t i=first;i<=last;++i){writeVersions[i].baseline=version;writeVersions[i].granules.reset();}
     return true;
 }
 
@@ -100,8 +130,8 @@ bool Memory::validateAccess(uint64_t address, size_t length, uint8_t permission)
     if (!checkRange(address, length)) return false;
     if (!canAccess(address, length, permission))
     {
-        lastError = permission == Execute ? "Execution memoire interdite" :
-                    permission == Write ? "Ecriture memoire interdite" : "Lecture memoire interdite";
+        lastError = permission == Execute ? "Memory execution denied" :
+                    permission == Write ? "Memory write denied" : "Memory read denied";
         return false;
     }
     return true;
@@ -126,7 +156,7 @@ Memory::Memory(size_t size)
           ((size % PAGE_SIZE) != 0 ? 1 : 0)),
       lastError(nullptr),
       permissions(pages.size(), All),
-      writeVersions(size / 16 + (size % 16 != 0), 0)
+      writeVersions(pages.size())
 {
 }
 
@@ -145,7 +175,7 @@ bool Memory::loadFile(
 
     if (!file)
     {
-        lastError = "Impossible d'ouvrir le fichier";
+        lastError = "Failed to open file";
         return false;
     }
 
@@ -153,7 +183,7 @@ bool Memory::loadFile(
 
     if (fileSize < 0)
     {
-        lastError = "Taille de fichier invalide";
+        lastError = "Invalid file size";
         return false;
     }
 
@@ -162,7 +192,7 @@ bool Memory::loadFile(
 
     if (size > std::numeric_limits<size_t>::max())
     {
-        lastError = "Fichier trop volumineux";
+        lastError = "File is too large";
         return false;
     }
 
@@ -182,7 +212,7 @@ bool Memory::loadFile(
 
         if (!file.get(value))
         {
-            lastError = "Impossible de lire le fichier";
+            lastError = "Failed to read file";
             return false;
         }
 
@@ -217,13 +247,13 @@ bool Memory::checkRange(
 {
     if (address >= memorySize)
     {
-        lastError = "Adresse memoire hors limites";
+        lastError = "Memory address is out of bounds";
         return false;
     }
 
     if (accessSize > memorySize - address)
     {
-        lastError = "Acces memoire hors limites";
+        lastError = "Memory access is out of bounds";
         return false;
     }
 
@@ -257,7 +287,7 @@ uint8_t* Memory::getOrCreatePage(
     if (!pages[pageIndex])
     {
         pages[pageIndex] =
-            std::make_unique<uint8_t[]>(PAGE_SIZE);
+            std::make_shared<uint8_t[]>(PAGE_SIZE);
 
         for (size_t i = 0; i < PAGE_SIZE; ++i)
             pages[pageIndex][i] = 0;
@@ -422,111 +452,30 @@ uint64_t Memory::read64(uint64_t address) const
             << 56);
 }
 
-void Memory::write8(
-    uint64_t address,
-    uint8_t value)
+void Memory::write8(uint64_t address,uint8_t value)
 {
-    if (!validateAccess(address, 1, Write))
-        return;
-
-    const uint64_t pageIndex =
-        address / PAGE_SIZE;
-
-    const size_t offset =
-        static_cast<size_t>(
-            address % PAGE_SIZE);
-
-    uint8_t* page =
-        getOrCreatePage(pageIndex);
-
-    if (!page)
-    {
-        lastError = "Impossible d'allouer une page";
-        return;
-    }
-
-    page[offset] = value;
-    markWritten(address, 1);
+    writeBytes(address,&value,1);
 }
 
-void Memory::write16(
-    uint64_t address,
-    uint16_t value)
+void Memory::write16(uint64_t address,uint16_t value)
 {
-    if (!validateAccess(address, 2, Write))
-        return;
-
-    write8(
-        address,
-        static_cast<uint8_t>(value));
-
-    write8(
-        address + 1,
-        static_cast<uint8_t>(value >> 8));
+    std::array<uint8_t,2> bytes{};
+    for(size_t i=0;i<bytes.size();++i)bytes[i]=uint8_t(value>>(8*i));
+    writeBytes(address,bytes.data(),bytes.size());
 }
 
-void Memory::write32(
-    uint64_t address,
-    uint32_t value)
+void Memory::write32(uint64_t address,uint32_t value)
 {
-    if (!validateAccess(address, 4, Write))
-        return;
-
-    write8(
-        address,
-        static_cast<uint8_t>(value));
-
-    write8(
-        address + 1,
-        static_cast<uint8_t>(value >> 8));
-
-    write8(
-        address + 2,
-        static_cast<uint8_t>(value >> 16));
-
-    write8(
-        address + 3,
-        static_cast<uint8_t>(value >> 24));
+    std::array<uint8_t,4> bytes{};
+    for(size_t i=0;i<bytes.size();++i)bytes[i]=uint8_t(value>>(8*i));
+    writeBytes(address,bytes.data(),bytes.size());
 }
 
-void Memory::write64(
-    uint64_t address,
-    uint64_t value)
+void Memory::write64(uint64_t address,uint64_t value)
 {
-    if (!validateAccess(address, 8, Write))
-        return;
-
-    write8(
-        address,
-        static_cast<uint8_t>(value));
-
-    write8(
-        address + 1,
-        static_cast<uint8_t>(value >> 8));
-
-    write8(
-        address + 2,
-        static_cast<uint8_t>(value >> 16));
-
-    write8(
-        address + 3,
-        static_cast<uint8_t>(value >> 24));
-
-    write8(
-        address + 4,
-        static_cast<uint8_t>(value >> 32));
-
-    write8(
-        address + 5,
-        static_cast<uint8_t>(value >> 40));
-
-    write8(
-        address + 6,
-        static_cast<uint8_t>(value >> 48));
-
-    write8(
-        address + 7,
-        static_cast<uint8_t>(value >> 56));
+    std::array<uint8_t,8> bytes{};
+    for(size_t i=0;i<bytes.size();++i)bytes[i]=uint8_t(value>>(8*i));
+    writeBytes(address,bytes.data(),bytes.size());
 }
 
 bool Memory::hasError() const

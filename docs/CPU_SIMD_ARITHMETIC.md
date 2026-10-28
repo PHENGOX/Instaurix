@@ -1,49 +1,41 @@
-# Saturation, decalages variables et multiplications elargies
+# SIMD saturation, variable shifts and widening multiplication
 
-Palier du 24 octobre 2026. Trois groupes d'operations sont ajoutes au CPU, avec des formes vectorielles et les formes scalaires architecturales correspondantes.
+Milestone dated October 24, 2026. Operations include valid vector and corresponding architectural scalar forms.
 
-| Groupe | Couverture |
+| Group | Coverage |
 | --- | --- |
-| Saturation | SQADD/UQADD, SQSUB/UQSUB, SQABS/SQNEG ; elements 8/16/32/64 bits, formes vectorielles valides et scalaires B/H/S/D |
-| Retrecissement saturant | SQXTN/UQXTN/SQXTUN, scalaires et vecteurs, variantes 2 ; sources 16/32/64 bits vers destinations 8/16/32 bits |
-| Decalages variables | SSHL/USHL, SRSHL/URSHL, SQSHL/UQSHL, SQRSHL/UQRSHL ; vecteurs et formes scalaires valides |
-| Multiplications elargies | SMULL/UMULL, SMLAL/UMLAL, SMLSL/UMLSL et variantes 2 ; sources 8/16/32 bits vers resultats 16/32/64 bits |
+| Saturation | SQADD/UQADD, SQSUB/UQSUB, SQABS/SQNEG; 8/16/32/64-bit elements and scalar B/H/S/D |
+| Saturating narrowing | SQXTN/UQXTN/SQXTUN, scalar/vector and 2 variants; 16/32/64-bit sources to 8/16/32-bit results |
+| Variable shifts | SSHL/USHL, SRSHL/URSHL, SQSHL/UQSHL, SQRSHL/UQRSHL; valid scalar/vector forms |
+| Widening multiplication | SMULL/UMULL, SMLAL/UMLAL, SMLSL/UMLSL and 2 variants; 8/16/32-bit sources to 16/32/64-bit results |
 
-## Regles importantes
+## Semantics
 
-La saturation borne le resultat au domaine signe ou non signe de l'element. Elle pose **FPSR.QC (bit 27)** si au moins un element sature. Ce bit est cumulatif : une instruction suivante sans saturation ne l'efface pas ; MSR FPSR permet de le remettre a zero. NZCV et les autres bits FPSR sont preserves.
+Saturation clamps to the element's signed/unsigned range and sets cumulative **FPSR.QC, bit 27** if any element saturates. Later non-saturating instructions do not clear it; MSR FPSR can. NZCV and other FPSR bits are preserved.
 
-Les decalages utilisent uniquement l'**octet bas signe** de chaque element du registre de decalage. Les autres bits sont ignores. Une valeur positive decale a gauche, une valeur negative a droite ; les formes signees prolongent le signe. Les cas de decalage egal/superieur a la largeur et les arrondis sont traites sans decalage C++ indefini. Les variantes R arrondissent a droite selon leur regle entiere, independamment de FPCR.RMode ; les variantes Q saturent a gauche et posent QC lorsque necessaire.
+Variable shifts use only each shift element's **signed low byte**. Positive values shift left; negative values shift right, sign-extending signed forms. Equal/greater-than-width shifts and rounding avoid undefined C++ shifts. R forms round right shifts independently of FPCR.RMode; Q forms saturate left shifts and set QC when needed.
 
-Les multiplications elargies lisent la moitie basse ou haute des sources selon l'absence/presence du suffixe 2. Le resultat occupe toujours 128 bits. Les accumulations et soustractions s'effectuent modulo la largeur de destination, sans saturation et sans modifier QC. Les calculs C++ sont non signes pour eviter les debordements signes indefinis.
+Widening multiplication selects the lower/upper source half according to suffix 2 and always produces 128 bits. Accumulate/subtract operations wrap modulo destination width, without saturation or QC changes. Unsigned C++ arithmetic avoids signed-overflow undefined behavior.
 
-Les retrecissements simples produisent la moitie basse et effacent la moitie haute. Leurs variantes 2 conservent la moitie basse et remplacent la moitie haute. Les sources et l'ancienne destination sont capturees avant calcul, ce qui permet les alias entre registres. Les encodages reserves, les vecteurs .1D et les tailles elargies/retrecies non architecturales sont refuses sans effet partiel.
+Plain narrowing writes the lower half and clears the upper half; 2 variants preserve the lower half and replace the upper half. Sources and old destination are captured first, supporting register aliases. Reserved encodings, .1D vectors and non-architectural widening/narrowing widths fail without partial effects.
 
-## Verification
+## Validation
 
-- **61 056 cas sur 477 variantes** : encodages Clang 18.1.6 via Zig 0.13.0, attendus Unicorn 2.1.4.
-- Comparaison du contexte entier et vectoriel complet, SP/NZCV, FPCR/FPSR et memoire. Inclut valeurs limites, aliases, decalages de -128 a 127, bruit dans les bits de decalage inutilises, QC initialement pose ou efface et donnees aleatoires.
-- Le corpus est separe des references FP/SIMD generales et des references sous-normales, et reutilise leur format et controle de provenance par blocs.
-- Le programme ELF integre enchaine saturation signee/non signee, decalages arrondis, retrecissement vers les moities basse/haute, produits elargis et accumules. **192 octets**, incluant instantanes QC et sa remise a zero, sont compares a une reference scalaire distincte.
-- La demonstration complete termine en **343 instructions**. Les **24 suites CTest passent en Debug et Release** ; les corpus precedents restent conserves.
+**61,056 cases over 477 variants**, encoded by Clang 18.1.6/Zig 0.13.0 with Unicorn 2.1.4 expectations. Comparisons include complete integer/vector contexts, SP/NZCV, FPCR/FPSR and memory: boundaries, aliases, shifts -128..127, noise in ignored shift bits, initial QC states and random data.
 
-Ces tests ne prouvent pas la conformite de toutes les extensions Advanced SIMD et ne constituent pas une validation sur Switch 2.
-
-## Reproduction
+The separate corpus reuses the general FP/SIMD format and per-variant provenance checks. The combined ELF chains signed/unsigned saturation, rounded shifts, low/high narrowing, widening products and accumulations. A separate scalar reference checks **192 bytes**, including QC snapshots and clearing. The full demo exits in **343 instructions**. At this milestone **24 Debug/Release CTest suites passed**, retaining previous corpora. These finite comparisons do not establish every Advanced SIMD extension or Switch 2 hardware compatibility.
 
 ```powershell
-./tools/build_simd_arithmetic_reference.ps1 -Python /chemin/vers/python.exe
-./tools/build_fp_reference.ps1 -Python /chemin/vers/python.exe -SamplesOnly
+./tools/build_simd_arithmetic_reference.ps1 -Python /path/to/python.exe
+./tools/build_fp_reference.ps1 -Python /path/to/python.exe -SamplesOnly
 cmake --build build --config Debug
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-## Prochaine etape
+Next: broader optimized C/C++ vector, buffer and atomic programs, compared with native results; add encountered missing instructions before a multithread scheduler. Decide on a JIT from performance measurements.
 
-Consolider le CPU sur plusieurs programmes C/C++ compiles et optimises : calcul vectoriel, traitements de buffers et operations atomiques. Comparer leurs resultats a l'execution native et traiter les instructions manquantes constatees. Cette cible doit preceder l'integration d'un ordonnanceur de plusieurs threads. Le JIT reste a decider a partir de mesures de performances.
+## Reference links
 
-## References
-
-- [Arm, guide de reference A64](https://documentation-service.arm.com/static/6245c734b059dc5ff9a8bdab).
-- [Arm, bit QC en AArch64](https://documentation-service.arm.com/static/5f3e9263b13d4764d4613b69?token=).
-- [Unicorn, moteur de comparaison](https://github.com/unicorn-engine/unicorn).
+- [Arm A64 instruction reference](https://documentation-service.arm.com/static/6245c734b059dc5ff9a8bdab)
+- [Arm AArch64 QC flag](https://documentation-service.arm.com/static/5f3e9263b13d4764d4613b69?token=)
+- [Unicorn independent reference engine](https://github.com/unicorn-engine/unicorn)

@@ -1,41 +1,37 @@
-# Animation et présentation continue
+# Animation and continuous presentation
 
-Étape du 25 octobre 2026 : un client C ARM64 présente huit images successives et dort entre les images. Le lancement peut afficher chaque présentation dans une fenêtre Windows ou exporter une séquence PNG horodatée. Le service reste le framebuffer local emu:disp ; le GPU natif et Vulkan restent absents.
+Milestone dated October 25, 2026. An ARM64 C client presents eight frames with sleeps between them. A Windows viewer displays every frame or exports timestamped PNGs. This remains local emu:disp; native GPU/Vulkan are absent.
 
-## Frontière d'image
+## Frame boundary
 
-`Machine::run(budget, true)` retourne **Stop::Frame** après une présentation réussie. Le SVC, le compteur d'instructions, le minuteur de développement et le quantum sont traités avant l'arrêt. La reprise continue à l'instruction suivante. Le mode normal `run(budget)` conserve son comportement antérieur.
+Machine::run(budget, true) returns **Stop::Frame** after a successful presentation. SVC processing, instruction count, development timer and quantum update occur before stopping; resumption starts at the next instruction. Ordinary run(budget) retains prior behavior. Readers capture each frame before replacement; instruction totals/presentation points are independent of slicing. The reader explicitly advances virtual time to deadlines while threads wait.
 
-Le lecteur récupère ainsi chaque image avant que la suivante la remplace. Le nombre total d'instructions et les points de présentation ne dépendent pas du découpage des budgets. L'horloge virtuelle reste pilotée explicitement : quand les threads sont bloqués sur un délai, le lecteur avance jusqu'à l'échéance suivante.
-
-## Fenêtre Windows
+## Windows window
 
 ```powershell
-.\build\Release\Switch2Emu.exe .\tests\programs\hle_animation\program.elf 10000000 --hle-reference --read-root .\tests\programs\hle_graphics\root --window
+.\build\Release\Instaurix.exe .\tests\programs\hle_animation\program.elf 10000000 --hle-reference --read-root .\tests\programs\hle_graphics\root --window
 ```
 
-La fenêtre native conserve le rapport largeur/hauteur et agrandit les pixels avec des bandes noires si nécessaire. Elle convertit les captures RGB en DIB pour GDI et ne nécessite pas de bibliothèque graphique externe. La boucle traite les messages entre des budgets de 4 096 instructions et pendant les pauses ; fermer la fenêtre interrompt l'exécution proprement.
+The native viewer preserves aspect ratio, scales pixels with black borders, and converts RGB captures to GDI DIB without external graphics libraries. It handles messages between 4,096-instruction slices and during waits; window closure interrupts cleanly.
 
-Les pauses virtuelles sont également attendues côté horloge réelle avec traitement des messages. Le temps de calcul et de dessin s'y ajoute : il ne s'agit pas d'une garantie de cadence ou d'une calibration du CPU. La fenêtre reste ouverte sur la dernière image après la fin normale jusqu'à sa fermeture. Une limite d'instructions atteinte arrête la session.
+Virtual sleeps also wait in wall time while processing messages. Computation/drawing add time, so this is not calibrated CPU timing or guaranteed frame pacing. After normal exit the last image stays until close; reaching the instruction limit ends the session.
 
-La fenêtre est réservée à Windows. Les autres fonctions du moteur et l'export de séquence restent indépendants de cette interface. Le test automatisé de cycle de vie crée la fenêtre cachée, présente deux images, traite les messages et ferme/réouvre la fenêtre ; il ne constitue pas une inspection visuelle d'une fenêtre affichée.
+The window is Windows-only; core/sequence export are independent. Automated lifecycle testing creates a hidden window, presents two frames, handles messages and closes/reopens it. This is not visual inspection of a visible window.
 
-## Export sans fenêtre
+## Headless export
 
 ```powershell
-.\build\Release\Switch2Emu.exe .\tests\programs\hle_animation\program.elf 10000000 --hle-reference --read-root .\tests\programs\hle_graphics\root --frames-out .\build\animation --frame-out .\build\animation-last.png
+.\build\Release\Instaurix.exe .\tests\programs\hle_animation\program.elf 10000000 --hle-reference --read-root .\tests\programs\hle_graphics\root --frames-out .\build\animation --frame-out .\build\animation-last.png
 ```
 
-`--frames-out` écrit frame-000001.png, etc., et **frames.csv**, avec numéro, temps virtuel en ns, nombre cumulé d'instructions, dimensions et empreinte RGB FNV-1a. Le journal définit les images de ce lancement ; d'éventuels anciens fichiers non listés ne font pas partie de la séquence. Le dossier est créé si nécessaire. Les erreurs d'export sont signalées, sans poursuivre une capture présentée comme complète.
+--frames-out writes frame-000001.png onward and **frames.csv**: number, virtual ns, cumulative instructions, dimensions and RGB FNV-1a hash. The log defines this run's sequence; stale unlisted files are excluded. Missing directories are created. Export failures stop rather than claim a complete capture.
 
-Sans fenêtre, les délais virtuels avancent sans pause réelle. `--frame-out` continue d'exporter seulement la dernière capture. Toutes ces options exigent le mode HLE. Le budget total d'instructions reste strict, y compris avec les arrêts intermédiaires aux images.
+Headless delays advance without wall sleeps. --frame-out still exports only the last capture. All options require HLE; the total budget remains strict across frame stops.
 
-## Démonstration et validation
+## Demo and tests
 
-Le client réutilise sprite.txt via le montage de fichiers. Le vaisseau se déplace horizontalement et les étoiles changent à chaque présentation. Il émet **8 images**, aux temps **0, 100, …, 700 ms virtuelles**, puis termine en **4 882 772 instructions**. Le rapport conserve status=1, loaded=272, presented=8 et l'empreinte de la dernière image.
+The guest loads sprite.txt, moves a ship horizontally and changes stars. It presents **8 frames at 0,100,…,700 virtual ms**, exiting after **4,882,772 instructions**. Report: status=1, loaded=272, presented=8 and final-frame hash.
 
-Les tests vérifient chaque pixel des huit captures, leur ordre, leur temps et leur frontière d'instruction. Les mêmes captures sont obtenues avec un budget élevé ou des tranches de 997 instructions. Les anciens tests restent actifs. Les PNG exportés ont aussi été décodés indépendamment et comparés aux empreintes de frames.csv.
+Tests verify every pixel, ordering, time and instruction boundary, with large budgets and 997-instruction slices. Exported PNGs were independently decoded and compared with frames.csv hashes. Legacy tests remain active.
 
-Un aperçu GIF peut être dérivé des PNG pour consultation ; ses couleurs indexées et son bouclage ne remplacent pas les captures RGB de référence. L'aperçu de cette étape est dans build/animation-preview.gif.
-
-Les entrées clavier et la démo interactive sont réalisées dans [HLE_INPUT.md](HLE_INPUT.md). Prochaine étape : confronter ce socle à une cible applicative plus complète. Les interfaces de manette et de GPU attendues par les jeux Switch 2 restent à étudier et implémenter.
+A GIF preview derived from PNGs is convenient but indexed colors/looping are not authoritative RGB captures; this milestone's preview was build/animation-preview.gif. [Interactive input](HLE_INPUT.md) followed; broader application targets and native controller/GPU interfaces remain separate work.

@@ -87,7 +87,7 @@ bool CPU::executeSimdArithmetic(uint32_t ins,bool& recognized)
     }
     recognized=kind!=Kind::None;
     if(!recognized) return false;
-    auto fail=[&]() { lastError="Taille ou encodage SIMD arithmetique non pris en charge"; return false; };
+    auto fail=[&]() { lastError="Unsupported SIMD arithmetic size or encoding"; return false; };
     const unsigned rd=ins&31,rn=(ins>>5)&31,rm=(ins>>16)&31,size=(ins>>22)&3,bits=8U<<size;
     const bool q=ins&(1U<<30),isUnsigned=ins&(1U<<29);
     const bool wideOrNarrow=kind==Kind::Widen || kind==Kind::Narrow;

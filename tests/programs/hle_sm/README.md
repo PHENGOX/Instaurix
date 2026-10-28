@@ -1,11 +1,12 @@
-# Démonstration du gestionnaire de services
+# Service-manager demonstration
 
-ELF ARM64 original, assemblé avec Clang 18.1.6 via Zig 0.13.0. Aucun fichier Nintendo. Reconstruction depuis la racine : `./tools/build_hle_sm.ps1`. Le placement ELF est celui de hle_memory.
+Project-owned ARM64 ELF, Clang 18.1.6/Zig 0.13.0, without Nintendo files. Rebuild: `./tools/build_hle_sm.ps1`; ELF layout follows hle_memory.
 
-Le programme ouvre sm:, envoie RegisterClient avec SendPid, demande les huit octets du nom emu:demo et récupère un handle Move dans la réponse. Il ferme la connexion sm:, utilise le nouveau handle pour calculer 20+35, vérifie 55, ferme la session et quitte.
+Opens sm:, sends RegisterClient with SendPid, requests the eight-byte emu:demo name and obtains a Move handle. Closes SM, computes/checks 20+35=55 through the acquired session, closes and exits.
 
-Résultat en **85 instructions**. À 0x12000 : handle du service obtenu (+0), ancien handle sm: (+4), résultat 55 (+8), marqueur de validation 1 (+16). Le marqueur vaut 99 en cas d'échec détecté.
+**85 instructions**. At 0x12000: acquired service handle (+0), old SM handle (+4), result 55 (+8), validation marker 1 (+16), or 99 on failure. See [manager/PID/handle limits](../../../docs/HLE_SM.md). This remains a local demo service.
 
-ELF SHA-256 : `4BB27A6CD9AEF3F5EFD2E02AD05F6DBCF9E05975D4E5381F1FAEF651CE8DAB48`.
+## Recorded artifact SHA-256
 
-Le service est un service local de démonstration. Les limites du gestionnaire, du PID et du transfert de handle sont détaillées dans [HLE_SM.md](../../../docs/HLE_SM.md).
+`4BB27A6CD9AEF3F5EFD2E02AD05F6DBCF9E05975D4E5381F1FAEF651CE8DAB48`
+

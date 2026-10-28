@@ -1,12 +1,12 @@
-# Préserver les octets, y compris les sources tierces vérifiées par SHA-256.
+# Preserve bytes, including SHA-256-verified third-party sources.
 * -text
 
-# Identifier les programmes et vecteurs de référence comme binaires.
+# Mark reference programs and vectors as binary.
 *.bin binary
 *.elf binary
 *.nro binary
 
-# Les trois références dépassent la limite de fichier GitHub (100 MiB).
+# These three references exceed the GitHub file size limit (100 MiB).
 tests/programs/cpu_fp/reference.bin filter=lfs diff=lfs merge=lfs -text
 tests/programs/cpu_simd_arithmetic/reference.bin filter=lfs diff=lfs merge=lfs -text
 tests/programs/cpu_subnormal/reference.bin filter=lfs diff=lfs merge=lfs -text

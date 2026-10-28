@@ -1,11 +1,12 @@
-# Client C interactif
+# Interactive C client
 
-Client original dérivé de hle_animation, compilé par Clang 18.1.6 via Zig 0.13.0, ARM64 freestanding O1. Reconstruction : `./tools/build_hle_interactive.ps1`. Le démarrage et SleepThread viennent de hle_animation/start.S ; les ressources de hle_graphics/root.
+Project-owned derivative of hle_animation, Clang 18.1.6/Zig 0.13.0 freestanding ARM64 O1. Rebuild: `./tools/build_hle_interactive.ps1`. Entry/SleepThread reuse hle_animation/start.S; resources come from hle_graphics/root.
 
-Le programme ouvre emu:fs, emu:disp et emu:pad via sm:, charge le sprite et lit les boutons avant chaque image. Il applique des pas de quatre pixels, annule les directions opposées et borne le sprite dans l'écran. Échap permet de quitter avant une présentation. Sans entrée, le sprite reste à sa position initiale.
+Opens emu:fs/emu:disp/emu:pad through SM, loads a sprite and reads buttons before each frame. Movement uses four-pixel steps, cancels opposite directions and clamps the sprite to the image. Escape exits before presentation; without input the initial position remains.
 
-Le rapport à 0x12000 contient status, loaded, presented, hash, x, y, max_frames, tous u64. Valeurs initiales : 99, 0, 0, 0, 48, 16, 60. Le banc modifie max_frames pour ses scénarios ; le nombre d'instructions et l'empreinte dépendent des entrées.
+Seven u64 fields at 0x12000: status,loaded,presented,hash,x,y,max_frames, initially **99,0,0,0,48,16,60**. Tests change max_frames; instruction count/hash depend on input. See [launch/limits](../../../docs/HLE_INPUT.md).
 
-ELF SHA-256 : `69949E93E913C07DEF4AEFA3937127983FA9EACEAFD99E00C6B5907A84E5120B`.
+## Recorded artifact SHA-256
 
-Lancement et limites dans [HLE_INPUT.md](../../../docs/HLE_INPUT.md).
+`69949E93E913C07DEF4AEFA3937127983FA9EACEAFD99E00C6B5907A84E5120B`
+

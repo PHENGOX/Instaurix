@@ -1,0 +1,33 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "initialization_provenance": "../libnx_init/reference.json",
+  "startup_provenance": "../libnx_gpu_channel_init/reference.json",
+  "compiler": "Zig 0.13.0 / Clang 18.1.6, aarch64-none-elf, -O1 -ffreestanding",
+  "compiler_nvchannel": "Arm GNU 14.3.1, original GNU VLA structure members",
+  "original_sdk_sources_unmodified": true,
+  "nv_transfer_memory_bytes": 65536,
+  "nro_sha256": "756F06EA210754F8A705CD39AB2579C98E0DA2C171EEDE4D1B1636DAE129B9DA",
+  "scope": "Original ioctl2 transport followed by bounded preflight rejecting a synthetic unmapped entry; no execution",
+  "service_sources_sha256": {
+    "nvidia/gpu_channel.c": "3C227D7054F63515177AD02A16C06C9C8EA78B6ABA236149F8E128DBA1EDF827",
+    "nvidia/ioctl/nvchannel.c": "0237FBF2999CC30C905E3B948C174BB05FF1ED52889C18E7E7318A35D7FE69B1",
+    "services/nv.c": "304EC5F740266042D05F157C36CB42FA13C69F0CE18381B2AE8E6BFE302F91FB",
+    "runtime/hosversion.c": "3083470C2E747C569F63A41909C7B5C0416EECDAC249A547AB49DAA47CADDC8C"
+  },
+  "transport_headers_sha256": {
+    "sf/service.h": "F774751E638D9025F89A796655266A24908801A2F14BE46421FE816C757BBE94",
+    "sf/cmif.h": "8D9D032C06CE4BBBB0052AB0952F95828BB5B032BA381C485E2A777A61A06B74",
+    "sf/hipc.h": "38BD18F76B120E75A07D6639761D23F21F289202982CA14DD0246BE7974394A0"
+  },
+  "guest_harness_sha256": "105C8EE2684305643F058C9902E83A834F3F0F79BB5EE31F5A67A6D0945ED47F",
+  "reference_symbols_sha256": "69F39D1B485FB87032850E2CAA66EDDE50B7118E1915902EA516BECFF8DE35D5",
+  "baseline_instructions": 71180,
+  "instructions": 71232,
+  "next_boundary": "KickoffPb now rejects the synthetic unmapped IOVA with InvalidAddress; no job admitted",
+  "temporary_client_hosversion_override": "4.0.0 around nvGpuChannelKickoff only; saved version restored immediately afterward",
+  "synthetic_unmapped_gpu_va": "0x100000000",
+  "report_words_per_lifetime": 32,
+  "lifetimes": 2,
+  "nro_bytes": 417792,
+  "transport_milestone_result": "CMIF UnknownCommand before command-memory preflight"
+}

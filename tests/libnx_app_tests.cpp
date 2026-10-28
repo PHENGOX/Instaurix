@@ -15,16 +15,22 @@ int main(int argc,char** argv)
     if(argc!=3) return 2;
     unsigned failures=0;
     auto check=[&](bool ok,const char* text) { if(!ok) { ++failures;std::cerr<<"FAIL: "<<text<<'\n'; } };
-    constexpr uint64_t report=0x43000, initFailAm=16217;
+    constexpr uint64_t missingMount=0xE017;
     Machine whole(false,true,true),sliced(false,true,true);
     if(!whole.load(argv[1]) || !sliced.load(argv[1])) { std::cerr<<whole.error()<<'\n';return 1; }
+    const uint64_t report=0x10000+whole.ram.read32(0x10000+0x30)+0x2000;
     const auto result=whole.run(100000);
+    check(whole.ram.read64(report-0x2000)==report && whole.ram.permissionsAt(report-0x2000)==Memory::Read,
+        "automatically placed RELRO relocation points at the actual report and remains read-only");
     auto value=[&](unsigned slot) { return whole.ram.read64(report+slot*8); };
-    check(result.stop==Machine::Stop::Exited && result.exitCode==initFailAm && value(15)==initFailAm,
-        "original default app initialization reports its actual AM initialization error");
-    check(value(0)==0 && value(14)==0 && value(16)==0 && value(17)==0 && value(18)==0x21545624 &&
-        value(19)!=0 && value(20)==0 && value(21)==0,
-        "main and constructors not reached; no fake firmware; application type selected and APM cleaned up");
+    check(result.stop==Machine::Stop::Exited && result.exitCode==missingMount && value(15)==missingMount,
+        "original app initialization completes fsInitialize before explicit missing fsdevMountSdmc dependency");
+    check(value(0)==0 && value(14)==0 && value(16)==0 && value(17)==0 && value(18)==0 &&
+        value(19)==0 && value(20)==0 && value(21)==0,
+        "main and constructors not reached; dependency bridge does not fabricate SDK diagnostic report");
+    check(value(22)>=Process::HeapBase && value(22)<Process::HeapBase+Process::HeapAlignment &&
+        whole.ram.read8(whole.ram.read64(value(22)))=='T' && whole.ram.read64(value(22)+8)==0,
+        "diagnostic exposes real allocated environment with one TZ entry");
     uint64_t count=0;Machine::Result part{Machine::Stop::Budget,0};
     for(unsigned i=0;i<20000 && part.stop==Machine::Stop::Budget;++i) { part=sliced.run(7);count+=part.instructions; }
     check(part.stop==result.stop && part.exitCode==result.exitCode && count==result.instructions,"default failure path deterministic across small budgets");
@@ -41,8 +47,8 @@ int main(int argc,char** argv)
         step=traced.run(1);
         if(svc && id==0x21) { e.transport=traced.cpu.readRegister(0);e.response=snapshot(traced.ram,tls);calls.push_back(e); }
     }
-    check(step.stop==Machine::Stop::Exited && step.exitCode==initFailAm,"trace ends at real diagnostic return, not a missing-dependency trap");
-    std::vector<std::string> requested;Ipc::Buffer apmLookup{},openRequest{},registration{};uint32_t apm=0,child=0,applet=0,messageEvent=0;
+    check(step.stop==Machine::Stop::Exited && step.exitCode==missingMount,"trace reaches the named unlinked SD mounting layer");
+    std::vector<std::string> requested;Ipc::Buffer apmLookup{},openRequest{},registration{};uint32_t apm=0,child=0,applet=0,messageEvent=0,managerHandle=0;
     for(const auto& e:calls) {
         if(e.transport==0 && get(e.response,8)==2 && get(e.response,32)==0x4F434653 && get(e.response,40)==0)
             messageEvent=uint32_t(get(e.response,12));
@@ -50,8 +56,8 @@ int main(int argc,char** argv)
         const bool pid=get(e.request,4)&0x80000000U;const size_t cmif=pid?32:16;
         if(get(e.request,cmif)!=0x49434653) continue;
         const auto command=get(e.request,cmif+8);
-        if(pid && command==0) registration=e.request;
-        if(command==1 && e.handle==value(19)) {
+        if(pid && command==0 && !managerHandle) { registration=e.request;managerHandle=e.handle; }
+        if(command==1 && e.handle==managerHandle) {
             std::string name;
             for(unsigned i=0;i<8 && e.request[cmif+16+i];++i) name+=char(e.request[cmif+16+i]);
             requested.push_back(name);
@@ -63,6 +69,12 @@ int main(int argc,char** argv)
                 applet=uint32_t(get(e.response,12));
                 check(e.transport==0 && get(e.response,24)==0 && (get(e.response,4)&0x80000000U) && applet,
                     "native applet lookup returns a real moved session");
+            } else if(name=="hid") {
+                check(e.transport==0 && get(e.response,24)==0 && get(e.response,8)==32 && get(e.response,12)!=0,"native HID lookup returns a moved typed session");
+            } else if(name=="time:u") {
+                check(e.transport==0 && get(e.response,24)==0 && get(e.response,8)==32 && get(e.response,12)!=0,"native time lookup returns a moved typed session");
+            } else if(name=="fsp-srv") {
+                check(e.transport==0 && get(e.response,24)==0 && get(e.response,8)==32 && get(e.response,12)!=0,"native filesystem lookup returns a moved typed session");
             } else check(e.transport==0 && get(e.response,24)==Ipc::PortNotFound && !(get(e.response,4)&0x80000000U),
                 "missing native services remain explicit errors without handles");
         }
@@ -72,9 +84,9 @@ int main(int argc,char** argv)
                 "original apmInitialize opens a distinct typed child session");
         }
     }
-    check(requested==std::vector<std::string>{"set:sys","apm","appletOE"},"real native service order remains unchanged");
-    check(apm && child && applet && messageEvent && closed==std::vector<uint32_t>{messageEvent,applet,child,apm},
-        "original failure cleanup closes the real message event, applet and APM sessions");
+    check(requested==std::vector<std::string>{"set:sys","apm","appletOE","hid","time:u","fsp-srv"},"real native service order includes original filesystem client");
+    check(apm && child && applet && messageEvent && closed.empty(),
+        "missing time dependency returns directly without fabricated applet/APM cleanup");
     check(get(openRequest,0)==4 && get(openRequest,4)==8 && get(openRequest,24)==0,"capture authentic no-payload APM OpenSession");
     {
         std::ofstream out(std::filesystem::path(argv[2])/"libnx-app-ipc.csv",std::ios::trunc);out<<"handle,transport,request_hex,response_hex\n";

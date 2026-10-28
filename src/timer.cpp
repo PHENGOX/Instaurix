@@ -25,13 +25,13 @@ bool Timer::checkOffset(
 {
     if (offset >= size())
     {
-        lastError = "Offset TIMER hors limites";
+        lastError = "TIMER offset is out of bounds";
         return false;
     }
 
     if (accessSize > size() - offset)
     {
-        lastError = "Acces TIMER hors limites";
+        lastError = "TIMER access is out of bounds";
         return false;
     }
 
@@ -48,7 +48,7 @@ uint64_t Timer::readRegister(
     if (accessSize != 8 &&
         accessSize != 4)
     {
-        lastError = "Taille TIMER invalide";
+        lastError = "Invalid TIMER access size";
         return 0;
     }
 
@@ -63,14 +63,14 @@ uint64_t Timer::readRegister(
         case 0x10:
             if (accessSize != 4)
             {
-                lastError = "Taille invalide pour CONTROL TIMER";
+                lastError = "Invalid access size for CONTROL TIMER";
                 return 0;
             }
 
             return control;
 
         default:
-            lastError = "Registre TIMER inconnu";
+            lastError = "Unknown TIMER register";
             return 0;
     }
 }
@@ -87,7 +87,7 @@ void Timer::writeRegister(
     {
         if (accessSize != 4)
         {
-            lastError = "Taille invalide pour CONTROL TIMER";
+            lastError = "Invalid access size for CONTROL TIMER";
             return;
         }
 
@@ -107,7 +107,7 @@ void Timer::writeRegister(
 
     if (accessSize != 8)
     {
-        lastError = "Taille TIMER invalide";
+        lastError = "Invalid TIMER access size";
         return;
     }
 
@@ -129,7 +129,7 @@ void Timer::writeRegister(
             return;
 
         default:
-            lastError = "Registre TIMER inconnu";
+            lastError = "Unknown TIMER register";
             return;
     }
 }

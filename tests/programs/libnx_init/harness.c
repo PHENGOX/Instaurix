@@ -88,4 +88,11 @@ void diagAbortWithResult(unsigned result) {
     __nx_exit(result,envGetExitFuncPtr());
 }
 /* No extra services or arguments are allowed to disappear behind success stubs. */
-void missing_dependency(unsigned marker) { report[15]=marker;__nx_exit(marker,envGetExitFuncPtr()); }
+void missing_dependency(unsigned marker) {
+    report[15]=marker;
+#ifdef REFERENCE_DEFAULT_APP
+    extern char **environ;
+    report[22]=(u64)environ;
+#endif
+    __nx_exit(marker,envGetExitFuncPtr());
+}

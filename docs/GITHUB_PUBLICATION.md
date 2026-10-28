@@ -1,34 +1,47 @@
-# Publier Switch2Emu sur GitHub
+# Publishing Instaurix on GitHub
 
-## Présentation du dépôt
+## Repository presentation
 
-Description courte à copier dans GitHub :
+Short GitHub description:
 
-> Émulateur expérimental en C++20 visant la Nintendo Switch 2. CPU ARM64, chargement ELF/NRO et services HLE en développement. Aucun jeu compatible actuellement.
+> Experimental C++20 emulator targeting Nintendo Switch 2. ARM64 CPU, ELF/NRO loading and HLE services under development. No games currently validated.
 
-Licence choisie pour le code propre au projet : **GPL-3.0-only**. Le fichier LICENSE contient le texte intégral de la GNU GPL v3. Les fichiers tiers conservent leurs conditions, détaillées dans THIRD_PARTY_NOTICES.md.
+The project's own code uses **GPL-3.0-only**. LICENSE contains the full GNU GPL v3 text. Third-party files retain their terms, documented in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md).
 
-## Contenu à publier
+## Files to publish
 
-Inclure les sources, tests, programmes de référence, scripts de construction, documentation, CMakeLists.txt, program.bin, .gitignore, .gitattributes, LICENSE et THIRD_PARTY_NOTICES.md. Les ELF/NRO/bin de tests sont intentionnels ; les exclure tous casserait les tests sur une copie neuve.
+Include sources, tests, reference programs, build scripts, documentation, CMakeLists.txt, program.bin, .gitignore, .gitattributes, LICENSE and THIRD_PARTY_NOTICES.md. Test ELF/NRO/bin files are intentional; excluding all of them would break tests on a fresh checkout.
 
-Trois références binaires dépassent 100 Mio et sont suivies par **Git LFS**, selon .gitattributes : cpu_fp/reference.bin (environ 192 Mio), cpu_simd_arithmetic/reference.bin (122 Mio) et cpu_subnormal/reference.bin (129 Mio). Installer Git LFS et exécuter `git lfs install` avant le premier ajout de fichiers. Vérifier ensuite `git lfs ls-files` : les trois références doivent y apparaître. Ne pas les envoyer par l'interface web comme des fichiers Git ordinaires. Leur stockage et téléchargement utilisent les quotas LFS du compte GitHub.
+Three references exceed 100 MiB and use **Git LFS**, as defined in .gitattributes: cpu_fp/reference.bin (about 192 MiB), cpu_simd_arithmetic/reference.bin (122 MiB), and cpu_subnormal/reference.bin (129 MiB). Install Git LFS and run `git lfs install` before first staging files. Then check `git lfs ls-files`: all three references must appear. Do not upload them as ordinary Git files through the web interface. Their storage and downloads use the GitHub account's LFS quotas.
 
-Exclure build/, out/, les caches, outils téléchargés, installations Python locales et archives de dépendances. Les exclusions de .gitignore ne retirent pas un fichier déjà suivi : contrôler les fichiers préparés avant le premier commit. Ne pas utiliser un envoi du dossier complet sans ce contrôle.
+Exclude build/, out/, caches, downloaded tools, local Python installations and dependency archives. .gitignore does not remove files already tracked: review staged files before the first commit. Do not upload the entire working directory without reviewing it.
 
-## Créer le dépôt
+## Update the existing repository
 
-1. Dans GitHub, créer un dépôt vide, par exemple Switch2Emu. Ne pas faire générer un second README, une autre licence ou un autre .gitignore.
-2. Avec GitHub Desktop, ajouter le dossier local comme dépôt ; s'il n'est pas encore un dépôt Git, utiliser l'option proposée pour le créer.
-3. Installer/activer Git LFS comme indiqué ci-dessus, vérifier la liste des fichiers et créer le premier commit.
-4. Utiliser Publish repository, choisir la visibilité publique et vérifier le dépôt publié.
+The current repository is https://github.com/PHENGOX/Instaurix. Clone that
+repository with Git LFS, create an update branch, and copy the prepared project
+files into the clone while preserving its .git directory. Review changes,
+commit, push the branch and open a pull request into main. Merge after the
+Windows/Linux Debug/Release checks pass. This retains history and contributors.
+Do not create a replacement repository or force-push a new history.
 
-Une archive préparée pour publication peut aussi être extraite dans un nouveau dossier puis ajoutée à GitHub Desktop. Les dossiers de compilation et caches de la copie de travail restent alors à l'écart.
+Only copy repository content from a publication bundle, not the outer bundle's
+personal instructions, manifests or build outputs. Existing LFS references must
+remain managed by .gitattributes. Preserve the author note and contributor credits.
 
-Après clonage : `git lfs pull` récupère les références. Pour les tests, préférer un clone Git avec LFS à un téléchargement ZIP de GitHub, qui peut contenir des pointeurs au lieu des données.
+## Create a repository for the first time only
 
-## État à annoncer
+1. Create an empty repository on GitHub, for example Instaurix. Do not generate a second README, license or .gitignore.
+2. In GitHub Desktop, add the local directory as a repository; if it is not already a Git repository, use the offered creation option.
+3. Enable Git LFS as described above, review the file list, and create the first commit.
+4. Select Publish repository, choose public visibility, and inspect the published repository.
 
-Le projet est un émulateur expérimental ; les homebrews et programmes de test sont ses cibles de validation. Le CPU est partiel, le GPU invité reste à développer et aucun jeu commercial n'est validé. Le parcours applicatif libnx par défaut n'atteint pas encore main. Les validations historiques de libnx Switch ne prouvent pas une compatibilité native Switch 2.
+A prepared publication archive can instead be extracted into a new directory and added to GitHub Desktop. This keeps build directories and caches separate from the upload.
 
-Le rapport technique actuel est [LIBNX_APPLET_STATE.md](LIBNX_APPLET_STATE.md). Une vérification de fichiers et de signatures ne certifie pas à elle seule tous les droits d'auteur ou l'absence de secrets : réexaminer tout ajout futur, notamment les fichiers binaires.
+After cloning, `git lfs pull` retrieves the references. Prefer a Git clone with LFS for testing: a GitHub ZIP download may contain pointers instead of data.
+
+## Status to communicate
+
+This is an experimental emulator; homebrews and test programs are validation targets. The CPU is partial. A bounded historical Maxwell copy interpreter and software framebuffer presentation are available; a general GPU rendering pipeline and native Switch 2 compatibility remain unvalidated. Reference programs reach project main through default libnx startup and original cleanup. No commercial game compatibility is claimed.
+
+See the [current README](../README.md) and [TLS milestone](LIBNX_TLS.md). File and signature checks alone do not certify all copyrights or the absence of secrets. Review future additions, especially binaries.

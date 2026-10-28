@@ -77,7 +77,7 @@ bool CPU::executeInteger(uint32_t instruction)
     const uint64_t mask = maskFor(width);
     const uint32_t rd = instruction & 31, rn = (instruction >> 5) & 31, rm = (instruction >> 16) & 31;
     const uint64_t a = readArithmeticRegister(rn) & mask, b = readArithmeticRegister(rm) & mask;
-    auto fail = [&]() { lastError = "Encodage entier reserve ou non pris en charge"; return false; };
+    auto fail = [&]() { lastError = "Reserved or unsupported integer encoding"; return false; };
     auto write = [&](uint64_t value) { writeArithmeticRegister(rd,value & mask); return true; };
     const bool sub = (instruction & 0x40000000) != 0, flags = (instruction & 0x20000000) != 0;
 

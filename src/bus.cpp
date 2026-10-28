@@ -33,19 +33,19 @@ bool Bus::mapDevice(
 {
     if (size == 0)
     {
-        lastError = "Taille de region invalide";
+        lastError = "Invalid region size";
         return false;
     }
 
     if (name == nullptr)
     {
-        lastError = "Nom de region invalide";
+        lastError = "Invalid region name";
         return false;
     }
 
     if (device.size() < size)
     {
-        lastError = "Peripherique trop petit pour la region";
+        lastError = "Device is too small for the region";
         return false;
     }
 
@@ -53,13 +53,13 @@ bool Bus::mapDevice(
 
     if (end < start)
     {
-        lastError = "Depassement adresse region";
+        lastError = "Region address overflow";
         return false;
     }
 
     if (checkRegionOverlap(start, end))
     {
-        lastError = "Chevauchement de regions MMIO";
+        lastError = "Overlapping MMIO regions";
         return false;
     }
 
@@ -88,7 +88,7 @@ MemoryMappedDevice* Bus::findDevice(
 
             if (accessSize > region.end - address + 1)
             {
-                lastError = "Acces MMIO depasse la region";
+                lastError = "MMIO access crosses the region boundary";
                 return nullptr;
             }
 
@@ -128,7 +128,7 @@ bool Bus::checkRamAccess(
 {
     if (!isValidRange(address, size))
     {
-        lastError = "Acces bus hors limites ou traverse une region MMIO";
+        lastError = "Bus access is out of bounds or crosses an MMIO region";
         return false;
     }
 
@@ -144,7 +144,7 @@ bool Bus::validateRamAccess(uint64_t address, size_t size, uint8_t permission)
 {
     if (!isRamRange(address, size))
     {
-        lastError = "Acces attendu en RAM, hors limites ou en MMIO";
+        lastError = "Expected RAM access is out of bounds or targets MMIO";
         return false;
     }
     return checkRamAccess(address, size, permission);

@@ -1,51 +1,46 @@
-# Temps virtuel et attentes finies
+# Virtual time and finite waits
 
-Étape du 25 octobre 2026 : SleepThread et WaitSynchronization gèrent des durées positives en nanosecondes sur une horloge virtuelle déterministe. Aucun rythme de CPU ou comportement natif Switch 2 n'est déduit de ce modèle.
+Milestone dated October 25, 2026. Positive-nanosecond SleepThread and WaitSynchronization durations use a deterministic virtual clock. This does not establish CPU timing or native Switch 2 behavior.
 
-## Horloge pilotée par l'hôte
+## Host-driven clock
 
-L'horloge commence à zéro au chargement. `Machine::advanceTime(ns)` l'avance explicitement ; `process().virtualTime()` lit sa valeur et `process().nextWakeDelay()` retourne la durée avant la prochaine échéance, ou aucune valeur en l'absence d'échéance. Une attente déjà résolue retourne un délai nul jusqu'à sa reprise.
+Time starts at zero on load. Machine::advanceTime(ns) advances explicitly; process().virtualTime() reads it; process().nextWakeDelay() returns time until the next deadline, or no value if none exists. A resolved-but-not-resumed wait returns zero delay.
 
-`run(budget)` n'avance pas cette horloge. Il exécute strictement au plus le budget d'instructions demandé, et conserve les échéances entre les appels. Aucun temps du PC, aucune pause réelle et aucun coût arbitraire par instruction ne déterminent les délais invités. L'hôte peut avancer le temps même lorsqu'un autre thread est exécutable.
+run(budget) never advances time and executes at most its instruction budget. Deadlines persist across calls. PC wall time, real sleeps and arbitrary instruction costs do not determine guest delays. The host may advance time while another thread is runnable.
 
-Le lanceur console pilote automatiquement les périodes où tous les threads sont bloqués : il avance jusqu'à la prochaine échéance et reprend avec le budget d'instructions restant. S'il n'y a que des attentes infinies, il affiche l'attente. Si un thread tourne sans se bloquer, le lanceur console n'avance pas le temps : un futur pilote d'exécution devra fournir une politique de progression pour ce cas. Cette étape fournit le mécanisme de délais, pas une calibration temporelle du CPU.
+The CLI advances idle periods to the next deadline and resumes with remaining instruction budget. Infinite-only waits are reported. A continuously runnable guest does not advance CLI virtual time; a future driver needs a policy for that case. This implements deadlines, not CPU calibration.
 
-L'horloge utilise un compteur de nanosecondes non signé de 64 bits. Une avance qui le ferait déborder est refusée sans effet. Une durée invitée dont l'échéance dépasserait cette plage est explicitement non prise en charge. Une machine terminée ou en faute refuse une avance de temps. Un chargement réussi réinitialise horloge et délais ; un chargement échoué conserve la session précédente.
+The clock is unsigned 64-bit ns. Overflowing host advances fail without effects; overflowing guest deadlines are explicitly unsupported. Exited/faulted machines reject advanceTime. Successful loads reset clock/deadlines; failed loads preserve them. The instruction-count MMIO timer remains separate and is not converted to nanoseconds.
 
-Le minuteur MMIO de développement conserve son compteur d'instructions indépendant. Il n'est pas une source de cette horloge et n'est pas recalibré en nanosecondes.
+## Guest conventions
 
-## Conventions invitées
-
-| Appel | Comportement |
+| Call | Behavior |
 | --- | --- |
-| SleepThread (SVC 0x0B), X0 > 0 | Bloque le thread jusqu'à l'échéance ; aucune valeur de résultat n'est écrite |
-| SleepThread, X0 = 0 | Cède l'exécution comme avant |
-| WaitSynchronization (SVC 0x18), X3 > 0 | Attend un objet ou l'échéance ; résultat 0 sur signal, TimedOut (0xEA01) sur expiration |
-| WaitSynchronization, X3 = 0 | Sondage immédiat |
-| WaitSynchronization, X3 = -1 | Attente infinie |
-| GetSystemTick (SVC 0x1E) | X0 = compteur virtuel à 19,2 MHz, arrondi vers le bas |
+| SleepThread 0x0B, X0>0 | Block until deadline; no result register written |
+| SleepThread, X0=0 | Yield |
+| WaitSynchronization 0x18, X3>0 | Wait for object or deadline; 0 on signal, TimedOut=0xEA01 on expiry |
+| WaitSynchronization, X3=0 | Poll |
+| WaitSynchronization, X3=-1 | Infinite wait |
+| GetSystemTick 0x1E | X0=floored virtual 19.2 MHz counter |
 
-Les autres valeurs négatives de délai ou de SleepThread restent non prises en charge. Le profil conserve un seul cœur et deux threads, avec les limites de [HLE_THREADS.md](HLE_THREADS.md).
+Other negative durations remain unsupported. The [two-thread/one-core limits](HLE_THREADS.md) remain. Public conventions and Horizon reference frequency were consulted October 25; the frequency is not claimed as native Switch 2 validation. Direct ARM hardware-counter reads were not added by this milestone.
 
-Les conventions d'appels et la fréquence de référence Horizon sont étudiées dans [SwitchBrew SVC](https://switchbrew.org/wiki/SVC) et [libnx svc.h](https://github.com/switchbrew/libnx/blob/master/nx/include/switch/kernel/svc.h), consultés le 25 octobre 2026. Cette fréquence n'est pas présentée comme validée pour la Switch 2. Les lectures directes de compteurs matériels ARM ne sont pas ajoutées dans cette étape.
+## Ordering
 
-## Ordre des signaux et expirations
+A resolved wait retains its result until resumption. A signal before expiration remains success after later clear/time advance. A recorded timeout remains TimedOut after later signal. At the exact deadline, sequential host-call order decides: advance first records timeout; signal first records success. Concurrent access is not guaranteed.
 
-Une attente résolue conserve son résultat jusqu'à la reprise. Un signal reçu avant l'expiration reste un succès même si l'événement est ensuite effacé ou si l'hôte avance le temps. Une expiration déjà constatée reste TimedOut malgré un signal ultérieur. À l'échéance exacte, l'ordre des appels hôte tranche : avancer le temps d'abord constate l'expiration ; signaler d'abord résout l'attente par succès. Ces appels sont séquentiels, sans accès concurrent garanti.
-
-Un dépassement de délai ne modifie pas X1, le registre utilisé pour le tableau d'entrée et l'index de sortie. Un succès écrit l'index du premier objet signalé. Un tableau vide peut attendre une durée finie et expirer. Les contrôles de handles et de pointeurs continuent de précéder l'enregistrement de l'attente. Une attente de fin de thread peut elle aussi avoir une échéance.
-
-Le réveil conserve PC après le SVC, pile, registres, FP/SIMD et TLS. Les références aux objets attendus sont libérées lorsque le résultat est fixé. La reprise n'exécute pas à nouveau le SVC.
-
-## Vérification et suite
+Timeout preserves X1; success writes the first signaled object's index. An empty handle array can wait for a finite timeout. Handle/pointer validation precedes registration. Thread-exit waits may have deadlines. Wakeup preserves post-SVC PC, stack, registers, FP/SIMD and TLS; fixed results release wait-object references and do not re-execute the SVC.
 
 ```powershell
-.\build\Debug\Switch2Emu.exe .\tests\programs\hle_time\program.elf 1000 --hle-reference
+.\build\Debug\Instaurix.exe .\tests\programs\hle_time\program.elf 1000 --hle-reference
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-La démonstration termine en **43 instructions**, à **1 500 ns virtuelles**, avec 55 en mémoire. Le principal attend un événement pendant 2 000 ns. Le second dort 1 000 ns, signale, dort encore 500 ns et quitte ; le principal attend sa fin. La variante où le principal n'attend que 500 ns vérifie l'expiration puis la poursuite normale.
+The demo exits after **43 instructions at 1,500 virtual ns**, with memory value **55**. Main waits 2,000 ns for an event; worker sleeps 1,000 ns, signals, sleeps another 500 ns and exits; main joins. A main timeout of 500 ns checks expiry followed by continued execution.
 
-Les tests couvrent les frontières avant/à l'échéance, l'ordre signal/expiration, un signal suivi d'un effacement, un autre thread exécutable, les attentes vides et infinies, les débordements, le compteur de ticks et l'identité des parcours avec des budgets d'une instruction.
+Tests cover before/at-deadline boundaries, signal/expiry ordering, signal-then-clear, runnable peers, empty/infinite waits, overflow, ticks and one-instruction slicing equivalence. [IPC](HLE_IPC.md) was subsequently added; buffer descriptors and SM were the next historical tasks. Cancellation, locks and time progression during computation remain separate work.
 
-Le transport IPC minimal est maintenant réalisé dans [HLE_IPC.md](HLE_IPC.md), avec un service de démonstration et des buffers propres à chaque thread. Prochain jalon : descripteurs de buffers IPC, puis gestionnaire de services. L'annulation, les verrous et une politique temporelle pendant le calcul restent à développer.
+## Reference links
+
+- [SwitchBrew system calls](https://switchbrew.org/wiki/SVC)
+- [libnx svc.h](https://github.com/switchbrew/libnx/blob/master/nx/include/switch/kernel/svc.h)

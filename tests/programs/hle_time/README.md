@@ -1,11 +1,12 @@
-# Démonstration des attentes à durée finie
+# Finite-wait demonstration
 
-ELF ARM64 original, assemblé par Clang 18.1.6 via Zig 0.13.0. Aucun fichier Nintendo. Reconstruction : `./tools/build_hle_time.ps1` depuis la racine. Le placement ELF est celui de hle_memory.
+Project-owned ARM64 ELF assembled by Clang 18.1.6/Zig 0.13.0, without Nintendo files. Rebuild from root: `./tools/build_hle_time.ps1`; hle_memory ELF layout.
 
-Le principal crée un événement et un thread, attend l'événement, puis attend la fin du thread. Le second dort 1 000 ns, signale, dort 500 ns et quitte. Le lanceur console avance explicitement le temps pendant les périodes où tous les threads sont bloqués. Résultat : **43 instructions**, **1 500 ns virtuelles**, valeur **55** à 0x1200C.
+Main creates event/worker, waits for event then worker exit. Worker sleeps **1,000 ns**, signals, sleeps **500 ns** and exits. CLI explicitly advances idle virtual time. Result: **43 instructions, 1,500 virtual ns, value 55 at 0x1200C**.
 
-La zone de données à 0x12000 contient les handles aux offsets 0/4/8, le résultat final à +12, le résultat de l'attente à +16, X1 après l'attente à +24, le délai du principal à +32 (2 000 ns), le sommeil du second à +40 (1 000 ns), et les ticks observés à +48/+56. Modifier le délai principal en 500 ns déclenche un TimedOut sans empêcher la fin normale après le join.
+Data at 0x12000: handles +0/+4/+8, final result +12, wait result +16, post-wait X1 +24, main timeout +32 (2,000 ns), worker sleep +40 (1,000 ns), ticks +48/+56. Changing main timeout to 500 ns yields TimedOut without preventing normal completion after join. hle_time_tests covers full execution/time boundaries; see [virtual time](../../../docs/HLE_TIME.md).
 
-ELF SHA-256 : `0C2800208D3DEE4A33EFB29699C506ACF88BBAA554FA7B3367C73F290BA553FE`.
+## Recorded artifact SHA-256
 
-Le banc hle_time_tests vérifie le parcours complet et les limites du moteur de temps. Détails dans [HLE_TIME.md](../../../docs/HLE_TIME.md).
+`0C2800208D3DEE4A33EFB29699C506ACF88BBAA554FA7B3367C73F290BA553FE`
+

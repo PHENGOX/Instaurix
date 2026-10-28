@@ -1,0 +1,18 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "audit_date": "2026-10-27",
+  "source_sha256": {
+    "source/nvidia/address_space.c": "F5B54DDED97F27E0B3F28BEBF0E49502667A1FCD7107A5D0DD31E2963EA88227",
+    "source/nvidia/gpu.c": "BAEFA2406BB49D982B45542231C8F22D44172C7779324A6CA006E6B181BC1860",
+    "source/nvidia/channel.c": "D79A069DAE7A32B90A4B6FDB4D9EF4C1151FF86A6027590023F9702CF3C0CA9F",
+    "source/nvidia/gpu_channel.c": "3C227D7054F63515177AD02A16C06C9C8EA78B6ABA236149F8E128DBA1EDF827",
+    "source/nvidia/ioctl/nvhost-as-gpu.c": "CBAA113CA0F847C842654879C8629E418D32998C46A6D05F39DD5231B7962E52",
+    "source/nvidia/ioctl/nvchannel.c": "0237FBF2999CC30C905E3B948C174BB05FF1ED52889C18E7E7318A35D7FE69B1",
+    "include/switch/nvidia/ioctl.h": "28521F22C14281DB72EDF062AFF5C5E51FA06EC86FAE464906368430D0388C01",
+    "include/switch/nvidia/gpu_channel.h": "DCB8E4941E4E17B889E038623E2DC0DC54FCF514FFA6335A34D8E93C44A60329"
+  },
+  "native_switch2_trace_available": false,
+  "gpu_client_executed_in_this_audit": false,
+  "nvidia_inventory_url": "https://raw.githubusercontent.com/NVIDIA/open-gpu-doc/master/classes/3d/README.txt",
+  "nvidia_inventory_status": "Manufacturer source read on audit date; evolving branch, not a captured native submission"
+}

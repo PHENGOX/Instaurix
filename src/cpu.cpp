@@ -61,7 +61,7 @@ bool CPU::checkRegister(size_t index)
 {
     if (index >= REGISTER_COUNT)
     {
-        lastError = "Registre CPU invalide";
+        lastError = "Invalid CPU register";
         return false;
     }
 
@@ -70,13 +70,13 @@ bool CPU::checkRegister(size_t index)
 
 uint64_t CPU::readArithmeticRegister(uint32_t index) const
 {
-    // X31 représente XZR
+    // X31 represents XZR
     if (index == 31)
     {
         return 0;
     }
 
-    // Sécurité contre les index invalides
+    // Guard against invalid indices
     if (index >= REGISTER_COUNT)
     {
         return 0;
@@ -87,13 +87,13 @@ uint64_t CPU::readArithmeticRegister(uint32_t index) const
 
 void CPU::writeArithmeticRegister(uint32_t index, uint64_t value)
 {
-    // X31 représente XZR : les écritures sont ignorées
+    // X31 represents XZR: writes are ignored
     if (index == 31)
     {
         return;
     }
 
-    // Sécurité contre les index invalides
+    // Guard against invalid indices
     if (index >= REGISTER_COUNT)
     {
         return;
@@ -161,16 +161,16 @@ CPU::StepResult CPU::stepDetailed()
 {
     clearError();
 
-    if ((pc & 3) != 0) { exclusiveValid = false; lastError = "PC non aligne"; return {StepStatus::Error}; }
+    if ((pc & 3) != 0) { exclusiveValid = false; lastError = "Unaligned PC"; return {StepStatus::Error}; }
 
     if (!memory.isValidRange(pc, 4))
     {
-        lastError = "Lecture instruction hors limites";
+        lastError = "Instruction fetch is out of bounds";
         exclusiveValid = false;
         return {StepStatus::Error};
     }
 
-    // Sauvegarder l'adresse de l'instruction actuelle
+    // Save the current instruction address
     currentInstructionPC = pc;
 
     uint32_t instruction = memory.fetch32(pc);
@@ -205,7 +205,7 @@ CPU::StepResult CPU::stepDetailed()
 }
 
 // ============================================================
-// V0.085 — Décodage immédiat logique ARM64
+// V0.085 — ARM64 logical immediate decoding
 // ============================================================
 
 static uint64_t rotateRight(uint64_t value, uint32_t rotation, uint32_t width)
@@ -275,8 +275,20 @@ static bool decodeLogicalImmediate(
 
 bool CPU::executeInstruction(uint32_t instruction)
 {
+    if((instruction&0xFFFFFFE0U)==0xD53B0020U){
+        // Local coherent-memory geometry: 64-byte I/D lines, 16-byte reservation granule.
+        writeArithmeticRegister(instruction&31,0x8424C004U);return true;
+    }
+    if((instruction&0xFFFFFFE0U)==0xD50B7E20U){
+        // DC CIVAC: RAM is already coherent; validate the whole local cache line.
+        const auto line=readArithmeticRegister(instruction&31)&~uint64_t(63);
+        if(!memory.isRamRange(line,64) || !memory.getMemory().canAccess(line,64,Memory::Read)){
+            lastError="Cache maintenance requires accessible RAM";return false;
+        }
+        return true;
+    }
     if((instruction&0xFFFFFFE0U)==0xD53BE020U || (instruction&0xFFFFFFE0U)==0xD53BE000U) {
-        if(!counterAvailable) { lastError="Compteur systeme non configure";return false; }
+        if(!counterAvailable) { lastError="System counter is not configured";return false; }
         writeArithmeticRegister(instruction&31,(instruction&0x20) ? counterValue : counterFrequency);return true;
     }
     if ((instruction & 0xBF000000) == 0x0C000000)
@@ -315,7 +327,7 @@ bool CPU::executeInstruction(uint32_t instruction)
     if (moveWide == 0x52800000 || moveWide == 0x72800000 || moveWide == 0x12800000)
     {
         const uint32_t hw = (instruction >> 21) & 3;
-        if (hw >= 2) { lastError = "Decalage MOV W reserve"; return false; }
+        if (hw >= 2) { lastError = "Reserved MOV W shift"; return false; }
         const uint32_t rd = instruction & 31;
         const uint32_t shift = hw * 16;
         const uint32_t immediate = ((instruction >> 5) & 0xFFFF) << shift;
@@ -362,16 +374,16 @@ bool CPU::executeInstruction(uint32_t instruction)
         int64_t immediate =
             (static_cast<int64_t>(immhi) << 2) | immlo;
 
-        // Sign-extension sur 21 bits
+        // Sign extension over 21 bits
         if (immediate & (1LL << 20))
         {
             immediate |= ~((1LL << 21) - 1);
         }
 
-        // PC de l'instruction en cours
+        // PC of the current instruction
         uint64_t base = currentInstructionPC;
 
-        // ADRP : adresse alignée sur une page
+        // ADRP: page-aligned address
         if (instruction & 0x80000000)
         {
             base &= ~0xFFFULL;
@@ -498,7 +510,7 @@ bool CPU::executeInstruction(uint32_t instruction)
         const uint32_t rd = instruction & 31, rn = (instruction >> 5)&31, op = (instruction >> 29)&3;
         const unsigned width = (instruction >> 31) ? 64 : 32;
         uint64_t immediate;
-        if (!decodeLogicalImmediate(instruction,immediate)) { lastError = "Immediat logique invalide"; return false; }
+        if (!decodeLogicalImmediate(instruction,immediate)) { lastError = "Invalid logical immediate"; return false; }
         const uint64_t left = readArithmeticRegister(rn);
         uint64_t value = op == 1 ? left|immediate : op == 2 ? left^immediate : left&immediate;
         if (width == 32) value = uint32_t(value);
@@ -510,7 +522,7 @@ bool CPU::executeInstruction(uint32_t instruction)
     }
     // ============================================================
     // V0.57 — B (Branch Always)
-    // Encodage : 0x14000000
+    // Encoding : 0x14000000
     // ============================================================
 
     if ((instruction & 0xFC000000) == 0x14000000)
@@ -533,7 +545,7 @@ bool CPU::executeInstruction(uint32_t instruction)
 
     // ============================================================
     // V0.58 — BL (Branch with Link)
-    // Encodage : 0x94000000
+    // Encoding : 0x94000000
     // ============================================================
 
     if ((instruction & 0xFC000000) == 0x94000000)
@@ -549,10 +561,10 @@ bool CPU::executeInstruction(uint32_t instruction)
         int64_t offset =
             static_cast<int64_t>(immediate) * 4;
 
-        // Adresse de retour : instruction suivante
+        // Return address: next instruction
         writeRegister(30, pc + 4);
 
-        // Branchement relatif
+        // Relative branch
         pc = currentInstructionPC + static_cast<uint64_t>(offset) - 4;
 
         return true;
@@ -560,7 +572,7 @@ bool CPU::executeInstruction(uint32_t instruction)
 
     // ============================================================
     // V0.059 — BR (Branch to Register)
-    // Encodage : D61F0000
+    // Encoding : D61F0000
     // ============================================================
 
     if ((instruction & 0xFFFFFC1F) == 0xD61F0000)
@@ -571,7 +583,7 @@ bool CPU::executeInstruction(uint32_t instruction)
         uint64_t targetAddress =
             readArithmeticRegister(rn);
 
-        // Compensation de l'incrémentation de PC
+        // Compensate for PC increment
         pc = targetAddress - 4;
 
         return true;
@@ -579,8 +591,8 @@ bool CPU::executeInstruction(uint32_t instruction)
 
     // ============================================================
     // V0.59 — RET (Return)
-    // Encodage : D65F0000
-    // RET X30 par défaut
+    // Encoding : D65F0000
+    // RET X30 by default
     // ============================================================
 
     if ((instruction & 0xFFFFFC1F) == 0xD65F0000)
@@ -598,7 +610,7 @@ bool CPU::executeInstruction(uint32_t instruction)
 
     // ============================================================
     // V0.060 — BLR (Branch with Link to Register)
-    // Encodage : D63F0000
+    // Encoding : D63F0000
     // BLR Xn
     // ============================================================
 
@@ -610,17 +622,17 @@ bool CPU::executeInstruction(uint32_t instruction)
         uint64_t targetAddress =
             readArithmeticRegister(rn);
 
-        // Sauvegarde de l'adresse de retour dans X30
+        // Save the return address in X30
         writeRegister(30, pc + 4);
 
-        // Branchement vers l'adresse du registre
-        // Compensation de l'incrémentation du PC
+        // Branch to the address in the register
+        // Compensate for PC increment
         pc = targetAddress - 4;
 
         return true;
     }
 
-    lastError = "Instruction CPU inconnue";
+    lastError = "Unknown CPU instruction";
     return false;
 }
 

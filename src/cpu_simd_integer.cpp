@@ -15,7 +15,7 @@ void put(CPU::Vector& v, unsigned index, unsigned bits, uint64_t value) {
 
 bool CPU::executeSimdInteger(uint32_t ins)
 {
-    auto fail = [&]() { lastError = "Instruction ou taille SIMD entiere non prise en charge"; return false; };
+    auto fail = [&]() { lastError = "Unsupported integer SIMD instruction or size"; return false; };
     const unsigned rd=ins&31, rn=(ins>>5)&31, rm=(ins>>16)&31;
     const bool q=ins&(1U<<30);
     const unsigned size=(ins>>22)&3, bits=8U<<size, lanes=(q ? 128 : 64)/bits;

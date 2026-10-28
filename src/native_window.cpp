@@ -65,16 +65,16 @@ bool NativeWindow::open(bool visible) {
 #ifdef _WIN32
     impl->width=0;impl->height=0;impl->bgra.clear();
     WNDCLASSW cls{};cls.lpfnWndProc=Impl::procedure;cls.hInstance=GetModuleHandleW(nullptr);
-    cls.lpszClassName=L"Switch2EmuDevelopmentFrame";cls.hCursor=LoadCursorW(nullptr,MAKEINTRESOURCEW(32512));
-    if(!RegisterClassW(&cls) && GetLastError()!=ERROR_CLASS_ALREADY_EXISTS) { impl->error="Creation de la classe de fenetre impossible";return false; }
-    impl->window=CreateWindowExW(0,cls.lpszClassName,L"Switch2Emu - affichage de developpement",WS_OVERLAPPEDWINDOW,
+    cls.lpszClassName=L"InstaurixDevelopmentFrame";cls.hCursor=LoadCursorW(nullptr,MAKEINTRESOURCEW(32512));
+    if(!RegisterClassW(&cls) && GetLastError()!=ERROR_CLASS_ALREADY_EXISTS) { impl->error="Failed to register window class";return false; }
+    impl->window=CreateWindowExW(0,cls.lpszClassName,L"Instaurix - development display",WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,CW_USEDEFAULT,800,520,nullptr,nullptr,cls.hInstance,impl.get());
-    if(!impl->window) { impl->error="Creation de la fenetre impossible";return false; }
+    if(!impl->window) { impl->error="Failed to create window";return false; }
     impl->alive=true;
     if(visible) ShowWindow(impl->window,SW_SHOW);
     return true;
 #else
-    (void)visible;impl->error="La fenetre native exige Windows";return false;
+    (void)visible;impl->error="Native window requires Windows";return false;
 #endif
 }
 void NativeWindow::close() {
@@ -98,7 +98,7 @@ bool NativeWindow::poll() {
 bool NativeWindow::present(std::shared_ptr<const Frame> frame) {
     if(!impl->alive || !frame || !frame->width || !frame->height || frame->width>256 || frame->height>256 ||
         frame->rgb.size()!=uint64_t(frame->width)*frame->height*3 || frame->rgb.size()>65536) {
-        impl->error="Fenetre fermee ou image invalide";return false;
+        impl->error="Window is closed or frame is invalid";return false;
     }
 #ifdef _WIN32
     std::vector<uint8_t> converted(frame->width*frame->height*4);

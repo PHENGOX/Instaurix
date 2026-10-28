@@ -1,9 +1,7 @@
-# References SIMD arithmetiques
+# Arithmetic SIMD references
 
-61 056 cas sur 477 variantes pour saturation, retrecissement, decalages variables et multiplications elargies. Encodages : Clang 18.1.6 via Zig 0.13.0. Attendues : Unicorn 2.1.4.
+**61,056 cases over 477 variants** for saturation, narrowing, variable shifts and widening multiplication. Encodings: Clang 18.1.6/Zig 0.13.0. Expectations: Unicorn 2.1.4.
 
-`reference.bin` utilise le format `FPREF001` commun aux tests FP/SIMD ; `reference-layout.txt` controle la provenance de chaque bloc ; `reference.json` contient graine, versions, variantes et SHA-256. Les fichiers `vectors.S` et `vectors.bin` conservent les instructions assemblees.
+reference.bin uses shared FPREF001; reference-layout.txt checks block provenance; reference.json records seed/versions/variants/SHA-256. vectors.S/vectors.bin retain encodings.
 
-Regeneration : `tools/build_simd_arithmetic_reference.ps1 -Python <python.exe>`. Les tests CTest lisent les artefacts conserves, sans dependance de generation.
-
-Voir [couverture, limites et validation](../../../docs/CPU_SIMD_ARITHMETIC.md). La demonstration ELF de `cpu_fp` enchaine ces familles et compare ses resultats et flags QC a une reference separee.
+Regenerate: `tools/build_simd_arithmetic_reference.ps1 -Python <python.exe>`. CTest reads supplied artifacts without generation dependencies. See [coverage/limits](../../../docs/CPU_SIMD_ARITHMETIC.md). The cpu_fp ELF chains these families and compares results/QC against a separate reference.

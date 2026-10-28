@@ -1,0 +1,28 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "initialization_provenance": "../libnx_init/reference.json",
+  "startup_provenance": "../libnx_gpu_channel/reference.json",
+  "compiler": "Zig 0.13.0 / Clang 18.1.6, aarch64-none-elf, -O1 -ffreestanding",
+  "compiler_nvchannel": "Arm GNU 14.3.1, original GNU VLA structure members",
+  "original_sdk_sources_unmodified": true,
+  "nv_transfer_memory_bytes": 65536,
+  "nro_sha256": "CC2B494D27AD6A1D5F5DC81E71D960C3F678956A70C0C50BD57712A1891AF292",
+  "scope": "Original BindChannel followed by the later bounded AllocGpfifoEx2 profile; no submission or native Switch 2 validation",
+  "service_sources_sha256": {
+    "nvidia/address_space.c": "F5B54DDED97F27E0B3F28BEBF0E49502667A1FCD7107A5D0DD31E2963EA88227",
+    "nvidia/ioctl/nvhost-as-gpu.c": "CBAA113CA0F847C842654879C8629E418D32998C46A6D05F39DD5231B7962E52",
+    "nvidia/channel.c": "D79A069DAE7A32B90A4B6FDB4D9EF4C1151FF86A6027590023F9702CF3C0CA9F",
+    "nvidia/ioctl/nvchannel.c": "0237FBF2999CC30C905E3B948C174BB05FF1ED52889C18E7E7318A35D7FE69B1",
+    "nvidia/map.c": "14A01CD903E3171793B3DC8F9A246327F5FC7BAAAAB05C1883F1923B28F16681",
+    "services/nv.c": "304EC5F740266042D05F157C36CB42FA13C69F0CE18381B2AE8E6BFE302F91FB"
+  },
+  "guest_harness_sha256": "AFEF09F1DE0CED3E1F807D8343311154397428A8701F93ADF704CEA46FA93065",
+  "reference_symbols_sha256": "5A49375958EEB7E2F4B8D1A54B80F3DC9DF7C81C2EAAE00D9ED7597325673D47",
+  "baseline_instructions": 57910,
+  "instructions": 58926,
+  "next_boundary": "None within this bounded harness; libnx_gpu_fifo continues to AllocObjCtx",
+  "report_words_per_lifetime": 32,
+  "lifetimes": 2,
+  "nro_bytes": 401408,
+  "binding_milestone_instructions": 58724
+}

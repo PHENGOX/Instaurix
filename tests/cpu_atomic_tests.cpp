@@ -28,6 +28,13 @@ int main(int argc, char** argv)
         cpu.setPSTATE(0xF0000000); ram.write64(0x2000,a); ram.write64(0x2008,~a);
     };
     auto maskFor = [](unsigned width) { return UINT64_MAX >> (64 - width * 8); };
+    {
+        Memory cold(0x4000);Bus shared(cold);CPU first(shared),second(shared);cold.writeBytes(0,code.data(),code.size());cold.setPermissions(0x2000,4096,Memory::All);
+        first.writeRegister(2,0x2000);second.writeRegister(2,0x2010);first.writeRegister(1,11);second.writeRegister(1,22);first.setPC(12*4);second.setPC(12*4);
+        check(first.step() && second.step(),"two CPUs reserve cold distinct granules in the same page");first.setPC(14*4);second.setPC(14*4);
+        check(first.step() && !first.readRegister(3) && second.step() && !second.readRegister(3) && cold.read64(0x2000)==11 && cold.read64(0x2010)==22,"first tracking-row allocation causes no false sharing between exclusive monitors");
+        cold.reset();cold.writeBytes(0,code.data(),code.size());first.reset();first.writeRegister(2,0x2000);first.writeRegister(1,33);first.setPC(12*4);check(first.step(),"reserve cold page after reset epoch changes");cold.write8(0x2010,0);first.setPC(14*4);check(first.step() && !first.readRegister(3) && cold.read64(0x2000)==33,"first metadata allocation after reset preserves other granules' exclusive reservations");
+    }
     // Four sizes, plain/acquire loads and plain/release stores.
     for (unsigned size = 0; size < 4; ++size)
     for (unsigned acquire = 0; acquire < 2; ++acquire)

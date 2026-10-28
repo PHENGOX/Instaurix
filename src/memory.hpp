@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <span>
+#include <array>
 
 class Memory
 {
@@ -12,6 +13,12 @@ public:
     static constexpr size_t PAGE_SIZE = 0x1000; // 4 KiB
 
     explicit Memory(size_t size);
+    Memory(const Memory&)=delete;
+    Memory& operator=(const Memory&)=delete;
+    Memory(Memory&&) noexcept=default;
+    Memory& operator=(Memory&&) noexcept=default;
+    using SharedPages=std::vector<std::shared_ptr<uint8_t[]>>;
+    bool mapReadOnlySharedPages(uint64_t address,std::span<const std::shared_ptr<uint8_t[]>> backing);
     enum Permission : uint8_t { None = 0, Read = 1, Write = 2, Execute = 4, All = 7 };
     void reset(uint8_t permission = All);
     bool setPermissions(uint64_t address, size_t size, uint8_t permission);
@@ -71,14 +78,15 @@ public:
 private:
     size_t memorySize;
 
-    std::vector<
-        std::unique_ptr<uint8_t[]>>
-        pages;
+    SharedPages pages;
 
     mutable const char* lastError;
     std::vector<uint8_t> permissions;
-    std::vector<uint64_t> writeVersions;
+    using GranuleVersions=std::array<uint64_t,PAGE_SIZE/16>;
+    struct ReservationPage { uint64_t baseline=0;std::unique_ptr<GranuleVersions> granules; };
+    std::vector<ReservationPage> writeVersions;
     uint64_t writeSerial = 0;
+    void prepareWriteVersions(uint64_t address,size_t length);
     void markWritten(uint64_t address, size_t length);
 
     bool checkRange(

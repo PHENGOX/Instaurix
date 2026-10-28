@@ -1,78 +1,65 @@
-# Premier environnement HLE de référence
+# Initial reference HLE environment
 
-État au 24 octobre 2026. Cette étape ajoute un processus local avec un thread principal, un sous-ensemble de services mémoire et des registres de thread ARM64. **Aucune compatibilité native Switch 2 n'est revendiquée.** Les conventions étudiées viennent de l'écosystème Horizon/libnx ; elles doivent être confrontées à une cible native Switch 2 avant d'être considérées comme validées pour elle.
-
-## Lancer la démonstration
+Historical milestone dated October 24, 2026: a local process/main thread, memory-service subset and ARM64 thread registers. **No native Switch 2 compatibility is claimed.** Studied conventions come from Horizon/libnx and require separate native Switch 2 comparison.
 
 ```powershell
-.\build\Debug\Switch2Emu.exe .\tests\programs\hle_memory\program.elf 500 --hle-reference
+.\build\Debug\Instaurix.exe .\tests\programs\hle_memory\program.elf 500 --hle-reference
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-Résultat : **121 instructions**, **X2=55**, fin normale HLE avec code 0. Le programme alloue un tas, appelle du C pour calculer la somme 1..10, écrit 55 dans le tas et la mémoire locale du thread, puis interroge les informations du tas et quitte le processus.
+Result: **121 instructions, X2=55, normal HLE exit code 0**. The program allocates a heap, computes 1..10 in C, writes 55 to heap/thread-local memory, queries heap information and exits.
 
-`--hle-reference` est explicite, désactivé par défaut et réservé aux ELF acceptés par le chargeur. Les binaires bruts sont refusés dans ce profil. Ce mode et `--test-protocol` sont mutuellement exclusifs dans l'interface de lancement. Les anciens tests continuent d'utiliser leur mode antérieur.
+--hle-reference is opt-in and initially restricted to accepted ELF files; raw input is rejected. It excludes --test-protocol. Later bounded NRO/homebrew profiles are documented separately.
 
-## Processus et thread
+## Process and context
 
-`Process` conserve l'état du processus et d'un thread principal local d'identifiant 1. Il possède la taille du tas, les types de pages et l'adresse de la région locale du thread. L'identifiant 1 n'est pas un handle de noyau émulé.
+Process tracks local main thread ID 1, heap size, page types and local-region address. An ID is distinct from a kernel handle. The context retains the prototype's 32 integer slots, PC/SP/PSTATE, TPIDR_EL0/TPIDRRO_EL0, all 32 128-bit vectors and FPCR/FPSR. Ready/Running/Paused/Waiting/Exited/Faulted states are recorded at execution boundaries. Saving a context alone is not a scheduler; later [events](HLE_EVENTS.md), [two-thread scheduling](HLE_THREADS.md) and [virtual time](HLE_TIME.md) are separate milestones.
 
-Le contexte sauvegarde les 32 emplacements de registre du prototype, PC, SP, PSTATE, TPIDR_EL0/TPIDRRO_EL0, les 32 registres SIMD 128 bits et FPCR/FPSR. Les états Ready, Running, Paused, Waiting, Exited et Faulted sont conservés aux frontières d'exécution. Les sauvegardes ne constituent pas un ordonnanceur multithread. Le sous-ensemble d'événements et son mécanisme d'attente/reprise sont décrits dans [HLE_EVENTS.md](HLE_EVENTS.md).
+Budget/interrupt stops can resume. Exit is final. A terminal error cannot be bypassed by another run call; reload is required. Standalone CPU tests retain explicit context restoration facilities.
 
-Le budget ou une interruption permet une reprise. Une fin reste définitive. Une erreur terminale empêche de contourner un appel inconnu en relançant simplement `run` ; il faut recharger un programme. Le CPU utilisé seul conserve ses mécanismes de test et de restauration de contexte.
+## Initial services
 
-## Services traités
-
-Ces conventions de registres sont celles publiées pour les appels Horizon étudiés, distinctes des signatures C des wrappers libnx [H1, H2].
-
-| SVC | Entrées utilisées | Résultat |
+| SVC | Inputs | Result |
 | --- | --- | --- |
-| 0x01 SetHeapSize | X1 = taille | W0 = résultat ; X1 = base du tas sur succès |
-| 0x06 QueryMemory | X0 = adresse du buffer MemoryInfo ; X2 = adresse interrogée | W0 = résultat ; W1 = PageInfo sur succès |
-| 0x07 ExitProcess | Aucune | Fin du processus ; X0 n'est pas un code de sortie |
+| 0x01 SetHeapSize | X1=size | W0=result, X1=heap base on success |
+| 0x06 QueryMemory | X0=MemoryInfo buffer, X2=queried address | W0=result, W1=PageInfo on success |
+| 0x07 ExitProcess | None | Terminates process; X0 is not an exit code |
 
-Les wrappers C peuvent effectuer eux-mêmes une écriture vers un pointeur après le retour du SVC. Le répartiteur ne doit donc pas prendre X0 de SetHeapSize ou X1 de QueryMemory pour un pointeur à écrire.
+These published register conventions differ from libnx C wrappers, which may write through output pointers after the SVC. Do not treat SetHeapSize X0 or QueryMemory X1 as kernel-side output pointers.
 
-Un appel inconnu arrête le processus avec son numéro et l'adresse de l'instruction. Il n'est ni ignoré ni présenté comme réussi. Les erreurs d'arguments d'un appel pris en charge renvoient un résultat au programme, qui peut les traiter et continuer.
+Unknown calls stop with their number and instruction address. Supported-call argument errors return results that the guest can handle.
 
-## Tas et limites locales
+## Local heap
 
-La taille demandée est un multiple de **2 Mio**. Le profil accepte la taille zéro et permet croissance/réduction. Le tas est fixé à **0x200000**, avec une capacité locale de **8 Mio**, sans ASLR. Les pages allouées sont R/W et non exécutables. Réduire le tas supprime les droits et le contenu des pages retirées ; leur réallocation donne des zéros. Une croissance conserve le contenu existant.
+Sizes are multiples of **2 MiB**, including zero, with growth/shrink support. Base is **0x200000**, capacity **8 MiB**, without ASLR. Allocated pages are R/W non-executable. Shrinking removes rights/content; reallocation yields zeros, and growth preserves earlier content.
 
-Le prototype renvoie notamment InvalidSize (0xCA01), OutOfMemory (0xD001), InvalidAddress (0xCC01), InvalidPointer (0xE601), ou OutOfResource (0xCE01). Les catégories s'appuient sur les références publiques [H1, H5] ; l'exhaustivité et l'ordre de toutes les validations d'un noyau réel ne sont pas reproduits. Les tailles supérieures à 4 Gio sont refusées, même si la limite locale de tas est bien plus basse.
+Errors include InvalidSize=0xCA01, OutOfMemory=0xD001, InvalidAddress=0xCC01, InvalidPointer=0xE601 and OutOfResource=0xCE01. Public categories guide names, but not every real-kernel validation or its ordering is reproduced. Requests over 4 GiB are rejected even though the local limit is much smaller.
 
 ## QueryMemory
 
-Le buffer de sortie de **40 octets** est écrit en little-endian : base, taille, type, attributs, droits, compteurs de références IPC/périphériques et remplissage [H3]. Les attributs, compteurs et PageInfo sont zéro dans ce sous-ensemble.
+A **40-byte little-endian** MemoryInfo contains base, size, type, attributes, permissions, IPC/device reference counts and padding. Attributes, counts and PageInfo are zero here. Contiguous equal-type/equal-permission pages are coalesced. Simplified types: 0 unmapped, 3/4 static/mutable image, 5 heap, 11 stack and 12 local region; complete kernel block attributes are absent.
 
-L'interrogation regroupe les pages contiguës de même type et de mêmes droits. Les types simplifiés utilisés sont 0 pour non mappé, 3/4 pour image statique/modifiable, 5 pour tas, 11 pour pile et 12 pour région locale. Aucun attribut complet de bloc noyau n'est simulé.
+Queries are limited to **16 MiB local RAM**, not a full console address space. Unwritable, forbidden-page-crossing, overflowing or MMIO output buffers fail before writes. Necessary page allocation precedes copying to avoid partial output.
 
-Les adresses interrogées sont limitées aux **16 Mio** du modèle local. Une adresse extérieure renvoie une erreur au lieu de décrire tout l'espace virtuel d'une vraie console. Un buffer de sortie non inscriptible, traversant une page interdite, débordant ou situé dans un périphérique MMIO est refusé avant écriture. L'allocation des pages nécessaires à la copie précède la copie elle-même, pour éviter une sortie partielle.
+## Thread-local registers
 
-## Région locale du thread et registres
+The initial profile reserves an R/W non-executable page at **0xFEE000**, with a 0x200-byte local region at **0xFEE200** after reserved space. These are prototype addresses, not a full SDK/ThreadPointer initialization.
 
-Le profil réserve une page R/W non exécutable à **0xFEE000**. La région locale de 0x200 octets commence à **0xFEE200**, après un premier emplacement réservé. Ce choix d'adresse est propre au prototype ; sa structure de départ s'appuie sur les références publiques [H4]. Aucun démarrage complet du SDK ni objet ThreadPointer n'est construit.
+MRS TPIDRRO_EL0 reads the host-configured local base. MRS/MSR TPIDR_EL0 expose a guest-managed pointer initially zero. Guest writes to TPIDRRO_EL0 and unsupported system registers fail. W MOVZ/MOVK/MOVN emitted by this demo clear upper X bits; reserved shifts fail.
 
-- MRS TPIDRRO_EL0 retourne la base locale configurée par l'hôte.
-- MRS/MSR TPIDR_EL0 permettent au programme de gérer son pointeur de thread, initialement nul.
-- Une écriture invitée dans TPIDRRO_EL0 et les autres registres système non pris en charge provoquent une erreur.
+## Loading and validation
 
-Le CPU prend aussi en charge MOVZ/MOVK/MOVN W, émis par le compilateur de la démonstration. Ces écritures remettent à zéro la moitié haute du registre X ; les décalages réservés sont refusés.
+ELF segments cannot overlap heap/local reservations even with zero permissions. Image/context are staged; rejected profile conflicts preserve earlier RAM/CPU/process state. Successful loads reset heap, local regions and devices.
 
-## Chargement et validation
+Validation covers legacy suites, compiled HLE execution, register conventions, pointer/size errors, resizing, thread state, system registers, CLI options, layout conflicts and later events. [Sample sources/hashes](../tests/programs/hle_memory/README.md) accompany the reference. This is a tested foundation rather than a complete native application milestone; later IPC/graphics work is tracked separately.
 
-Les segments ELF ne doivent recouvrir ni la réservation du tas ni celle de la région locale, même si leur permission est nulle. L'image et le contexte sont préparés avant le remplacement de la session. Un conflit de profil laisse la mémoire, le CPU et le processus précédents en place. Un chargement réussi réinitialise le tas, les régions locales et les périphériques.
+Sources were consulted October 24, 2026. Local addresses, limits and scope are project choices.
 
-La validation comprend les anciennes suites, le programme HLE compilé, les conventions de registre, les erreurs de pointeurs et de taille, le redimensionnement du tas, l'état du thread, les registres système, les options de lancement et les conflits de disposition mémoire, ainsi que les événements ajoutés ensuite.
+## Reference links
 
-Les sources de la démonstration et ses empreintes sont dans [son guide](../tests/programs/hle_memory/README.md). Les handles d'événements, un [ordonnanceur local à deux threads](HLE_THREADS.md) et les [attentes à durée finie sur temps virtuel](HLE_TIME.md) sont maintenant présents. Il reste notamment le transport IPC et les services graphiques. Cette étape est une fondation HLE testée, pas le jalon complet d'exécution d'une application native Switch 2.
-
-## Sources consultées
-
-- [H1 — SwitchBrew, appels système](https://switchbrew.org/wiki/SVC) : conventions SetHeapSize, QueryMemory et ExitProcess ; référence communautaire.
-- [H2 — libnx, wrappers SVC](https://github.com/switchbrew/libnx/blob/master/nx/source/kernel/svc.s) : séparation des conventions noyau et des pointeurs de sortie des wrappers.
-- [H3 — libnx, structures et types mémoire](https://github.com/switchbrew/libnx/blob/master/nx/include/switch/kernel/svc.h) : MemoryInfo et énumérations de référence.
-- [H4 — SwitchBrew, région locale du thread](https://switchbrew.org/wiki/Thread_Local_Region) et [libnx, lecture du pointeur local](https://github.com/switchbrew/libnx/blob/master/nx/include/switch/arm/tls.h).
-- [H5 — Atmosphère, catégories de résultats SVC](https://github.com/Atmosphere-NX/Atmosphere/blob/master/libraries/libvapours/include/vapours/results/svc_results.hpp) : noms et catégories publiques ; code du répartiteur du projet écrit séparément.
-
-Sources évolutives consultées le 24 octobre 2026. Les adresses du profil, ses limites de ressources et son périmètre sont des décisions du projet.
+- [SwitchBrew system calls](https://switchbrew.org/wiki/SVC)
+- [libnx svc.s](https://github.com/switchbrew/libnx/blob/master/nx/source/kernel/svc.s)
+- [libnx svc.h](https://github.com/switchbrew/libnx/blob/master/nx/include/switch/kernel/svc.h)
+- [SwitchBrew thread-local region](https://switchbrew.org/wiki/Thread_Local_Region)
+- [libnx tls.h](https://github.com/switchbrew/libnx/blob/master/nx/include/switch/arm/tls.h)
+- [Public SVC result categories](https://github.com/Atmosphere-NX/Atmosphere/blob/master/libraries/libvapours/include/vapours/results/svc_results.hpp)

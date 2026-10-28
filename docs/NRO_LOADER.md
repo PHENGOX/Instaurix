@@ -1,37 +1,39 @@
-# Chargeur NRO0 statique de référence
+# Reference static NRO0 loader
 
-Étape du 25 octobre 2026. Le chargeur reconnaît NRO0 à l'offset 0x10 et l'extension .nro, puis valide le fichier avant de remplacer la mémoire. Ce support est un sous-ensemble choisi pour les essais ; il n'est pas une annonce de chargement des homebrews libnx standards ou des jeux Switch 2.
+Milestone dated October 25, 2026. NRO0 at offset 0x10 or the .nro extension selects validation before memory replacement. This is a bounded test subset, not a claim to load standard libnx homebrews or Switch 2 games.
 
-## Profil accepté
+## Accepted profile
 
-- En-tête de 0x80 octets, version 0, flags zéro et aucun en-tête additionnel.
-- Taille déclarée exactement égale au fichier ; aucun ASET ou autre contenu ajouté.
-- Trois segments aux offsets et tailles fichier alignés sur 4 Kio ; text commence à zéro et contient l'en-tête.
-- Pas de chevauchement, débordement RAM ou recouvrement de la pile/page de garde.
-- Métadonnées dynamiques étendues nulles ; identifiant de module conservé sans interprétation de confiance.
+- 0x80-byte header, version 0, zero flags and no additional header.
+- Declared size exactly equals file size; no appended ASET/assets.
+- Three segments with 4 KiB-aligned file offsets/sizes; text starts at zero and contains the header.
+- No overlap, RAM overflow or stack/guard collision.
+- Zero extended dynamic metadata; module identifier retained without treating it as trusted identity.
 
-La base locale est **0x10000**, avec entrée à cette base et sans ASLR. Text devient R/X, rodata R, data et BSS R/W sans exécution. Les trous restent interdits. La BSS commence après data et est initialisée à zéro. La pile protégée de 64 Kio reste en haut de la machine de développement.
+Local base/entry is **0x10000**, without ASLR. Text is R/X, rodata R, data/BSS R/W non-executable; gaps are inaccessible. BSS follows data and is zeroed. The protected 64 KiB stack remains at development RAM's top.
 
-Les adresses, le tas et les régions de thread du profil HLE restent ceux du prototype. Process vérifie leurs conflits comme pour ELF. Le NRO statique de test démarre avec les mêmes conventions locales que nos ELF, sans environnement homebrew annoncé implicitement.
+HLE heap/thread reservations retain prototype addresses and collision checks. The static sample uses the same local entry conventions as project ELF files, without implying a homebrew environment.
 
-Un pointeur MOD0 non nul doit être aligné, couvert par un segment fichier et porter la bonne signature. Le chargeur de segments peut le reconnaître et marquer `requiresNroRuntime`. **Machine refuse son exécution par défaut**. Le nouveau [profil d'entrée homebrew](NRO_BOOTSTRAP.md), explicitement activé par `--hle-reference --homebrew-entry`, valide un sous-ensemble MOD0/RELA/RELR et fournit un environnement d'entrée. Cela ne correspond pas encore au runtime libnx complet.
+A nonzero MOD0 pointer must be aligned, file-backed and correctly signed. Segment loading marks requiresNroRuntime, but **Machine rejects execution by default**. The explicitly enabled [homebrew entry profile](NRO_BOOTSTRAP.md), --hle-reference --homebrew-entry, validates bounded MOD0/RELA/RELR and supplies an entry environment; it is not the entire libnx runtime.
 
-La mémoire et les informations d'image sont préparées séparément. Un en-tête, mapping ou profil refusé conserve la session précédente. Un NRO renommé .bin reste reconnu par sa signature. Les fichiers identifiés comme NSO et les extensions de conteneurs NCA/NSP/XCI non pris en charge ne sont pas traités comme des instructions brutes.
+Staged memory/image metadata preserve the old session on rejected headers, mappings or profiles. NRO magic is recognized even after renaming to .bin. NSO signatures and unsupported NCA/NSP/XCI containers never fall back to raw instructions.
 
-## Échantillon reproductible
+## Reproducible sample
 
 ```powershell
-.\tools\build_nro_client.ps1 -Python <chemin_python>
-.\build\Debug\Switch2Emu.exe .\tests\programs\nro_client\program.nro 50000 --hle-reference
+.\tools\build_nro_client.ps1 -Python <python_path>
+.\build\Debug\Instaurix.exe .\tests\programs\nro_client\program.nro 50000 --hle-reference
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-Le client C réutilise hle_client/work.c et ses vérifications de services, clones, copie et empreinte. Un démarrage original réserve l'en-tête NRO puis branche vers le programme. Le script Python empaquette uniquement ce profil ELF fixe, sans MOD0, relocations ni assets ; il n'est pas présenté comme remplaçant elf2nro.
+The C client reuses hle_client/work.c and its service/clone/copy/hash checks. A project-owned entry reserves the NRO header and branches to the program. The packager handles this fixed ELF profile without MOD0, relocations or assets; it does not replace elf2nro.
 
-Le fichier fait **12 288 octets**, avec **12 288 octets de BSS** supplémentaires. Il termine en **14 343 instructions**, avec status=1, sum=55, copied=512 et hash=3505779141. Le banc compare ses sept champs de rapport à ceux de l'ELF correspondant.
+The file is **12,288 bytes** with another **12,288 bytes BSS**. It exits after **14,343 instructions**, with status=1, sum=55, copied=512 and hash=3505779141. Tests compare all seven report fields with the corresponding ELF.
 
-Les tests couvrent les droits, la BSS, la pile, les tailles et offsets mal formés, les chevauchements, la troncature, les métadonnées inconnues, le signalement MOD0, la détection par signature et le refus des replis de format.
+Coverage includes permissions, BSS, stack, malformed sizes/offsets, overlap, truncation, unknown metadata, MOD0 reporting, magic detection and refusal of format fallback. See [external target audit](COMPATIBILITY_AUDIT.md).
 
-Le besoin de démarrage libnx et la cible externe choisie sont détaillés dans [COMPATIBILITY_AUDIT.md](COMPATIBILITY_AUDIT.md).
+## Reference links
 
-Références publiques étudiées le 25 octobre 2026 : [SwitchBrew NRO](https://switchbrew.org/wiki/NRO), [elf2nro](https://github.com/switchbrew/switch-tools/blob/master/src/elf2nro.c) et [crt0 libnx](https://github.com/switchbrew/libnx/blob/master/nx/source/runtime/switch_crt0.s). Le chargeur et l'échantillon sont écrits dans ce projet.
+- [switchbrew.org](https://switchbrew.org/wiki/NRO)
+- [github.com](https://github.com/switchbrew/switch-tools/blob/master/src/elf2nro.c)
+- [libnx switch_crt0.s](https://github.com/switchbrew/libnx/blob/master/nx/source/runtime/switch_crt0.s)

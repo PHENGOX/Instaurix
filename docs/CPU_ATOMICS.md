@@ -1,30 +1,30 @@
-# Operations atomiques et exclusives
+# Atomic and exclusive operations
 
-Palier du 24 octobre 2026. Le CPU reste un interpreteur partiel AArch64.
+Milestone dated October 24, 2026. The CPU remains a partial AArch64 interpreter.
 
-## Couverture
+## Coverage
 
-- LDXR/LDAXR et STXR/STLXR : octet, demi-mot, W et X.
-- LDXP/LDAXP et STXP/STLXP : paires W et X.
-- LDAR/STLR : octet, demi-mot, W et X.
-- CAS, SWP, LDADD, LDCLR, LDEOR, LDSET, LDSMAX, LDSMIN, LDUMAX et LDUMIN : quatre tailles et variantes acquire/release. Les alias sans resultat utilisent le meme encodage avec destination ZR.
-- CLREX avec immediat ; DMB/DSB pour les options de domaine/type usuelles ; ISB SY.
+- Byte, halfword, W/X LDXR/LDAXR and STXR/STLXR.
+- W/X pair LDXP/LDAXP and STXP/STLXP.
+- Byte, halfword, W/X LDAR/STLR.
+- CAS, SWP, LDADD, LDCLR, LDEOR, LDSET, LDSMAX, LDSMIN, LDUMAX and LDUMIN, in four widths and acquire/release variants. No-result aliases use ZR destinations.
+- Immediate CLREX, common DMB/DSB domain/type options, and ISB SY.
 
-Les acces sont limites a la RAM, naturellement alignes (sur la taille totale pour les paires), avec controle des permissions avant tout effet. Les registres W sont etendus par zero, les flags sont preserves. Les chevauchements contraints imprevisibles des exclusives sont refuses ; les combinaisons reservees et CASP restent refuses.
+Accesses are RAM-only, naturally aligned (to total width for pairs), with permissions checked before effects. W results are zero-extended; flags are preserved. Constrained-unpredictable exclusive overlaps, reserved combinations and CASP are rejected.
 
-## Modele de reservation
+## Reservation model
 
-Chaque CPU a une reservation locale, hors du contexte architectural sauvegarde. Elle contient adresse, taille et version d'un granule RAM de 16 octets. Les versions appartiennent a Memory : elles voient aussi les ecritures directes de l'hote, les copies de buffers et les autres CPU qui utilisent la meme RAM. Une ecriture, meme de la meme valeur, invalide la reservation de ce granule ; une modification de permissions ou une remise a zero l'invalide aussi.
+Each CPU holds a local reservation outside the saved architectural context: address, size and the version of a 16-byte RAM granule. Versions belong to Memory and observe direct host writes, buffer copies and other CPUs sharing RAM. Any write, including the same value, invalidates that granule's reservation. Permission changes and reset invalidate it as well.
 
-Une exclusive store consomme la reservation et retourne Wstatus=0 en cas de succes, 1 sinon. Adresse et taille doivent correspondre a la lecture precedente. CLREX, reset CPU, restauration de contexte, SVC et erreurs d'execution/instruction effacent la reservation. Un simple captureContext ne l'efface pas. Cette politique de changement de contexte evite de transporter une reservation entre threads ; une reprise peut obliger la boucle invitee a recommencer.
+An exclusive store consumes the reservation, returning Wstatus=0 on success or 1 on failure. Address and size must match the load. CLREX, CPU reset, context restoration, SVC and execution/instruction errors clear reservations. captureContext alone does not. Context switching therefore cannot transfer a reservation between threads; a resumed guest loop may need to retry.
 
-L'execution actuelle est sequentielle, sans reordonnancement ni acces differes : acquire/release et les barrieres ne necessitent pas de file memoire supplementaire. Les transferts atomiques sont indivisibles dans ce modele. **Aucune garantie d'execution parallele par plusieurs threads hotes** : un futur ordonnanceur devra serialiser les acces, ou introduire une synchronisation appropriee. Les tests a deux CPU entrelacent leurs pas sur un seul thread hote. Ce palier ne valide pas un modele memoire multicoeur Switch 2.
+Execution is sequential without reordered/deferred accesses, so acquire/release and barriers need no additional memory queue. Atomic transfers are indivisible in this model. **Parallel host-thread execution is not guaranteed**: a future scheduler must serialize accesses or synchronize them properly. Two-CPU tests interleave steps on one host thread. This is not a Switch 2 multicore memory-model validation.
 
-## Validation et reproduction
+## Validation and reproduction
 
-Les 206 instructions de `tests/programs/atomic_vectors.S` sont assemblees par Clang 18.1.6, fourni dans Zig 0.13.0. `tools/build_atomic_samples.ps1` regenere le binaire ; il invoque directement l'assembleur Clang avec LSE, car le pilote cc de cette version perd cette option pour les fichiers assembleur.
+Clang 18.1.6 from Zig 0.13.0 assembles 206 instructions in tests/programs/atomic_vectors.S. tools/build_atomic_samples.ps1 invokes the assembler directly with LSE because this version's cc driver loses that assembly option.
 
-`cpu_atomic_tests` compare les effets a des attentes mathematiques pour toutes les tailles, variantes d'ordre, operations LSE et CAS sur des valeurs limites. Les tests couvrent aussi exclusives simples/paires, ecritures concurrentes simulees, meme valeur/ABA, copies hote, granules voisins, deux CPU, permissions, MMIO, registres zero/SP, encodages invalides et une boucle reessayant apres contention forcee. Les encodages viennent d'un assembleur independant ; les attentes de ce palier ne sont pas issues d'une comparaison avec une console ou un moteur externe.
+cpu_atomic_tests checks mathematical expectations for widths, ordering variants, LSE and boundary CAS. It covers single/pair exclusives, simulated contention, same-value/ABA writes, host copies, adjacent granules, two CPUs, permissions, MMIO, ZR/SP, invalid encodings and a retry loop after forced contention. Encodings are independent; expected results here are not generated from a console or external execution engine.
 
 ```powershell
 ./tools/build_atomic_samples.ps1
@@ -32,10 +32,10 @@ cmake --build build --config Debug
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-Un [premier palier FP et Advanced SIMD](CPU_FP_SIMD.md), avec leur etat de contexte, est maintenant realise. Ces familles restent partielles. CCMP/CCMN sont egalement disponibles ; d'autres familles entieres restent absentes.
+[Initial FP/Advanced SIMD](CPU_FP_SIMD.md) and its context are also available, with partial coverage. CCMP/CCMN are supported; other integer families remain absent.
 
-## References
+## Reference links
 
-- [Arm, Synchronization Primitives in A64](https://documentation-service.arm.com/static/68c223238a337a2bc6645c0a), pour les moniteurs et acquire/release.
-- [Arm, Instruction Set Reference Guide](https://documentation-service.arm.com/static/6245c734b059dc5ff9a8bdab), pour les instructions et contraintes.
-- [Arm, introduction a LSE](https://learn.arm.com/learning-paths/servers-and-cloud-computing/lse/intro/).
+- [Arm A64 synchronization primitives](https://documentation-service.arm.com/static/68c223238a337a2bc6645c0a)
+- [Arm A64 instruction reference](https://documentation-service.arm.com/static/6245c734b059dc5ff9a8bdab)
+- [Arm LSE introduction](https://learn.arm.com/learning-paths/servers-and-cloud-computing/lse/intro/)

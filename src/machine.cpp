@@ -4,7 +4,7 @@
 #include <new>
 #include <utility>
 
-Machine::Machine(bool enableTestProtocol, bool enableReferenceHle, bool enableHomebrewEntry) : ram(RAM_SIZE), bus(ram), cpu(bus), timer(interrupts, TIMER_IRQ), testProtocolEnabled(enableTestProtocol), referenceHleEnabled(enableReferenceHle), homebrewEntryEnabled(enableHomebrewEntry)
+Machine::Machine(bool enableTestProtocol, bool enableReferenceHle, bool enableHomebrewEntry,Gpu::ProfileId gpuProfile) : ram(RAM_SIZE), bus(ram), cpu(bus), timer(interrupts, TIMER_IRQ), testProtocolEnabled(enableTestProtocol), referenceHleEnabled(enableReferenceHle), homebrewEntryEnabled(enableHomebrewEntry),selectedGpuProfile(gpuProfile)
 {
     if (!bus.mapDevice(DEVICE_BASE, device.size(), device, "TestDevice") ||
         !bus.mapDevice(IRQ_BASE, interrupts.size(), interrupts, "IRQ") ||
@@ -17,19 +17,19 @@ bool Machine::load(const char* path)
 {
     lastError.clear();
     if(homebrewEntryEnabled && (testProtocolEnabled || !referenceHleEnabled))
-    { lastError="Profil homebrew : HLE requis et protocole de test incompatible";return false; }
+    { lastError="Homebrew profile requires HLE and is incompatible with the test protocol";return false; }
     ProgramLoader::Image image;
     try
     {
         Memory staged(RAM_SIZE);
         Process stagedProcess;
         if (!ProgramLoader::loadImage(staged,path,image,lastError) ||
-            !stagedProcess.initialize(staged,image,referenceHleEnabled,lastError,homebrewEntryEnabled)) return false;
+            !stagedProcess.initialize(staged,image,referenceHleEnabled,lastError,homebrewEntryEnabled,selectedGpuProfile)) return false;
         stagedProcess.setReadOnlyFiles(mountedFiles);
         ram = std::move(staged);
         processContext = std::move(stagedProcess);
     }
-    catch (const std::bad_alloc&) { lastError = "Allocation du contexte de processus impossible"; return false; }
+    catch (const std::bad_alloc&) { lastError = "Failed to allocate process context"; return false; }
     interrupts = InterruptController();
     device = TestDevice();
     timer.reset();
@@ -54,7 +54,7 @@ bool Machine::load(const char* path)
 
 bool Machine::mountReadOnlyRoot(const std::filesystem::path& path)
 {
-    if(!referenceHleEnabled) { lastError="Le dossier de fichiers exige --hle-reference"; return false; }
+    if(!referenceHleEnabled) { lastError="File directory requires --hle-reference"; return false; }
     auto snapshot=ReadOnlyFiles::load(path,lastError);
     if(!snapshot) return false;
     mountedFiles=std::move(snapshot);
@@ -84,7 +84,7 @@ Machine::Result Machine::run(uint64_t maxInstructions,bool stopOnFrame)
         const auto step = cpu.stepDetailed();
         if (step.status == CPU::StepStatus::Error)
         {
-            lastError = cpu.getLastError() ? cpu.getLastError() : "Erreur CPU";
+            lastError = cpu.getLastError() ? cpu.getLastError() : "CPU error";
             return finish(Stop::Error,count);
         }
         ++count;
@@ -118,9 +118,9 @@ Machine::Result Machine::run(uint64_t maxInstructions,bool stopOnFrame)
             if (action == Process::Action::Unsupported)
             {
                 lastError = (step.immediate == 0x18 && referenceHleEnabled ?
-                    "WaitSynchronization : delai negatif autre que -1 ou debordement du temps virtuel ; SVC " :
-                    "SVC non pris en charge : ") + std::to_string(step.immediate) +
-                    " au PC " + std::to_string(cpu.getPC()-4);
+                    "WaitSynchronization: negative timeout other than -1 or virtual time overflow; SVC " :
+                    "Unsupported SVC: ") + std::to_string(step.immediate) +
+                    " at PC " + std::to_string(cpu.getPC()-4);
                 return finish(Stop::Error,count);
             }
             if (action == Process::Action::Exit)
@@ -130,6 +130,7 @@ Machine::Result Machine::run(uint64_t maxInstructions,bool stopOnFrame)
                 return finish(Stop::Exited,count,0);
             }
         }
+        if (processContext.appletSuspended()) return finish(Stop::Waiting,count);
         if (interrupts.isIRQActive()) return finish(Stop::Interrupt,count);
         if (++quantumUsed == Process::Quantum)
         {
