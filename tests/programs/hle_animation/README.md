@@ -1,11 +1,14 @@
-# Client C animé
+# Animated C client
 
-Client original dérivé de hle_graphics, compilé par Clang 18.1.6 via Zig 0.13.0 en ARM64 freestanding O1. Reconstruction : `./tools/build_hle_animation.ps1`. Le client ajoute un wrapper SleepThread et réutilise le montage `../hle_graphics/root`.
+Project-owned derivative of hle_graphics, compiled with Clang 18.1.6/Zig 0.13.0 for freestanding ARM64 O1. Rebuild from project root: `./tools/build_hle_animation.ps1`. Adds SleepThread and reuses ../hle_graphics/root.
 
-Le programme lit et vérifie sprite.txt, produit huit images 160 × 96, déplace le motif horizontalement et change les étoiles. Entre deux images, SleepThread attend 100 000 000 ns virtuelles. Il n'y a pas de sommeil après la huitième présentation.
+It reads/checks sprite.txt, draws eight 160×96 frames, moves the pattern horizontally and changes stars. Between frames SleepThread waits 100,000,000 virtual ns; no sleep follows frame eight.
 
-Succès : **4 882 772 instructions**, **8 images**, **700 000 000 ns virtuelles**. Rapport à 0x12000 : status=1, loaded=272, presented=8, hash de la dernière image ; quatre champs u64.
+Success: **4,882,772 instructions, 8 frames, 700,000,000 virtual ns**. Four u64 fields at 0x12000: status=1, loaded=272, presented=8 and final-frame hash.
 
-ELF SHA-256 : `AEA26DC51A3A52CF95132016692ED5E74BED3B518BE993E04EC81898AECFC5C8`.
+The host reference checks every pixel, timestamp and cumulative instruction count. See [viewer/sequence options](../../../docs/HLE_ANIMATION.md). This is development display without native GPU commands.
 
-La référence hôte vérifie chaque pixel, temps et nombre cumulé d'instructions. Voir [HLE_ANIMATION.md](../../../docs/HLE_ANIMATION.md) pour --window et --frames-out. Il s'agit d'un affichage de développement, sans commandes GPU natives.
+## Recorded artifact SHA-256
+
+`AEA26DC51A3A52CF95132016692ED5E74BED3B518BE993E04EC81898AECFC5C8`
+

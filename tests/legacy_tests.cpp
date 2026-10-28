@@ -17,12 +17,12 @@ int runLegacyTests()
     std::cout << "\n# v0.058 CPU REGISTERS\n\n";
 
     cpu.writeRegister(0, 0x1122334455667788ULL);
-    std::cout << "Registre X0      : "
+    std::cout << "Register X0      : "
               << (cpu.readRegister(0) == 0x1122334455667788ULL ? "OK" : "FAIL")
               << "\n";
 
     cpu.writeRegister(31, 0xAABBCCDDEEFF0011ULL);
-    std::cout << "Registre X31     : "
+    std::cout << "Register X31     : "
               << (cpu.readRegister(31) == 0xAABBCCDDEEFF0011ULL ? "OK" : "FAIL")
               << "\n";
 
@@ -43,7 +43,7 @@ int runLegacyTests()
 
     bool invalidRegister = !cpu.writeRegister(32, 0x1234);
 
-    std::cout << "Registre invalide : "
+    std::cout << "Invalid register : "
               << (invalidRegister ? "OK" : "FAIL")
               << "\n";
 
@@ -200,7 +200,7 @@ int runLegacyTests()
         cpu.readRegister(3) == 37 &&
         cpu.getPC() == 0x0028;
 
-    std::cout << "Programme multiple  : "
+    std::cout << "Multiple instructions  : "
             << (multipleInstructionsExecuted ? "OK" : "FAIL")
             << "\n";
 
@@ -208,7 +208,7 @@ int runLegacyTests()
 
     cpuMemory.write32(
         0x0028,
-        0xFFFFFFFF); // Instruction inconnue
+        0xFFFFFFFF); // Unknown instruction
 
     cpu.setPC(0x0028);
 
@@ -217,7 +217,7 @@ int runLegacyTests()
         cpu.hasError() &&
         cpu.getPC() == 0x0028;
 
-    std::cout << "Instruction inconnue : "
+    std::cout << "Unknown instruction : "
             << (unknownInstruction ? "OK" : "FAIL")
             << "\n";
 
@@ -232,7 +232,7 @@ int runLegacyTests()
 
     cpu.clearError();
 
-    // Remplace l'instruction inconnue par un NOP
+    // Replace the unknown instruction with a NOP
     cpuMemory.write32(
         0x0028,
         0xD503201F);
@@ -245,7 +245,7 @@ int runLegacyTests()
         !cpu.hasError() &&
         cpu.getPC() == 0x002C;
 
-    std::cout << "Recuperation CPU     : "
+    std::cout << "CPU recovery     : "
             << (recoveryExecuted ? "OK" : "FAIL")
             << "\n";
 
@@ -264,7 +264,7 @@ int runLegacyTests()
         cpu.readRegister(1) == (42ULL << 16) &&
         cpu.getPC() == 0x0034;
 
-    std::cout << "MOVZ avec shift      : "
+    std::cout << "MOVZ with shift      : "
             << (movzShiftExecuted ? "OK" : "FAIL")
             << "\n";
 
@@ -284,7 +284,7 @@ int runLegacyTests()
         cpu.readRegister(0) == 42 &&
         cpu.getPC() == 0x003C;
 
-    std::cout << "Registre XZR        : "
+    std::cout << "Register XZR        : "
             << (xzrWriteIgnored ? "OK" : "FAIL")
             << "\n";
 
@@ -423,18 +423,18 @@ int runLegacyTests()
             << "\n";
 
     // ============================================================
-    // V0.36 — TESTS INSTRUCTIONS LOGIQUES
+    // V0.36 — LOGICAL INSTRUCTION TESTS
     // ============================================================
 
     cpu.reset();
 
-    // Valeurs de test
+    // Test values
     cpu.writeRegister(0, 0xF0F0F0F0F0F0F0F0ULL);
     cpu.writeRegister(1, 0x0F0F0F0F0F0F0F0FULL);
 
     // ------------------------------------------------------------
     // AND X2, X0, X1
-    // Résultat attendu : 0x0000000000000000
+    // Expected result : 0x0000000000000000
     // ------------------------------------------------------------
 
     uint32_t andInstruction =
@@ -457,7 +457,7 @@ int runLegacyTests()
 
     // ------------------------------------------------------------
     // ORR X2, X0, X1
-    // Résultat attendu : 0xFFFFFFFFFFFFFFFF
+    // Expected result : 0xFFFFFFFFFFFFFFFF
     // ------------------------------------------------------------
 
     cpu.reset();
@@ -485,7 +485,7 @@ int runLegacyTests()
 
     // ------------------------------------------------------------
     // EOR X2, X0, X1
-    // Résultat attendu : 0xFFFFFFFFFFFFFFFF
+    // Expected result : 0xFFFFFFFFFFFFFFFF
     // ------------------------------------------------------------
 
     cpu.reset();
@@ -512,7 +512,7 @@ int runLegacyTests()
             << "\n";
 
     // ============================================================
-    // V0.085 — AND / ORR / EOR immédiats
+    // V0.085 — AND / ORR / EOR immediates
     // ============================================================
 
     {
@@ -545,7 +545,7 @@ int runLegacyTests()
 
         uint64_t actual = cpu.readRegister(2);
 
-        std::cout << "ORR résultat : 0x"
+        std::cout << "ORR result : 0x"
             << std::hex << actual << std::dec << '\n';
 
         bool ok = result && actual == 0x12FF;
@@ -616,7 +616,7 @@ int runLegacyTests()
     }
 
     // ============================================================
-    // TEST ADD W immédiat (32 bits)
+    // TEST ADD W immediate (32 bits)
     // ============================================================
 
     cpu.reset();
@@ -642,7 +642,7 @@ int runLegacyTests()
 
     // ------------------------------------------------------------
     // CMP X0, X1
-    // 10 - 10 = 0 → Flag Z activé
+    // 10 - 10 = 0 → Z flag set
     // ------------------------------------------------------------
 
     cpu.reset();
@@ -660,13 +660,13 @@ int runLegacyTests()
         cpu.readRegister(31) == 0 &&
         (cpu.getPSTATE() & CPU::FLAG_Z);
 
-    std::cout << "CMP égalité       : "
+    std::cout << "CMP equality       : "
             << (cmpEqualOk ? "OK" : "FAIL")
             << "\n";
 
     // ------------------------------------------------------------
     // CMP X0, X1
-    // 5 - 10 = -5 → Flag N activé
+    // 5 - 10 = -5 → N flag set
     // ------------------------------------------------------------
 
     cpu.reset();
@@ -682,13 +682,13 @@ int runLegacyTests()
         cpu.step() &&
         (cpu.getPSTATE() & CPU::FLAG_N);
 
-    std::cout << "CMP négatif       : "
+    std::cout << "CMP negative       : "
             << (cmpNegativeOk ? "OK" : "FAIL")
             << "\n";
 
     // ------------------------------------------------------------
     // CMN X0, X1
-    // 10 + 10 = 20 → Flag Z désactivé
+    // 10 + 10 = 20 → Z flag cleared
     // ------------------------------------------------------------
 
     cpu.reset();
@@ -715,7 +715,7 @@ int runLegacyTests()
     // V0.43 — TEST B.EQ
     // ============================================================
 
-    // B.EQ avec Z = 1 et offset +8
+    // B.EQ with Z = 1 and a +8 offset
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(CPU::FLAG_Z);
@@ -735,31 +735,31 @@ int runLegacyTests()
     // V0.44 — TEST B.NE (Branch if Not Equal)
     // ============================================================
 
-    // Test 1 : B.NE doit sauter si Z = 0
+    // Test 1 : B.NE must branch if Z = 0
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(0); // Z = 0
 
-    // B.NE avec un offset de +8 octets
+    // B.NE with a +8-byte offset
     cpuMemory.write32(0x00DC, 0x54000041);
 
     bool bneTakenOk =
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // Test 2 : B.NE ne doit pas sauter si Z = 1
+    // Test 2 : B.NE must not branch if Z = 1
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(CPU::FLAG_Z); // Z = 1
 
-    // B.NE avec un offset de +8 octets
+    // B.NE with a +8-byte offset
     cpuMemory.write32(0x00DC, 0x54000041);
 
     bool bneNotTakenOk =
         cpu.step() &&
         cpu.getPC() == 0x00E0;
 
-    // Résultat global
+    // Overall result
     bool bneOk = bneTakenOk && bneNotTakenOk;
 
     std::cout << "B.NE             : "
@@ -770,7 +770,7 @@ int runLegacyTests()
     // V0.45 — TEST B.GT (Branch if Greater Than)
     // ============================================================
 
-    // Test 1 : B.GT doit sauter si Z = 0 et N = V = 0
+    // Test 1 : B.GT must branch if Z = 0 and N = V = 0
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(0);
@@ -781,7 +781,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // Test 2 : B.GT ne doit pas sauter si Z = 1
+    // Test 2 : B.GT must not branch if Z = 1
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(CPU::FLAG_Z);
@@ -792,7 +792,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E0;
 
-    // Résultat global
+    // Overall result
     bool bgtOk = bgtTakenOk && bgtNotTakenOk;
 
     std::cout << "B.GT             : "
@@ -803,7 +803,7 @@ int runLegacyTests()
     // V0.46 — TEST B.LE (Branch if Less Than or Equal)
     // ============================================================
 
-    // Test 1 : B.LE saute si Z = 1
+    // Test 1 : B.LE branches if Z = 1
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(CPU::FLAG_Z);
@@ -814,7 +814,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // Test 2 : B.LE saute si N != V
+    // Test 2 : B.LE branches if N != V
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(CPU::FLAG_N);
@@ -825,7 +825,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // Test 3 : B.LE ne saute pas si Z = 0 et N = V
+    // Test 3 : B.LE does not branch if Z = 0 and N = V
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(0);
@@ -836,7 +836,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E0;
 
-    // Résultat global
+    // Overall result
     bool bleOk =
         bleZeroOk &&
         bleNegativeOk &&
@@ -850,7 +850,7 @@ int runLegacyTests()
     // V0.47 — TEST B.LT (Branch if Less Than)
     // ============================================================
 
-    // Test 1 : B.LT saute si N = 1 et V = 0
+    // Test 1 : B.LT branches if N = 1 and V = 0
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(CPU::FLAG_N);
@@ -861,7 +861,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // Test 2 : B.LT saute si N = 0 et V = 1
+    // Test 2 : B.LT branches if N = 0 and V = 1
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(CPU::FLAG_V);
@@ -872,7 +872,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // Test 3 : B.LT ne saute pas si N = V = 0
+    // Test 3 : B.LT does not branch if N = V = 0
     cpu.reset();
     cpu.setPC(0x00DC);
     cpu.setPSTATE(0);
@@ -883,7 +883,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E0;
 
-    // Résultat global
+    // Overall result
     bool bltOk =
         bltTakenOk &&
         bltOverflowOk &&
@@ -893,21 +893,21 @@ int runLegacyTests()
             << (bltOk ? "OK" : "FAIL")
             << std::endl;
 
-    // Test B.GE : branchement pris si N == V
+    // Test B.GE : branch taken if N == V
     cpu.reset();
     cpu.setPC(0x00DC);
 
     // B.GE +8 : 0x5400004A
     cpuMemory.write32(0x00DC, 0x5400004A);
 
-    // Cas pris : N=0, V=0
+    // Taken : N=0, V=0
     cpu.setPSTATE(0);
 
     bool bgeTakenOk =
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // Cas non pris : N=1, V=0
+    // Not taken : N=1, V=0
     cpu.reset();
     cpu.setPC(0x00DC);
     cpuMemory.write32(0x00DC, 0x5400004A);
@@ -932,14 +932,14 @@ int runLegacyTests()
     cpu.setPC(0x00DC);
     cpuMemory.write32(0x00DC, 0x54000048);
 
-    // C=1 et Z=0 : branchement pris
+    // C=1 and Z=0 : branch taken
     cpu.setPSTATE(CPU::FLAG_C);
 
     bool bhiTakenOk =
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // C=1 et Z=1 : branchement non pris
+    // C=1 and Z=1 : branch not taken
     cpu.reset();
     cpu.setPC(0x00DC);
     cpuMemory.write32(0x00DC, 0x54000048);
@@ -961,7 +961,7 @@ int runLegacyTests()
 
     // B.LS +8 : 0x54000049
 
-    // Cas pris : C=0, Z=0
+    // Taken : C=0, Z=0
     cpu.reset();
     cpu.setPC(0x00DC);
     cpuMemory.write32(0x00DC, 0x54000049);
@@ -971,7 +971,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // Cas non pris : C=1, Z=0
+    // Not taken : C=1, Z=0
     cpu.reset();
     cpu.setPC(0x00DC);
     cpuMemory.write32(0x00DC, 0x54000049);
@@ -981,7 +981,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E0;
 
-    // Cas pris : C=1, Z=1
+    // Taken : C=1, Z=1
     cpu.reset();
     cpu.setPC(0x00DC);
     cpuMemory.write32(0x00DC, 0x54000049);
@@ -1006,7 +1006,7 @@ int runLegacyTests()
 
     // B.VS +8 : 0x54000046
 
-    // Cas pris : V=1
+    // Taken : V=1
     cpu.reset();
     cpu.setPC(0x00DC);
     cpuMemory.write32(0x00DC, 0x54000046);
@@ -1016,7 +1016,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00E4;
 
-    // Cas non pris : V=0
+    // Not taken : V=0
     cpu.reset();
     cpu.setPC(0x00DC);
     cpuMemory.write32(0x00DC, 0x54000046);
@@ -1040,7 +1040,7 @@ int runLegacyTests()
 
     // B.VC +8 : 0x54000047
 
-    // Cas pris : V=0
+    // Taken : V=0
     cpu.reset();
     cpu.setPC(0x00E8);
     cpuMemory.write32(0x00E8, 0x54000047);
@@ -1050,7 +1050,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00F0;
 
-    // Cas non pris : V=1
+    // Not taken : V=1
     cpu.reset();
     cpu.setPC(0x00E8);
     cpuMemory.write32(0x00E8, 0x54000047);
@@ -1074,7 +1074,7 @@ int runLegacyTests()
 
     // B.HS +8 : 0x54000042
 
-    // Cas pris : C=1
+    // Taken : C=1
     cpu.reset();
     cpu.setPC(0x00F4);
     cpuMemory.write32(0x00F4, 0x54000042);
@@ -1084,7 +1084,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x00FC;
 
-    // Cas non pris : C=0
+    // Not taken : C=0
     cpu.reset();
     cpu.setPC(0x00F4);
     cpuMemory.write32(0x00F4, 0x54000042);
@@ -1108,7 +1108,7 @@ int runLegacyTests()
 
     // B.LO +8 : 0x54000043
 
-    // Cas pris : C=0
+    // Taken : C=0
     cpu.reset();
     cpu.setPC(0x0100);
     cpuMemory.write32(0x0100, 0x54000043);
@@ -1118,7 +1118,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x0108;
 
-    // Cas non pris : C=1
+    // Not taken : C=1
     cpu.reset();
     cpu.setPC(0x0100);
     cpuMemory.write32(0x0100, 0x54000043);
@@ -1142,7 +1142,7 @@ int runLegacyTests()
 
     // B.MI +8 : 0x54000044
 
-    // Cas pris : N=1
+    // Taken : N=1
     cpu.reset();
     cpu.setPC(0x0110);
     cpuMemory.write32(0x0110, 0x54000044);
@@ -1152,7 +1152,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x0118;
 
-    // Cas non pris : N=0
+    // Not taken : N=0
     cpu.reset();
     cpu.setPC(0x0110);
     cpuMemory.write32(0x0110, 0x54000044);
@@ -1176,7 +1176,7 @@ int runLegacyTests()
 
     // B.PL +8 : 0x54000045
 
-    // Cas pris : N=0
+    // Taken : N=0
     cpu.reset();
     cpu.setPC(0x0120);
     cpuMemory.write32(0x0120, 0x54000045);
@@ -1186,7 +1186,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x0128;
 
-    // Cas non pris : N=1
+    // Not taken : N=1
     cpu.reset();
     cpu.setPC(0x0120);
     cpuMemory.write32(0x0120, 0x54000045);
@@ -1218,7 +1218,7 @@ int runLegacyTests()
         cpu.step() &&
         cpu.getPC() == 0x0138;
 
-    // Les flags ne doivent pas influencer B
+    // Flags must not affect B
     cpu.reset();
     cpu.setPC(0x0130);
     cpuMemory.write32(0x0130, 0x14000002);
@@ -1304,7 +1304,7 @@ int runLegacyTests()
     cpu.reset();
     cpu.setPC(0x0200);
 
-    // X1 contient l'adresse de destination
+    // X1 contains the destination address
     cpu.writeRegister(1, 0x0300);
 
     // BR X1
@@ -1329,14 +1329,14 @@ int runLegacyTests()
 
     // ============================================================
     // V0.060 — Test BLR
-    // BLR X1 : saute vers l'adresse contenue dans X1
+    // BLR X1: branch to the address stored in X1
     // ============================================================
 
     cpu.reset();
 
     cpu.setPC(0x0400);
 
-    // X1 contient l'adresse cible
+    // X1 contains the target address
     cpu.writeRegister(1, 0x0500);
 
     // BLR X1
@@ -1360,7 +1360,7 @@ int runLegacyTests()
             << std::endl;
 
     // ============================================================
-    // V0.061 — Test ADD/SUB avec SP
+    // V0.061 — Test ADD/SUB with SP
     // ============================================================
 
     cpu.reset();
@@ -1391,7 +1391,7 @@ int runLegacyTests()
             << "\n";
 
     // ============================================================
-    // TEST SUB W immédiat (32 bits)
+    // TEST SUB W immediate (32 bits)
     // ============================================================
 
     cpu.reset();
@@ -1418,7 +1418,7 @@ int runLegacyTests()
     std::cout << "\n# TESTS PSTATE FLAGS\n";
 
     // SUB X2, X0, X1
-    // Encodage : 0xCB010002
+    // Encoding : 0xCB010002
 
     // ------------------------------------------------------------
     // FLAG Z : 10 - 10 = 0
@@ -1457,7 +1457,7 @@ int runLegacyTests()
             << "\n";
 
     // ------------------------------------------------------------
-    // FLAG C : 10 - 5 = 5, sans emprunt
+    // FLAG C : 10 - 5 = 5, without borrow
     // ------------------------------------------------------------
 
     cpu.reset();
@@ -1475,7 +1475,7 @@ int runLegacyTests()
             << "\n";
 
     // ------------------------------------------------------------
-    // FLAG V : débordement signé
+    // FLAG V : signed overflow
     // 0x7FFFFFFFFFFFFFFF - (-1) = 0x8000000000000000
     // ------------------------------------------------------------
 
@@ -1519,11 +1519,11 @@ int runLegacyTests()
             << "\n";
 
     // ============================================================
-    // V0.41 — TESTS ADDS IMMÉDIAT
+    // V0.41 — ADDS IMMEDIATE TESTS
     // ============================================================
 
     // ------------------------------------------------------------
-    // ADDS W immédiat : résultat normal
+    // ADDS W immediate : normal result
     // 10 + 10 = 20
     // ------------------------------------------------------------
 
@@ -1547,7 +1547,7 @@ int runLegacyTests()
             << "\n";
 
     // ------------------------------------------------------------
-    // ADDS W immédiat : retenue (Carry)
+    // ADDS W immediate : carry
     // 0xFFFFFFFF + 1 = 0
     // ------------------------------------------------------------
 
@@ -1571,7 +1571,7 @@ int runLegacyTests()
             << "\n";
 
     // ------------------------------------------------------------
-    // ADDS X immédiat : overflow signé
+    // ADDS X immediate : signed overflow
     // 0x7FFFFFFFFFFFFFFF + 1
     // = 0x8000000000000000
     // ------------------------------------------------------------
@@ -1596,20 +1596,20 @@ int runLegacyTests()
             << "\n";
 
     // ============================================================
-    // V0.37 — TESTS SECURISATION DES REGISTRES
+    // V0.37 — REGISTER ACCESS GUARD TESTS
     // ============================================================
 
-    // Test lecture XZR
+    // Test XZR read
     cpu.reset();
 
     bool xzrReadSafe =
         cpu.readRegister(31) == 0;
 
-    std::cout << "Lecture XZR securisee : "
+    std::cout << "XZR read guarded : "
             << (xzrReadSafe ? "OK" : "FAIL")
             << "\n";
 
-    // Test écriture XZR via instruction
+    // Test writing XZR through an instruction
     cpu.reset();
 
     cpu.writeRegister(0, 123);
@@ -1618,16 +1618,16 @@ int runLegacyTests()
     bool xzrWriteSafe =
         cpu.readRegister(31) == 999;
 
-    std::cout << "Ecriture registre X31 : "
+    std::cout << "Write register X31 : "
             << (xzrWriteSafe ? "OK" : "FAIL")
             << "\n";
 
-    // Test registre invalide
+    // Invalid register test
     bool invalidRegisterSafe =
         !cpu.writeRegister(32, 123) &&
         cpu.hasError();
 
-    std::cout << "Registre invalide securise : "
+    std::cout << "Invalid register guarded : "
             << (invalidRegisterSafe ? "OK" : "FAIL")
             << "\n";
 
@@ -1635,12 +1635,12 @@ int runLegacyTests()
           << (nopExecuted ? "OK" : "FAIL")
           << "\n";
 
-    std::cout << "SWITCH2EMU v0.058\n";
+    std::cout << "Instaurix v0.058\n";
     std::cout << "PAGED MEMORY / INTERRUPTS / TIMER\n";
     std::cout << "=================================\n\n";
 
     // =========================================================
-    // MEMOIRE
+    // MEMORY
     // =========================================================
 
     Memory memory(0x2000);
@@ -1793,7 +1793,7 @@ int runLegacyTests()
     bool idRead =
         bus.read32(0x1000) == 0x53543245;
 
-    std::cout << "Lecture ID       : "
+    std::cout << "Read ID       : "
               << (idRead ? "OK" : "FAIL")
               << "\n";
 
@@ -1842,7 +1842,7 @@ int runLegacyTests()
               << "\n";
 
     // =========================================================
-    // ROUTAGE MMIO
+    // MMIO ROUTING
     // =========================================================
 
     bus.write32(
@@ -1852,12 +1852,12 @@ int runLegacyTests()
     bool mmioRouting =
         testDevice.read32(0x04) == 0x11223344;
 
-    std::cout << "Routage MMIO     : "
+    std::cout << "MMIO routing     : "
               << (mmioRouting ? "OK" : "FAIL")
               << "\n";
 
     // =========================================================
-    // LECTURE SEULE
+    // READ ONLY
     // =========================================================
 
     bus.clearError();
@@ -1869,7 +1869,7 @@ int runLegacyTests()
     bool idReadOnly =
         bus.read32(0x1000) == 0x53543245;
 
-    std::cout << "ID lecture seule : "
+    std::cout << "Read-only ID : "
               << (idReadOnly ? "OK" : "FAIL")
               << "\n";
 
@@ -1887,7 +1887,7 @@ int runLegacyTests()
               << "\n";
 
     // =========================================================
-    // ACCES MMIO INVALIDE
+    // INVALID MMIO ACCESS
     // =========================================================
 
     bus.clearError();
@@ -1899,7 +1899,7 @@ int runLegacyTests()
     bool invalidMmio =
         bus.hasError();
 
-    std::cout << "Acces MMIO invalide : "
+    std::cout << "Invalid MMIO access : "
               << (invalidMmio ? "OK" : "FAIL")
               << "\n";
 
@@ -1911,7 +1911,7 @@ int runLegacyTests()
     }
 
     // =========================================================
-    // DEPASSEMENT MMIO
+    // MMIO BOUNDARY CROSSING
     // =========================================================
 
     bus.clearError();
@@ -1921,12 +1921,12 @@ int runLegacyTests()
     bool mmioOverflow =
         bus.hasError();
 
-    std::cout << "Depassement MMIO : "
+    std::cout << "MMIO boundary crossing : "
               << (mmioOverflow ? "OK" : "FAIL")
               << "\n";
 
     // =========================================================
-    // TEST CHEVAUCHEMENT
+    // OVERLAP TEST
     // =========================================================
 
     TestDevice secondDevice;
@@ -1938,7 +1938,7 @@ int runLegacyTests()
             secondDevice,
             "Overlap");
 
-    std::cout << "Chevauchement    : "
+    std::cout << "Overlap    : "
               << (overlapTest ? "OK" : "FAIL")
               << "\n";
 
@@ -1952,18 +1952,18 @@ int runLegacyTests()
     Memory pagedMemory(0x10000);
 
     // ---------------------------------------------------------
-    // Page jamais utilisée
+    // Previously unused page
     // ---------------------------------------------------------
 
     bool untouchedPage =
         pagedMemory.read32(0x4000) == 0;
 
-    std::cout << "Page non allouee     : "
+    std::cout << "Unallocated page     : "
               << (untouchedPage ? "OK" : "FAIL")
               << "\n";
 
     // ---------------------------------------------------------
-    // Ecriture dans une page
+    // Write to a page
     // ---------------------------------------------------------
 
     pagedMemory.write32(
@@ -1974,12 +1974,12 @@ int runLegacyTests()
         pagedMemory.read32(0x4000)
         == 0x12345678;
 
-    std::cout << "Ecriture page        : "
+    std::cout << "Write page        : "
               << (pageWrite ? "OK" : "FAIL")
               << "\n";
 
     // ---------------------------------------------------------
-    // Frontière de page
+    // Page boundary
     // ---------------------------------------------------------
 
     pagedMemory.write8(
@@ -1994,7 +1994,7 @@ int runLegacyTests()
         pagedMemory.read8(0x0FFF) == 0xAA &&
         pagedMemory.read8(0x1000) == 0xBB;
 
-    std::cout << "Frontiere de page    : "
+    std::cout << "Page boundary    : "
               << (pageBoundary ? "OK" : "FAIL")
               << "\n";
 
@@ -2031,7 +2031,7 @@ int runLegacyTests()
               << "\n";
 
     // ---------------------------------------------------------
-    // Mémoire virtuelle de 12 Go
+    // 12 GiB virtual memory
     // ---------------------------------------------------------
 
     Memory largeMemory(
@@ -2049,17 +2049,17 @@ int runLegacyTests()
             0x80000000ULL)
         == 0xCAFEBABE;
 
-    std::cout << "Memoire 12 Go        : "
+    std::cout << "12 GiB memory        : "
               << (largeMemoryTest ? "OK" : "FAIL")
               << "\n";
 
     // =========================================================
-    // FIN
+    // END
     // =========================================================
 
     std::cout << "\n=================================\n";
     std::cout << "V0.19 PAGED MEMORY\n";
-    std::cout << "TESTS TERMINES\n";
+    std::cout << "TESTS COMPLETE\n";
     std::cout << "=================================\n";
 
     // ============================================================
@@ -2071,18 +2071,18 @@ int runLegacyTests()
 
     cpu.reset();
 
-    // X0 contient la valeur à stocker
+    // X0 contains the value to store
     cpu.writeRegister(0, 0x1122334455667788ULL);
 
-    // X1 contient l'adresse mémoire
+    // X1 contains the memory address
     cpu.writeRegister(1, 0x0800);
 
     // STR X0, [X1, #0]
-    // Encodage : F9000020
+    // Encoding : F9000020
     cpuMemory.write32(0x0100, 0xF9000020);
 
     // LDR X2, [X1, #0]
-    // Encodage : F9400022
+    // Encoding : F9400022
     cpuMemory.write32(0x0104, 0xF9400022);
 
     cpu.setPC(0x0100);
@@ -2095,15 +2095,15 @@ int runLegacyTests()
         cpu.step() &&
         cpu.readRegister(2) == 0x1122334455667788ULL;
 
-    std::cout << "STR X0 mémoire     : "
+    std::cout << "STR X0 memory     : "
             << (strExecuted ? "OK" : "FAIL")
             << "\n";
 
-    std::cout << "LDR X2 mémoire     : "
+    std::cout << "LDR X2 memory     : "
             << (ldrExecuted ? "OK" : "FAIL")
             << "\n";
 
-    std::cout << "\nV0.063 LDR / STR avec offset\n";
+    std::cout << "\nV0.063 LDR / STR with offset\n";
     std::cout << "============================\n";
 
     cpu.reset();
@@ -2133,7 +2133,7 @@ int runLegacyTests()
     std::cout << "LDR X2 [X1,#8] : "
             << (ldrOffsetExecuted ? "OK" : "FAIL") << "\n";
 
-    std::cout << "\nV0.064 LDR / STR avec SP\n";
+    std::cout << "\nV0.064 LDR / STR with SP\n";
     std::cout << "=======================\n";
 
     cpu.reset();
@@ -2163,7 +2163,7 @@ int runLegacyTests()
     std::cout << "LDR X2 [SP,#8] : "
             << (ldrSPExecuted ? "OK" : "FAIL") << "\n";
 
-    std::cout << "\nV0.065 Plusieurs offsets et limites\n";
+    std::cout << "\nV0.065 Multiple offsets and bounds\n";
     std::cout << "==================================\n";
 
     cpu.reset();
@@ -2211,7 +2211,7 @@ int runLegacyTests()
     std::cout << "Offset #24       : "
             << (offset24 ? "OK" : "FAIL") << "\n";
 
-    // Test accès hors limites
+    // Out-of-bounds access test
     cpu.reset();
 
     cpu.writeRegister(0, 0x123456789ABCDEF0ULL);
@@ -2224,7 +2224,7 @@ int runLegacyTests()
 
     bool invalidAccess = !cpu.step();
 
-    std::cout << "Limite mémoire    : "
+    std::cout << "Memory boundary    : "
             << (invalidAccess ? "OK" : "FAIL") << "\n";
 
     std::cout << "\nV0.066 LDR / STR 32 bits\n";
@@ -2257,7 +2257,7 @@ int runLegacyTests()
     std::cout << "LDR W2 [X1,#8] : "
             << (ldrWExecuted ? "OK" : "FAIL") << "\n";
 
-    std::cout << "\nV0.067 LDR / STR 32 bits avec SP\n";
+    std::cout << "\nV0.067 LDR / STR 32 bits with SP\n";
     std::cout << "===============================\n";
 
     cpu.reset();
@@ -2287,7 +2287,7 @@ int runLegacyTests()
     std::cout << "LDR W2 [SP,#8] : "
             << (ldrWSPExecuted ? "OK" : "FAIL") << "\n";
 
-    std::cout << "\nV0.068 LDR / STR pré-indexé\n";
+    std::cout << "\nV0.068 LDR / STR pre-indexed\n";
     std::cout << "===========================\n";
 
     cpu.reset();
@@ -2321,10 +2321,10 @@ int runLegacyTests()
             << (ldrPreIndexExecuted ? "OK" : "FAIL") << "\n";
 
     // ============================================================
-    // V0.069 - LDR / STR 64 bits post-indexés
+    // V0.069 - LDR / STR 64 bits post-indexed
     // ============================================================
 
-    std::cout << "\nV0.069 LDR / STR post-indexé 64 bits\n";
+    std::cout << "\nV0.069 LDR / STR post-indexed 64 bits\n";
     std::cout << "====================================\n";
 
     cpu.reset();
@@ -2359,10 +2359,10 @@ int runLegacyTests()
 
 
     // ============================================================
-    // V0.070 - LDR / STR 32 bits pré-indexés
+    // V0.070 - LDR / STR 32 bits pre-indexed
     // ============================================================
 
-    std::cout << "\nV0.070 LDR / STR pré-indexé 32 bits\n";
+    std::cout << "\nV0.070 LDR / STR pre-indexed 32 bits\n";
     std::cout << "===================================\n";
 
     cpu.reset();
@@ -2383,7 +2383,7 @@ int runLegacyTests()
         cpu.readRegister(1) == 0x0808 &&
         cpuMemory.read32(0x0808) == 0xAABBCCDD;
 
-    // On remet X1 à son adresse initiale avant le LDR
+    // Restore the initial X1 address before LDR
     cpu.writeRegister(1, 0x0800);
 
     bool ldrPre32 =
@@ -2399,10 +2399,10 @@ int runLegacyTests()
 
 
     // ============================================================
-    // V0.071 - LDR / STR 32 bits post-indexés
+    // V0.071 - LDR / STR 32 bits post-indexed
     // ============================================================
 
-    std::cout << "\nV0.071 LDR / STR post-indexé 32 bits\n";
+    std::cout << "\nV0.071 LDR / STR post-indexed 32 bits\n";
     std::cout << "====================================\n";
 
     cpu.reset();
@@ -2423,7 +2423,7 @@ int runLegacyTests()
         cpuMemory.read32(0x0800) == 0x12345678 &&
         cpu.readRegister(1) == 0x0808;
 
-    // On remet X1 à son adresse initiale avant le LDR
+    // Restore the initial X1 address before LDR
     cpu.writeRegister(1, 0x0800);
 
     bool ldrPost32 =
@@ -2439,10 +2439,10 @@ int runLegacyTests()
 
 
     // ============================================================
-    // V0.072 - LDR / STR avec registre d'offset
+    // V0.072 - LDR / STR with register offset
     // ============================================================
 
-    std::cout << "\nV0.072 LDR / STR registre offset\n";
+    std::cout << "\nV0.072 LDR / STR register offset\n";
     std::cout << "================================\n";
 
     cpu.reset();
@@ -2540,12 +2540,12 @@ int runLegacyTests()
             << std::endl;
 
     // ============================================================
-    // V0.075 — LDRSB / LDRSH (chargements signés)
+    // V0.075 — LDRSB / LDRSH (signed loads)
     // ============================================================
 
     std::cout << "\n# V0.075 LDRSB / LDRSH\n";
 
-    // LDRSB X2, [X1,#8] : 0x80 doit être étendu avec le signe.
+    // LDRSB X2, [X1,#8]: sign-extend 0x80.
     cpu.reset();
     cpu.writeRegister(1, 0x0800);
     cpuMemory.write8(0x0808, 0x80);
@@ -2556,10 +2556,10 @@ int runLegacyTests()
         cpu.step() &&
         cpu.readRegister(2) == 0xFFFFFFFFFFFFFF80ULL;
 
-    std::cout << "LDRSB X2 [X1,#8] négatif : "
+    std::cout << "LDRSB X2 [X1,#8] negative : "
             << (ldrsbNegative ? "OK" : "FAIL") << '\n';
 
-    // LDRSB X2, [X1,#8] : une valeur positive ne doit pas être altérée.
+    // LDRSB X2, [X1,#8]: preserve a positive value.
     cpu.reset();
     cpu.writeRegister(1, 0x0800);
     cpuMemory.write8(0x0808, 0x7F);
@@ -2573,7 +2573,7 @@ int runLegacyTests()
     std::cout << "LDRSB X2 [X1,#8] positif : "
             << (ldrsbPositive ? "OK" : "FAIL") << '\n';
 
-    // LDRSH X2, [X1,#8] : imm12=4 est multiplié par 2.
+    // LDRSH X2, [X1,#8]: scale imm12=4 by 2.
     cpu.reset();
     cpu.writeRegister(1, 0x0800);
     cpuMemory.write16(0x0808, 0x8000);
@@ -2584,10 +2584,10 @@ int runLegacyTests()
         cpu.step() &&
         cpu.readRegister(2) == 0xFFFFFFFFFFFF8000ULL;
 
-    std::cout << "LDRSH X2 [X1,#8] négatif : "
+    std::cout << "LDRSH X2 [X1,#8] negative : "
             << (ldrshNegative ? "OK" : "FAIL") << '\n';
 
-    // LDRSH X2, [X1,#8] : vérifie aussi le cas positif.
+    // LDRSH X2, [X1,#8]: also check a positive value.
     cpu.reset();
     cpu.writeRegister(1, 0x0800);
     cpuMemory.write16(0x0808, 0x7FFF);
@@ -2602,7 +2602,7 @@ int runLegacyTests()
             << (ldrshPositive ? "OK" : "FAIL") << '\n';
 
     // ============================================================
-    // V0.076 — LDRSB / LDRSH vers W (extension de signe 32 bits)
+    // V0.076 — LDRSB / LDRSH to W (32-bit sign extension)
     // ============================================================
 
     std::cout << "\n# V0.076 LDRSB / LDRSH W\n";
@@ -2625,7 +2625,7 @@ int runLegacyTests()
     std::cout << "LDRSH W2 [X1,#8] : " << (ldrshW ? "OK" : "FAIL") << '\n';
 
     // ============================================================
-    // V0.077 — LDRSW (extension de signe 32 vers 64 bits)
+    // V0.077 — LDRSW (32-to-64-bit sign extension)
     // ============================================================
 
     std::cout << "\n# V0.077 LDRSW\n";
@@ -2640,10 +2640,10 @@ int runLegacyTests()
     std::cout << "LDRSW X2 [X1,#8] : " << (ldrsw ? "OK" : "FAIL") << '\n';
 
     // ============================================================
-    // V0.078 / V0.079 — accès octet et demi-mot indexés
+    // V0.078 / V0.079 — indexed byte and halfword accesses
     // ============================================================
 
-    std::cout << "\n# V0.078 / V0.079 accès indexés octet/demi-mot\n";
+    std::cout << "\n# V0.078 / V0.079 indexed byte/halfword accesses\n";
 
     cpu.reset();
     cpu.writeRegister(0, 0xAB);
@@ -2679,10 +2679,10 @@ int runLegacyTests()
     std::cout << "LDRH W2 [X1],#2  : " << (ldrhPost ? "OK" : "FAIL") << '\n';
 
     // ============================================================
-    // V0.082 à V0.084 — adresses et branches relatives
+    // V0.082 to V0.084 — PC-relative addresses and branches
     // ============================================================
 
-    std::cout << "\n# V0.082 à V0.084 ADR / branches relatives\n";
+    std::cout << "\n# V0.082 to V0.084 ADR / branches relatives\n";
 
     cpu.reset();
     cpuMemory.write32(0x0000, 0x10000082); // ADR X2, #16

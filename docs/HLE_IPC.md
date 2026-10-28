@@ -1,68 +1,49 @@
-# Premier transport IPC HLE
+# Initial HLE IPC transport
 
-Étape du 25 octobre 2026 : un programme ELF ARM64 ouvre une session vers un service local, écrit une requête dans sa région de thread et lit la réponse. Le transport emploie un sous-ensemble HIPC/CMIF étudié publiquement ; le port et les commandes du service sont propres au projet. Aucune compatibilité native Switch 2 n'est revendiquée. Une extension permet maintenant [les buffers Send/Receive](HLE_IPC_BUFFERS.md) ; le format sans descripteurs décrit ici reste accepté.
+Milestone dated October 25, 2026. An ARM64 ELF opens a local service, writes a thread-region request and reads its response. Transport uses a publicly studied HIPC/CMIF subset; service names/commands are project-owned. No native Switch 2 compatibility is claimed. Later [Send/Receive buffers](HLE_IPC_BUFFERS.md) extend this descriptor-free format.
 
-## Connexion et requête
-
-| SVC | Entrée | Sortie |
+| SVC | Input | Output |
 | --- | --- | --- |
-| 0x1F ConnectToNamedPort | X1 = nom terminé par zéro, en RAM lisible | W0 = résultat ; W1 = handle de session sur succès |
-| 0x21 SendSyncRequest | W0 = handle de session | W0 = résultat du transport ; réponse dans le buffer IPC du thread |
-| 0x16 CloseHandle | W0 = handle | W0 = résultat |
+| 0x1F ConnectToNamedPort | X1=NUL-terminated readable RAM name | W0=result, W1=session handle on success |
+| 0x21 SendSyncRequest | W0=session handle | W0=transport result; reply in current thread IPC buffer |
+| 0x16 CloseHandle | W0=handle | W0=result |
 
-Le seul port enregistré est **`emu:demo`**. Les noms sont lus dans une limite locale de 12 octets, terminaison comprise. Un port inconnu renvoie une erreur ; aucune connexion implicite vers des services de console n'est créée.
+Initially the only port is **emu:demo**. Names are bounded to 12 bytes including termination. Unknown ports fail rather than implicitly opening console services. [sm:](HLE_SM.md) was added later.
 
-Les sessions utilisent la même table de 128 handles que les événements et le second thread. Le port sm: et l'obtention de nouvelles sessions par MoveHandle sont maintenant décrits dans [HLE_SM.md](HLE_SM.md). Un slot est libéré à la fermeture, sans réattribuer l'ancien identifiant. Une session n'est ni un événement ni un thread ; SignalEvent, ClearEvent, ResetSignal et StartThread la refusent. WaitSynchronization sur cette session synchrone locale est explicitement refusé : aucun serveur invité ne gère d'état d'attente de session dans cette étape.
+Sessions share the 128-slot handle table with events/threads. Close frees slots, never old IDs. Session handles are not events or threads and reject SignalEvent/ClearEvent/ResetSignal/StartThread. Waiting on these local synchronous sessions is explicitly unsupported: no guest server manages their wait state. A stateless host service session can be used sequentially by both guest threads; requests reply immediately without a server process.
 
-La session est un objet hôte sans état de service et peut être utilisée successivement par les deux threads du même processus. L'exécution reste séquentielle sur le CPU simulé. SendSyncRequest répond immédiatement et ne crée pas de processus serveur.
+## Buffer and format
 
-## Buffer et format acceptés
+Requests use the current thread's canonical first **256 local-region bytes**, initially main 0xFEE200 and worker 0xC11200. The dispatcher does not accept an arbitrary guest-provided IPC pointer. Each thread has its own buffer.
 
-SendSyncRequest utilise les **256 premiers octets** de la région locale du thread courant : 0xFEE200 pour le principal dans la machine de 16 Mio, 0xC11200 pour le second. Le répartiteur emploie la région canonique du processus, sans lire un pointeur arbitraire dans les arguments du programme. Chaque thread possède son propre buffer.
+The whole buffer must be readable/writable RAM. Requests are copied into a bounded host array, validated, and answered through a separately built zero-padded reply and transactional memory copy. Validation errors preserve requests; bytes after the buffer are untouched.
 
-Le buffer entier doit être en RAM lisible et inscriptible avant toute copie. La requête est copiée dans un tableau hôte borné, puis validée. Une réponse est construite séparément, avec les octets inutilisés mis à zéro, puis écrite par la copie mémoire transactionnelle. Une erreur de validation conserve les octets de la requête. Les octets après le buffer ne sont pas modifiés.
+Initial format: HIPC **type 4**, no descriptors/PID/transferred handles/receive list; Header1 contains only RawCount, **8–62 32-bit words**. **SFCI** CMIF at offset 16 has version 0, command ID and zero token. Inline parameters start at 32; RawCount includes 16 total padding bytes.
 
-Le sous-ensemble accepte seulement :
+Replies have HIPC type 0, **SFCO** at +16, service result +24 and data +32. RawCount is 10 for a u64 result, 8 for a service error without data. Later [A/B](HLE_IPC_BUFFERS.md), [PID/MoveHandle](HLE_SM.md), and [session controls](HLE_CLIENT.md) have separately bounded formats. Domains were absent at this initial milestone; later libnx domain support is documented separately. TIPC, static descriptors and general handle transfers remain outside it.
 
-- HIPC type **4**, sans descripteurs, PID, handles transférés ni liste de réception.
-- Header1 contenant uniquement RawCount, de 8 à 62 mots de 32 bits selon la taille du message.
-- En-tête CMIF **SFCI**, version 0, identifiant de commande et token nul, aligné à l'offset 16.
-- Paramètres intégrés au message à partir de l'offset 32, avec les 16 octets de padding total CMIF prévus dans RawCount.
+## Demo commands and errors
 
-La réponse contient un en-tête HIPC de type 0, puis **SFCO** à l'offset 16, le résultat du service à +24 et les éventuelles données à +32. RawCount vaut 10 pour une réponse avec un entier de 64 bits, 8 pour une erreur de service sans données.
-
-Les autres formes sont refusées explicitement, à l'exception des extensions [Send/Receive](HLE_IPC_BUFFERS.md), [SendPid/MoveHandle](HLE_SM.md) et des [contrôles de session](HLE_CLIENT.md). Les domaines, TIPC, les descripteurs statiques et les transferts généraux de handles restent absents.
-
-## Service de démonstration
-
-| Commande | Paramètres | Réponse |
+| Command | Input | Result |
 | --- | --- | --- |
-| 0 Add | Deux entiers non signés de 64 bits, exactement 16 octets | Somme modulo 2^64 |
-| 1 GetVirtualTime | Aucun paramètre | Nanosecondes de l'horloge virtuelle locale |
+| 0 Add | Exactly two unsigned u64 values / 16 bytes | Sum modulo 2^64 |
+| 1 GetVirtualTime | No parameters | Local virtual nanoseconds |
 
-Un identifiant de commande inconnu ou des paramètres de mauvaise taille produisent une réponse SFCO avec une erreur de service. W0 reste zéro parce que le transport s'est déroulé correctement. Une erreur d'enveloppe, de handle ou de mémoire est une erreur de transport dans W0, sans fausse réponse de succès.
+Unknown commands or wrong sizes produce SFCO service errors with W0=0, since transport succeeded. Envelope/handle/memory errors return transport errors in W0 without a fake success response.
 
-Les codes de démonstration utilisent le module local 511 : InvalidMessage=0x3FF, UnsupportedFormat=0x5FF, UnknownCommand=0x7FF, PortNotFound=0x9FF, InvalidArguments=0xBFF. Ils ne sont pas présentés comme des erreurs natives de la console. Les erreurs de mémoire et de handles emploient les catégories déjà présentes dans le profil HLE.
-
-Une erreur de transport conserve ici la session pour permettre de corriger la requête. Les comportements natifs de fermeture automatique en cas d'erreur ne sont pas reproduits. Un rechargement réussi réinitialise la table ; un chargement échoué garde la session existante.
-
-## Démonstration et vérification
+Local module 511 results: InvalidMessage=0x3FF, UnsupportedFormat=0x5FF, UnknownCommand=0x7FF, PortNotFound=0x9FF, InvalidArguments=0xBFF. These are not claimed as native console errors. Existing HLE categories cover memory/handles. Transport errors preserve the session for correction; native automatic closure behavior is not modeled. Successful reload resets sessions; failed loading preserves them.
 
 ```powershell
-.\build\Debug\Switch2Emu.exe .\tests\programs\hle_ipc\program.elf 1000 --hle-reference
+.\build\Debug\Instaurix.exe .\tests\programs\hle_ipc\program.elf 1000 --hle-reference
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-L'ELF termine en **116 instructions**. Le principal calcule 20+35=55 via le service. Le second emploie la même session pour calculer 44+55=99 dans son propre buffer. Le principal attend sa fin, vérifie que sa réponse est restée intacte, demande le temps virtuel puis ferme la session.
+The ELF exits after **116 instructions**. Main requests 20+35=55; worker uses the same session in its own buffer for 44+55=99. Main joins, checks its unchanged reply, queries time and closes the session. Tests cover names/envelopes, service-versus-transport errors, permissions, typed/invalid handles, shared quota and one-instruction slicing.
 
-Le banc vérifie aussi les limites de noms et d'enveloppes, les erreurs de service séparées des erreurs de transport, les droits mémoire, les types et identifiants de handles, l'épuisement partagé des ressources et l'identité du résultat avec des budgets d'une instruction.
+The historical next tasks were buffer descriptors and SM. Demo services do not replace game services; guest GPU/native application formats require separate implementation. Transport/demo code is project-owned; public sources were consulted October 25, 2026.
 
-Les descripteurs Send/Receive sont maintenant réalisés dans [HLE_IPC_BUFFERS.md](HLE_IPC_BUFFERS.md). Prochain jalon : gestionnaire de services avec transfert de handles de session. Le service de démonstration ne remplace pas les services attendus par un jeu ; le GPU et les formats d'applications natives restent absents.
+## Reference links
 
-## Sources étudiées
-
-- [SwitchBrew SVC](https://switchbrew.org/wiki/SVC) : registres de ConnectToNamedPort et SendSyncRequest.
-- [SwitchBrew HIPC](https://switchbrew.org/wiki/IPC_Marshalling) : structure du message, compteurs et padding CMIF.
-- [libnx cmif.h](https://github.com/switchbrew/libnx/blob/master/nx/include/switch/sf/cmif.h) : en-têtes SFCI/SFCO et construction des messages.
-
-Sources consultées le 25 octobre 2026 ; code du transport et service de démonstration écrits dans ce projet.
+- [SwitchBrew system calls](https://switchbrew.org/wiki/SVC)
+- [SwitchBrew IPC marshalling](https://switchbrew.org/wiki/IPC_Marshalling)
+- [libnx cmif.h](https://github.com/switchbrew/libnx/blob/master/nx/include/switch/sf/cmif.h)

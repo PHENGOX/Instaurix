@@ -1,75 +1,64 @@
-# Audit CPU : premier palier entier ARM64
+# CPU audit: initial ARM64 integer milestone
 
-État vérifié le 24 octobre 2026. La priorité de travail est le CPU ; aucun nouveau service HLE ni IPC n'a été ajouté pendant ce palier.
+Verified October 24, 2026. This milestone prioritized CPU consolidation and added no HLE/IPC services. Counts below describe that historical milestone; current validation is in README.
 
-## Résultat
+## Results
 
-Le premier palier comptait 18 tests CTest et 32 832 comparaisons indépendantes sur 640 variantes. **Le corpus entier couvre maintenant 41 304 comparaisons sur 775 variantes**, avec CCMP/CCMN W/X, immédiats et registres, et encodages invalides supplémentaires. La suite complète compte 24 tests CTest, avec les paliers FP/SIMD, sous-normaux, SIMD arithmétique et atomiques. Un programme C mêlant calculs 32/64 bits produit les mêmes résultats dans l'émulateur et en exécution native x64 :
+The initial milestone had 18 CTest suites and 32,832 independent comparisons over 640 variants. The expanded integer corpus contains **41,304 comparisons over 775 variants**, adding W/X CCMP/CCMN, immediate/register forms and invalid encodings. With subsequent FP/SIMD, subnormal, arithmetic SIMD and atomic milestones, the suite then contained 24 tests.
 
-- 64 bits : `0x78335ef4bc270ff5` ;
-- 32 bits : `0xc5473408` ;
-- exécution invitée : **303 instructions**, pile restaurée et fin explicite.
+A mixed 32/64-bit C calculation matches native x64 execution: 64-bit result `0x78335ef4bc270ff5`, 32-bit result `0xc5473408`, **303 guest instructions**, restored stack and explicit exit. This validates an integer subset, not complete ARM64 or Switch 2 compatibility.
 
-Il s'agit d'un palier de validation du calcul entier, pas d'un CPU ARM64 complet ni d'une preuve de compatibilité Switch 2.
+## Audit findings and corrections
 
-## Constats et corrections
-
-| Point audité | Constat avant ce palier | Changement vérifié |
+| Area | Earlier issue | Verified change |
 | --- | --- | --- |
-| ADD/SUB immédiats | Variantes SUBS absentes ; WSP et SP mal distingués de ZR dans certaines formes | Traitement commun 32/64 bits, source/destination SP selon l'encodage, destination ZR pour les formes avec flags |
-| Addition avec retenue | ADC/SBC absents | Calcul commun de la retenue et du débordement, avec préservation des autres bits PSTATE |
-| Décalages | Les décodeurs de registre ne traitaient que des formes simples | Validation des quantités ; décalages signés/logiques et rotations dans les formes acceptées |
-| Logique immédiate | La destination 31 était toujours ignorée | Destination SP dans les formes sans flags ; ANDS/TST avec N/Z et C/V remis à zéro |
-| Conditions | Nombreux blocs de branchement séparés | Une évaluation des 16 codes de condition, partagée par branchements et sélections |
-| Adresses relatives | Calculs passant inutilement par des additions signées | Déplacements relatifs calculés sans débordement signé C++ |
-| Accès mémoire scalaires | Extension et mise à l'échelle d'offset registre non interprétées complètement ; code dupliqué par largeur | Décodage commun des tailles, extensions, offsets et mises à jour de base |
-| Encodages inconnus | Certains masques acceptaient trop largement des variantes | Rejet explicite des combinaisons réservées ou non modélisées dans les familles traitées |
-| Test historique SP | Deux tests étiquetés XZR ne vérifiaient que la conservation de X0 | Libellés corrigés et vérification de SP après ADD/SUB immédiats |
+| Immediate ADD/SUB | Missing SUBS and incorrect WSP/SP versus ZR distinctions | Shared 32/64-bit handling; encoding-dependent SP operands and ZR flag-setting destinations |
+| Carry arithmetic | Missing ADC/SBC | Common carry/overflow calculation preserving other PSTATE bits |
+| Shifts | Register decoders accepted only simple forms | Validated amounts, signed/logical shifts and rotations |
+| Logical immediates | Destination 31 always ignored | SP for non-flag forms; ANDS/TST set N/Z and clear C/V |
+| Conditions | Separate branch blocks | Shared evaluator for all 16 conditions, branches and selections |
+| PC-relative addresses | Unnecessary signed additions | Relative displacement without C++ signed overflow |
+| Scalar memory | Incomplete extension/scaling and duplicated width handling | Common size, extension, offset and base-update decoding |
+| Unknown encodings | Overly broad masks | Explicit rejection of reserved or unmodeled combinations |
+| Historical SP tests | Two XZR-labeled checks only preserved X0 | Correct labels and actual SP checks after immediate ADD/SUB |
 
-Les sources sont maintenant réparties entre `cpu.cpp` pour l'exécution/décodage principal, `cpu_integer.cpp` pour le calcul entier, `cpu_load_store.cpp` pour les accès scalaires et `cpu_pair.cpp` pour les paires. Les blocs remplacés ont été retirés ; ils ne restent pas comme chemins concurrents.
+Code is split across cpu.cpp (execution/main decode), cpu_integer.cpp, cpu_load_store.cpp and cpu_pair.cpp. Replaced blocks were removed rather than retained as competing paths.
 
-## Familles couvertes par cette étape
+## Covered families
 
-| Famille | Formes implémentées et exercées |
+| Family | Implemented and exercised forms |
 | --- | --- |
-| Arithmétique | ADD/ADDS/SUB/SUBS immédiats, registres décalés et étendus ; ADC/ADCS/SBC/SBCS ; alias CMP/CMN/NEG selon ces encodages |
-| Logique | AND/BIC/ORR/ORN/EOR/EON/ANDS/BICS sur registres décalés ; AND/ORR/EOR/ANDS immédiats |
-| Décalages et champs | LSLV/LSRV/ASRV/RORV ; SBFM/BFM/UBFM et leurs alias de décalage, extraction, insertion et extension ; EXTR/ROR |
-| Multiplication | MADD/MSUB, MUL/MNEG ; formes longues signées/non signées ; SMULH/UMULH |
-| Division | UDIV/SDIV W/X, y compris division par zéro et cas signé minimal divisé par -1 |
-| Bits et octets | RBIT, REV16, REV32/REV selon largeur, CLZ et CLS |
-| Conditions | CSEL/CSINC/CSINV/CSNEG ; B.cond et les branchements déjà présents |
-| Comparaisons conditionnelles | CCMP/CCMN W/X, registre ou immédiat 5 bits ; les 16 conditions et les 16 combinaisons NZCV initiales sont exercées ; flags immédiats de repli lorsque la condition échoue |
-| Mémoire scalaire | LDR/STR, formes signées, LDUR/STUR, offsets immédiats et registre UXTW/SXTW/LSL/SXTX, pré/post-index et lectures littérales W/X/SW |
+| Arithmetic | Immediate/shifted/extended ADD/ADDS/SUB/SUBS; ADC/ADCS/SBC/SBCS; applicable CMP/CMN/NEG aliases |
+| Logic | Shifted-register AND/BIC/ORR/ORN/EOR/EON/ANDS/BICS; immediate AND/ORR/EOR/ANDS |
+| Shifts/bitfields | LSLV/LSRV/ASRV/RORV; SBFM/BFM/UBFM and shift/extract/insert/extend aliases; EXTR/ROR |
+| Multiplication | MADD/MSUB, MUL/MNEG; signed/unsigned long forms; SMULH/UMULH |
+| Division | W/X UDIV/SDIV, including zero divisor and signed minimum divided by -1 |
+| Bits/bytes | RBIT, REV16, width-appropriate REV32/REV, CLZ and CLS |
+| Conditions | CSEL/CSINC/CSINV/CSNEG; B.cond and existing branches |
+| Conditional comparison | W/X CCMP/CCMN, register or 5-bit immediate; all 16 conditions and initial NZCV combinations; immediate fallback flags |
+| Scalar memory | LDR/STR and signed forms, LDUR/STUR, immediate and UXTW/SXTW/LSL/SXTX register offsets, pre/post-index, W/X/SW literals |
 
-Une famille annoncée ne signifie pas la prise en charge de toutes les extensions ARM ayant des noms proches. Les quantités de décalage et combinaisons réservées sont vérifiées. Les écritures W remettent à zéro la moitié haute de X. Les registres zéro et SP gardent une signification déterminée par la forme d'instruction.
+A family name does not imply all similarly named ARM extensions. Shift amounts and reserved combinations are checked. W writes clear upper X bits. ZR/SP interpretation depends on the instruction form.
 
-## Validation indépendante
+## Independent validation
 
-Les encodages sont produits par **Clang 18.1.6 via Zig 0.13.0**. Les résultats attendus sont générés par **Unicorn 2.1.4**, moteur ARM64 indépendant de notre interpréteur. Les scripts, l'assembleur et un manifeste lisible sont conservés avec les artefacts.
+Clang 18.1.6 through Zig 0.13.0 produces encodings. Unicorn 2.1.4 independently generates expected ARM64 results. Scripts, assembly and readable manifests accompany artifacts.
 
-Chaque cas compare les registres X0–X30, SP, NZCV et le prochain PC ; les cas mémoire comparent aussi une fenêtre de 512 octets. Les autres bits du PSTATE local doivent rester inchangés. Les encodages invalides sélectionnés doivent être refusés sans changer les registres. Les entrées incluent valeurs limites, retenues, signes, décalages, combinaisons de flags et données déterministes, avec graine `0xA6402026`.
+Cases compare X0–X30, SP, NZCV and next PC; memory cases also compare a 512-byte window. Other local PSTATE bits must remain unchanged. Selected invalid encodings must fail without register changes. Inputs cover boundaries, carry, signs, shifts, flag combinations and deterministic data seeded with `0xA6402026`.
 
-La comparaison C est un second contrôle : le même calcul unsigned, défini en C, est compilé pour le CPU hôte et pour l'invité. Elle vérifie un enchaînement d'instructions, des boucles et les résultats mémoire, en plus des tests instruction par instruction.
+The native-versus-guest unsigned C calculation separately checks instruction chains, loops and memory results. Unicorn can itself have limitations or bugs; a finite corpus is not full ISA or target-hardware validation. See [reproduction guide](../tests/programs/cpu_integer/README.md).
 
-Unicorn peut aussi avoir des limites ou erreurs. Le corpus est fini, ne couvre pas toute l'ISA et ne remplace pas une comparaison avec le matériel cible. Voir [le guide des tests et de reproduction](../tests/programs/cpu_integer/README.md).
+## Limits and next work
 
-## Limites explicites et suite CPU
+[Atomics/exclusives](CPU_ATOMICS.md) use a sequential model, without parallel multicore execution. [FP/SIMD](CPU_FP_SIMD.md) and its saved context remain partial. CCMP/CCMN are available, while further integer families remain absent. Unprivileged memory forms, PRFM and non-temporal pairs are unsupported; B/H/S/D/Q scalar/vector memory and S/D/Q pairs belong to the FP/SIMD milestone.
 
-- Opérations exclusives/atomiques ajoutées dans le [palier suivant](CPU_ATOMICS.md), selon un modèle séquentiel ; toujours aucun modèle d'exécution parallèle multicoeur.
-- Premier sous-ensemble flottant/Advanced SIMD et état de contexte ajoutés dans le [palier FP/SIMD](CPU_FP_SIMD.md), avec des limites explicites.
-- CCMP/CCMN sont maintenant pris en charge ; d'autres familles et extensions entières restent absentes.
-- Les variantes mémoire non privilégiées, PRFM et les paires non temporelles restent absents. Les transferts scalaires/vectoriels B/H/S/D/Q et paires S/D/Q sont ajoutés dans le palier FP/SIMD.
-- La pile utilisée comme base mémoire doit être alignée sur 16 octets dans le profil local. Les chevauchements de base/destination avec writeback non modélisés sont refusés.
-- Le modèle mémoire local refuse les débordements numériques d'adresse pour les transferts, au lieu de modéliser toutes les règles d'adressage d'un système complet. Les cas différentiels utilisent des adresses valides dans la fenêtre locale.
-- Toujours aucun JIT, MMU complète, gestionnaire d'exceptions privilégiées ou démarrage natif Switch 2.
+SP memory bases require 16-byte alignment. Unmodeled writeback overlaps are rejected. Local transfers reject numeric address overflow rather than model every full-system addressing rule; differential cases use valid local addresses. There is no JIT, complete MMU, privileged exception handler or native Switch 2 startup.
 
-Les paliers atomiques/exclusives et un premier sous-ensemble FP/SIMD avec état de contexte sont maintenant réalisés et documentés séparément. Les conversions entier/flottant et S/D et les calculs fusionnés sont également ajoutés. La suite doit traiter les cas flottants encore refusés et élargir les opérations vectorielles. La conformité continue à être présentée par familles vérifiées, sans annoncer un CPU « terminé » sur la seule base d'un nombre d'instructions.
+Continue validating implemented families, expanding floating-point/vector coverage and compiled targets; instruction counts alone cannot establish a finished CPU.
 
-## Références
+## Reference links
 
-- [Arm : aperçu officiel de l'ISA A64](https://developer.arm.com/-/media/Files/pdf/graphics-and-multimedia/ARMv8_InstructionSetOverview.pdf), notamment les familles de multiplication/division et les comportements limites de division.
-- [Arm : guide de référence A64](https://documentation-service.arm.com/static/5f3fa899428f7a6b3328fd44), pour les formes d'instructions.
-- [Unicorn : projet et moteur indépendant](https://github.com/unicorn-engine/unicorn), version de test 2.1.4 [publiée sur PyPI](https://pypi.org/project/unicorn/2.1.4/).
-
-Ces sources servent à la définition et à la comparaison ; aucune implémentation tierce n'est intégrée dans le cœur CPU du projet.
+- [Arm A64 instruction-set overview](https://developer.arm.com/-/media/Files/pdf/graphics-and-multimedia/ARMv8_InstructionSetOverview.pdf)
+- [Arm A64 load/store reference](https://documentation-service.arm.com/static/5f3fa899428f7a6b3328fd44)
+- [Unicorn independent reference engine](https://github.com/unicorn-engine/unicorn)
+- [Unicorn 2.1.4 release](https://pypi.org/project/unicorn/2.1.4/)

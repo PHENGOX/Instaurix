@@ -117,7 +117,7 @@ using namespace fp_detail;
 
 bool CPU::executeFloatingPoint(uint32_t ins)
 {
-    auto fail = [&]() { lastError = "Instruction ou mode FP/SIMD non pris en charge"; return false; };
+    auto fail = [&]() { lastError = "Unsupported FP/SIMD instruction or mode"; return false; };
     const unsigned rd = ins & 31, rn = (ins >> 5) & 31, rm = (ins >> 16) & 31;
     bool simdArithmetic=false;
     const bool simdArithmeticResult=executeSimdArithmetic(ins,simdArithmetic);

@@ -4,7 +4,7 @@
 bool CPU::executeLoadStore(uint32_t instruction)
 {
     const uint32_t rt = instruction & 31;
-    auto fail = [&]() { lastError = "Encodage ou acces LDR/STR non pris en charge"; return false; };
+    auto fail = [&]() { lastError = "Unsupported LDR/STR encoding or access"; return false; };
     if ((instruction & 0x3F000000) == 0x18000000) // LDR literal W/X or LDRSW
     {
         const unsigned opc = instruction >> 30;
@@ -24,7 +24,7 @@ bool CPU::executeLoadStore(uint32_t instruction)
     if ((opc == 2 && size == 3) || (opc == 3 && size >= 2)) return fail();
     const uint32_t rn = (instruction >> 5) & 31;
     const uint64_t base = rn == 31 ? sp : readArithmeticRegister(rn);
-    if (rn == 31 && (base & 15)) { lastError = "Pile LDR/STR non alignee"; return false; }
+    if (rn == 31 && (base & 15)) { lastError = "Unaligned LDR/STR stack"; return false; }
     uint64_t offset = 0;
     bool writeback = false, post = false;
     if (instruction & (1U<<24)) offset = uint64_t((instruction >> 10) & 4095) << size;

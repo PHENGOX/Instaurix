@@ -1,0 +1,36 @@
+POSIX reference source notices
+
+Original newlib/libgloss license files accompany the fixture.
+
+
+===== newlib/libc/syscalls/sysopen.c =====
+SHA-256: FD9D7ADD77F034517DAD2B9B1F0B42BD4E1ABEE561328B03BDFCB4DFE264BC74
+/* connector for open */
+
+
+
+===== newlib/libc/syscalls/sysread.c =====
+SHA-256: 9F74912F4D6BAB281BAA984FD677BE27F1FC12B720429BD562A45EE61D157189
+/* connector for read */
+
+
+
+===== newlib/libc/syscalls/sysclose.c =====
+SHA-256: F599FA341AD9BE4F65625C96F6DC24EA3FA610DE838339D336EC3FDB42CCA412
+/* connector for close */
+
+
+
+===== libgloss/libsysbase/open.c =====
+SHA-256: DA122643E9C8CE370A365BB7D7DD0DCA4D40F65A53A2A23F9E1B48602D9D1DD0
+No additional leading notice; original library license applies.
+
+
+===== libgloss/libsysbase/read.c =====
+SHA-256: 736C74B22EFAF6A5898059A56DE679FF646F894F6A0F8C481AD08F82494A9A4B
+No additional leading notice; original library license applies.
+
+
+===== libgloss/libsysbase/handle_manager.c =====
+SHA-256: 301ED2C3633E94DC92980E3069AE96E0493F08D3D59874363465F5B422E07F54
+No additional leading notice; original library license applies.

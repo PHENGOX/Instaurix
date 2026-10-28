@@ -1,4 +1,19 @@
 libnx b156b4774fb2df7b93402169509266da7547fc4c
+
+Additional linked source: nx/source/services/hid.c (covered by the libnx ISC licence below).
+Additional linked source: nx/source/services/time.c (covered by the libnx ISC licence below).
+
+===== source/kernel/shmem.c =====
+// Copyright 2017 plutoo
+
+===== source/kernel/random.c =====
+/*
+  chacha-ref.c version 20080118
+  D. J. Bernstein
+  Public domain.
+
+  Modified by plutoo.
+*/
 Notices from reference sources and headers (including headers not necessarily linked).
 The ISC licence is reproduced in tests/programs/libnx_*/LICENSE.libnx.md.
 Copyright 2017-2018 libnx Authors
@@ -2281,3 +2296,60 @@ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH RE
 ===== source/runtime/env.c =====
 // Copyright 2018 plutoo
 
+
+===== source/services/fs.c =====
+// Copyright 2017 plutoo
+
+===== source/kernel/condvar.c =====
+// Copyright 2018 plutoo
+
+===== source/sf/sessionmgr.c =====
+Covered by the libnx root ISC license; no additional source header notice.
+
+===== source/runtime/readtp.s =====
+Covered by the libnx root ISC license; no additional source header notice.
+
+===== source/services/vi.c =====
+Covered by the libnx root ISC license; no additional leading source notice.
+
+===== source/display/binder.c =====
+Covered by the libnx root ISC license; no additional leading source notice.
+
+===== source/display/parcel.c and buffer_producer.c =====
+Covered by the libnx root ISC license; buffer_producer.c is compiled as its unchanged prefix before the final unused GCC-only function. Original source hashes and compiled prefix hash accompany libnx_queue.
+
+===== source/display/native_window.c =====
+Covered by the libnx root ISC license; no additional leading source notice.
+
+===== source/services/nv.c =====
+Covered by the libnx root ISC license; no additional leading source notice.
+
+===== source/kernel/tmem.c =====
+// Copyright 2017 plutoo
+
+===== source/nvidia/map.c =====
+Covered by the libnx root ISC license; no additional leading source notice.
+
+===== source/nvidia/ioctl/nvmap.c =====
+Covered by the libnx root ISC license; no additional leading source notice.
+
+===== source/arm/cache.s =====
+Covered by the libnx root ISC license; no additional leading source notice.
+Linked unchanged for the nvMapCreate wrapper's conditional cache-maintenance path;
+the CPU-cacheable fixture does not execute that path.
+
+===== source/nvidia/fence.c and source/nvidia/ioctl/nvhost-ctrl.c =====
+Covered by the libnx root ISC license; no additional leading source notice.
+
+===== full source/display/buffer_producer.c in libnx_register =====
+Covered by the libnx root ISC license; no additional leading source notice.
+The complete original file is compiled unchanged with Arm GNU GCC 14.3.1.
+Earlier fixtures retain the unchanged prefix documented above.
+
+===== source/display/framebuffer.c =====
+Covered by the libnx root ISC license; no additional leading source notice.
+Compiled unchanged for the original framebufferCreate reference.
+
+===== source/nvidia/address_space.c and source/nvidia/ioctl/nvhost-as-gpu.c =====
+Covered by the libnx root ISC license; no additional leading source notices.
+Compiled unchanged for the original address-space Create/Close reference.

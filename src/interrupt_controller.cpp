@@ -16,7 +16,7 @@ bool InterruptController::checkIRQ(size_t irq)
 {
     if (irq >= IRQ_COUNT)
     {
-        lastError = "Numero IRQ invalide";
+        lastError = "Invalid IRQ number";
         return false;
     }
 
@@ -66,19 +66,19 @@ uint64_t InterruptController::readRegister(
 {
     if (offset >= size())
     {
-        lastError = "Offset IRQ hors limites";
+        lastError = "IRQ offset is out of bounds";
         return 0;
     }
 
     if (accessSize > size() - offset)
     {
-        lastError = "Acces IRQ hors limites";
+        lastError = "IRQ access is out of bounds";
         return 0;
     }
 
     if (accessSize != 4)
     {
-        lastError = "Taille IRQ invalide";
+        lastError = "Invalid IRQ access size";
         return 0;
     }
 
@@ -94,7 +94,7 @@ uint64_t InterruptController::readRegister(
             return pending & enable;
 
         default:
-            lastError = "Registre IRQ inconnu";
+            lastError = "Unknown IRQ register";
             return 0;
     }
 }
@@ -106,19 +106,19 @@ void InterruptController::writeRegister(
 {
     if (offset >= size())
     {
-        lastError = "Offset IRQ hors limites";
+        lastError = "IRQ offset is out of bounds";
         return;
     }
 
     if (accessSize > size() - offset)
     {
-        lastError = "Acces IRQ hors limites";
+        lastError = "IRQ access is out of bounds";
         return;
     }
 
     if (accessSize != 4)
     {
-        lastError = "Taille IRQ invalide";
+        lastError = "Invalid IRQ access size";
         return;
     }
 
@@ -133,11 +133,11 @@ void InterruptController::writeRegister(
             return;
 
         case 0x08:
-            lastError = "Registre IRQ ACTIVE en lecture seule";
+            lastError = "IRQ ACTIVE register is read-only";
             return;
 
         default:
-            lastError = "Registre IRQ inconnu";
+            lastError = "Unknown IRQ register";
             return;
     }
 }

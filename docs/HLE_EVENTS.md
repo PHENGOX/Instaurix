@@ -1,36 +1,34 @@
-# Événements et reprise du processus
+# Events and process resumption
 
-Étape d'intégration du 24 octobre 2026 : le CPU, la mémoire et les appels système travaillent ensemble sur un ELF ARM64 reproductible. Ce profil reste local, explicite (`--hle-reference`) et ne lance pas de jeux Switch 2.
+Integration milestone dated October 24, 2026. CPU, memory and system calls cooperate on a reproducible ARM64 ELF. The opt-in --hle-reference profile does not run Switch 2 games.
 
-## Périmètre
-
-| SVC | Entrée | Sortie sur succès |
+| SVC | Input | Success output |
 | --- | --- | --- |
-| 0x45 CreateEvent | aucune | W0=0, W1=handle d'écriture, W2=handle de lecture |
-| 0x11 SignalEvent | W0=handle d'écriture | W0=0 |
-| 0x12 ClearEvent | W0=un des deux handles | W0=0 |
+| 0x45 CreateEvent | None | W0=0, W1=write handle, W2=read handle |
+| 0x11 SignalEvent | W0=write handle | W0=0 |
+| 0x12 ClearEvent | W0=either endpoint | W0=0 |
 | 0x16 CloseHandle | W0=handle | W0=0 |
-| 0x17 ResetSignal | W0=handle de lecture signalé | W0=0 |
-| 0x18 WaitSynchronization | X1=tableau de handles, W2=nombre, X3=délai | W0=0, W1=index |
+| 0x17 ResetSignal | W0=signaled read handle | W0=0 |
+| 0x18 WaitSynchronization | X1=handle array, W2=count, X3=timeout | W0=0, W1=index |
 
-Ces conventions et les résultats proviennent de [SwitchBrew SVC](https://switchbrew.org/wiki/SVC), consulté le 24 octobre 2026. Elles ne prouvent pas l'identité des interfaces natives Switch 2.
+These public SwitchBrew conventions were consulted October 24; they do not prove native Switch 2 identity.
 
-Les événements conservent leur signal jusqu'à ClearEvent ou ResetSignal. Attendre ne consomme pas le signal. Les handles sont typés : seul le côté écriture peut signaler, seul le côté lecture peut attendre ou ResetSignal. ClearEvent accepte les deux côtés. ResetSignal sur un événement non signalé renvoie InvalidState (0xFA01).
+Signals persist until ClearEvent/ResetSignal; waiting does not consume them. Typed handles enforce write-only signaling, read-only waiting/ResetSignal, and either endpoint for ClearEvent. ResetSignal on an unsignaled event returns InvalidState=0xFA01.
 
-La table locale contient 128 handles. Une paire est créée entièrement ou pas du tout (OutOfHandles 0xD201). Les identifiants fermés ne sont jamais réattribués dans un processus, même lorsque leur emplacement est réutilisé. Chaque extrémité garde une référence à l'objet ; fermer une extrémité laisse l'autre valide. Les attentes gardent elles aussi leurs références.
+The table has **128 handles**. Event pairs allocate atomically or return OutOfHandles=0xD201. Closed IDs are never reused within a process even if slots are reused. Endpoints and waits retain shared object references, so closing one endpoint leaves the other valid.
 
-WaitSynchronization vérifie d'abord tout le tableau, limité à 64 handles de lecture. La mémoire doit être lisible et entièrement dans la RAM ; MMIO, débordements et traversées de pages interdites sont refusés. Le premier index signalé est retourné. Une erreur conserve X1. InvalidHandle=0xE401, InvalidPointer=0xE601, TimedOut=0xEA01 et TooManyHandles=0xEE01.
+WaitSynchronization validates the entire array, limited to **64 read handles**, in readable RAM. MMIO, overflow and forbidden-page crossings fail. It returns the first signaled index; errors preserve X1. Results include InvalidHandle=0xE401, InvalidPointer=0xE601, TimedOut=0xEA01 and TooManyHandles=0xEE01.
 
-## Suspension et reprise
+## Suspend/resume
 
-Le délai zéro est un sondage immédiat. Le délai -1 est une attente infinie. Si aucun objet n'est signalé, Machine retourne Stop::Waiting et conserve le contexte après le SVC. Appeler run à nouveau ne consomme aucune instruction tant que l'attente reste insatisfaite. Machine::signalEvent signale un handle d'écriture ; au prochain run, le résultat et l'index sont placés dans les registres avant la prochaine instruction. Les appels hôte sont séquentiels, sans accès concurrent garanti.
+Timeout zero polls; -1 waits infinitely. An unsatisfied wait returns Stop::Waiting with post-SVC context. Repeated run consumes no instructions until satisfied. Machine::signalEvent signals a write handle; next run installs result/index before the next instruction. Host calls are sequential without concurrency guarantees.
 
-Un tableau vide est accepté : sondage expiré ou attente infinie sans source de réveil dans ce sous-ensemble. Un rechargement réussi réinitialise handles et attentes ; un chargement échoué conserve la session précédente.
+Empty arrays are allowed: immediate timeout or an infinite wait without a wake source in this subset. Successful reload resets handles/waits; failed loading preserves the session.
 
-Les durées positives sont maintenant prises en charge par [l'horloge virtuelle](HLE_TIME.md), pilotée explicitement par l'hôte. Aucun lien arbitraire entre nombre d'instructions et nanosecondes n'est introduit. L'attente est propre à chaque thread et Stop::Waiting signifie qu'aucun thread démarré ne peut s'exécuter ; voir [l'ordonnanceur à deux threads](HLE_THREADS.md). L'annulation reste absente.
+[Virtual time](HLE_TIME.md) later added positive durations without inventing an instruction-to-nanosecond conversion. Waits are per-thread; Stop::Waiting means no started thread can run, as described by the [scheduler](HLE_THREADS.md). Cancellation is absent.
 
-## Vérification et suite
+hle_events_suspend_resume checks full ELF execution, FP/SIMD/TLS/stack preservation, errors, permissions, limits and unsupported durations. hle_events_waiting_cli checks the English waiting message. [Sample sources and rebuilding](../tests/programs/hle_events/README.md) accompany the demo. At this stage bounded IPC was the next milestone; later work is tracked separately.
 
-`hle_events_suspend_resume` exécute le parcours ELF complet, vérifie la conservation FP/SIMD/TLS/pile et les erreurs, droits, limites et durées non prises en charge. `hle_events_waiting_cli` vérifie le message d'attente. Sources et reconstruction dans [la démonstration](../tests/programs/hle_events/README.md).
+## Reference links
 
-Les jalons de deux threads et d'attentes à durée finie sont réalisés dans [HLE_THREADS.md](HLE_THREADS.md) et [HLE_TIME.md](HLE_TIME.md). Prochain jalon : transport IPC minimal et service de démonstration. Les extensions CPU suivront les blocages observés sur ces cibles ; le GPU reste absent.
+- [SwitchBrew system calls](https://switchbrew.org/wiki/SVC)

@@ -1,53 +1,51 @@
-# Point d'entrée libnx original et protection RELRO
+# Original libnx entry and RELRO protection
 
-Étape du 25 octobre 2026 : le fichier `switch_crt0.s` de libnx, révision `b156b4774fb2df7b93402169509266da7547fc4c`, est désormais assemblé **sans modification** et exécuté dans un NRO de référence. Il appelle le `dynamic.c` original, applique la relocation, protège RELRO, sauvegarde la pile, puis atteint l'appel à `__libnx_init`.
+Milestone dated October 25, 2026. Original switch_crt0.s from libnx b156b4774fb2df7b93402169509266da7547fc4c is assembled **unchanged** in a reference NRO. It calls original dynamic.c, relocates, protects RELRO, saves SP and reaches __libnx_init.
 
-## Ce qui est effectivement exécuté
+## Executed path
 
-Le banc conserve le marqueur HOMEBREW, le pointeur MOD0 et les extensions LNY0/LNY1/LNY2 émis par le source original. Les offsets MOD0 sont résolus par le script de liaison. Le chargeur valide les plages GOT et RELRO, les bornes fichier, l'alignement et la version LNY2=1 avant d'autoriser l'exécution. Les plages RELRO vides, les extensions incomplètes et les versions inconnues restent refusées dans ce profil.
+The bench preserves original HOMEBREW, MOD0 and LNY0/LNY1/LNY2. The linker resolves MOD0 offsets. Loader validation checks file/GOT/RELRO bounds, alignment and LNY2 version 1. Empty RELRO, incomplete extensions and unknown versions fail.
 
-Le chemin vérifié est le suivant :
+1. Original crt0 receives the NRO environment/loader return.
+2. __nx_dynamic clears BSS and applies RELATIVE relocation to the report.
+3. SVC 2 makes two RELRO pages read-only.
+4. SVC 3 locks those permissions.
+5. Original initial SP and three __libnx_init arguments are saved/passed.
+6. The bench explicitly stops at this boundary, then original __nx_exit restores SP and returns to the loader.
 
-1. Entrée NRO dans le crt0 original avec environnement et retour au chargeur.
-2. Appel de `__nx_dynamic`, effacement BSS et relocation RELATIVE vers le rapport.
-3. `svcSetMemoryPermission` (SVC 2) pour rendre deux pages RELRO accessibles en lecture seule.
-4. `svcSetMemoryAttribute` (SVC 3) pour verrouiller ces permissions.
-5. Sauvegarde de la pile initiale et passage des trois arguments à `__libnx_init`.
-6. Arrêt explicite du banc à cette frontière, puis utilisation du `__nx_exit` original pour restaurer SP et revenir au chargeur.
+**This bench substitutes a probe for __libnx_init.** It records arguments and exits with boundary marker **0xC001 / 49,153**. main/exit/exception symbols fail if reached. The [next minimal target](LIBNX_INIT.md) separately runs actual initialization to main without default services.
 
-**Ce banc conserve une sonde à la place de `__libnx_init`.** Elle enregistre les arguments et arrête le programme avec le marqueur `0xC001` (49 153), qui signifie « frontière atteinte ». Les symboles main, exit et exception du banc déclenchent un arrêt d'erreur s'ils sont atteints. L'[étape suivante](LIBNX_INIT.md) exécute désormais l'initialisation originale jusqu'à main dans une autre cible minimale sans services.
+The **32,768-byte file / 4,096-byte BSS** executes **12,432 instructions**. Report at **0x17000** records marker, X0=0xD00000, X1=UINT64_MAX, return=0xD01000 and SP=0x1000000. Guest code clears deliberately dirtied BSS, then saves SP at 0x18000. Relocation at 0x15000 points to the report.
 
-Le fichier fait 32 768 octets avec 4 096 octets de BSS. Le parcours compte **12 432 instructions**. Le rapport à `0x17000` contient le marqueur de passage, X0=`0xD00000`, X1=`UINT64_MAX`, le retour `0xD01000` et SP=`0x1000000`. Une BSS salie après chargement est effacée par le vrai code invité ; le crt0 écrit ensuite sa sauvegarde de pile à `0x18000`. La relocation à `0x15000` pointe vers le rapport.
+Single-step tracing writes build/libnx-crt0-trace.csv: SVC 2 at PC 0x1016C (address 0x15000, size 0x2000, R), SVC 3 at 0x10174 (same range, mask/value 0x10), then local F001 at 0xD01000 with marker 0xC001. Tests verify parameters.
 
-Le test relève aussi chaque appel invité en avançant d'une instruction à la fois et écrit `build/libnx-crt0-trace.csv`. La séquence observée est SVC 2 au PC `0x1016C` (adresse `0x15000`, taille `0x2000`, permission R), SVC 3 au PC `0x10174` (même plage, masque et valeur `0x10`), puis le retour local F001 au PC `0xD01000` avec le marqueur `0xC001`. Les paramètres sont vérifiés par le test.
+## Bounded protection services
 
-## SVC de protection bornés
+SVC 2/3 apply only to validated homebrew RELRO, not general Horizon memory management.
 
-Les SVC 2 et 3 sont disponibles uniquement pour la plage RELRO validée du profil homebrew. Cela ne fournit pas une implémentation générale des gestionnaires mémoire Horizon.
+- SVC 2 accepts None/R/RW, never execute; nonzero page-aligned size/address, entire range inside RELRO.
+- SVC 3 accepts only MemAttr_IsPermissionLocked bit 4 as mask/value, with all pages already read-only. Unlocking is rejected.
+- All pages are validated before changes; errors have no partial effects.
+- Locked ranges reject further permission changes. QueryMemory exposes the attribute and splits/coalesces regions accordingly.
+- Data, stack, heap, text and environment lie outside this authorization; RAM actually rejects writes.
 
-- SVC 2 accepte None, R et R/W, sans permission d'exécution. Les adresses et tailles doivent être alignées sur 4 Kio, la taille non nulle et l'ensemble de la plage inclus dans RELRO.
-- SVC 3 accepte uniquement le masque et la valeur `MemAttr_IsPermissionLocked` (bit 4). Toutes les pages doivent déjà être en lecture seule. La suppression du verrou est refusée.
-- Les changements sont précédés d'un contrôle de toutes les pages ; une erreur ne produit pas de changement partiel.
-- Une plage verrouillée refuse toute nouvelle modification de permission. L'état et le bit d'attribut sont visibles dans QueryMemory, qui sépare ou regroupe les régions en tenant compte de ces attributs.
-- Les pages de données, la pile, le tas, le texte et l'environnement restent hors de cette autorisation. Les droits de RAM appliquent réellement le refus d'écriture.
-
-Les tests vérifient aussi les tailles/adresses invalides, les permissions interdites, les plages mixtes, les tentatives de déverrouillage, les extensions mal formées et la conservation du processus précédent sur un chargement refusé. Une exécution découpée par budgets de sept instructions reproduit le même rapport et le même résultat.
-
-Validation complète après cette étape : **53 suites CTest réussies en Debug et en Release**. La seconde reconstruction reproduit exactement le SHA256 du manifeste.
-
-## Reconstruction et provenance
+Tests also cover invalid ranges/sizes/permissions, mixed ranges, unlock attempts, malformed extensions, failed-load preservation and seven-instruction equivalence. At this stage **53 Debug/Release suites passed**, and strict rebuilding reproduced the manifest hash.
 
 ```powershell
-.\tools\build_libnx_crt0.ps1 -Python <chemin_python>
+.\tools\build_libnx_crt0.ps1 -Python <python_path>
 ctest --test-dir build -C Debug -R libnx_original_crt0_and_relro --output-on-failure
 ```
 
-Le script utilise Zig 0.13.0, vérifie les sources contre l'archive libnx épinglée et compare le NRO à son empreinte enregistrée. Le source original, la licence et `reference.json` sont conservés dans `tests/programs/libnx_crt0`. L'option `--libnx-crt0` de l'empaqueteur préserve son en-tête existant ; elle ne génère pas les tables de relocation et ne remplace pas elf2nro. Le NRO reste lié à la base locale fixe `0x10000`.
+Zig 0.13.0 verifies pinned archive sources and recorded NRO hash. Original source/license/manifest are in tests/programs/libnx_crt0. --libnx-crt0 packaging preserves existing headers, generates no relocation tables and does not replace elf2nro. Base remains fixed at 0x10000.
 
-## Chaîne complète et prochaine étape
+## Toolchain research and subsequent work
 
-La recherche locale n'a trouvé ni devkitA64, ni devkitPro pacman. Les métadonnées publiques officielles indiquent devkitA64 r30 et newlib 4.6.0.20260123-4. Les tentatives de lecture des paquets et index sur `pkg.devkitpro.org` ont répondu HTTP 403 dans cette session ; aucun installateur global n'a été lancé. **Ces outils ne sont donc pas installés ou validés dans le projet.** Le banc actuel reste compilé avec Zig et ne lie pas newlib.
+No devkitA64 or devkitPro pacman was found locally. Official metadata then listed devkitA64 r30 and newlib 4.6.0.20260123-4. Requests to pkg.devkitpro.org returned HTTP 403 in that session; no global installer ran. Those tools were not installed/validated by this milestone. This bench uses Zig without newlib.
 
-Cette limite a ensuite été dépassée pour une cible minimale en [compilant des sources newlib officielles avec Zig](LIBNX_INIT.md) : l'initialisation libnx originale atteint main, avec des hooks applicatifs sans services. La chaîne devkitA64 complète et les services par défaut restent à traiter. Aucun appel manquant n'est remplacé par un succès artificiel pour annoncer leur prise en charge.
+Later [official newlib sources compiled with Zig](LIBNX_INIT.md) enabled minimal original startup to main with no-service app hooks. Full devkitA64/default services remained separate, without fake success stubs. Historical Switch references do not prove native Switch 2 compatibility.
 
-Sources publiques : [crt0 épinglé](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/runtime/switch_crt0.s), [dynamic.c épinglé](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/runtime/dynamic.c), [paquets officiels devkitA64](https://github.com/devkitPro/pacman-packages/tree/master/devkita64). Cette référence historique Switch ne démontre toujours pas de compatibilité Switch 2 native.
+## Reference links
+
+- [libnx switch_crt0.s](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/runtime/switch_crt0.s)
+- [libnx dynamic.c](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/runtime/dynamic.c)
+- [Official devkitA64 packages](https://github.com/devkitPro/pacman-packages/tree/master/devkita64)

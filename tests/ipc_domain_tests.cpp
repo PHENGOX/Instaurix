@@ -20,14 +20,15 @@ int main(int argc,char** argv)
     const auto resourceId=traced.process().appletResourceId();
     const auto tls=traced.process().mainThread().localRegion;
     unsigned conversions=0,sends=0,unimplemented=0;std::vector<uint32_t> returned,closed;
+    uint32_t appletHandle=0;
     Machine::Result step{Machine::Stop::Budget,0};
     for(unsigned i=0;i<100000 && step.stop==Machine::Stop::Budget;++i) {
         const auto op=traced.ram.fetch32(traced.cpu.getPC());const bool ipc=(op&0xFFE0001F)==0xD4000001 && ((op>>5)&0xFFFF)==0x21;
-        Ipc::Buffer request{};if(ipc) request=snapshot(traced.ram,tls);
+        Ipc::Buffer request{};const auto caller=uint32_t(traced.cpu.readRegister(0));if(ipc) request=snapshot(traced.ram,tls);
         step=traced.run(1);
         if(!ipc) continue;
         const auto response=snapshot(traced.ram,tls);const auto transport=traced.cpu.readRegister(0);
-        if(get(request,0)==5 && get(request,24)==0) {
+        if(caller==appletHandle && get(request,0)==5 && get(request,24)==0) {
             convert=request;++conversions;
             check(transport==0 && get(response,4)==9 && get(response,24)==0 && get(response,32)==1,
                 "original SDK conversion receives one root object ID as a u32");
@@ -35,10 +36,11 @@ int main(int argc,char** argv)
         if(get(request,0)!=4) continue;
         const bool pid=(get(request,4)&0x80000000U)!=0;const size_t cmif=pid?32:16;
         if(get(request,cmif)==0x49434653) {
-            if(pid && get(request,cmif+8)==0) registration=request;
-            if(get(request,cmif+8)==1 && std::string(reinterpret_cast<const char*>(request.data()+cmif+16),8)=="appletOE") lookup=request;
+            if(pid && get(request,cmif+8)==0 && get(registration,0)==0) registration=request;
+            if(get(request,cmif+8)==1 && std::string(reinterpret_cast<const char*>(request.data()+cmif+16),8)=="appletOE") { lookup=request;appletHandle=uint32_t(get(response,12)); }
             continue;
         }
+        if(caller!=appletHandle) continue;
         Ipc::DomainRequest decoded;
         if(Ipc::parseDomain(request,decoded)) continue;
         check(transport==0,"all actual SDK domain requests have successful transport");
@@ -57,23 +59,31 @@ int main(int argc,char** argv)
             check(get(response,16)==0,"scalar and event replies do not publish domain objects");
             if(decoded.object==7 && decoded.command==1) check(get(response,48,8)==resourceId && resourceId!=0,"SDK gets the real process-scoped resource identity");
             else if(decoded.object==5 && decoded.command==0) check(get(response,8)==2 && get(response,12)!=0,"message event is a copied kernel handle");
+            else if(decoded.object==7 && decoded.command==10) check(get(response,4)==12 && traced.process().appletOwnsForeground(),"foreground acquisition grants process ownership without output objects");
+            else if(decoded.object==6 && decoded.command==13) check(decoded.payloadSize==3 && traced.process().appletSuspendsInBackground()==(request[decoded.payload+2]!=0),"SDK selects and clears background suspension policy");
+            else if(decoded.object==3 && decoded.command==40) check(get(response,4)==13 && get(response,48,1)==1 && traced.process().appletRunningNotified(),"SDK running notification publishes process state and boolean response");
+            else if(decoded.object==5 && decoded.command==5) check(get(response,48,1)==0,"SDK reads handheld operation profile");
+            else if(decoded.object==5 && decoded.command==6) check(get(response,48)==0,"SDK reads normal performance profile");
+            else if(decoded.object==6 && (decoded.command==11 || decoded.command==12)) check(decoded.payloadSize==1 && request[decoded.payload]==1,"SDK enables mode notifications with a boolean input");
             else check(decoded.object==5 && decoded.command==9 && get(response,48,1)==1,"headless application starts with its assigned virtual focus");
         } else {
             check(get(response,16)==0 && get(response,40)==Ipc::UnknownCommand,"unimplemented applet functionality remains an explicit domain service error");
-            check((decoded.object==7 && decoded.command==10) || (decoded.object==6 && decoded.command==13),"foreground acquisition and cleanup policy remain unsupported");
+            check(false,"no applet command on the current SDK startup path should fail");
             if(decoded.command==13) check(decoded.payloadSize==3,"non-word-sized native payload is accepted structurally");
             ++unimplemented;
         }
     }
-    check(step.stop==Machine::Stop::Exited && step.exitCode==16217 && conversions==1 && sends==14 && unimplemented==2 &&
-        returned==std::vector<uint32_t>{2,3,4,5,6,7,8,9,10} && closed==std::vector<uint32_t>{10,9,8,7,6,5,4,3,2},
-        "actual SDK creates proxy and eight typed interfaces then closes them after the real unsupported operation");
+    check(step.stop==Machine::Stop::Exited && step.exitCode==0xE017 && conversions==1 && sends==19 && unimplemented==0 &&
+        returned==std::vector<uint32_t>{2,3,4,5,6,7,8,9,10} && closed.empty(),
+        "actual SDK initializes filesystem before missing SD mounting layer");
+    // Also retain explicit close coverage independently from the SDK cleanup path.
+    put(closeObject,0,4);put(closeObject,4,8);put(closeObject,16,2,1);
     if(returned.size()!=9) return 1;
 
     Memory ram(Machine::RAM_SIZE);ProgramLoader::Image image;Process p;std::string error;
     check(ProgramLoader::loadImage(ram,argv[1],image,error) && p.initialize(ram,image,true,error,true),"domain replay fixture");
     Bus bus(ram);CPU cpu(bus);const auto ipc=p.mainThread().localRegion;
-    const uint8_t port[]{'s','m',':',0};ram.writeBytes(0x43300,port,sizeof port);cpu.writeRegister(1,0x43300);p.dispatch(0x1F,cpu,bus);
+    const uint8_t port[]{'s','m',':',0};ram.writeBytes(0x200300,port,sizeof port);cpu.writeRegister(1,0x200300);p.dispatch(0x1F,cpu,bus);
     const auto manager=uint32_t(cpu.readRegister(1));
     auto send=[&](const Ipc::Buffer& b,uint32_t handle) { ram.writeBytes(ipc,b.data(),b.size());cpu.writeRegister(0,handle);p.dispatch(0x21,cpu,bus);return cpu.readRegister(0); };
     auto failedReply=[&](const Ipc::Buffer& b,uint32_t handle) {

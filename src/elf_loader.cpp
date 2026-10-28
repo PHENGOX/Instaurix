@@ -34,18 +34,18 @@ bool ProgramLoader::loadElf(Memory& memory, const std::vector<uint8_t>& bytes, I
 {
     error.clear();
     auto fail = [&](const char* message) { error = message; return false; };
-    if (bytes.size() < 64 || bytes.size() > MaxFileSize || !magic(bytes)) return fail("En-tete ELF absent, tronque ou trop grand");
+    if (bytes.size() < 64 || bytes.size() > MaxFileSize || !magic(bytes)) return fail("ELF header is missing, truncated or too large");
     if (bytes[4] != 2 || bytes[5] != 1 || bytes[6] != 1 || bytes[7] != 0 || bytes[8] != 0)
-        return fail("ELF : seul ELF64 little-endian System V version 1 est pris en charge");
+        return fail("ELF: only ELF64 little-endian System V version 1 is supported");
     if (little(bytes,16,2) != 2 || little(bytes,18,2) != 183 || little(bytes,20,4) != 1 || little(bytes,48,4) != 0)
-        return fail("ELF : executable statique AArch64 ET_EXEC requis");
+        return fail("ELF: static AArch64 ET_EXEC executable required");
     const uint64_t entry = little(bytes,24,8), phoff = little(bytes,32,8);
     const uint64_t phnum = little(bytes,56,2);
     if (little(bytes,52,2) != 64 || little(bytes,54,2) != 56 || phnum == 0 || phnum > 128 ||
         phoff < 64 || !inFile(phoff,phnum * 56,bytes.size()))
-        return fail("ELF : table des segments invalide ou tronquee");
+        return fail("ELF: invalid or truncated segment table");
     if (memory.size() % Memory::PAGE_SIZE != 0 || memory.size() < StackSize + 2 * Memory::PAGE_SIZE)
-        return fail("ELF : RAM insuffisante ou non alignee pour la pile");
+        return fail("ELF: insufficient or unaligned RAM for the stack");
     const uint64_t stackBegin = memory.size() - StackSize;
     const uint64_t reservedBegin = stackBegin - Memory::PAGE_SIZE;
     std::vector<Segment> segments;
@@ -57,31 +57,31 @@ bool ProgramLoader::loadElf(Memory& memory, const std::vector<uint8_t>& bytes, I
         const uint64_t offset = little(bytes,at+8,8), address = little(bytes,at+16,8);
         const uint64_t fileSize = little(bytes,at+32,8), memSize = little(bytes,at+40,8), align = little(bytes,at+48,8);
         if (type == 0) continue; // PT_NULL has no effect, even its other fields are unspecified.
-        if (!inFile(offset,fileSize,bytes.size())) return fail("ELF : segment hors du fichier");
+        if (!inFile(offset,fileSize,bytes.size())) return fail("ELF: segment is outside the file");
         if (type == 0x6474E551) // PT_GNU_STACK
         {
             if ((flags & ~uint64_t(7)) != 0 || (flags & 1) != 0 || memSize > StackSize)
-                return fail("ELF : pile executable ou taille de pile non prise en charge");
+                return fail("ELF: executable stack or unsupported stack size");
             continue;
         }
         if (type == 4 || type == 6) continue; // PT_NOTE / PT_PHDR: metadata only.
-        if (type != 1) return fail("ELF : type de segment non pris en charge (dynamique, TLS ou extension)");
-        if (fileSize > memSize) return fail("ELF : taille fichier superieure a la taille memoire");
+        if (type != 1) return fail("ELF: unsupported segment type (dynamic, TLS or extension)");
+        if (fileSize > memSize) return fail("ELF: file size exceeds memory size");
         if ((flags & ~uint64_t(7)) != 0 || (flags & 3) == 3)
-            return fail("ELF : permissions inconnues ou segment a la fois writable et executable");
+            return fail("ELF: unknown permissions or writable and executable segment");
         if (align > 1 && ((align & (align - 1)) != 0 || address % align != offset % align))
-            return fail("ELF : alignement ou congruence de segment invalide");
+            return fail("ELF: invalid segment alignment or congruence");
         if (memSize == 0) continue;
         if (address >= reservedBegin || memSize > reservedBegin - address)
-            return fail("ELF : segment hors RAM ou dans la pile/page de garde");
+            return fail("ELF: segment is outside RAM or overlaps the stack/guard page");
         const uint64_t pageBegin = address & ~uint64_t(Memory::PAGE_SIZE - 1);
         const uint64_t pageEnd = (address + memSize + Memory::PAGE_SIZE - 1) & ~uint64_t(Memory::PAGE_SIZE - 1);
-        if (pageEnd > reservedBegin) return fail("ELF : pages du segment dans la pile/page de garde");
+        if (pageEnd > reservedBegin) return fail("ELF: segment pages overlap the stack/guard page");
         for (const auto& previous : segments)
             if (pageBegin < previous.pageEnd && pageEnd > previous.pageBegin)
-                return fail("ELF : segments se partageant une page non pris en charge");
+                return fail("ELF: segments sharing a page are unsupported");
         if (!segments.empty() && address < segments.back().address)
-            return fail("ELF : segments PT_LOAD non tries par adresse");
+            return fail("ELF: PT_LOAD segments are not sorted by address");
         const uint8_t permission = static_cast<uint8_t>(((flags & 4) ? Memory::Read : 0) |
                                    ((flags & 2) ? Memory::Write : 0) | ((flags & 1) ? Memory::Execute : 0));
         segments.push_back({offset,address,fileSize,memSize,pageBegin,pageEnd,permission});
@@ -89,7 +89,7 @@ bool ProgramLoader::loadElf(Memory& memory, const std::vector<uint8_t>& bytes, I
             entryValid = true;
     }
     if (segments.empty() || (entry & 3) != 0 || !entryValid)
-        return fail("ELF : point d'entree non aligne ou absent du code executable charge");
+        return fail("ELF: entry point is unaligned or outside loaded executable code");
     try
     {
         Memory staged(memory.size());
@@ -111,34 +111,34 @@ bool ProgramLoader::loadElf(Memory& memory, const std::vector<uint8_t>& bytes, I
         image = std::move(stagedImage);
         return true;
     }
-    catch (const std::bad_alloc&) { return fail("ELF : allocation memoire impossible"); }
+    catch (const std::bad_alloc&) { return fail("ELF: memory allocation failed"); }
 }
 
 bool ProgramLoader::loadImage(Memory& memory, const char* filename, Image& image, std::string& error)
 {
     error.clear();
-    if (!filename) { error = "Nom de programme absent"; return false; }
+    if (!filename) { error = "Missing program name"; return false; }
     try
     {
         std::ifstream file(filename,std::ios::binary | std::ios::ate);
         const auto size = file ? file.tellg() : std::streampos(-1);
         if (size <= 0 || static_cast<uint64_t>(size) > MaxFileSize)
-        { error = "Programme absent, vide ou superieur a 64 Mio"; return false; }
+        { error = "Program is missing, empty or larger than 64 MiB"; return false; }
         std::vector<uint8_t> bytes(static_cast<size_t>(size));
         file.seekg(0,std::ios::beg);
         if (!file.read(reinterpret_cast<char*>(bytes.data()),static_cast<std::streamsize>(bytes.size())))
-        { error = "Lecture du programme incomplete"; return false; }
+        { error = "Incomplete program read"; return false; }
         auto extension = std::filesystem::path(filename).extension().string();
         std::transform(extension.begin(),extension.end(),extension.begin(),[](unsigned char c) { return static_cast<char>(std::tolower(c)); });
         if (magic(bytes) || extension == ".elf") return loadElf(memory,bytes,image,error);
         const bool nro=bytes.size()>=20 && bytes[16]=='N' && bytes[17]=='R' && bytes[18]=='O' && bytes[19]=='0';
         if(nro || extension==".nro") return loadNro(memory,bytes,image,error);
         if(extension==".nso" || (bytes.size()>=4 && bytes[0]=='N' && bytes[1]=='S' && bytes[2]=='O' && bytes[3]=='0'))
-        { error="NSO : format non pris en charge ; refus du repli vers un binaire brut";return false; }
+        { error="NSO: unsupported format; raw binary fallback refused";return false; }
         if(extension==".nca" || extension==".nsp" || extension==".xci")
-        { error="Conteneur de contenu non pris en charge ; ce fichier n'est pas un binaire brut ARM64";return false; }
+        { error="Unsupported content container; this file is not a raw ARM64 binary";return false; }
         if (bytes.size() > memory.size() || bytes.size() % 4 != 0)
-        { error = "Binaire brut trop grand ou taille non multiple de 4"; return false; }
+        { error = "Raw binary is too large or its size is not a multiple of 4"; return false; }
         Memory staged(memory.size());
         for (size_t i = 0; i < bytes.size(); ++i) staged.write8(i,bytes[i]);
         if (staged.hasError()) { error = staged.getLastError(); return false; }
@@ -146,6 +146,6 @@ bool ProgramLoader::loadImage(Memory& memory, const char* filename, Image& image
         image = {Format::Raw,0,memory.size()};
         return true;
     }
-    catch (const std::bad_alloc&) { error = "Allocation du programme impossible"; return false; }
-    catch (const std::filesystem::filesystem_error&) { error = "Chemin du programme invalide"; return false; }
+    catch (const std::bad_alloc&) { error = "Program allocation failed"; return false; }
+    catch (const std::filesystem::filesystem_error&) { error = "Invalid program path"; return false; }
 }

@@ -24,7 +24,8 @@ uint32_t parseControl(const Buffer& request,ControlRequest& plan)
         if (header < 8 || header > (BufferSize-8)/4) return InvalidMessage;
         if (read(16) != 0x49434653) return InvalidMessage;
         if (read(20) || read(28)) return UnsupportedFormat;
-        if (header != 8) staged.result = InvalidArguments;
+        if(header==9 && read(24)==4){staged.clone=true;staged.taggedClone=true;staged.cloneTag=read(32);}
+        else if (header != 8) staged.result = InvalidArguments;
         else if (read(24) == 0) staged.convert = true;
         else if (read(24) == 2) staged.clone = true;
         else if (read(24) == 3) staged.queryPointerSize = true;
@@ -74,7 +75,12 @@ uint32_t parseManager(const Buffer& request, bool initialized, ManagerRequest& p
             constexpr uint8_t inputName[8]{'e','m','u',':','p','a','d',0};
             constexpr uint8_t apmName[8]{'a','p','m',0,0,0,0,0};
             constexpr char appletName[]="appletOE";
-            bool matches = true, fileMatches = true, displayMatches = true, inputMatches = true, apmMatches=true, appletMatches=true;
+            constexpr uint8_t hidName[8]{'h','i','d',0,0,0,0,0};
+            constexpr uint8_t timeName[8]{'t','i','m','e',':','u',0,0};
+            constexpr uint8_t fspName[8]{'f','s','p','-','s','r','v',0};
+            constexpr uint8_t viName[8]{'v','i',':','u',0,0,0,0};
+            constexpr uint8_t nvName[8]{'n','v','d','r','v',0,0,0};
+            bool matches = true, fileMatches = true, displayMatches = true, inputMatches = true, apmMatches=true, appletMatches=true, hidMatches=true, timeMatches=true, fspMatches=true, viMatches=true, nvMatches=true;
             for (size_t i=0;i<8;++i) {
                 matches &= request[cmif+16+i] == uint8_t(name[i]);
                 fileMatches &= request[cmif+16+i] == fileName[i];
@@ -82,6 +88,11 @@ uint32_t parseManager(const Buffer& request, bool initialized, ManagerRequest& p
                 inputMatches &= request[cmif+16+i] == inputName[i];
                 apmMatches &= request[cmif+16+i] == apmName[i];
                 appletMatches &= request[cmif+16+i] == uint8_t(appletName[i]);
+                hidMatches &= request[cmif+16+i] == hidName[i];
+                timeMatches &= request[cmif+16+i] == timeName[i];
+                fspMatches &= request[cmif+16+i] == fspName[i];
+                viMatches &= request[cmif+16+i] == viName[i];
+                nvMatches &= request[cmif+16+i] == nvName[i];
             }
             if (matches) staged.openDemo = true;
             else if (fileMatches) staged.openFiles = true;
@@ -89,6 +100,11 @@ uint32_t parseManager(const Buffer& request, bool initialized, ManagerRequest& p
             else if (inputMatches) staged.openInput = true;
             else if (apmMatches) staged.openApm = true;
             else if (appletMatches) staged.openApplet = true;
+            else if (hidMatches) staged.openHid = true;
+            else if (timeMatches) staged.openTime = true;
+            else if (fspMatches) staged.openFsp = true;
+            else if (viMatches) staged.openVi = true;
+            else if (nvMatches) staged.openNv = true;
             else staged.result = PortNotFound;
         }
     }
@@ -128,6 +144,35 @@ void valueResponse(Buffer& response,uint32_t result,uint64_t value)
         response[4]=10;
         for(size_t i=0;i<8;++i) response[32+i]=uint8_t(value>>(8*i));
     }
+}
+
+void copiedHandleResponse(Buffer& response,uint32_t result,uint32_t handle)
+{
+    managerResponse(response,result,result ? 0 : handle);
+    if(!result && handle) response[8]=2;
+}
+
+uint32_t parseHid(const Buffer& request,bool resource,uint64_t appletId,HidRequest& plan)
+{
+    auto read=[&](size_t at,size_t n=4) { uint64_t v=0;for(size_t i=0;i<n;++i)v|=uint64_t(request[at+i])<<(8*i);return v; };
+    if(read(0)!=4 || (read(4)&~uint64_t(0x800003FF))) return UnsupportedFormat;
+    const bool pid=read(4)&0x80000000U;
+    if(pid && read(8)!=1) return UnsupportedFormat;
+    const size_t raw=pid?20:8,cmif=pid?32:16;
+    const auto words=read(4)&0x3FF;
+    if(words<8 || words>(BufferSize-raw)/4) return InvalidMessage;
+    if(read(cmif)!=0x49434653) return InvalidMessage;
+    if(read(cmif+4) || read(cmif+12)) return UnsupportedFormat;
+    HidRequest next;
+    if(read(cmif+8)!=0) next.result=UnknownCommand;
+    else if(resource) {
+        if(pid || words!=8) next.result=InvalidArguments;
+        else next.getMemory=true;
+    } else {
+        if(!pid || words!=10 || !appletId || read(cmif+16,8)!=appletId) next.result=InvalidArguments;
+        else next.createResource=true;
+    }
+    plan=next;return 0;
 }
 
 uint32_t dispatchInput(const Buffer& request,Buffer& response,Bus& bus,uint64_t ipcAddress,uint32_t buttons)

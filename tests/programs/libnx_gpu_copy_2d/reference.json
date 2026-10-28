@@ -1,0 +1,39 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "initialization_provenance": "../libnx_init/reference.json",
+  "startup_provenance": "../libnx_gpu_copy/reference.json",
+  "compiler": "Zig 0.13.0 / Clang 18.1.6, aarch64-none-elf, -O1 -ffreestanding",
+  "compiler_nvchannel": "Arm GNU 14.3.1, original GNU VLA structure members",
+  "original_sdk_sources_unmodified": true,
+  "nv_transfer_memory_bytes": 65536,
+  "nro_sha256": "480049ACAB04C245E23671E188695611E7DD6DC675D2A9CE8182D24612770EE9",
+  "scope": "Guest-generated pitched 2D B0B5 copying and byte/padding verification in synchronous historical HLE",
+  "service_sources_sha256": {
+    "nvidia/gpu_channel.c": "3C227D7054F63515177AD02A16C06C9C8EA78B6ABA236149F8E128DBA1EDF827",
+    "nvidia/address_space.c": "F5B54DDED97F27E0B3F28BEBF0E49502667A1FCD7107A5D0DD31E2963EA88227",
+    "nvidia/map.c": "14A01CD903E3171793B3DC8F9A246327F5FC7BAAAAB05C1883F1923B28F16681",
+    "nvidia/ioctl/nvhost-as-gpu.c": "CBAA113CA0F847C842654879C8629E418D32998C46A6D05F39DD5231B7962E52",
+    "nvidia/ioctl/nvmap.c": "9B0E72AB955ADB9AB65264E35100E51572A49E6589770CE88C3C212EC149E25E",
+    "nvidia/ioctl/nvchannel.c": "0237FBF2999CC30C905E3B948C174BB05FF1ED52889C18E7E7318A35D7FE69B1",
+    "services/nv.c": "304EC5F740266042D05F157C36CB42FA13C69F0CE18381B2AE8E6BFE302F91FB",
+    "runtime/hosversion.c": "3083470C2E747C569F63A41909C7B5C0416EECDAC249A547AB49DAA47CADDC8C"
+  },
+  "packet_source_provenance": "../../../docs/GPU_PACKET_DECODER_SOURCES.json",
+  "guest_harness_sha256": "B1B5BD5F95EE41F2EDBD8AD8683979633047499AC34FD115E75B13ED6B06321D",
+  "reference_symbols_sha256": "2F81727C67DD9AB727A7C7730AFF132B87C4678E246613D99316BE140F7CF6FD",
+  "instructions": 108040,
+  "next_boundary": "Image-layout operations remain separate; no rendering or native Switch 2 validation",
+  "report_words_per_lifetime": 64,
+  "lifetimes": 2,
+  "nro_bytes": 417792,
+  "temporary_client_hosversion_override": "4.0.0 around Kickoff only, saved value restored immediately",
+  "validation": {
+    "platform": "Windows",
+    "debug_ctest": "124/124",
+    "release_ctest": "124/124",
+    "positive_instructions": 108040,
+    "missing_transfer_instructions": 108165,
+    "padding_corruption_instructions": 108045,
+    "legacy_debug_peak_working_set_mib": 103.64
+  }
+}

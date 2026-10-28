@@ -5,7 +5,7 @@
 // within that execution model; this is not a parallel host-thread memory model.
 bool CPU::executeAtomic(uint32_t ins)
 {
-    auto fail = [&]() { lastError = "Encodage ou acces atomique non pris en charge"; return false; };
+    auto fail = [&]() { lastError = "Unsupported atomic encoding or access"; return false; };
     if ((ins & 0xFFFFF0FF) == 0xD503305F) { exclusiveValid = false; return true; }
     if ((ins & 0xFFFFF09F) == 0xD503309F)
     {

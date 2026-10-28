@@ -1,0 +1,308 @@
+FSDEV reference source notices
+
+See the supplied libnx/newlib/libgloss licenses for complete terms.
+
+
+===== runtime/devices/fs_dev.c =====
+SHA-256: 6A0138DF373FFCA4D1237854B5A3CD24742FC4EE696A122C4DAEAE2CF83CA2B4
+No additional leading source notice; original library license applies.
+
+
+===== runtime/devices/path_buf.c =====
+SHA-256: 7C74C4703238E98F8B95E6DADFA4E8AAD5F427041D6D14F84E4C6FC7D6EED5F4
+No additional leading source notice; original library license applies.
+
+
+===== runtime/alloc.c =====
+SHA-256: B335510DD452760EEC97E9B60FFAF0E0EF55A0175E70C8AE4ED42D023768E88D
+No additional leading source notice; original library license applies.
+
+
+===== runtime/util/utf/decode_utf8.c =====
+SHA-256: CDBBFEC12D2964985F6FC35656713F0AC637DA46AABA1C4F95C93A1903FCFCA4
+No additional leading source notice; original library license applies.
+
+
+===== newlib/libc/string/strcmp.c =====
+SHA-256: 6B09924EB662CF7EE03613D0190C495B5C2C3B4BA8803BA8BDBBE40472783E6A
+/*
+FUNCTION
+	<<strcmp>>---character string compare
+	
+INDEX
+	strcmp
+
+SYNOPSIS
+	#include <string.h>
+	int strcmp(const char *<[a]>, const char *<[b]>);
+
+DESCRIPTION
+	<<strcmp>> compares the string at <[a]> to
+	the string at <[b]>.
+
+RETURNS
+	If <<*<[a]>>> sorts lexicographically after <<*<[b]>>>,
+	<<strcmp>> returns a number greater than zero.  If the two
+	strings match, <<strcmp>> returns zero.  If <<*<[a]>>>
+	sorts lexicographically before <<*<[b]>>>, <<strcmp>> returns a
+	number less than zero.
+
+PORTABILITY
+<<strcmp>> is ANSI C.
+
+<<strcmp>> requires no supporting OS subroutines.
+
+QUICKREF
+	strcmp ansi pure
+*/
+
+
+
+===== newlib/libc/string/strncat.c =====
+SHA-256: A5983940DD9E11BF8A842F2882E6D2B669225B37CD9B5C154F7F1136CB2C61C8
+/*
+FUNCTION
+	<<strncat>>---concatenate strings
+
+INDEX
+	strncat
+
+SYNOPSIS
+	#include <string.h>
+	char *strncat(char *restrict <[dst]>, const char *restrict <[src]>,
+                      size_t <[length]>);
+
+DESCRIPTION
+	<<strncat>> appends not more than <[length]> characters from
+	the string pointed to by <[src]> (including the	terminating
+	null character) to the end of the string pointed to by
+	<[dst]>.  The initial character of <[src]> overwrites the null
+	character at the end of <[dst]>.  A terminating null character
+	is always appended to the result
+
+WARNINGS
+	Note that a null is always appended, so that if the copy is
+	limited by the <[length]> argument, the number of characters
+	appended to <[dst]> is <<n + 1>>.
+
+RETURNS
+	This function returns the initial value of <[dst]>
+
+PORTABILITY
+<<strncat>> is ANSI C.
+
+<<strncat>> requires no supporting OS subroutines.
+
+QUICKREF
+	strncat ansi pure
+*/
+
+
+
+===== newlib/libc/string/strnlen.c =====
+SHA-256: 408FAAB69FFE3B5A10D85D9CD7C56B2540698F35012DC86FBAF574DD3264786B
+/* 
+FUNCTION
+	<<strnlen>>---character string length
+	
+INDEX
+	strnlen
+
+SYNOPSIS
+	#include <string.h>
+	size_t strnlen(const char *<[str]>, size_t <[n]>);
+
+DESCRIPTION
+	The <<strnlen>> function works out the length of the string
+	starting at <<*<[str]>>> by counting chararacters until it
+	reaches a NUL character or the maximum: <[n]> number of
+        characters have been inspected.
+
+RETURNS
+	<<strnlen>> returns the character count or <[n]>.
+
+PORTABILITY
+<<strnlen>> is a GNU extension.
+
+<<strnlen>> requires no supporting OS subroutines.
+
+*/
+
+
+
+===== newlib/libc/string/strrchr.c =====
+SHA-256: 8E74E61634D2160E24B8C3C332B56584F506983BB980D31053436490B6BFA1C5
+/*
+FUNCTION
+	<<strrchr>>---reverse search for character in string
+
+INDEX
+	strrchr
+
+SYNOPSIS
+	#include <string.h>
+	char * strrchr(const char *<[string]>, int <[c]>);
+
+DESCRIPTION
+	This function finds the last occurence of <[c]> (converted to
+	a char) in the string pointed to by <[string]> (including the
+	terminating null character).
+
+RETURNS
+	Returns a pointer to the located character, or a null pointer
+	if <[c]> does not occur in <[string]>.
+
+PORTABILITY
+<<strrchr>> is ANSI C.
+
+<<strrchr>> requires no supporting OS subroutines.
+
+QUICKREF
+	strrchr ansi pure
+*/
+
+
+
+===== newlib/libc/search/bsearch.c =====
+SHA-256: 801D1A2856272826A919FAE44C983D2BA3FB3E20A2FDDC956ED1C747EE5CC69B
+/*
+ * bsearch.c
+ * Original Author:	G. Haley
+ * Rewritten by:	G. Noer
+ *
+ * Searches an array of nmemb members, the initial member of which is pointed
+ * to by base, for a member that matches the object pointed to by key. The
+ * contents of the array shall be in ascending order according to a comparison
+ * function pointed to by compar. The function shall return an integer less
+ * than, equal to or greater than zero if the first argument is considered to be
+ * respectively less than, equal to or greater than the second. Returns a
+ * pointer to the matching member of the array, or a null pointer if no match
+ * is found.
+ */
+
+/*
+FUNCTION
+<<bsearch>>---binary search
+
+INDEX
+	bsearch
+
+SYNOPSIS
+	#include <stdlib.h>
+	void *bsearch(const void *<[key]>, const void *<[base]>,
+		size_t <[nmemb]>, size_t <[size]>,
+		int (*<[compar]>)(const void *, const void *));
+
+DESCRIPTION
+<<bsearch>> searches an array beginning at <[base]> for any element
+that matches <[key]>, using binary search.  <[nmemb]> is the element
+count of the array; <[size]> is the size of each element.
+
+The array must be sorted in ascending order with respect to the
+comparison function <[compar]> (which you supply as the last argument of
+<<bsearch>>).
+
+You must define the comparison function <<(*<[compar]>)>> to have two
+arguments; its result must be negative if the first argument is
+less than the second, zero if the two arguments match, and
+positive if the first argument is greater than the second (where
+``less than'' and ``greater than'' refer to whatever arbitrary
+ordering is appropriate).
+
+RETURNS
+Returns a pointer to an element of <[array]> that matches <[key]>.  If
+more than one matching element is available, the result may point to
+any of them.
+
+PORTABILITY
+<<bsearch>> is ANSI.
+
+No supporting OS subroutines are required.
+*/
+
+
+
+===== newlib/libc/time/gmtime.c =====
+SHA-256: 0C62A502660802F56429CDAC635070C86DB7F74A65C5DBD9949F1AB6EECF462F
+/*
+ * gmtime.c
+ * Original Author:	G. Haley
+ *
+ * Converts the calendar time pointed to by tim_p into a broken-down time
+ * expressed as Greenwich Mean Time (GMT). Returns a pointer to a structure
+ * containing the broken-down time, or a null pointer if GMT is not
+ * available.
+ */
+
+/*
+FUNCTION
+<<gmtime>>---convert time to UTC traditional form
+
+INDEX
+	gmtime
+INDEX
+	gmtime_r
+
+SYNOPSIS
+	#include <time.h>
+	struct tm *gmtime(const time_t *<[clock]>);
+	struct tm *gmtime_r(const time_t *<[clock]>, struct tm *<[res]>);
+
+DESCRIPTION
+<<gmtime>> takes the time at <[clock]> representing the number
+of elapsed seconds since 00:00:00 on January 1, 1970, Universal
+Coordinated Time (UTC, also known in some countries as GMT,
+Greenwich Mean time) and converts it to a <<struct tm>>
+representation.
+
+<<gmtime>> constructs the traditional time representation in static
+storage; each call to <<gmtime>> or <<localtime>> will overwrite the
+information generated by previous calls to either function.
+
+RETURNS
+A pointer to the traditional time representation (<<struct tm>>).
+
+PORTABILITY
+ANSI C requires <<gmtime>>.
+
+<<gmtime>> requires no supporting OS subroutines.
+*/
+
+
+
+===== newlib/libc/time/gmtime_r.c =====
+SHA-256: C426410BAF2C5ECE0BC46DA7622343DCBF353EA3E25AFEBD74AA959CCC22B1CA
+/*
+ * gmtime_r.c
+ * Original Author: Adapted from tzcode maintained by Arthur David Olson.
+ * Modifications:
+ * - Changed to mktm_r and added __tzcalc_limits - 04/10/02, Jeff Johnston
+ * - Fixed bug in mday computations - 08/12/04, Alex Mogilnikov <alx@intellectronika.ru>
+ * - Fixed bug in __tzcalc_limits - 08/12/04, Alex Mogilnikov <alx@intellectronika.ru>
+ * - Move code from _mktm_r() to gmtime_r() - 05/09/14, Freddie Chopin <freddie_chopin@op.pl>
+ * - Fixed bug in calculations for dates after year 2069 or before year 1901. Ideas for
+ *   solution taken from musl's __secs_to_tm() - 07/12/2014, Freddie Chopin
+ *   <freddie_chopin@op.pl>
+ * - Use faster algorithm from civil_from_days() by Howard Hinnant - 12/06/2014,
+ * Freddie Chopin <freddie_chopin@op.pl>
+ *
+ * Converts the calendar time pointed to by tim_p into a broken-down time
+ * expressed as local time. Returns a pointer to a structure containing the
+ * broken-down time.
+ */
+
+
+
+===== libgloss/libsysbase/iosupport.c =====
+SHA-256: D7AAB2396B00549DAAC0B85E933DBA62D62C03A996CD1365558382D195E48FDA
+No additional leading source notice; original library license applies.
+
+
+===== libgloss/libsysbase/chdir.c =====
+SHA-256: 64E478C9AD9F1078C9CD12A2F31384F5A9A3BBDA7CB6CC3A67536BFC192EB67E
+No additional leading source notice; original library license applies.
+
+
+===== libgloss/libsysbase/concatenate.c =====
+SHA-256: 40AC5BCBAEF5525315E562386EF8253309B898E2C65A5C8204ED44C99BA5A117
+No additional leading source notice; original library license applies.

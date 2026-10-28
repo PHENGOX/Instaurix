@@ -1,16 +1,30 @@
 #include "ipc.hpp"
 namespace Ipc {
-uint32_t parseDomain(const Buffer& request,DomainRequest& plan)
+uint32_t parseDomain(const Buffer& request,DomainRequest& plan,bool allowFileBuffers)
 {
     auto read=[&](size_t at,size_t size=4) { uint64_t v=0;for(size_t i=0;i<size;++i) v|=uint64_t(request[at+i])<<(8*i);return v; };
-    if(read(0)!=4 || (read(4)&~uint64_t(0x800003FF))) return UnsupportedFormat;
+    const auto header=read(0);
+    if((header!=4 && (!allowFileBuffers || (header!=0x10004 && header!=0x1000004))) || (read(4)&~uint64_t(0x800003FF))) return UnsupportedFormat;
     DomainRequest next;
     next.sendPid=(read(4)&0x80000000U)!=0;
-    const size_t raw=next.sendPid ? 24 : 8, domain=next.sendPid ? 32 : 16;
-    // Only the original OpenApplicationProxy combination: PID plus one copied process handle.
+    size_t raw=8;
+    if(header!=4) {
+        if(next.sendPid)return UnsupportedFormat;
+        if(header==0x10004) {
+            if(read(8)&0x3F)return UnsupportedFormat;
+            next.sendStatic=true;next.source=read(12)|((read(8)>>12&15)<<32)|((read(8)>>6&63)<<36);next.sourceSize=read(8)>>16;raw=16;
+        }else {
+            if((read(16)&3)!=1)return UnsupportedFormat;
+            next.receiveBuffer=true;next.destination=read(12)|((read(16)>>28)<<32)|((read(16)>>2&0x3FFFFF)<<36);
+            next.destinationSize=read(8)|((read(16)>>24&15)<<32);raw=20;
+        }
+    }
+    const size_t domain=next.sendPid || next.receiveBuffer ? 32 : 16;
+    // Support SendPid alone (fsp-srv) or SendPid plus one copied process handle (appletOE).
     if(next.sendPid) {
-        if(read(8)!=3) return UnsupportedFormat;
-        next.copyHandle=uint32_t(read(20));
+        if(read(8)==1) raw=20;
+        else if(read(8)==3) { raw=24;next.copyHandlePresent=true;next.copyHandle=uint32_t(read(20)); }
+        else return UnsupportedFormat;
     }
     const auto words=read(4)&0x3FF;
     if(words<8 || words>(BufferSize-raw)/4) return InvalidMessage;
@@ -19,7 +33,7 @@ uint32_t parseDomain(const Buffer& request,DomainRequest& plan)
     if(objects || read(domain+8) || read(domain+12)) return UnsupportedFormat;
     if(!next.object) return InvalidMessage;
     if(type==2) {
-        if(next.sendPid || size || words!=8) return InvalidMessage;
+        if(next.sendPid || next.sendStatic || next.receiveBuffer || size || words!=8) return InvalidMessage;
         next.close=true;
     } else if(type==1) {
         if(size<16 || words!=(32+size+3)/4 || domain+16+size>raw+words*4) return InvalidMessage;

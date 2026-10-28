@@ -14,19 +14,19 @@ bool CPU::executeRegisterPair(uint32_t instruction)
     // Integer W/X pairs and LDPSW; non-temporal/reserved encodings are rejected.
     if ((opc != 0 && opc != 2 && !signedWords) || mode == 0)
     {
-        lastError = "Variante LDP/STP non prise en charge";
+        lastError = "Unsupported LDP/STP variant";
         return false;
     }
     // Reject constrained-unpredictable overlaps rather than inventing values.
     if ((load && rt == rt2) || (writeback && rn != 31 && (rn == rt || rn == rt2)))
     {
-        lastError = "Chevauchement de registres LDP/STP non pris en charge";
+        lastError = "Unsupported LDP/STP register overlap";
         return false;
     }
     const uint64_t base = rn == 31 ? sp : readArithmeticRegister(rn);
     if (rn == 31 && (base & 15) != 0)
     {
-        lastError = "Pile LDP/STP non alignee sur 16 octets";
+        lastError = "LDP/STP stack is not 16-byte aligned";
         return false;
     }
     const size_t width = opc == 2 ? 8 : 4;
@@ -36,7 +36,7 @@ bool CPU::executeRegisterPair(uint32_t instruction)
     if ((offset < 0 && base < static_cast<uint64_t>(-offset)) ||
         (offset >= 0 && base > UINT64_MAX - static_cast<uint64_t>(offset)))
     {
-        lastError = "Depassement d'adresse LDP/STP";
+        lastError = "LDP/STP address overflow";
         return false;
     }
     const uint64_t nextBase = base + static_cast<uint64_t>(offset);
@@ -45,7 +45,7 @@ bool CPU::executeRegisterPair(uint32_t instruction)
     // failure cannot leave the first half of a pair written to a peripheral.
     if (!memory.validateRamAccess(address, width * 2, load ? Memory::Read : Memory::Write))
     {
-        lastError = "Paire LDP/STP hors RAM ou traversant une region MMIO";
+        lastError = "LDP/STP pair is outside RAM or crosses an MMIO region";
         return false;
     }
     if (load)

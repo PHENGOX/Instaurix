@@ -3,7 +3,7 @@
 
 bool CPU::executeSimdStructure(uint32_t ins)
 {
-    auto fail=[&]() { lastError="Encodage ou adresse LD/ST SIMD structure non pris en charge"; return false; };
+    auto fail=[&]() { lastError="Unsupported SIMD structure LD/ST encoding or address"; return false; };
     const bool q=ins&(1U<<30), post=ins&(1U<<23), load=ins&(1U<<22);
     const unsigned rm=(ins>>16)&31, opcode=(ins>>12)&15, size=(ins>>10)&3;
     const unsigned rn=(ins>>5)&31, rt=ins&31;
@@ -53,7 +53,7 @@ bool CPU::executeSimdStructure(uint32_t ins)
 
 bool CPU::executeSimdMemory(uint32_t ins)
 {
-    auto fail = [&]() { lastError = "Encodage ou adresse memoire FP/SIMD non pris en charge"; return false; };
+    auto fail = [&]() { lastError = "Unsupported FP/SIMD memory encoding or address"; return false; };
     const unsigned rt = ins & 31, rn = (ins >> 5) & 31;
     unsigned rt2 = (ins >> 10) & 31, width = 0;
     bool load = false, writeback = false, post = false, pair = false, literal = false;

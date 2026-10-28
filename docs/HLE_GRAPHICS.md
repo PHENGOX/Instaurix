@@ -1,42 +1,38 @@
-# Première image de développement
+# First development frame
 
-Étape du 25 octobre 2026 : un client C ARM64 lit un motif par emu:fs, calcule une image dans sa mémoire et la présente au service local **emu:disp**, obtenu via sm:. L'hôte conserve les pixels et peut les exporter en PNG. Cette étape valide un framebuffer de développement. Le GPU invité, ses shaders, ses commandes natives et le backend Vulkan restent absents.
+Milestone dated October 25, 2026. An ARM64 C client reads a pattern through emu:fs, computes pixels in guest memory and presents them to local **emu:disp** through SM. The host captures/exports PNG. This validates a development framebuffer; guest GPU commands, shaders and Vulkan are absent.
 
-## Service de présentation
-
-| Élément | Contrat local |
+| Element | Local contract |
 | --- | --- |
-| Service | Nom de 8 octets `emu:disp` |
-| Commande | 0 Present |
-| Paramètres CMIF | largeur u32, hauteur u32 |
-| Entrée | Un descripteur Send Normal contenant les pixels RGB8 contigus |
-| Disposition | Lignes de haut en bas, pixels de gauche à droite, R puis G puis B, sans alpha ni padding |
-| Réponse | SFCO avec nombre d'octets présentés en u64 |
+| Service | 8-byte name emu:disp |
+| Command | 0 Present |
+| CMIF parameters | u32 width, u32 height |
+| Input | One Normal Send descriptor with contiguous RGB8 pixels |
+| Layout | Top-to-bottom rows, left-to-right pixels, R/G/B without alpha/padding |
+| Reply | SFCO u64 presented byte count |
 
-Les dimensions vont de 1 à 256 ; largeur × hauteur × 3 doit rester inférieur ou égal à 64 Kio et correspondre exactement à la taille Send. Les buffers Receive et paramètres supplémentaires sont refusés. Le contrôle mémoire commun vérifie lecture RAM, limites, modes et absence de MMIO.
+Dimensions are 1–256; width×height×3 must be at most 64 KiB and exactly match Send size. Receive buffers/extra parameters fail. Common validation checks readable RAM, bounds, mode and no MMIO.
 
-Les pixels sont copiés dans un nouvel objet hôte immuable. La nouvelle image n'est publiée qu'après écriture complète de la réponse IPC. Une requête invalide, un buffer interdit ou une réponse non inscriptible laisse la dernière image et son compteur inchangés. Modifier ensuite les pixels invités ne modifie pas une image déjà capturée.
+Pixels are copied to a new immutable host object and published only after the full reply reaches RAM. Invalid input/unwritable replies preserve previous frame/count; later guest edits do not change captured pixels.
 
-`process().frame()` expose la dernière image et `process().frameCount()` le nombre de présentations réussies. L'image reste disponible après fermeture du service et fin du programme. Un chargement réussi réinitialise image et compteur ; un chargement échoué les conserve. Les sessions utilisent les contrôles de clonage et fermeture déjà présents.
+process().frame() returns the last image; frameCount() counts successful presentations. Frames survive session close/process exit. Successful loads reset both; failed loads preserve them. Existing session clone/close controls apply.
 
-## Export PNG
+## PNG export
 
 ```powershell
-.\build\Debug\Switch2Emu.exe .\tests\programs\hle_graphics\program.elf 1000000 --hle-reference --read-root .\tests\programs\hle_graphics\root --frame-out .\build\first-frame.png
+.\build\Debug\Instaurix.exe .\tests\programs\hle_graphics\program.elf 1000000 --hle-reference --read-root .\tests\programs\hle_graphics\root --frame-out .\build\first-frame.png
 ```
 
-L'export est demandé explicitement par `--frame-out`. Il exige le mode HLE et une image effectivement présentée. Il est effectué après l'exécution ; aucun chemin de sortie n'est fourni par le programme invité. Un budget insuffisant avant la première présentation produit une erreur d'export, sans fichier image factice.
+--frame-out explicitly requests post-execution export, requires HLE and an actual presentation, and accepts no output path from the guest. An insufficient pre-presentation budget produces an export error, not a fabricated image.
 
-Le code d'export écrit un PNG RGB 8 bits, sans compression des blocs DEFLATE, avec CRC et Adler-32. Il ne nécessite aucune bibliothèque graphique externe. Le PNG ne constitue pas encore une fenêtre d'affichage ni une boucle de présentation en temps réel.
+The encoder writes RGB8 PNG with uncompressed DEFLATE blocks, CRC and Adler-32, without external graphics libraries. PNG export alone is not a window or realtime presentation loop.
 
-## Démonstration
+## Demo and validation
 
-La ressource sprite.txt contient 16 lignes de 16 caractères plus LF, soit 272 octets. Le client C vérifie le motif, produit un fond étoilé et agrandit le motif par blocs de 4 × 4 pixels au centre d'une image **160 × 96**. Tous les pixels sont calculés par le code ARM64 invité.
+sprite.txt contains 16 lines of 16 characters plus LF: **272 bytes**. Guest C validates it, draws a starfield and expands the pattern in 4×4 blocks at the center of a **160×96** image. Every pixel is computed by ARM64 code.
 
-Le parcours termine en **614 588 instructions**. Le rapport à 0x12000 contient quatre champs u64 : status=1, loaded=272, presented=46080, hash=4044961488. Le compteur de présentation vaut 1.
+**614,588 instructions**; four u64 report fields at 0x12000: status=1, loaded=272, presented=46080, hash=4044961488. Frame count=1.
 
-Le banc compare chacun des pixels à un calcul hôte indépendant, vérifie l'empreinte et le résultat avec des budgets de 127 instructions. Il contrôle aussi les dimensions et tailles invalides, les sources MMIO, les réponses interdites, l'immuabilité des captures, le remplacement d'image et le rechargement.
+Tests compare every pixel against independent host calculations, the hash and 127-instruction slicing; also invalid dimensions/sizes, MMIO, failed replies, immutable captures, frame replacement and reload. Pillow independently decoded demo and two-DEFLATE-block PNG outputs.
 
-Les PNG de la démonstration et d'un cas nécessitant deux blocs DEFLATE ont également été décodés et vérifiés avec Pillow, indépendamment de l'encodeur du projet.
-
-Le jalon d'animation et de présentation continue est réalisé dans [HLE_ANIMATION.md](HLE_ANIMATION.md). Prochaine étape : entrées clavier pour une démo interactive. L'interface graphique de développement reste distincte du futur décodage des commandes GPU natives Switch 2.
+[Animation](HLE_ANIMATION.md) followed, then [keyboard input](HLE_INPUT.md). Development graphics remain separate from native Switch 2 GPU decoding.

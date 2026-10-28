@@ -1,55 +1,51 @@
-# Initialisation applicative par défaut et première session APM
+# Default application initialization and first APM session
 
-Le 25 octobre 2026, une nouvelle cible exécute le **`__appInit` original de libnx**, avec ses clients setsys, applet et APM originaux. Elle ne remplace plus les hooks applicatifs par une initialisation minimale. La révision reste `b156b4774fb2df7b93402169509266da7547fc4c` et les sources libnx sont compilées sans modification.
+Historical milestone dated October 25, 2026. A new target executes **original libnx __appInit**, linking unchanged setsys/applet/APM clients from b156b4774fb2df7b93402169509266da7547fc4c instead of no-service app hooks.
 
-## Blocage observé, puis dépassé
+## Observed blocker and progress
 
-Les sources et l'exécution montrent que `set:sys` absent n'est pas, à lui seul, un arrêt obligatoire : libnx ignore l'échec de cette tentative d'obtention de la version système, puis continue vers appletInitialize. Pour une application ordinaire, cette dernière exige d'abord apmInitialize.
+Missing set:sys is not fatal by itself: original code ignores failure to obtain a system version and continues to appletInitialize, which first requires apmInitialize for ordinary applications.
 
-Avant le nouveau service, la cible s'arrêtait après 2 790 instructions avec le diagnostic libnx `InitFail_AM` (16 217). Après l'ajout borné de l'ouverture APM, **le même NRO** progresse jusqu'à la demande d'`appletOE` et s'arrête après **3 785 instructions**, avec le même diagnostic de haut niveau. La trace permet de distinguer ces deux causes : le code de diagnostic seul ne suffit pas à localiser le blocage.
+Before APM, execution stopped after 2,790 instructions with libnx InitFail_AM=16,217. Bounded APM opening lets **the same NRO** reach appletOE after **3,785 instructions**, with the same high-level diagnostic. Trace context, not the diagnostic alone, distinguishes the causes.
 
-| Étape native | Résultat actuel |
+| Native step | Result at this milestone |
 | --- | --- |
-| smInitialize | Succès avec le client SM original |
-| Recherche `set:sys` | PortNotFound local, aucun handle ; libnx poursuit |
-| Recherche `apm` | Succès, session réelle transmise par handle Move |
-| APM commande 0 OpenSession | Succès, sous-session distincte par handle Move |
-| Recherche `appletOE` | PortNotFound local ; arrêt réel de l'initialisation applet |
-| Nettoyage après échec | Le code original ferme la sous-session APM, puis sa session parente |
+| Original smInitialize | Success |
+| set:sys lookup | Local PortNotFound, no handle; execution continues |
+| apm lookup | Real session Move handle |
+| APM 0 OpenSession | Distinct child Move handle |
+| appletOE lookup | Local PortNotFound; actual applet initialization failure |
+| Failure cleanup | Original code closes APM child then parent |
 
-Le type d'applet initial provient maintenant de la valeur faible originale `AppletType_Default`, puis libnx le fait passer à Application après APM. La version système reste zéro. Aucun firmware, mode de performances ou fréquence n'est fabriqué. La cible n'atteint **ni les constructeurs ni main** et le test exige cet arrêt précis.
+Original weak AppletType_Default becomes Application after APM. System version stays zero; no firmware, performance mode or clock is invented. **Neither constructors nor main are reached.** Tests require this exact stop.
 
-## Service natif APM : périmètre exact
+## Exact APM scope
 
-Dans le profil explicite `--hle-reference --homebrew-entry`, le gestionnaire SM reconnaît désormais le nom natif de huit octets `apm`. Le profil HLE historique conserve son refus de ce service.
+Only --hle-reference --homebrew-entry recognizes the native eight-byte apm name; the older HLE profile rejects it. Root command **0 OpenSession**, without parameters/descriptors, creates a distinct typed child after a complete SFCO reply write. Generic clone/pointer-size/close controls apply. Children cannot recursively open sessions.
 
-Seule la commande racine **0 OpenSession**, sans paramètre ni descripteur, est implémentée. Elle crée une sous-session de type APM distinct, publiée après l'écriture complète de la réponse SFCO. Le clonage, la requête de taille du buffer et la fermeture passent par les contrôles génériques déjà disponibles. Les sous-sessions ne peuvent pas ouvrir récursivement d'autres sessions.
-
-Les commandes de lecture du mode de performances et de configuration de puissance restent explicitement **UnknownCommand**. L'ouverture d'une session est un vrai état IPC, pas une simulation de gestion matérielle de la puissance. Une sous-session reste indépendante si le client ferme sa session parente ; les identifiants fermés restent invalides.
-
-La table commune de 128 handles borne les créations. Une réponse non inscriptible, un paquet mal formé ou un dépassement de quota ne publie pas de handle et ne consomme pas son prochain identifiant. Les demandes natives non reconnues restent des erreurs sans handle factice.
+Performance/power commands return **UnknownCommand**. Session state is not hardware power management. Closing parent leaves child valid; closed IDs stay invalid. The shared 128-handle quota bounds creation. Unwritable replies, malformed requests and exhausted quota consume no IDs and publish no handles.
 
 ## Validation
 
-Le test relève **10 échanges SendSyncRequest** du programme original dans `build/libnx-app-ipc.csv`, dont les demandes `set:sys`, `apm`, `appletOE`, la création de sous-session et les fermetures APM. La routine de nettoyage d'applet tente aussi une commande sur son contrôleur non initialisé ; le transport retourne InvalidHandle et le code libnx poursuit son nettoyage. Cette erreur n'est pas transformée en succès.
+build/libnx-app-ipc.csv records **10 SendSyncRequest exchanges**, including set:sys/apm/appletOE, child creation and APM cleanup. Original applet cleanup also calls an uninitialized controller, receiving InvalidHandle; libnx continues. This is not converted to fake success.
 
-Les tests contrôlent le diagnostic original, l'absence de main/constructeurs, le type d'applet, l'absence de version inventée, les fermetures dans l'ordre et le déterminisme par budgets de sept instructions. Les paquets SDK sont rejoués pour tester les formats invalides, paramètres supplémentaires, commandes inconnues, réponses protégées, séparation parent/enfant, fermeture et quota. Le refus d'APM dans l'ancien profil est également vérifié.
+Tests verify original diagnostic, absent main/constructors, applet type, zero system version, close ordering and seven-instruction determinism. Replayed SDK packets test malformed formats, extra arguments, unknown commands, protected replies, parent/child lifetime, quotas and legacy-profile rejection.
 
-Validation complète : **57 suites CTest réussies en Debug et en Release**. La reconstruction reproduit l'empreinte du nouveau NRO et conserve celles des cibles précédentes avec et sans SM.
-
-## Reproduction et limites
+**57 Debug/Release suites passed**. Rebuilds preserve earlier SM/no-SM hashes and reproduce this target.
 
 ```powershell
-.\tools\build_libnx_app.ps1 -Python <chemin_python>
+.\tools\build_libnx_app.ps1 -Python <python_path>
 ctest --test-dir build -C Debug -R libnx_default_app_and_native_apm --output-on-failure
 ```
 
-Le NRO fait 212 992 octets avec 4 096 octets de BSS. Son rapport de diagnostic est à `0x43000`. Le manifeste conserve les empreintes des sources APM/applet/set et du NRO ; les sources et le correctif newlib sont les mêmes que pour les cibles précédentes. Le placement laisse davantage d'espace au code original d'applet, dont le graphe de fonctions retenues est plus grand. Le script partagé conserve les empreintes des deux anciennes cibles.
+At this stage the NRO was **212,992 bytes**, BSS **4,096 bytes**, report **0x43000**. Its manifest records APM/applet/set/NRO hashes and preceding newlib provenance. A larger retained applet function graph required more text space; older targets stayed unchanged.
 
-Les dépendances HID, time, FS et les fonctions auxiliaires situées au-delà de l'arrêt actuel ne sont pas annoncées comme exécutables : leurs symboles manquants possèdent des pièges d'erreur explicites. Le test refuse ces marqueurs et attend uniquement le diagnostic libnx réel. L'arrêt de diagnostic et le pont exit du banc sont toujours propres au projet ; la libc de sortie complète et l'installation GCC devkitA64 restent hors de ce jalon.
+Beyond-stop HID/time/FS helpers were explicit missing-symbol traps, not claimed functional. This historical test expected actual libnx diagnostics, rejecting dependency markers. Diagnostic/exit bridges remain project-owned; full libc shutdown and GCC devkitA64 installation were outside the milestone.
 
-## Prochaine étape
+[Applet domains](LIBNX_APPLET_DOMAINS.md) followed, reaching GetAppletResourceUserId. Later progress is in README. Historical Switch infrastructure is not game or native Switch 2 compatibility.
 
-L'[étape suivante](LIBNX_APPLET_DOMAINS.md) ouvre désormais **appletOE**, convertit sa session en domaine et fournit le proxy applicatif et cinq interfaces. Le même NRO progresse jusqu'à GetAppletResourceUserId, encore absent. Les services d'affichage et les entrées natives restent à construire. Ce parcours valide une infrastructure historique Switch ; il ne démontre toujours pas le lancement de jeux ou la compatibilité native Switch 2.
+## Reference links
 
-Sources épinglées : [init.c](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/runtime/init.c), [applet.c](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/services/applet.c), [apm.c](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/services/apm.c).
+- [libnx init.c](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/runtime/init.c)
+- [libnx applet.c](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/services/applet.c)
+- [libnx apm.c](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/services/apm.c)

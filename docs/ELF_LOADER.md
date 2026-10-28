@@ -1,64 +1,53 @@
-# Chargeur ELF ARM64 et permissions mémoire
+# ARM64 ELF loader and memory permissions
 
-État vérifié le 24 octobre 2026. Ce chargeur sert aux programmes de test ARM64 autonomes ; il ne charge pas de jeux Switch 2 et ne fournit pas un environnement Linux.
-
-## Utilisation
+Verified October 24, 2026. This loader serves standalone ARM64 tests, not Switch 2 games or a Linux environment.
 
 ```powershell
 cmake --build build --config Debug
-.\build\Debug\Switch2Emu.exe .\tests\programs\elf_sum\program.elf 500 --test-protocol
+.\build\Debug\Instaurix.exe .\tests\programs\elf_sum\program.elf 500 --test-protocol
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-Résultat de référence : **94 instructions**, **X2=55**, fin normale avec code 0. Le programme lit des données initialisées et des constantes, vérifie une variable BSS initialement nulle, appelle une fonction C, utilise la pile et écrit le résultat en mémoire.
+Reference: **94 instructions, X2=55, normal exit code 0**. The program reads initialized data/constants, checks zero BSS, calls C, uses the stack and writes a memory result. SVC #0xF000 is a local test protocol requiring --test-protocol. ELF alone supplies no system services.
 
-Le protocole `SVC #0xF000` reste local au test et nécessite `--test-protocol`. ELF ne fournit pas à lui seul de services système.
+## Accepted profile
 
-## Périmètre accepté
+ELF64 little-endian version 1, System V ABI without extensions, AArch64 ET_EXEC and zero architecture flags. Files are limited to 64 MiB with 1–128 program headers of 56 bytes; headers/tables must be complete.
 
-- ELF64 little-endian, version 1, ABI System V sans extension, machine AArch64, type ET_EXEC et indicateurs d'architecture nuls.
-- Fichier de 64 Mio maximum et table de 1 à 128 entrées de 56 octets. Les en-têtes ELF et la table des segments doivent être complets.
-- Segments PT_LOAD : adresse virtuelle, taille fichier, taille mémoire, alignement et permissions vérifiés. Les adresses de chargement sont celles du fichier ; aucune relocation n'est effectuée.
-- Copie des octets du segment puis initialisation à zéro du reste, notamment la BSS. Les tables de sections et les symboles ne sont pas nécessaires à l'exécution.
-- Point d'entrée aligné sur 4 octets et première instruction entièrement présente dans un segment chargé exécutable.
-- PT_NULL ignoré ; PT_NOTE et PT_PHDR traités comme métadonnées après contrôle de leur plage fichier. PT_GNU_STACK accepté sans droit d'exécution ni demande de pile supérieure à 64 Kio.
+PT_LOAD virtual address, file/memory size, alignment and permissions are checked. Segments load at file-specified addresses without relocation; remaining memory/BSS is zeroed. Section/symbol tables are unnecessary for execution. Entry is 4-byte aligned with its complete first instruction inside loaded executable code.
 
-Références de format : [en-tête ELF](https://gabi.xinuos.com/elf/02-eheader.html), [segments et chargement ELF](https://gabi.xinuos.com/elf/07-pheader.html), [ABI ELF AArch64 d'Arm](https://github.com/ARM-software/abi-aa/blob/main/aaelf64/aaelf64.rst). Les restrictions supplémentaires ci-dessous sont des choix du prototype.
+PT_NULL is ignored. PT_NOTE/PT_PHDR are metadata after file-range checks. PT_GNU_STACK is accepted only without execution permission or a requested stack larger than 64 KiB.
 
-## Restrictions explicites
+## Restrictions
 
-Les segments PT_LOAD doivent être triés par adresse, tenir dans la RAM disponible et ne pas partager de page, même s'ils auraient les mêmes permissions. Les segments à la fois inscriptibles et exécutables sont refusés. Les variantes non prises en charge sont rejetées, y compris ET_DYN/PIE, interpréteur dynamique, PT_DYNAMIC, TLS et numérotation étendue des segments.
+PT_LOAD segments must be address-sorted, fit RAM and never share a page, even with equal permissions. Writable/executable segments are rejected. Unsupported forms include ET_DYN/PIE, dynamic interpreters, PT_DYNAMIC, TLS and extended header numbering. Note platform properties, dynamic linking, Linux arguments and thread-local memory are not implemented by this ELF loader. Arbitrary AArch64 ELF files can therefore be rejected or need missing instructions/services.
 
-Les propriétés de plateforme des notes, l'édition de liens dynamique, les arguments d'un processus Linux et la mémoire locale des threads ne sont pas implémentés. Un exécutable ELF AArch64 quelconque peut donc être refusé ou nécessiter des instructions/services absents.
+## Protected memory
 
-## Mémoire protégée
+R/W/X permissions apply to **4 KiB pages**. ELF flags are translated to internal permissions, not reused as the same mask. Unoccupied pages have no rights.
 
-Les droits R/W/X sont attachés aux pages de **4 Kio**. Les drapeaux ELF sont convertis en droits internes ; ils ne sont pas utilisés directement comme masque mémoire. Les pages non occupées par un segment ou la pile n'ont aucun droit.
+The final **64 KiB** of RAM form a non-executable R/W stack; the preceding page is inaccessible. Initial SP equals RAM end. Segments cannot overlap either reservation.
 
-La machine réserve les derniers **64 Kio** de RAM pour une pile R/W non exécutable ; la page qui la précède est une page de garde sans accès. Le SP initial vaut la fin de la RAM. Aucun segment ne peut recouvrir ces réservations.
+Instruction fetch checks X separately from data R: execute-only pages need not permit data reads. 1/2/4/8-byte reads/writes validate complete ranges across pages; LDP/STP validate both elements together. Memory→Bus→CPU errors preserve the faulting instruction's PC/registers, without architectural exception entry. Errors remain until clearError(); CPU execution clears them before each instruction.
 
-Le chargement des instructions passe par un accès X distinct des lectures R : une page exécutable seule peut être exécutée sans autoriser une lecture de données. Les lectures et écritures de 1/2/4/8 octets vérifient toute leur plage avant transfert, y compris entre pages. Les paires LDP/STP vérifient les deux éléments ensemble pour les erreurs de plage et de permission.
+Permissions cover page padding as well. Addresses are storage offsets, without MMU translation or process isolation. Existing development MMIO routing is not a Switch 2 hardware map.
 
-Les contrôles s'appliquent dans Memory et passent par Bus jusqu'au CPU. Une erreur garde le PC et les registres de l'instruction fautive ; cela ne constitue pas encore une exception architecturale ARM64. Les erreurs signalées restent présentes jusqu'à `clearError()` ; la boucle CPU les réinitialise avant chaque instruction.
+## Transactional loading
 
-Les droits sont appliqués à la page entière, donc aux octets de remplissage de cette page aussi. Ce modèle reste une RAM avec adresses identiques aux offsets de stockage : aucune traduction MMU ni isolation entre plusieurs processus n'est ajoutée ici. Les périphériques de développement existants gardent leur routage MMIO ; ils ne forment pas une carte matérielle Switch 2.
+The loader stages a temporary memory image. Rejected files preserve previous data, permissions and image metadata. Machine::load resets CPU/timer/devices only after success; successful loads discard old data, zero BSS and select ELF entry. Raw binaries still begin at zero.
 
-## Chargement et reprise
-
-Le chargeur prépare l'image dans une mémoire temporaire. Un fichier refusé ne remplace ni les données et permissions précédentes, ni les métadonnées de chargement. `Machine::load` ne réinitialise CPU, minuteur et périphériques qu'après le succès du chargement.
-
-Après un succès, les anciennes données sont éliminées, la BSS est nulle et les périphériques repartent de leur état initial. Le point d'entrée ELF devient le PC ; les binaires bruts démarrent toujours à zéro.
-
-La signature ELF est détectée dans le contenu. L'extension `.elf`, sans distinction de casse, exige aussi un ELF valide : elle ne retombe pas silencieusement sur un chargement brut. Les autres fichiers sans signature ELF gardent le mode brut historique, de taille multiple de 4 et limitée à la RAM. **Ce mode brut conserve les droits R/W/X sur toute la RAM** pour les anciens tests ; les protections de segments concernent le mode ELF.
+ELF magic is content-detected. A case-insensitive .elf extension also requires valid ELF and never falls back silently. Other non-ELF files retain the historical raw mode: size multiple of four, bounded by RAM, with **R/W/X across all RAM** for legacy tests. Segment protection applies to ELF mode.
 
 ## Validation
 
-La suite CTest contient désormais 11 tests, dont une suite dédiée qui couvre : ELF produit par le compilateur, segments synthétiques indépendants, constantes, données, BSS entre pages, pile et page de garde, lectures const, permissions X seules, accès inter-pages, paires de registres, chargement échoué sans changement d'état et rechargement propre.
+At this milestone 11 CTest suites passed. Coverage includes compiler-produced ELF, independent synthetic segments, constants/data, cross-page BSS, stack/guard, const reads, execute-only pages, cross-page transfers, pairs, failed-load preservation and clean reload.
 
-102 variantes ELF incorrectes sont refusées : troncatures, tables ou segments hors limites, architecture/versions non prises en charge, débordements, mauvais alignement, entrée invalide et collisions de pages. Le binaire brut historique et le programme C précédent continuent à passer.
+**102 invalid ELF variants** cover truncation, out-of-range tables/segments, unsupported architecture/version, overflow, alignment, invalid entry and page collisions. Legacy raw/C tests still pass. See [test ELF reproduction](../tests/programs/elf_sum/README.md).
 
-Les sources et instructions de reproduction de la cible sont dans [le guide ELF de test](../tests/programs/elf_sum/README.md).
+The optional [reference HLE profile](HLE_RUNTIME.md) reserves heap and thread-local space, rejecting conflicts before replacing a session. Its initial three reference ELF services do not establish native Switch 2 compatibility.
 
-## Profil HLE optionnel
+## Reference links
 
-Le chargeur peut aussi préparer le [profil HLE de référence](HLE_RUNTIME.md) avec une réservation de tas et une région locale de thread. Dans ce mode, les conflits avec ces réservations sont refusés avant de remplacer la session. Le profil ajoute trois services de référence aux ELF, tout en restant distinct d'un environnement natif Switch 2 validé.
+- [System V ELF header](https://gabi.xinuos.com/elf/02-eheader.html)
+- [System V ELF program loading](https://gabi.xinuos.com/elf/07-pheader.html)
+- [Arm AArch64 ELF ABI](https://github.com/ARM-software/abi-aa/blob/main/aaelf64/aaelf64.rst)

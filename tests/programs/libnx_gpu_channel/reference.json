@@ -1,0 +1,26 @@
+{
+  "libnx_revision": "b156b4774fb2df7b93402169509266da7547fc4c",
+  "initialization_provenance": "../libnx_init/reference.json",
+  "startup_provenance": "../libnx_gpu_as/reference.json",
+  "compiler": "Zig 0.13.0 / Clang 18.1.6, aarch64-none-elf, -O1 -ffreestanding",
+  "nro_sha256": "310A886651D91D91F91E4162F41520479649AD505BA9E9A2204EF762BB65D197",
+  "original_sdk_sources_unmodified": true,
+  "nv_transfer_memory_bytes": 65536,
+  "scope": "Original historical channel reference with later priority support; no submission or GPU execution",
+  "compiler_nvchannel": "Arm GNU 14.3.1, original GNU VLA structure members",
+  "service_sources_sha256": {
+    "nvidia/channel.c": "D79A069DAE7A32B90A4B6FDB4D9EF4C1151FF86A6027590023F9702CF3C0CA9F",
+    "nvidia/ioctl/nvchannel.c": "0237FBF2999CC30C905E3B948C174BB05FF1ED52889C18E7E7318A35D7FE69B1",
+    "nvidia/map.c": "14A01CD903E3171793B3DC8F9A246327F5FC7BAAAAB05C1883F1923B28F16681",
+    "services/nv.c": "304EC5F740266042D05F157C36CB42FA13C69F0CE18381B2AE8E6BFE302F91FB"
+  },
+  "guest_harness_sha256": "4E79BDE2749138C9E5C119693DF0B95D5AC43D7B56CBD7405559E355D0631A69",
+  "reference_symbols_sha256": "0C35F842ADD2E4A72DF38579902F38BF8DED51CA38A3EEB65488617A7F3B9E86",
+  "baseline_instructions": 53962,
+  "instructions": 56060,
+  "next_boundary": "None within this bounded harness; original full helper is validated by libnx_gpu_channel_init",
+  "report_words_per_lifetime": 16,
+  "lifetimes": 2,
+  "nro_bytes": 401408,
+  "channel_milestone_instructions": 55948
+}

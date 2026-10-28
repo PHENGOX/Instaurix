@@ -1,61 +1,55 @@
-# Calcul flottant logiciel et sous-normaux
+# Software floating point and subnormals
 
-Etat du 24 octobre 2026. Le CPU execute maintenant les calculs binary32/binary64 implementes, scalaires et vectoriels, sans utiliser les operations flottantes de l'hote. Ce palier remplace les anciens refus des operandes/resultats sous-normaux et du mode FPCR.FZ.
+Status dated October 24, 2026. Implemented scalar/vector binary32/binary64 arithmetic uses no host floating-point operations. This replaces earlier rejection of subnormal operands/results and FPCR.FZ.
 
-## Representation et calcul
+## Representation and arithmetic
 
-`src/cpu_softfloat.cpp` utilise des entiers de 4096 bits stockes dans 128 mots de 32 bits, sans allocation dynamique. Un operande fini est decompose en signe, significande entier et puissance de deux.
+src/cpu_softfloat.cpp uses fixed 4096-bit integers in 128 32-bit words, without dynamic allocation. Finite operands are decomposed into sign, integer significand and power of two.
 
-- Addition/soustraction : alignement exact des significandes puis addition ou difference signee.
-- Multiplication : produit exact des significandes, jusqu'a 106 bits pour binary64.
-- FMA : produit exact puis addition de l'accumulateur avant l'unique arrondi. L'alignement maximal de ces formats demande au plus 3172 positions binaires.
-- Division : quotient entier avec suffisamment de bits de garde et reste conserve sous forme de bit collant.
-- Racine carree : racine entiere par paires de bits et reste collant.
-- Conversion S/D : passage par la meme representation exacte et le meme arrondi final.
+- Addition/subtraction aligns significands exactly, then adds or subtracts.
+- Multiplication computes exact significand products, up to 106 bits for binary64.
+- FMA computes the exact product and accumulator sum before one rounding; maximum alignment requires at most 3172 bit positions.
+- Division retains enough quotient guard bits and a sticky remainder.
+- Square root uses integer bit-pair extraction and a sticky remainder.
+- S/D conversion shares this exact representation and final rounding.
 
-Le traitement commun des NaN, infinis, zeros signes et controles precede les calculs finis. Le profil conserve la priorite des NaN signalisants et les regles propres aux calculs fusionnes. Aucune implementation tierce de calcul flottant n'est integree.
+Common NaN, infinity, signed-zero and control handling precedes finite calculations. Signaling NaN priority and fused-operation rules are retained. No third-party floating-point implementation is incorporated.
 
-## Arrondis et flags
+## Rounding and flags
 
-Les quatre modes FPCR.RMode et Default NaN restent disponibles. Les flags cumulatifs FPSR sont conserves et combines entre les elements vectoriels : IOC, DZC, OFC, UFC, IXC et IDC.
+All four FPCR.RMode settings and Default NaN are supported. Cumulative FPSR IOC, DZC, OFC, UFC, IXC and IDC flags combine across vector elements. In the profile without Alternate Handling:
 
-Dans le profil architectural sans Alternate Handling :
+- With FZ=0, an exact subnormal result sets neither UFC nor IXC.
+- An inexact tiny result sets UFC and IXC. Tininess is detected **before rounding**, even if rounding yields the smallest normal value.
+- FZ=1 replaces subnormal inputs with same-sign zero and sets IDC.
+- With FZ=1, a nonzero tiny result becomes same-sign zero and sets UFC; flushing does not additionally set IXC.
+- Exact cancellations and signed zeros respect rounding mode and operand signs.
 
-- En mode graduel (FZ=0), un resultat sous-normal exact ne pose ni UFC ni IXC.
-- Un resultat minuscule inexact pose UFC et IXC. La petitesse est detectee **avant arrondi**, meme si le resultat arrondi devient le plus petit nombre normal.
-- Avec FZ=1, une entree sous-normale est remplacee par un zero de meme signe et pose IDC.
-- Un resultat non nul minuscule avec FZ=1 devient un zero de meme signe et pose UFC ; cette mise a zero n'ajoute pas IXC.
-- Les annulations exactes et les zeros signes respectent le mode d'arrondi et les signes des operations.
-
-FZ est applique aux calculs, comparaisons, conversions, extrema et arrondis qui le demandent. Les copies FMOV, FABS/FNEG et les mouvements de donnees conservent leurs traitements de bits propres. La sauvegarde/restauration d'un environnement flottant hote n'est plus necessaire : le moteur ne le modifie pas.
+FZ applies to applicable arithmetic, comparison, conversion, extrema and rounding operations. FMOV, FABS/FNEG and data moves retain their own bit rules. The engine does not modify the host floating-point environment, so host environment save/restore is unnecessary.
 
 ## Validation
 
-Le corpus FP/SIMD precedent de **96 400 cas sur 1 491 variantes** reste utilise. Un corpus independant supplementaire ajoute **64 896 cas sur 129 variantes** : operations S/D, calculs fusionnes, formes vectorielles et par paires, comparaisons, conversions, extrema et arrondis. Il inclut les deux valeurs de FZ, DN, les quatre modes d'arrondi, les frontieres normal/sous-normal, les egalites d'arrondi, les produits et alignements extremes, des valeurs aleatoires, les NaN/infinis et les zeros signes.
+The existing **96,400 cases over 1,491 variants** remain. A separate corpus adds **64,896 cases over 129 variants** covering S/D, fused/vector/pairwise arithmetic, comparisons, conversions, extrema and rounding. Inputs include both FZ states, DN, four rounding modes, normal/subnormal boundaries, ties, extreme products/alignment, random values, NaNs, infinities and signed zeros.
 
-Les encodages sont produits par Clang 18.1.6 via Zig 0.13.0 ; les resultats et flags attendus viennent d'Unicorn 2.1.4. Le lecteur compare tout le contexte expose et verifie le decoupage des variantes via `reference-layout.txt`. Le test d'environnement hote conserve un arrondi different et FTZ/DAZ actifs pour detecter une dependance accidentelle au calcul du PC.
+Clang 18.1.6/Zig 0.13.0 produces encodings; Unicorn 2.1.4 generates expected bits and flags. The reader compares the complete exposed context and reference-layout.txt variant boundaries. A host-environment test uses different rounding with FTZ/DAZ enabled to detect accidental host arithmetic dependence.
 
-Le programme ELF de demonstration comprend 128 octets de resultats/flags : produits sous-normaux exacts et inexacts S/D, FZ en entree et sortie, calcul vectoriel minuscule et conversion D vers S avec underflow. Ces octets sont verifies contre des valeurs attendues explicites. La demonstration comptait 308 instructions lors de ce palier ; elle en compte maintenant **343** avec les [ajouts SIMD suivants](CPU_SIMD_ARITHMETIC.md).
-
-La suite complete compte maintenant **24 tests CTest**, tous reussis en Debug et Release avec MSVC. Ces comparaisons ne remplacent pas une validation sur le materiel cible ni une preuve exhaustive de conformite ARM64.
-
-## Reproduction
+The ELF demo checks 128 bytes of explicit result/flag expectations: exact/inexact S/D subnormal products, input/output FZ, tiny vector arithmetic and D-to-S underflow. It originally executed 308 instructions, and now executes **343** with [later SIMD additions](CPU_SIMD_ARITHMETIC.md). At that stage **24 CTest suites passed in Debug and Release with MSVC**. Finite comparisons do not replace target-hardware or exhaustive ARM64 validation.
 
 ```powershell
-./tools/build_subnormal_reference.ps1 -Python /chemin/vers/python.exe
-./tools/build_fp_reference.ps1 -Python /chemin/vers/python.exe -SamplesOnly
+./tools/build_subnormal_reference.ps1 -Python /path/to/python.exe
+./tools/build_fp_reference.ps1 -Python /path/to/python.exe -SamplesOnly
 cmake --build build --config Debug
 ctest --test-dir build -C Debug --output-on-failure
 ```
 
-Le corpus est conserve dans `tests/programs/cpu_subnormal`. Le generateur reutilise le format du corpus FP/SIMD, avec un preparateur d'entrees specifique. Les manifestes conservent les versions, la graine, les variantes et les empreintes des references.
+The tests/programs/cpu_subnormal generator reuses the FP/SIMD format with specialized inputs. Manifests retain versions, seed, variants and reference hashes.
 
-## Limites et suite
+## Limits
 
-Les exceptions flottantes piegees restent refusees avec un diagnostic. FP16, FPCR.FZ16/AHP, les nouvelles extensions Alternate Handling, les conversions fixed-point et plusieurs familles SIMD restent absentes. Ce moteur est une reference de correction ; aucune promesse de performances pour des jeux ou d'execution multicoeur n'est faite. Saturation, decalages variables et multiplications elargies sont maintenant ajoutes ; la suite concerne des programmes C/C++ plus varies.
+Trapped floating-point exceptions are rejected with diagnostics. FP16, FPCR.FZ16/AHP, Alternate Handling, fixed-point conversion and further SIMD families remain absent. This is a correctness reference without game-performance or multicore promises. Saturation, variable shifts and widening products have since been added; broader compiled C/C++ targets are next.
 
-## References
+## Reference links
 
-- [Arm, exceptions et detection de petitesse avant arrondi](https://support.arm.com/documentation/dui0349/c/floating-point-support/ieee-754-arithmetic/exceptions).
-- [Arm, pseudocode des operations et de FPRound](https://support.arm.com/documentation/ddi0487/mc/-Part-E-The-AArch32-Application-Level-Architecture/-Chapter-E1-The-AArch32-Application-Level-Programmers--Model/-E1-3-Advanced-SIMD-and-floating-point-instructions/-E1-3-11-Pseudocode-description-of-floating-point-operations?lang=en).
-- [Unicorn, moteur de comparaison independant](https://github.com/unicorn-engine/unicorn).
+- [Arm floating-point exceptions and tininess](https://support.arm.com/documentation/dui0349/c/floating-point-support/ieee-754-arithmetic/exceptions)
+- [Arm floating-point operation pseudocode](https://support.arm.com/documentation/ddi0487/mc/-Part-E-The-AArch32-Application-Level-Architecture/-Chapter-E1-The-AArch32-Application-Level-Programmers--Model/-E1-3-Advanced-SIMD-and-floating-point-instructions/-E1-3-11-Pseudocode-description-of-floating-point-operations?lang=en)
+- [Unicorn independent reference engine](https://github.com/unicorn-engine/unicorn)

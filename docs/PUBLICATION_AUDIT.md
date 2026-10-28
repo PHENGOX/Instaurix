@@ -1,28 +1,30 @@
-# Préparation GitHub — 25 octobre 2026
+# GitHub preparation — October 25, 2026
 
-## Périmètre
+This is a historical preparation report. See [README.md](../README.md) for current development status.
 
-Contrôle des fichiers sélectionnés pour publication selon .gitignore, des dépendances documentées, des licences déjà présentes et des programmes de référence utilisés par CMake. Ce contrôle ne constitue pas une certification juridique de chaque ligne de code ni une garantie exhaustive d'absence de secrets.
+## Scope
 
-## Résultats
+Review of files selected for publication using .gitignore, documented dependencies, existing licenses, and reference programs used by CMake. This review is not a legal certification of every line of code or an exhaustive guarantee that no secrets exist.
 
-- Licence du code propre au projet : GPL-3.0-only, texte intégral dans LICENSE. Le texte provient de COPYING3 de l'archive newlib vérifiée localement ; il s'agit du texte GNU GPL v3, sans modification.
-- Mentions ISC de libnx et licences multiples de newlib conservées dans les dossiers de référence. Ajout de THIRD_PARTY_NOTICES.md et des recueils de mentions sources/en-têtes dans docs/licenses/.
-- Aucun fichier de jeu XCI/NSP/NCA, firmware identifié par son emplacement, jeu de clés console, exécutable hôte ou outil téléchargé parmi les fichiers sélectionnés. Les programmes ELF/NRO et vecteurs binaires de tests sont conservés avec leurs sources, générateurs et manifestes disponibles.
-- Aucune correspondance aux signatures recherchées de clés privées, jetons GitHub, identifiants AWS ou jetons Slack parmi les fichiers sélectionnés. Ce contrôle ne détecte pas toutes les formes de secrets.
-- Les fichiers et répertoires de référence explicitement utilisés par CMake sont présents dans la sélection.
-- Trois fichiers CPU de plus de 100 Mio nécessitent Git LFS. .gitattributes définit leur suivi ; la génération de pointeurs LFS a été vérifiée localement, avec correspondance SHA-256 et reconnaissance par `git lfs ls-files`.
-- Les attributs Git préservent les octets des fichiers pour ne pas modifier les sources et références dont les empreintes sont vérifiées.
-- Une copie extraite de l'archive a été configurée et compilée en Release sans les caches de la copie de travail (`BUILD_TESTING=OFF`). Le programme de base produit X0=5, X1=7, X2=12. Le test libnx applicatif existant exécuté sur le NRO extrait retrouve 7 428 instructions, 35 IPC et zéro échec. La préparation ne modifie pas le code de l'émulateur ; les 60 suites Debug/Release du palier précédent restent la dernière validation complète.
+## Results
 
-La copie de travail principale n'a pas été initialisée comme dépôt Git. Un dépôt temporaire sous build/ a servi à vérifier les attributs et pointeurs LFS. Aucun commit, dépôt distant ou envoi GitHub n'a été créé.
+- Project code uses GPL-3.0-only, with the full text in LICENSE. The unmodified GNU GPL v3 text came from COPYING3 in the locally verified newlib archive.
+- libnx ISC notices and newlib's multiple licenses are retained in reference directories. THIRD_PARTY_NOTICES.md and source/header notice collections under docs/licenses/ were added.
+- No XCI/NSP/NCA game files, firmware identified by its location, console keys, host executables or downloaded tools were among selected files. Test ELF/NRO programs and binary vectors were retained with available sources, generators and manifests.
+- No matches for the searched private-key, GitHub-token, AWS-credential or Slack-token signatures were found in selected files. This check does not detect every form of secret.
+- Files and reference directories explicitly used by CMake are included.
+- Three CPU files exceeding 100 MiB require Git LFS. .gitattributes defines them; pointer generation was verified locally, including SHA-256 correspondence and recognition by `git lfs ls-files`.
+- Git attributes preserve file bytes so that verified source and reference hashes are not changed.
+- A copy extracted from the archive was configured and built in Release without working-copy caches (`BUILD_TESTING=OFF`). The base program produced X0=5, X1=7, X2=12. The existing application test, run against the extracted NRO, reproduced 7,428 instructions, 35 IPC exchanges and zero failures. Preparation did not change emulator code; the preceding milestone's 60 Debug/Release suites remained the latest complete validation at that time.
 
-## Livrables locaux
+The main working directory was not initialized as a Git repository. A temporary repository under build/ checked attributes and LFS pointers. No commit, remote repository or GitHub upload was created.
 
-`build/Switch2Emu-github.zip` contient les fichiers destinés à publication, sous un dossier Switch2Emu, sans les caches ni les compilations. L'archive contient les données LFS réelles ; Git doit les transformer en pointeurs lors de l'ajout, après activation de Git LFS.
+## Local deliverables
 
-`build/github-publication-audit.json` contient l'inventaire, les tailles, les empreintes SHA-256 et le résultat du contrôle automatisé. Ces deux fichiers de préparation restent exclus du dépôt.
+`build/Switch2Emu-github.zip` contained the selected files under a Switch2Emu directory, without caches or builds. It contained actual LFS data; after LFS is enabled, Git must convert these files to pointers during staging.
 
-## Étape utilisateur
+`build/github-publication-audit.json` recorded the inventory, sizes, SHA-256 hashes and automated check results. Both preparation artifacts remain excluded from the repository. They are historical snapshots and do not automatically include subsequent development changes.
 
-Extraire l'archive et suivre [GITHUB_PUBLICATION.md](GITHUB_PUBLICATION.md). Activer Git LFS avant le premier ajout et vérifier les trois références. La création du dépôt distant et son premier envoi restent à effectuer.
+## User step
+
+Extract the archive and follow [GITHUB_PUBLICATION.md](GITHUB_PUBLICATION.md). Enable Git LFS before first staging and check all three references. Creating the remote repository and its first upload remain user actions.

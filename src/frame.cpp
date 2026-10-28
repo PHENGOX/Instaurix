@@ -8,7 +8,7 @@ bool Frame::savePng(const std::filesystem::path& path,std::string& error) const
 {
     error.clear();
     if(!width || !height || width>256 || height>256 || uint64_t(width)*height*3!=rgb.size() || rgb.size()>65536)
-    { error="Dimensions ou pixels de l'image invalides"; return false; }
+    { error="Invalid image dimensions or pixels"; return false; }
     try {
         std::vector<uint8_t> png{137,80,78,71,13,10,26,10};
         auto big=[&](uint32_t value) { for(int i=3;i>=0;--i) png.push_back(uint8_t(value>>(8*i))); };
@@ -45,8 +45,8 @@ bool Frame::savePng(const std::filesystem::path& path,std::string& error) const
         chunk("IDAT",zlib); chunk("IEND",{});
         std::ofstream out(path,std::ios::binary|std::ios::trunc);
         out.write(reinterpret_cast<const char*>(png.data()),std::streamsize(png.size())); out.close();
-        if(!out) { error="Ecriture du PNG impossible"; return false; }
+        if(!out) { error="Failed to write PNG"; return false; }
         return true;
     }
-    catch(const std::exception& e) { error=std::string("Export PNG : ")+e.what(); return false; }
+    catch(const std::exception& e) { error=std::string("PNG export: ")+e.what(); return false; }
 }

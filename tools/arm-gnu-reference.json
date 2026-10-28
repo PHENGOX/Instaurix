@@ -1,0 +1,8 @@
+{
+  "release": "Arm GNU Toolchain 14.3.Rel1, Windows x86_64, AArch64 bare metal",
+  "version": "14.3.1 20250623",
+  "archive_url": "https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-mingw-w64-x86_64-aarch64-none-elf.zip",
+  "sha256": "6B7D0680831FEB5E69B3F8B9DC05F633C6A7B543B411F863E0F7BD263413C5A5",
+  "checksum_url": "https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-mingw-w64-x86_64-aarch64-none-elf.zip.sha256asc",
+  "purpose": "Compile the unchanged original libnx buffer_producer.c, including its GCC variable-length struct member. Other fixture objects remain compiled with pinned Zig/Clang. No toolchain binary is distributed with the project."
+}

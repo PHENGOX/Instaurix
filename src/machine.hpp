@@ -19,9 +19,11 @@ public:
     static constexpr size_t TIMER_IRQ = 4;
     enum class Stop { Budget, Interrupt, Waiting, Frame, Exited, Error };
     struct Result { Stop stop; uint64_t instructions; uint64_t exitCode = 0; };
-    explicit Machine(bool enableTestProtocol = false, bool enableReferenceHle = false, bool enableHomebrewEntry = false);
+    explicit Machine(bool enableTestProtocol = false, bool enableReferenceHle = false, bool enableHomebrewEntry = false,Gpu::ProfileId gpuProfile=Gpu::ProfileId::MaxwellReference);
     bool load(const char* path);
     bool setAppletFocus(bool focused) { return !exited && processContext.state()!=Process::State::Faulted && processContext.setAppletFocus(focused); }
+    bool setAppletOperationMode(Process::OperationMode mode) { return !exited && processContext.state()!=Process::State::Faulted && processContext.setAppletOperationMode(mode); }
+    bool setAppletFocusState(Process::AppletFocus focus) { return !exited && processContext.state()!=Process::State::Faulted && processContext.setAppletFocusState(focus); }
     bool mountReadOnlyRoot(const std::filesystem::path& path);
     Result run(uint64_t maxInstructions, bool stopOnFrame = false);
     bool setButtons(uint32_t buttons) {
@@ -47,6 +49,7 @@ private:
     uint64_t exitCode = 0;
     bool referenceHleEnabled;
     bool homebrewEntryEnabled;
+    Gpu::ProfileId selectedGpuProfile;
     Process processContext;
     uint64_t quantumUsed = 0;
     std::shared_ptr<const ReadOnlyFiles> mountedFiles;

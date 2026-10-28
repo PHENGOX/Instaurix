@@ -1,13 +1,14 @@
-# Démonstration des deux threads HLE
+# Two HLE threads demonstration
 
-Programme ARM64 original assemblé avec Clang 18.1.6 via Zig 0.13.0. Aucun fichier Nintendo. Reconstruction depuis la racine : `./tools/build_hle_threads.ps1`.
+Project-owned ARM64, Clang 18.1.6/Zig 0.13.0, without Nintendo files. Rebuild: `./tools/build_hle_threads.ps1`, reusing hle_memory ELF placement.
 
-Le principal crée un événement et un second thread. Il attend l'événement puis la fin du thread. Le second écrit 42, signale l'événement, effectue une boucle, écrit 55 puis quitte. Le principal vérifie 55 et quitte aussi. Le programme parcourt 367 instructions dans son mode normal.
+Main creates event/worker and waits for the event then worker exit. Worker writes 42, signals, loops, writes 55 and exits; main checks 55 and exits. Ordinary path: **367 instructions**.
 
-La zone R/W à 0x12000 contient les deux handles d'événement (+0, +4), le handle du thread (+8), le résultat (+12), puis les marqueurs de registres et de TLS. Les champs initialement nuls à +96 et +100 permettent au test hôte de demander respectivement un principal en boucle active et un second thread qui attend lui aussi l'événement avant de calculer.
+R/W data at 0x12000 stores event handles (+0/+4), worker handle (+8), result (+12), then integer/TLS markers. Initially zero +96/+100 let host tests request a busy-loop main or a worker that also waits on the event before calculating.
 
-Les marqueurs entiers, vecteurs, registres TLS et la pile distincte vérifient la conservation du contexte. Le banc C++ contrôle également FPCR/FPSR, les gardes de pile et la stabilité de l'ordonnancement avec un budget d'une instruction.
+Integer/vector/TLS markers and separate stacks check context preservation. C++ also checks FPCR/FPSR, guards and scheduling equivalence under one-instruction slices. See [scheduler limits](../../../docs/HLE_THREADS.md).
 
-ELF SHA-256 : `B8969BED87ADBE2D2C5BAE75491E9BFE8EF68EB359F2820CBC7F621EB9532CEB`.
+## Recorded artifact SHA-256
 
-Le script réutilise le placement ELF de hle_memory. Détails et limites dans [HLE_THREADS.md](../../../docs/HLE_THREADS.md).
+`B8969BED87ADBE2D2C5BAE75491E9BFE8EF68EB359F2820CBC7F621EB9532CEB`
+

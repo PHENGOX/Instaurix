@@ -8,7 +8,7 @@
 /tools/python-deps/
 /tools/reference-sources/
 
-# Caches locaux et fichiers personnels
+# Local caches and personal files
 .vs/
 .idea/
 __pycache__/
@@ -23,7 +23,7 @@ zig-out/
 prod.keys
 title.keys
 
-# Dumps console et contenus de jeux (les petits ELF/NRO de tests restent inclus)
+# Console dumps and game content (small test ELF/NRO files remain included)
 *.xci
 *.nsp
 *.nca
@@ -34,3 +34,8 @@ title.keys
 /roms/
 /keys/
 /saves/
+/tools/arm-gnu-*/
+/tools/arm-gnu-*.sha256asc
+
+# Prepared publication bundle (not repository content)
+/GitHubUptdate0-0-1/

@@ -16,13 +16,13 @@ bool TestDevice::checkOffset(uint64_t offset, size_t accessSize)
 {
     if (offset >= size())
     {
-        lastError = "Offset MMIO hors limites";
+        lastError = "MMIO offset is out of bounds";
         return false;
     }
 
     if (accessSize > size() - offset)
     {
-        lastError = "Acces MMIO hors limites";
+        lastError = "MMIO access is out of bounds";
         return false;
     }
 
@@ -41,7 +41,7 @@ uint64_t TestDevice::readRegister(
         case 0x00:
             if (accessSize != 4)
             {
-                lastError = "Taille invalide pour ID";
+                lastError = "Invalid access size for ID";
                 return 0;
             }
 
@@ -50,7 +50,7 @@ uint64_t TestDevice::readRegister(
         case 0x04:
             if (accessSize != 4)
             {
-                lastError = "Taille invalide pour CONTROL";
+                lastError = "Invalid access size for CONTROL";
                 return 0;
             }
 
@@ -59,7 +59,7 @@ uint64_t TestDevice::readRegister(
         case 0x08:
             if (accessSize != 4)
             {
-                lastError = "Taille invalide pour STATUS";
+                lastError = "Invalid access size for STATUS";
                 return 0;
             }
 
@@ -68,14 +68,14 @@ uint64_t TestDevice::readRegister(
         case 0x0C:
             if (accessSize != 4)
             {
-                lastError = "Taille invalide pour DATA";
+                lastError = "Invalid access size for DATA";
                 return 0;
             }
 
             return data;
 
         default:
-            lastError = "Registre MMIO inconnu";
+            lastError = "Unknown MMIO register";
             return 0;
     }
 }
@@ -90,14 +90,14 @@ void TestDevice::writeRegister(
 
     if (accessSize != 4)
     {
-        lastError = "Taille MMIO invalide";
+        lastError = "Invalid MMIO access size";
         return;
     }
 
     switch (offset)
     {
         case 0x00:
-            lastError = "Registre ID en lecture seule";
+            lastError = "ID register is read-only";
             return;
 
         case 0x04:
@@ -105,7 +105,7 @@ void TestDevice::writeRegister(
             return;
 
         case 0x08:
-            lastError = "Registre STATUS en lecture seule";
+            lastError = "STATUS register is read-only";
             return;
 
         case 0x0C:
@@ -113,7 +113,7 @@ void TestDevice::writeRegister(
             return;
 
         default:
-            lastError = "Registre MMIO inconnu";
+            lastError = "Unknown MMIO register";
             return;
     }
 }

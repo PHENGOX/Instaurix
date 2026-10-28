@@ -110,7 +110,7 @@ bool CPU::executeFpExtended(uint32_t ins,bool& recognized)
     }
     recognized=kind!=Kind::None;
     if (!recognized) return false;
-    auto fail=[&]() { lastError="Mode ou taille FP de reduction/conversion/arrondi non pris en charge"; return false; };
+    auto fail=[&]() { lastError="Unsupported FP reduction/conversion/rounding mode or size"; return false; };
     const bool q=ins&(1U<<30), wide=ins&(1U<<22);
     if ((!scalar && wide && !q) || (kind==Kind::Across && (wide || !q)) || (fpcr&~0x03C00000U)) return fail();
     const unsigned rd=ins&31, rn=(ins>>5)&31, rm=(ins>>16)&31;

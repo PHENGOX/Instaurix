@@ -20,13 +20,21 @@ constexpr uint32_t FilesDisabled = 0x17FF, InvalidPath = 0x19FF, FileNotFound = 
 constexpr uint32_t InvalidObject = 0x1DFF, OutOfObjects = 0x1FFF;
 constexpr size_t MaxTransfer = 64*1024;
 struct Transfer { uint64_t address = 0; std::vector<uint8_t> bytes; };
-struct ManagerRequest { uint32_t result = 0; bool initialize = false, openDemo = false, openFiles = false, openDisplay = false, openInput = false, openApm = false, openApplet = false; };
+struct ManagerRequest { uint32_t result = 0; bool initialize = false, openDemo = false, openFiles = false, openDisplay = false, openInput = false, openApm = false, openApplet = false, openHid=false, openTime=false, openFsp=false, openVi=false, openNv=false; };
+enum class TimeRole : uint8_t { Root, User, Network, Steady, Zone, Local };
+struct TimeRequest { uint32_t result=0;TimeRole child=TimeRole::Root;bool current=false,steady=false,calendar=false;uint64_t timestamp=0; };
+uint32_t dispatchTime(const Buffer& request,Buffer& response,TimeRole role,uint64_t virtualNanoseconds,uint64_t epoch,TimeRequest& plan);
+struct HidRequest { uint32_t result=0;bool createResource=false,getMemory=false; };
+uint32_t parseHid(const Buffer& request,bool resource,uint64_t appletId,HidRequest& plan);
+void copiedHandleResponse(Buffer& response,uint32_t result,uint32_t handle);
 struct DomainRequest {
-    bool close=false, sendPid=false;
+    bool close=false, sendPid=false, copyHandlePresent=false;
     uint32_t object=0,command=0,copyHandle=0;
     size_t payload=0,payloadSize=0;
+    bool sendStatic=false,receiveBuffer=false;
+    uint64_t source=0,sourceSize=0,destination=0,destinationSize=0;
 };
-uint32_t parseDomain(const Buffer& request,DomainRequest& plan);
+uint32_t parseDomain(const Buffer& request,DomainRequest& plan,bool allowFileBuffers=false);
 void domainResponse(Buffer& response,uint32_t result,uint32_t object=0);
 void domainValueResponse(Buffer& response,uint32_t result,uint64_t value,size_t size);
 void domainEventResponse(Buffer& response,uint32_t result,uint32_t handle);
@@ -48,7 +56,7 @@ struct FileRequest {
 uint32_t dispatchFiles(const Buffer& request,Bus& bus,uint64_t ipcAddress,
     const ReadOnlyFiles* files,const ReadOnlyFiles::Bytes* file,Transfer& transfer,FileRequest& plan);
 void valueResponse(Buffer& response,uint32_t result,uint64_t value);
-struct ControlRequest { uint32_t result = 0; bool close = false, clone = false, queryPointerSize = false, convert = false; };
+struct ControlRequest { uint32_t result = 0; bool close = false, clone = false, queryPointerSize = false, convert = false, taggedClone=false; uint32_t cloneTag=0; };
 uint32_t parseControl(const Buffer& request, ControlRequest& plan);
 uint32_t parseManager(const Buffer& request, bool initialized, ManagerRequest& plan);
 void managerResponse(Buffer& response, uint32_t result, uint32_t movedHandle = 0);

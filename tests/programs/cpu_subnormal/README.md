@@ -1,10 +1,7 @@
-# References sous-normaux et FZ
+# Subnormal and FZ references
 
-64 896 cas sur 129 variantes, assembles par Clang 18.1.6 et executes avec Unicorn 2.1.4. Voir [le bilan du moteur flottant logiciel](../../../docs/CPU_SOFTFLOAT.md).
+**64,896 cases over 129 variants**, assembled by Clang 18.1.6 and executed with Unicorn 2.1.4. See [software floating-point report](../../../docs/CPU_SOFTFLOAT.md).
 
-- `vectors.S` / `vectors.bin` : encodages de test.
-- `reference.bin` : entrees, contexte attendu, flags et fenetre RAM au format `FPREF001`.
-- `reference-layout.txt` : instruction et taille de chaque bloc, verifies par le lecteur C++.
-- `reference.json` : variantes, provenance, graine et SHA-256.
+vectors.S/vectors.bin contain encodings. reference.bin contains inputs, expected context/flags/RAM in FPREF001 format. reference-layout.txt records instruction/block sizes checked by C++; reference.json retains variants/provenance/seed/SHA-256.
 
-Regeneration : `tools/build_subnormal_reference.ps1 -Python <python.exe>`. Les tests CTest n'ont besoin ni de Python ni d'Unicorn pour lire les references conservees. Le programme ELF de la cible `cpu_fp` comprend une chaine supplementaire de petits nombres et flags, comparee a des constantes attendues.
+Regenerate: `tools/build_subnormal_reference.ps1 -Python <python.exe>`. Ordinary CTest requires neither Python nor Unicorn. The cpu_fp ELF adds a tiny-value/flag chain compared against explicit constants.

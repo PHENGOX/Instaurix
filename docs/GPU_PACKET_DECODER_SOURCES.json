@@ -1,0 +1,42 @@
+{
+  "audit_date": "2026-10-27",
+  "scope": "Historical B06F packet grammar, not native Switch 2 validation",
+  "sources": [
+    {
+      "repository": "NVIDIA/open-gpu-doc",
+      "revision": "9fdf5c4062007929d9f4e6cbad9c9771fe61b880",
+      "path": "classes/host/clb06f.h",
+      "url": "https://raw.githubusercontent.com/NVIDIA/open-gpu-doc/9fdf5c4062007929d9f4e6cbad9c9771fe61b880/classes/host/clb06f.h",
+      "sha256": "C19A3BA78C6337F9139567365A657C7473D36D335B339F10BB83D2538E282FC7"
+    },
+    {
+      "repository": "NVIDIA/open-gpu-doc",
+      "revision": "9fdf5c4062007929d9f4e6cbad9c9771fe61b880",
+      "path": "classes/3d/clb197.h",
+      "url": "https://raw.githubusercontent.com/NVIDIA/open-gpu-doc/9fdf5c4062007929d9f4e6cbad9c9771fe61b880/classes/3d/clb197.h",
+      "sha256": "175C50F29798B39C6858CAFE31497E9E9798C70CA068A64856719003B5D088D7"
+    },
+    {
+      "repository": "NVIDIA/open-gpu-kernel-modules",
+      "revision": "ca2d03e6fafd4d4b56b383497d931c25b283bfcf",
+      "path": "kernel-open/nvidia-uvm/uvm_push_macros.h",
+      "url": "https://raw.githubusercontent.com/NVIDIA/open-gpu-kernel-modules/ca2d03e6fafd4d4b56b383497d931c25b283bfcf/kernel-open/nvidia-uvm/uvm_push_macros.h",
+      "sha256": "4DC78376C31240181CF22D938E2055075D1033601B7F8C65C7D8F799752196EE"
+    },
+    {
+      "repository": "NVIDIA/open-gpu-kernel-modules",
+      "revision": "ca2d03e6fafd4d4b56b383497d931c25b283bfcf",
+      "path": "src/common/unix/nvidia-push/interface/nvidia-push-methods.h",
+      "url": "https://raw.githubusercontent.com/NVIDIA/open-gpu-kernel-modules/ca2d03e6fafd4d4b56b383497d931c25b283bfcf/src/common/unix/nvidia-push/interface/nvidia-push-methods.h",
+      "sha256": "59DF0671B212BF5C4A405EC0868A5AE13802E27CAFA96891AEE2ABA63EAA9F9B"
+    }
+  ],
+  "reference_stream_u32": [
+    "0x20010014",
+    "0x12345678",
+    "0x00000000"
+  ],
+  "expected_method": "NVB06F_SET_REFERENCE 0x50, payload 0x12345678",
+  "expected_dma_nops": 1,
+  "execution_or_admission": false
+}

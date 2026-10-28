@@ -26,7 +26,7 @@ int main(int argc,char** argv)
     HWND own=nullptr;
     EnumThreadWindows(GetCurrentThreadId(),[](HWND window,LPARAM parameter)->BOOL {
         wchar_t name[128]{};GetClassNameW(window,name,128);
-        if(std::wstring(name)==L"Switch2EmuDevelopmentFrame") { *reinterpret_cast<HWND*>(parameter)=window;return FALSE; }
+        if(std::wstring(name)==L"InstaurixDevelopmentFrame") { *reinterpret_cast<HWND*>(parameter)=window;return FALSE; }
         return TRUE;
     },reinterpret_cast<LPARAM>(&own));
     check(own!=nullptr,"find only this test thread's own window");

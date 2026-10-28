@@ -1,56 +1,41 @@
-# Client SM libnx original : IPC vérifié
+# Original libnx SM client: verified IPC
 
-Étape du 25 octobre 2026 : la cible NRO utilise désormais le `sm.c` original de libnx, révision `b156b4774fb2df7b93402169509266da7547fc4c`, au-dessus de l'[initialisation originale jusqu'à main](LIBNX_INIT.md). Aucun service `emu:*` n'est demandé par cette cible.
+Milestone dated October 25, 2026. The NRO links original sm.c from libnx b156b4774fb2df7b93402169509266da7547fc4c above [original minimal initialization](LIBNX_INIT.md), requesting no emu:* service. Existing transport accepted SDK packets **without CPU or IPC-dispatch changes**. This adds a reproducible external client, not all services of a complete application.
 
-Le transport existant a accepté les requêtes produites par libnx. **Aucun correctif du CPU ou du dispatcher IPC n'a été nécessaire pour ce parcours.** Cette étape ajoute une référence externe reproductible et des tests sur ses paquets réels ; elle ne fournit pas encore les services natifs recherchés par une application complète.
+## Observed path
 
-## Parcours observé
+The app hook calls smInitialize twice; libnx's real reference count avoids another connection/registration. The program requests set:sys, clones SM, retries on the clone, then closes it. First smExit retains original connection; final cleanup smExit closes it.
 
-Le hook applicatif appelle `smInitialize` deux fois. Le vrai compteur de références de libnx évite une seconde connexion et une seconde inscription. Le programme demande `set:sys`, clone la session du gestionnaire, réessaie la même recherche sur le clone et le ferme. Un premier smExit conserve la connexion d'origine ; le dernier smExit, pendant le nettoyage applicatif, la ferme.
+| Exchange | Session/request | Local result |
+| --- | --- | --- |
+| 1 | Manager control 3 QueryPointerBufferSize | SFCO u16 zero |
+| 2 | Manager RegisterClient 0 with SendPid | Success |
+| 3 | Manager GetService 1, set:sys | PortNotFound, no handle |
+| 4 | Manager control 2 CloneCurrentObject | Distinct Move handle |
+| 5 | Clone GetService set:sys | PortNotFound, confirming shared registration |
+| 6 | Clone HIPC Close and CloseHandle | Independent closure |
+| 7 | Manager lookup after first smExit | Still active, PortNotFound |
+| 8 | Final manager HIPC Close/CloseHandle | Connection closed, libnx object reset |
 
-| Échange | Session | Requête libnx | Résultat du profil local |
-| --- | --- | --- | --- |
-| 1 | Gestionnaire | Contrôle 3, QueryPointerBufferSize | SFCO, taille u16 zéro |
-| 2 | Gestionnaire | Commande 0, RegisterClient avec SendPid | SFCO succès |
-| 3 | Gestionnaire | Commande 1, GetService `set:sys` | PortNotFound, aucun handle |
-| 4 | Gestionnaire | Contrôle 2, CloneCurrentObject | Un nouveau handle Move |
-| 5 | Clone | GetService `set:sys` | PortNotFound, preuve que le clone partage l'état d'inscription |
-| 6 | Clone | HIPC Close, puis CloseHandle | Clone fermé indépendamment |
-| 7 | Gestionnaire | GetService après un premier smExit | Toujours actif, PortNotFound |
-| 8 | Gestionnaire | HIPC Close, puis CloseHandle final | Connexion fermée, objet libnx remis à zéro |
+One sm: connection, eight SendSyncRequest and two CloseHandle calls; **3,117 instructions**, preserved constructor/main/cleanup flags, main=77 and loader result=0. No dependency trap executes. PortNotFound=0x9FF, NotInitialized and AlreadyInitialized remain **local prototype codes**. set:sys is genuinely absent; no firmware identity/session is fabricated. App hooks still avoid default services.
 
-Le parcours comporte une seule connexion au port `sm:`, huit SendSyncRequest et deux CloseHandle. Il termine en **3 117 instructions**, avec les mêmes indicateurs de constructeur/main/nettoyage que la cible précédente. Le résultat de main est 77, celui renvoyé par la sortie libnx au chargeur est zéro. Aucun piège de dépendance n'est atteint.
+## SDK byte validation
 
-Les résultats PortNotFound (0x9FF), NotInitialized et AlreadyInitialized restent les **codes locaux du prototype** ; leur correspondance avec les résultats SM d'une console n'est pas revendiquée. Le service `set:sys` est réellement absent : le banc ne fabrique ni session de service natif ni version de firmware. Les hooks applicatifs restent minimaux et n'appellent pas encore les services par défaut.
+Single-stepping captures requests before SVC 0x21 and replies afterward. Checks include u16 pointer-buffer result/RawCount; RegisterClient Header1=0x8000000A, SendPid and SFCI+32; one distinct clone Move handle; set:sys and handle-free errors; transport/SFCO separation; reply-free HIPC Close and ordered handle release; ThreadVars preservation and seven-instruction determinism.
 
-## Validation des octets du SDK
+build/libnx-sm-ipc.csv stores complete request/reply hex from this synthetic target. Actual SDK packets are replayed on a clean process for early lookup, malformed envelopes, unwritable registration reply without publication, duplicates, independent connections and closed handles. Guest PID bytes are not identity. Multiprocess authentication/SAC are absent.
 
-Le test avance une instruction à la fois, capture chaque requête juste avant SVC 0x21 et la réponse juste après son traitement. Il vérifie notamment :
-
-- Le contrôle QueryPointerBufferSize et la réponse contenant un u16 zéro avec la taille brute correcte.
-- Le RegisterClient avec Header1=0x8000000A, marqueur SendPid et SFCI aligné à +32.
-- La réponse de clonage avec un descripteur Move unique et un handle distinct.
-- Le nom natif `set:sys`, les erreurs de service sans handle Move et la séparation entre résultat transport et résultat SFCO.
-- Les fermetures HIPC sans corps de réponse fabriqué, puis les fermetures de handles dans le bon ordre.
-- La conservation des ThreadVars à la fin de la TLR et le déterminisme avec des budgets de sept instructions.
-
-Le fichier `build/libnx-sm-ipc.csv` conserve les requêtes et réponses complètes en hexadécimal. Il sert d'élément de diagnostic et ne contient que les données de cette cible synthétique.
-
-Les mêmes octets SDK sont ensuite rejoués sur un processus propre. Les tests couvrent une recherche avant inscription, les paquets mal formés, l'échec d'une réponse en mémoire protégée sans publication de l'inscription, l'inscription répétée, deux connexions indépendantes et le refus d'un handle fermé. Les octets PID fournis par l'invité ne sont pas utilisés comme identité. L'authentification multiprocessus et les permissions SAC ne sont pas implémentées.
-
-Validation complète : **56 suites CTest réussies en Debug et en Release**. Les reconstructions reproduisent les empreintes des deux cibles, avec et sans SM.
-
-## Reconstruction
+**56 Debug/Release suites passed**. Rebuilds reproduced both SM and no-SM references.
 
 ```powershell
-.\tools\build_libnx_sm.ps1 -Python <chemin_python>
+.\tools\build_libnx_sm.ps1 -Python <python_path>
 ctest --test-dir build -C Debug -R libnx_original_sm_ipc --output-on-failure
 ```
 
-Le constructeur de cible partagé compile les sources libnx/newlib inchangées, puis ajoute sm.c et les appels applicatifs du banc. Le source SM conservé est comparé à celui de l'archive libnx épinglée. Le NRO, sa licence, les dépendances et les résultats attendus sont consignés dans `tests/programs/libnx_sm/reference.json` et dans le manifeste de la cible d'initialisation. Une seconde reconstruction reproduit son empreinte. La cible précédente sans SM conserve également son empreinte d'origine.
+The shared builder compiles unchanged libnx/newlib, adding sm.c and app calls. Vendored SM is compared against the pinned archive. tests/programs/libnx_sm/reference.json and initialization provenance record NRO/licenses/dependencies/results. Original no-SM hashes remain unchanged.
 
-## Suite
+[Default app initialization/APM](LIBNX_APP.md) followed. Original code ignores missing set:sys without inventing a system identity. External hello-world, native display and native Switch 2 compatibility remain unproven.
 
-L'[étape suivante](LIBNX_APP.md) exécute désormais l'initialisation applicative par défaut, franchit une ouverture APM bornée et localise le blocage sur `appletOE`. L'échec de `set:sys` est ignoré par ce parcours original ; aucune identité système n'a été inventée pour le contourner. Le hello-world original, l'affichage natif et la compatibilité native Switch 2 restent à démontrer.
+## Reference links
 
-Source publique épinglée : [libnx sm.c](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/services/sm.c).
+- [libnx sm.c](https://github.com/switchbrew/libnx/blob/b156b4774fb2df7b93402169509266da7547fc4c/nx/source/services/sm.c)
