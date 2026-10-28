@@ -1,4 +1,4 @@
-# Switch2Emu
+# RefiCore
 
 Hey everyone,
 
